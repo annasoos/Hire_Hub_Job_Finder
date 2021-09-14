@@ -40,7 +40,7 @@ const ReviewContent = styled.div`
 		padding-bottom: 1rem;
 
 		@media only screen and (max-width: 820px) {
-			font-size: 1.5rem;
+			font-size: 1.3rem;
 		};
 	}
 
@@ -48,6 +48,12 @@ const ReviewContent = styled.div`
 		color: hsl(0, 0%, 75%);
 		text-align: center;
 		padding-bottom: 1.2rem;
+		width: 60%;
+
+		@media only screen and (max-width: 820px) {
+			width: 100%;
+			font-size: 0.8rem;
+		};
 	}
 `
 

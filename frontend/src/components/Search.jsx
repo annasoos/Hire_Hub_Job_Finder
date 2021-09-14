@@ -26,6 +26,7 @@ const SearchContainer = styled.section`
 	transform: translateX(-50%);
 
 	background-color: hsl(219, 30%, 18%);
+	box-shadow: hsl(216, 53%, 9%) 0px 8px 14px;
 	border-radius: 10px;
 
 	z-index: 1;
@@ -64,13 +65,12 @@ const Input = styled.input`
 
 		@media only screen and (max-width: 1090px) {
 			text-align: center;
-			font-size: 1rem;
 			width: 100%;
 		};
 
 		@media only screen and (max-width: 600px) {
 			text-align: center;
-			font-size: 0.8rem;
+			font-size: 0.7rem;
 			text-indent: 0;
 		};
 

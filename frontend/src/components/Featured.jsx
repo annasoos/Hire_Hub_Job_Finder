@@ -10,20 +10,23 @@ const Featured = () => {
 
 	const cards = [
 		{
-			header: "Brand Recognition",
-			text: "Boost your brand recognition with each click. Generic links don’t mean a thing. Branded links help instil confidence in your content.",
+			header: "Senior QA Engineer",
+			location: "London",
+			text: "Webdriver.IO | Cypress | Java | JavaScript | React | Rest Assured | Kafka |AWS | £75,000",
 			image: recognitionImage,
 			id: "first"
 		},
 		{
-			header: "Detailed Records",
-			text: "Gain insights into who is clicking your links. Knowing when and where people engage with your content helps you make more informed decisions.",
+			header: "Marketing Expert",
+			location: "Budapest",
+			text: "Strategic planning with the team leader to all social and digital platforms in terms of content (blog, app, social channels, website); Leading and coordinating social media campaigns...",
 			image: recordsImage,
 			id: "second"
 		},
 		{
-			header: "Fully Customizable",
-			text: "Improve brand awareness and content discoverability through customizable links, supercharging audience engagement.",
+			header: "Logistics Manager",
+			location: "Amsterdam",
+			text: "As an Area Manager, you’ll have responsibility for the day to day management of a Delivery Station, providing leadership to Shift Managers, Operations Supervisors...",
 			image: customizableImage,
 			id: "third"
 		},

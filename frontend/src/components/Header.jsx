@@ -189,7 +189,7 @@ const HamburgerMenu = styled.div`
 		width: 80%;
 		display: flex;
 		flex-direction: column;
-		background-color: hsl(257, 27%, 26%);
+		background-color: hsl(216, 53%, 9%);
 		border-radius: 10px;
 
 		position: absolute;

@@ -19,13 +19,6 @@ const Footer = () => {
 			],
 		},
 		{
-			name: "Support",
-			links: [
-				{ linkName: "Customer Service", path: "#" },
-				{ linkName: "Contact Us", path: "#" },
-			],
-		},
-		{
 			name: "Company",
 			links: [
 				{ linkName: "About Us", path: "#" },
@@ -33,6 +26,13 @@ const Footer = () => {
 				{ linkName: "Media Offer", path: "#" },
 			],
 		},
+		{
+			name: "Support",
+			links: [
+				{ linkName: "Customer Service", path: "#" },
+				{ linkName: "Contact Us", path: "#" },
+			],
+		}
 	];
 
 	const socialIcons = [
@@ -101,8 +101,8 @@ const FooterContainer = styled.section`
 		grid-template-columns: 1fr;
 		grid-template-rows: repeat(5, 1fr);
 		justify-items: center;
-		align-items: start;
 		padding: 0 10%;
+		grid-row-gap: 2%;
 
 		& .imageLink {
 			align-self: center;

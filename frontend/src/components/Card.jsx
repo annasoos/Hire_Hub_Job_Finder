@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const Card = ({ header, text, image, id }) => {
+const Card = ({ header, location, text, image, id }) => {
 	return (
 			<CardContent id={id}>
 				<CardImg src={image} alt="icon" />
 				<CardTitle> {header} </CardTitle>
+				<CardLocation> {location} </CardLocation>
 				<CardText>{text}</CardText>
 			</CardContent>
 	);
@@ -15,9 +16,11 @@ const CardContent = styled.div`
 	width: 31%;
 	min-height: 14rem;
 	height: auto;
-	background-color: white;
+	background-color: hsl(219, 30%, 18%);
 	padding: 2rem 2rem;
 	z-index: 1;
+	box-shadow: hsl(216, 53%, 9%) 0px 8px 14px;
+	
 
 
 	&#second{
@@ -36,7 +39,7 @@ const CardContent = styled.div`
 `
 
 const CardTitle = styled.h4`
-	color: hsl(257, 27%, 26%);
+	color: white;
 	font-size: 1.2rem;
 	position: relative;
 	top: -2rem;
@@ -52,6 +55,14 @@ const CardTitle = styled.h4`
 	@media only screen and (max-width: 300px) {
 		font-size: 0.8rem;
 	};
+`
+
+const CardLocation = styled.h5`
+	color: white;
+	font-size: 0.8rem;
+	font-weight: 500;
+	position: relative;
+	top: -1.8rem;
 `
 
 const CardText = styled.p`
