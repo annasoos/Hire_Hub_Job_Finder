@@ -7,8 +7,14 @@ const Search = () => {
 		<>
 			<SearchContainer>
 				<SearchContent>
-					<Input type="text" name="keyword" autoComplete="off" placeholder="Job title, keywords or company name" required></Input>
-					<Input type="text" name="location" autoComplete="off" placeholder="City, state or country (optional)"></Input>
+					<div>
+						<label htmlFor="keyword">What is your dream job?</label>
+						<Input type="text" name="keyword" autoComplete="off" placeholder="Job title, keywords or company name" required></Input>
+					</div>
+					<div>
+						<label htmlFor="location">Where would you like to work?</label>
+						<Input type="text" name="location" autoComplete="off" placeholder="City, state or country (optional)"></Input>
+					</div>
 					<Button> Find </Button>
 				</SearchContent>
 			</SearchContainer>
@@ -47,6 +53,13 @@ const SearchContent = styled.div`
 	@media only screen and (max-width: 1090px) {
 		flex-direction: column;
 	};
+
+	& label{
+		color: hsl(0, 0%, 75%);
+		font-size: 0.9rem;
+		margin: 0 1rem;
+		font-style: italic;
+	}
 `
 
 const Input = styled.input`
@@ -56,10 +69,10 @@ const Input = styled.input`
 	text-indent: 1rem;
 
 	border-radius: 10px;
-	width: 80%;
+	width: 90%;
 	background-color: white;
 	color: hsl(255, 11%, 22%);
-	margin: 0 1rem;
+	margin: 0.5rem 1rem;
 
 	transition: all 1s ease-in-out;
 
@@ -95,7 +108,7 @@ const Button = styled.button`
   color: white;
 	background-color: hsl(180, 66%, 49%);
 	border-radius: 10px;
-	margin: 0 1rem;
+	margin: 1.4rem 1rem 0 1rem;
 
   &:hover{
 		background-color: hsla(180, 66%, 49%, 0.5);

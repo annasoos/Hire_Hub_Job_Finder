@@ -98,7 +98,7 @@ const Button = styled.button`
 const HeroImg = styled.img`
   position: absolute;
 	width: 40%;
-	right: 5%;
+	right: 10%;
 	top: 5%;
 	z-index: 1;
 	transition: all 1s ease-in-out;

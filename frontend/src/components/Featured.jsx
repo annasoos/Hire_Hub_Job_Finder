@@ -33,7 +33,7 @@ const Featured = () => {
 	];
 
 	return (
-		<StatSection>
+		<FeaturedSection>
 			<Shortener />
 
 			<Title>Featured Positions</Title>
@@ -46,12 +46,12 @@ const Featured = () => {
 				<BlueLine />
 			</CardContainer>
 
-		</StatSection>
+		</FeaturedSection>
 	);
 };
 
 
-const StatSection = styled.section`
+const FeaturedSection = styled.section`
   width: 100%;
 	height: auto;
 	position: relative;
