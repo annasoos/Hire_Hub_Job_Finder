@@ -24,7 +24,7 @@ const HeroSection = styled.section`
 
 const Title = styled.h1`
 	width: 40%;
-  font-size: 80px;
+  font-size: 70px;
 	font-weight: 700;
 	letter-spacing: -0.05em;
   color: white;
@@ -39,7 +39,7 @@ const Title = styled.h1`
 		font-size: 50px;
 		width: 100%;
 		text-align: center;
-		margin-top: 65%;
+		margin-top: 55%;
 		padding-top: 5rem;
 	};
 
@@ -97,8 +97,7 @@ const Button = styled.button`
 
 const HeroImg = styled.img`
   position: absolute;
-	width: auto;
-	max-width: 50%;
+	width: 40%;
 	right: 5%;
 	top: 5%;
 	z-index: 1;
@@ -108,6 +107,7 @@ const HeroImg = styled.img`
 		position: absolute;
 		left: 50%;
 		transform: translateX(-50%);
+		width: 70%;
 	};
 
 `

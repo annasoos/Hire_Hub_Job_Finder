@@ -195,7 +195,7 @@ const HamburgerMenu = styled.div`
 		position: absolute;
 		top: 6rem;
 
-		z-index: 1;
+		z-index: 2;
 
 		animation: hide 500ms;
 		transition-duration: 500ms;
