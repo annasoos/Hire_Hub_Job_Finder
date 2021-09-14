@@ -63,6 +63,10 @@ const CardLocation = styled.h5`
 	font-weight: 500;
 	position: relative;
 	top: -1.8rem;
+
+	@media only screen and (max-width: 1100px) {
+		text-align: center;
+	};
 `
 
 const CardText = styled.p`
@@ -82,9 +86,8 @@ const CardText = styled.p`
 
 const CardImg = styled.img`
 	background-color: hsl(257, 27%, 26%);
-	border-radius: 100%;
-	padding: 5%;
-
+	padding: 2%;
+	border-radius: 10px;
 	position: relative;
 	top: -3.5rem;
 

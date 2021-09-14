@@ -2,9 +2,9 @@ import React from 'react';
 import styled from "styled-components";
 import Card from "./Card";
 import Shortener from "./Search";
-import recognitionImage from "../images/icon-brand-recognition.svg";
-import customizableImage from "../images/icon-fully-customizable.svg";
-import recordsImage from "../images/icon-detailed-records.svg";
+import companyLogo1 from "../images/be.svg";
+import companyLogo2 from "../images/greenpoint.svg";
+import companyLogo3 from "../images/encirca.svg";
 
 const Featured = () => {
 
@@ -13,21 +13,21 @@ const Featured = () => {
 			header: "Senior QA Engineer",
 			location: "London",
 			text: "Webdriver.IO | Cypress | Java | JavaScript | React | Rest Assured | Kafka |AWS | £75,000",
-			image: recognitionImage,
+			image: companyLogo1,
 			id: "first"
 		},
 		{
 			header: "Marketing Expert",
 			location: "Budapest",
 			text: "Strategic planning with the team leader to all social and digital platforms in terms of content (blog, app, social channels, website); Leading and coordinating social media campaigns...",
-			image: recordsImage,
+			image: companyLogo2,
 			id: "second"
 		},
 		{
 			header: "Logistics Manager",
 			location: "Amsterdam",
 			text: "As an Area Manager, you’ll have responsibility for the day to day management of a Delivery Station, providing leadership to Shift Managers, Operations Supervisors...",
-			image: customizableImage,
+			image: companyLogo3,
 			id: "third"
 		},
 	];
