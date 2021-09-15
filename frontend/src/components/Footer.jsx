@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from '@emotion/styled';
 import FooterLogo from "../images/footer_logo.svg";
 import FooterLogoHover from "../images/footer_logo_hover.svg";
 import Facebook from "../images/icon-facebook.svg";

@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from '@emotion/styled';
 
 const Card = ({ header, location, text, image, id }) => {
 	return (
@@ -20,8 +20,6 @@ const CardContent = styled.div`
 	padding: 2rem 2rem;
 	z-index: 1;
 	box-shadow: hsl(216, 53%, 9%) 0px 8px 14px;
-	
-
 
 	&#second{
 		position: relative;

@@ -5,7 +5,7 @@ import {
 	Route,
 	Link
 } from "react-router-dom";
-import styled from "styled-components";
+import styled from '@emotion/styled';
 import HeaderLogo from "../images/logo_white.png";
 
 const Header = () => {
@@ -76,7 +76,7 @@ const Header = () => {
 					</Route>
 				</Switch>
 			</div>
-		</Router >
+		</Router>
 	)
 }
 

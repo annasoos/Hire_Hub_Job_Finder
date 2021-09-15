@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from '@emotion/styled';
 
 const Search = () => {
 
@@ -8,11 +8,11 @@ const Search = () => {
 			<SearchContainer>
 				<SearchContent>
 					<div>
-						<label htmlFor="keyword">What is your dream job?</label>
+						<Label htmlFor="keyword">What is your dream job?</Label>
 						<Input type="text" name="keyword" autoComplete="off" placeholder="Job title, keywords or company name" required></Input>
 					</div>
 					<div>
-						<label htmlFor="location">Where would you like to work?</label>
+						<Label htmlFor="location">Where would you like to work?</Label>
 						<Input type="text" name="location" autoComplete="off" placeholder="City, state or country (optional)"></Input>
 					</div>
 					<Button> Find </Button>
@@ -53,13 +53,13 @@ const SearchContent = styled.div`
 	@media only screen and (max-width: 1090px) {
 		flex-direction: column;
 	};
+`
 
-	& label{
-		color: hsl(0, 0%, 75%);
-		font-size: 0.9rem;
-		margin: 0 1rem;
-		font-style: italic;
-	}
+const Label = styled.label`
+	color: hsl(0, 0%, 75%);
+	font-size: 0.9rem;
+	margin: 0 1rem;
+	font-style: italic;
 `
 
 const Input = styled.input`

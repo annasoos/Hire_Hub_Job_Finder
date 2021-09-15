@@ -1,7 +1,7 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from '@emotion/styled';
 import Card from "./Card";
-import Shortener from "./Search";
+import Search from "./Search";
 import companyLogo1 from "../images/be.svg";
 import companyLogo2 from "../images/greenpoint.svg";
 import companyLogo3 from "../images/encirca.svg";
@@ -34,7 +34,7 @@ const Featured = () => {
 
 	return (
 		<FeaturedSection>
-			<Shortener />
+			<Search />
 
 			<Title>Featured Positions</Title>
 			<Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aliquid provident quasi possimus autem!</Text>
