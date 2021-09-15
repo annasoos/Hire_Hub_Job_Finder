@@ -7,7 +7,10 @@ import {
 } from "react-router-dom";
 import styled from '@emotion/styled';
 import HeaderLogo from "../images/logo_white.png";
-import App from "../App";
+import Hero from "./components/Hero";
+import Featured from "./components/Featured";
+import Review from "./components/Review";
+import Footer from "./components/Footer";
 
 const Header = () => {
 
@@ -24,7 +27,7 @@ const Header = () => {
 		<Router>
 			<div>
 				<NavBar>
-					<a href="/"><img id="logoSVG" src={HeaderLogo} alt="shortly_logo" /></a>
+					<a href="/"><img src={HeaderLogo} alt="hire_hub_logo" /></a>
 					<ul>
 						<li>
 							<Link to="/find-a-job">Find a job</Link>
@@ -82,15 +85,17 @@ const Header = () => {
 }
 
 function Home() {
-  return (
-    <>
-      <App />
-    </>
-  );
+	return (
+		<>
+			<Hero />
+			<Featured />
+			<Review />
+			<Footer />
+		</>
+	);
 }
 
 const NavBar = styled.nav`
-
 	width: 100%;
 	height: 7rem;
 	padding: 5rem 10%;
@@ -114,6 +119,12 @@ const NavBar = styled.nav`
 		height: 3.5rem;
 		padding-right: 5rem;
 		margin-bottom: 1rem;
+
+		@media screen and (max-width: 600px) {
+    	height: 3rem;
+			padding: 0;
+			margin: 0;
+  	}
 	}
 	
 	& ul {
@@ -127,8 +138,8 @@ const NavBar = styled.nav`
 		color: hsl(257, 7%, 63%);
 
 		@media screen and (max-width: 1090px) {
-    display: none;
-  }
+    	display: none;
+  	}
 
 		&:first-of-type{
 			justify-content: flex-start;

@@ -41,11 +41,17 @@ const SearchContainer = styled.section`
 
 	@media only screen and (max-width: 1090px) {
 		padding: 0 1.5rem;
+		height: 16rem;
+	};
+
+	@media only screen and (max-width: 400px) {
+		height: 20rem;
 	};
 `
 
 const SearchContent = styled.div`
 	height: 100%;
+	width: 100%;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
@@ -54,13 +60,14 @@ const SearchContent = styled.div`
 
 	@media only screen and (max-width: 1090px) {
 		flex-direction: column;
+		padding: 1rem;
 	};
 
 	& .searchBtn {
 		font-size: 1rem;
 		width: 10rem;
 		margin: 1.4rem 1rem 0 1rem;
-		border-radius: 25px;
+		border-radius: 10px;
 		border: none;
 
   	&:hover{
@@ -71,6 +78,10 @@ const SearchContent = styled.div`
 			width: 100%;
 		};
 	}
+
+	& div{
+		width: 100%;
+	}
 `
 
 const Label = styled.label`
@@ -78,6 +89,11 @@ const Label = styled.label`
 	font-size: 0.9rem;
 	margin: 0 1rem;
 	font-style: italic;
+
+	@media only screen and (max-width: 600px) {
+		margin: 0;
+		font-size: 0.8rem;
+	};
 `
 
 const Input = styled.input`
@@ -97,12 +113,13 @@ const Input = styled.input`
 		@media only screen and (max-width: 1090px) {
 			text-align: center;
 			width: 100%;
+			text-indent: 0;
+			margin: 0.5rem 0;
 		};
 
 		@media only screen and (max-width: 600px) {
 			text-align: center;
 			font-size: 0.7rem;
-			text-indent: 0;
 		};
 
 	&::placeholder{

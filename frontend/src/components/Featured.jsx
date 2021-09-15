@@ -59,6 +59,14 @@ const FeaturedSection = styled.section`
 	padding: 10rem 0;
 
 	background-color: hsl(217, 28%, 15%);
+
+	@media only screen and (max-width: 1090px) {
+		padding: 15rem 0;
+	};
+
+	@media only screen and (max-width: 400px) {
+		padding: 18rem 0;
+	};
 `;
 
 const Title = styled.h1`
