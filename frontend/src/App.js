@@ -27,7 +27,7 @@ const App = () => {
 		<Router>
 			<div>
 				<NavBar>
-					<a href="/"><img id="logoSVG" src={HeaderLogo} alt="shortly_logo" /></a>
+					<a href="/"><img src={HeaderLogo} alt="hire_hub_logo" /></a>
 					<ul>
 						<li>
 							<Link to="/find-a-job">Find a job</Link>
@@ -120,6 +120,12 @@ const NavBar = styled.nav`
 		height: 3.5rem;
 		padding-right: 5rem;
 		margin-bottom: 1rem;
+
+		@media screen and (max-width: 600px) {
+    	height: 3rem;
+			padding: 0;
+			margin: 0;
+  	}
 	}
 	
 	& ul {
@@ -187,15 +193,15 @@ const Hamburger = styled.div`
 		border-radius: 2px;
 	}
 
-	&#open span:nth-child(1) {
+	&#open span:nth-of-type(1) {
 		transform: rotate(-45deg) translate(-9px, 6px);
 	}
 
-	&#open span:nth-child(2) {
+	&#open span:nth-of-type(2) {
   	opacity: 0;
 	}
 
-	&#open span:nth-child(3) {
+	&#open span:nth-of-type(3) {
   	transform: rotate(45deg) translate(-8px, -8px);
 	}
 `;
