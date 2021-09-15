@@ -8,10 +8,15 @@ import {
 import './App.less';
 import styled from '@emotion/styled';
 import HeaderLogo from "./images/logo_white.png";
+//import components
 import Hero from "./components/Hero";
 import Featured from "./components/Featured";
 import Review from "./components/Review";
 import Footer from "./components/Footer";
+import PostForm from "./components/PostForm";
+import JobList from './components/JobList';
+import LoginPage from "./components/LoginPage.jsx";
+import RegistrationPage from "./components/RegistrationPage.jsx";
 
 const App = () => {
 
@@ -67,16 +72,16 @@ const App = () => {
 						<Home />
 					</Route>
 					<Route exact path="/find-a-job">
-
+						<Find />
 					</Route>
 					<Route exact path="/post-a-job">
-
+						<Post />
 					</Route>
 					<Route exact path="/login">
-
+						<Login />
 					</Route>
 					<Route exact path="/signup">
-
+						<Signup />
 					</Route>
 				</Switch>
 			</div>
@@ -93,6 +98,42 @@ function Home() {
 			<Footer />
 		</>
 	);
+}
+
+function Find(){
+	return (
+		<>
+			<JobList />
+			<Footer />
+		</>
+	)
+};
+
+function Post(){
+	return (
+		<>
+			<PostForm />
+			<Footer />
+		</>
+	)
+};
+
+function Login(){
+	return (
+		<>
+			<LoginPage />
+			<Footer />
+		</>
+	)
+};
+
+function Signup(){
+	return (
+		<>
+			<RegistrationPage />
+			<Footer />
+		</>
+	)
 }
 
 const NavBar = styled.nav`

@@ -132,8 +132,10 @@ const LinkContainer = styled.ul`
 		font-weight: 300;
 		padding-bottom: 1rem;
 
-		&:hover{
+		& a {
+			&:hover{
 			color: hsl(180, 66%, 49%);
+		}
 		}
 	};
 
