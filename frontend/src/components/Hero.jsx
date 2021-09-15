@@ -1,13 +1,17 @@
 import React from "react";
+import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 import Illustration from "../images/Shared workspace-pana.svg";
 
 const Hero = () => {
+	
+	const history = useHistory();
+
 	return (
 		<HeroSection>
 			<Title>Your career is our concern</Title>
 			<Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. </Text>
-			<Button>Find a job</Button>
+			<Button onClick={() => history.push('/find-a-job')}>Find a job</Button>
 			<HeroImg src={Illustration} alt="illustration" />
 		</HeroSection>
 	);

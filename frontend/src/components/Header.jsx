@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import styled from '@emotion/styled';
 import HeaderLogo from "../images/logo_white.png";
+import App from "../App";
 
 const Header = () => {
 
@@ -59,25 +60,33 @@ const Header = () => {
 				</NavBar>
 
 				<Switch>
-					<Route path="/">
+					<Route exact path="/">
+						<Home />
+					</Route>
+					<Route exact path="/find-a-job">
 
 					</Route>
-					<Route path="/find-a-job">
+					<Route exact path="/post-a-job">
 
 					</Route>
-					<Route path="/post-a-job">
+					<Route exact path="/login">
 
 					</Route>
-					<Route path="/login">
-
-					</Route>
-					<Route path="/signup">
+					<Route exact path="/signup">
 
 					</Route>
 				</Switch>
 			</div>
 		</Router>
 	)
+}
+
+function Home() {
+  return (
+    <>
+      <App />
+    </>
+  );
 }
 
 const NavBar = styled.nav`

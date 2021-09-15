@@ -62,7 +62,7 @@ const SearchContent = styled.div`
 		margin: 1.4rem 1rem 0 1rem;
 		border-radius: 25px;
 		border: none;
-		
+
   	&:hover{
 			background-color: hsla(180, 66%, 49%, 0.5);
 		}
@@ -116,25 +116,5 @@ const Input = styled.input`
 	}
 
 `
-
-const OwnButton = styled.button`
-	font-size: 1rem;
-	font-weight: 700;
-	height: 2.5rem;
-	width: 10rem;
-
-  color: white;
-	background-color: hsl(180, 66%, 49%);
-	border-radius: 10px;
-	margin: 1.4rem 1rem 0 1rem;
-
-  &:hover{
-		background-color: hsla(180, 66%, 49%, 0.5);
-	}
-
-	@media only screen and (max-width: 1090px) {
-		width: 100%;
-	};
-`;
 
 export default Search
