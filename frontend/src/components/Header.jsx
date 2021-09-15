@@ -38,7 +38,7 @@ const Header = () => {
 							<Link to="/login">Login</Link>
 						</li>
 						<li>
-							<Link id="signup" to="/signup">Sign Up</Link>
+							<Link as="button" id="signup" to="/signup">Sign Up</Link>
 						</li>
 					</ul>
 
@@ -104,6 +104,7 @@ const NavBar = styled.nav`
 	& img {
 		height: 3.5rem;
 		padding-right: 5rem;
+		margin-bottom: 1rem;
 	}
 	
 	& ul {

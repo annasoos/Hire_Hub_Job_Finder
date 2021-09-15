@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { Button } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 
 const Search = () => {
 
@@ -15,7 +17,7 @@ const Search = () => {
 						<Label htmlFor="location">Where would you like to work?</Label>
 						<Input type="text" name="location" autoComplete="off" placeholder="City, state or country (optional)"></Input>
 					</div>
-					<Button> Find </Button>
+					<Button type="primary" size="default" className="searchBtn"> <SearchOutlined /> Find </Button>
 				</SearchContent>
 			</SearchContainer>
 		</>
@@ -53,6 +55,22 @@ const SearchContent = styled.div`
 	@media only screen and (max-width: 1090px) {
 		flex-direction: column;
 	};
+
+	& .searchBtn {
+		font-size: 1rem;
+		width: 10rem;
+		margin: 1.4rem 1rem 0 1rem;
+		border-radius: 25px;
+		border: none;
+		
+  	&:hover{
+			background-color: hsla(180, 66%, 49%, 0.5);
+		}
+
+		@media only screen and (max-width: 1090px) {
+			width: 100%;
+		};
+	}
 `
 
 const Label = styled.label`
@@ -99,7 +117,7 @@ const Input = styled.input`
 
 `
 
-const Button = styled.button`
+const OwnButton = styled.button`
 	font-size: 1rem;
 	font-weight: 700;
 	height: 2.5rem;
