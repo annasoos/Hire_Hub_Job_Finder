@@ -14,11 +14,6 @@
 
 ## Typography
 
-### Body Copy
-
-- Font size: 18px
-
 ### Fonts
-
+- Font size: 18px
 - Family: [Poppins](https://fonts.google.com/specimen/Poppins)
-- Weights: 500, 700

@@ -1,9 +1,8 @@
-import React from "react";
 import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 import Illustration from "../images/Shared workspace-pana.svg";
 
-const Hero = () => {
+export const Hero = () => {
 	
 	const history = useHistory();
 
@@ -115,5 +114,3 @@ const HeroImg = styled.img`
 	};
 
 `
-
-export default Hero;

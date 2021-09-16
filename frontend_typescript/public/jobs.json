@@ -1,0 +1,52 @@
+[
+	{
+		"id": 1,
+		"position": "Information Analyst",
+		"company": "Howden",
+		"featured": true,
+		"level": "Junior",
+		"location": "Budapest",
+		"skills": ["SQL", ".NET", "SharePoint"],
+		"description": "What do you need to do? Within the Smart Records project team, assist with the creation of enterprise taxonomies and meta-data standards that optimises the search experience for users; Within the Smart Records project team, assist with the creation and delivery of a digitisation plan for each Howden Business Unit (BU); To support all BUs in the process of identifying physical records used by the Aftermarket function and the local options for the digitisation of this information"
+	},
+	{
+		"id": 2,
+		"position": "Cloud Data Engineer",
+		"company": "Thyssenkrupp",
+		"featured": true,
+		"level": "Senior",
+		"location": "London",
+		"skills": ["C#", "Phyton", "Java", "Azure"],
+		"description": "Main tasks and responsibilities include: Implement ETL processes within the Cloud Platform using latest open source tools, Analytics of the raw data, building and maintaining data systems and pipelines, Working together with Data Scientists and Cloud DevOps Engineers, Subsequent monitoring, performance tuning and enhancement of these ETL processes"
+	},
+	{
+		"id": 3,
+		"position": "Test automation engineer",
+		"company": "Tern Systems",
+		"featured": true,
+		"level": "Junior/Medior",
+		"location": "Amsterdam",
+		"skills": ["Linux", "Pyton", "ISTQB"],
+		"description": "We’re looking for a highly skilled Test Automation Engineer to join our team in delivering mission-critical Air Traffic Control Systems. You will be able to apply your knowledge and experience in designing, implementing, verifying, and deploying automated tests and improvements. You will be working closely with development teams, and other experts in operational systems, becoming a vital part of ensuring that our products meet the highest quality standards."
+	},
+	{
+		"id": 4,
+		"position": "Lead Java developer",
+		"company": "JSX Solutions",
+		"featured": false,
+		"level": "Senior",
+		"location": "London",
+		"skills": ["DevOps", "Linux", "C++", "Agile", "Jenkins", "Spring", "JavaScript"],
+		"description": "JSX Solutions is the leader of cryptographic solutions and practices, our engineers develop authentication and encryption solutions, which provide a solid basis for today's and tomorrow's digital administration and business world. Our development plans focus on the latest cryptographic solutions and algorithms, their business applications, and other groundbreaking developments based on those, such as blockchain-based records, cryptocurrencies and fintech solutions."
+	},
+	{
+		"id": 5,
+		"position": "Automated Software Tester",
+		"company": "Netlock",
+		"featured": false,
+		"level": "Medior",
+		"location": "Krakow",
+		"skills": ["Selenium", "Git", "JavaScript", "JSON"],
+		"description": "If you are interested in cryptography, blockchain, fintech or business IT solutions, then this is the place for you! Netlock is owned by DOCLER, one of the most dynamically developing company groups in Hungary, as a leading developer of electronically authenticated business solutions."
+	}
+]

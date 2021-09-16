@@ -1,13 +1,28 @@
-import React from "react";
 import styled from '@emotion/styled';
+import { BulbTwoTone } from '@ant-design/icons';
+import { LikeTwoTone } from '@ant-design/icons';
+import { SmileTwoTone } from '@ant-design/icons';
 
-const Card = ({ header, location, text, image, id }) => {
+type CardType = {
+	header: string,
+	location: string,
+	text: string,
+	image: string,
+	id: string
+};
+
+interface CardProps {
+card: CardType,
+}
+
+
+export const Card = ({ card }: CardProps) => {
 	return (
-			<CardContent id={id}>
-				<CardImg src={image} alt="icon" />
-				<CardTitle> {header} </CardTitle>
-				<CardLocation> {location} </CardLocation>
-				<CardText>{text}</CardText>
+			<CardContent id={card.id}>
+				<CardLogo> <SmileTwoTone className="smile" twoToneColor="hsl(180, 66%, 49%)" /> </CardLogo>
+				<CardTitle> {card.header} </CardTitle>
+				<CardLocation> {card.location} </CardLocation>
+				<CardText>{card.text}</CardText>
 			</CardContent>
 	);
 };
@@ -20,6 +35,7 @@ const CardContent = styled.div`
 	padding: 2rem 2rem;
 	z-index: 1;
 	box-shadow: hsl(216, 53%, 9%) 0px 8px 14px;
+	cursor: pointer;
 
 	&#second{
 		position: relative;
@@ -82,10 +98,12 @@ const CardText = styled.p`
 	};
 `
 
-const CardImg = styled.img`
+const CardLogo = styled.div`
+	width: 50px;
+	height: 50px;
 	background-color: hsl(257, 27%, 26%);
 	padding: 2%;
-	border-radius: 10px;
+	border-radius: 25px;
 	position: relative;
 	top: -3.5rem;
 
@@ -93,7 +111,12 @@ const CardImg = styled.img`
 		left: 50%;
 		transform: translateX(-50%);
 	};
+
+	& .smile{
+		font-size: 30px;
+		position: relative;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
 `
-
-export default Card;
-

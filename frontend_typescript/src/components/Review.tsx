@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from '@emotion/styled';
 
-const Review = () => {
+export const Review = () => {
 	return (
 		<ReviewContainer>
 	
@@ -65,6 +64,4 @@ const Button = styled.button`
   &:hover{
 		background-color: hsla(180, 66%, 49%, 0.5);
 	}
-`;
-
-export default Review
+`

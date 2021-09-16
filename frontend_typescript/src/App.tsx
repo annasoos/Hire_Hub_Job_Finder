@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
 	Link
-} from "react-router-dom";
+} from 'react-router-dom';
 import './App.less';
 import styled from '@emotion/styled';
 import HeaderLogo from "./images/logo_white.png";
 //import components
-import Hero from "./components/Hero";
-import Featured from "./components/Featured";
-import Review from "./components/Review";
-import Footer from "./components/Footer";
-import PostForm from "./components/PostForm";
-import JobList from './components/JobList';
-import LoginPage from "./components/LoginPage.jsx";
-import RegistrationPage from "./components/RegistrationPage.jsx";
+import { Hero } from "./components/Hero";
+import { Featured } from "./components/Featured";
+import { Review } from "./components/Review";
+import { Footer } from "./components/Footer";
+import { PostForm } from "./components/PostForm";
+import { JobList } from './components/JobList';
+import { LoginPage } from "./components/LoginPage";
+import { RegistrationPage } from "./components/RegistrationPage";
 
 const App = () => {
 
-	const [hamMenu, setHamMenu] = useState("closed");
-	const [hamIcon, setHamIcon] = useState("closed");
+	const [hamMenu, setHamMenu] = useState<string>("closed");  //generic argument doesn't necessary because TS infer it from the intial value
+	const [hamIcon, setHamIcon] = useState<string>("closed");
 
-	const mobileMenu = () => {
+	const mobileMenu = (): void => {
 		hamMenu === "open" ? setHamMenu("closed") : setHamMenu("open");
 		hamIcon === "open" ? setHamIcon("closed") : setHamIcon("open");
 	};
@@ -47,7 +47,7 @@ const App = () => {
 							<Link to="/login">Login</Link>
 						</li>
 						<li>
-							<Link as="button" id="signup" to="/signup">Sign Up</Link>
+							<Link id="signup" to="/signup">Sign Up</Link>
 						</li>
 					</ul>
 
@@ -57,7 +57,7 @@ const App = () => {
 						<span className="bar"></span>
 					</Hamburger>
 
-					<HamburgerMenu id={hamMenu}>
+					<HamburgerMenu id={hamMenu} onClick={() => {setHamMenu("closed"); setHamIcon("closed")}}>
 						<Link className="dropdown" to="/find-a-job">Find a job</Link>
 						<Link className="dropdown" to="/post-a-job">Post a job</Link>
 						<hr />

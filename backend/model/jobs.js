@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 
 const job = new mongoose.Schema(
     {
-        id: String,
-        title: String,
+        id: Number,
+        position: String,
         company: String,
 				featured: Boolean,
-				position: String,
 				level: String,
         location: String,
+				tools: Array,
         description: String,
     }
 );

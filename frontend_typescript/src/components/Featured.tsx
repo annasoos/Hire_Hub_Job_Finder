@@ -1,12 +1,11 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import Card from "./Card";
-import Search from "./Search";
+import { Card } from "./Card";
+import { Search } from "./Search";
 import companyLogo1 from "../images/be.svg";
 import companyLogo2 from "../images/greenpoint.svg";
 import companyLogo3 from "../images/encirca.svg";
 
-const Featured = () => {
+export const Featured = () => {
 
 	const cards = [
 		{
@@ -41,7 +40,7 @@ const Featured = () => {
 
 			<CardContainer>
 				{cards.map((card, index) => (
-					<Card key={index} {...card} /> //pass an object with all the properties as separate prop
+					<Card key={index} card={card} />
 				))}
 				<BlueLine />
 			</CardContainer>
@@ -144,6 +143,3 @@ const BlueLine = styled.div`
 		margin-top: 5rem;
 	};
 `
-
-
-export default Featured

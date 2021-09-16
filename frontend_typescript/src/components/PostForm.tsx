@@ -1,6 +1,5 @@
-import React from 'react'
 
-const PostForm = () => {
+export const PostForm = () => {
 	return (
 		<div style={{color: "white", textAlign: "center"}}>
 			Form here....
@@ -8,5 +7,3 @@ const PostForm = () => {
 		</div>
 	)
 }
-
-export default PostForm
