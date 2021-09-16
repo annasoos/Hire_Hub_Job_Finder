@@ -32,6 +32,7 @@ const ReviewContainer = styled.section`
 const ReviewTitle = styled.h1`
 	color: white;
 	font-size: 2rem;
+	font-weight: 700;
 	text-align: center;
 
 	@media only screen and (max-width: 820px) {
@@ -42,10 +43,10 @@ const ReviewTitle = styled.h1`
 const ReviewText = styled.p`
 	color: hsl(0, 0%, 75%);
 	text-align: center;
-	width: 60%;
+	width: 50%;
 	
 	@media only screen and (max-width: 820px) {
-		width: 100%;
+		width: 90%;
 		font-size: 0.8rem;
 	};
 
