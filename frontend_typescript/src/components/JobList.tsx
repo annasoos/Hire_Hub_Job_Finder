@@ -1,35 +1,35 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import styled from "@emotion/styled";
+import axios from "axios";
 
 const grey = "hsl(0, 0%, 75%)";
 const cyan = "hsl(180, 66%, 49%)";
 const white = "white";
 
+export interface IJob {
+  id: number;
+  position: string;
+  company: string;
+	isFeatured: boolean;
+  level: string;
+  location: string;
+  skills: string[];
+  description: string;
+}
+
 export const JobList = () => {
-  const [data, setData] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [data, setData] = useState<IJob[]>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  type Job = {
-    id: number;
-    position: string;
-    company: string;
-    featured: boolean;
-    level: string;
-    location: string;
-    skills: string[];
-    description: string;
-  };
-
-  const getData = async () => {
-    const response = await await axios.get("./jobs.json");
-    let res = await response;
-    setData(res.data);
-    setTimeout(() => setIsLoaded(true), 1500);
-  };
+	const getData = async (url: string) : Promise<void> => {
+		let response = await axios.get(url);
+		let res = await response;
+		setData(res.data);
+	}
 
   useEffect(() => {
-    getData();
+		getData("./jobs.json");
+		setTimeout(() => setIsLoaded(true), 1500);
   }, []);
 
   if (!isLoaded) {
@@ -41,7 +41,7 @@ export const JobList = () => {
   } else {
     return (
       <JobContainer>
-        {data.map((job: Job, index: number) => (
+        {data.map((job: IJob, index: number) => (
           <JobContent key={index}>
             <Position color={white}>
               <b>{job.position}</b>

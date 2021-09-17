@@ -1,36 +1,21 @@
+import { useState, useEffect } from "react";
 import styled from '@emotion/styled';
 import { Card } from "./Card";
 import { Search } from "./Search";
-import companyLogo1 from "../images/be.svg";
-import companyLogo2 from "../images/greenpoint.svg";
-import companyLogo3 from "../images/encirca.svg";
+import axios from "axios";
+import {IJob} from "./JobList";
 
 export const Featured = () => {
 
-	const cards = [
-		{
-			header: "Senior QA Engineer",
-			location: "London",
-			text: "Webdriver.IO | Cypress | Java | JavaScript | React | Rest Assured | Kafka |AWS | £75,000",
-			image: companyLogo1,
-			id: "first"
-		},
-		{
-			header: "Marketing Expert",
-			location: "Budapest",
-			text: "Strategic planning with the team leader to all social and digital platforms in terms of content (blog, app, social channels, website); Leading and coordinating social media campaigns...",
-			image: companyLogo2,
-			id: "second"
-		},
-		{
-			header: "Logistics Manager",
-			location: "Amsterdam",
-			text: "As an Area Manager, you’ll have responsibility for the day to day management of a Delivery Station, providing leadership to Shift Managers, Operations Supervisors...",
-			image: companyLogo3,
-			id: "third"
-		},
-	];
+	const[featured, setFeatured] = useState<IJob[]>([]);
 
+	const getCards = async (url: string) : Promise<void> => {
+		let response = await axios.get(url);
+		let res = await response;
+		setFeatured(res.data)
+	}
+
+	useEffect(() => {getCards("./jobs.json")}, [])
 
 	return (
 		<FeaturedSection>
@@ -40,8 +25,8 @@ export const Featured = () => {
 			<Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aliquid provident quasi possimus autem!</Text>
 
 			<CardContainer>
-				{cards.map((card, index) => (
-					<Card key={index} card={card} />
+				{featured.map((card: IJob, index: number) => (
+					card.isFeatured === true && <Card key={index} cardElement={card} />
 				))}
 				<BlueLine />
 			</CardContainer>
@@ -58,7 +43,7 @@ const FeaturedSection = styled.section`
   margin: 9rem 0 0 0;
 	padding: 10rem 0;
 
-	background-color: hsl(217, 28%, 15%);
+	background-color: hsl(218, 28%, 13%);
 
 	@media only screen and (max-width: 1090px) {
 		padding: 15rem 0;

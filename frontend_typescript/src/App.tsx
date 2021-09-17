@@ -18,6 +18,7 @@ import { JobList } from './components/JobList';
 import { LoginPage } from "./components/LoginPage";
 import { RegistrationPage } from "./components/RegistrationPage";
 
+
 const App = () => {
 
 	const [hamMenu, setHamMenu] = useState<string>("closed");  //generic argument doesn't necessary because TS infer it from the intial value

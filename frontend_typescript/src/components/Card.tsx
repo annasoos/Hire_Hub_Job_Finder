@@ -1,125 +1,131 @@
-import styled from '@emotion/styled';
-import { BulbTwoTone } from '@ant-design/icons';
-import { LikeTwoTone } from '@ant-design/icons';
-import { SmileTwoTone } from '@ant-design/icons';
+import styled from "@emotion/styled";
+import { BulbTwoTone } from "@ant-design/icons";
+import { LikeTwoTone } from "@ant-design/icons";
+import { SmileTwoTone } from "@ant-design/icons";
 
-type CardType = {
-	header: string,
-	location: string,
-	text: string,
-	id: string
+type CardPropsType = {
+  cardElement: {
+    id: number;
+    position: string;
+    company: string;
+    isFeatured: boolean;
+    level: string;
+    location: string;
+    skills: string[];
+    description: string;
+  };
 };
 
-interface CardProps {
-card: CardType,
-}
-
-
-export const Card = ({ card }: CardProps) => {
-	return (
-			<CardContent id={card.id}>
-				<CardLogo> 
-					{card.id === "first" && <SmileTwoTone className="cardLogoImg" twoToneColor="hsl(180, 66%, 49%)" />}
-					{card.id === "second" && <LikeTwoTone className="cardLogoImg" twoToneColor="hsl(180, 66%, 49%)" /> }
-					{card.id === "third" &&<BulbTwoTone className="cardLogoImg" twoToneColor="hsl(180, 66%, 49%)" />}					
-				</CardLogo>
-				<CardTitle> {card.header} </CardTitle>
-				<CardLocation> {card.location} </CardLocation>
-				<CardText>{card.text}</CardText>
-			</CardContent>
-	);
+export const Card = ({ cardElement }: CardPropsType) => {
+  return (
+    <CardContent id={cardElement.id.toString()}>
+      <CardLogo>
+        {cardElement.id === 1 && (
+          <SmileTwoTone
+            className="cardLogoImg"
+            twoToneColor="hsl(180, 66%, 49%)"
+          />
+        )}
+        {cardElement.id === 2 && (
+          <LikeTwoTone
+            className="cardLogoImg"
+            twoToneColor="hsl(180, 66%, 49%)"
+          />
+        )}
+        {cardElement.id === 3 && (
+          <BulbTwoTone
+            className="cardLogoImg"
+            twoToneColor="hsl(180, 66%, 49%)"
+          />
+        )}
+      </CardLogo>
+      <CardTitle> {cardElement.position} </CardTitle>
+      <CardLocation> {cardElement.location} </CardLocation>
+      <CardText>{cardElement.description}</CardText>
+    </CardContent>
+  );
 };
 
 const CardContent = styled.div`
-	width: 31%;
-	min-height: 14rem;
-	height: auto;
-	background-color: hsl(219, 30%, 18%);
-	padding: 2rem 2rem;
-	z-index: 1;
-	box-shadow: hsl(216, 53%, 9%) 0px 8px 14px;
-	cursor: pointer;
+  width: 31%;
+  min-height: 14rem;
+  height: auto;
+  background-color: hsl(219, 30%, 18%);
+  padding: 2rem 2rem;
+  z-index: 1;
+  box-shadow: hsl(216, 53%, 9%) 0px 8px 14px;
+  cursor: pointer;
 
-	&#second{
-		position: relative;
-		top: 2rem;
-	}
-
-	&#third{
-		position: relative;
-		top: 4rem;
-	}
-
-	@media only screen and (max-width: 1100px) {
-		width: 80%;
-	};
-`
+  @media only screen and (max-width: 1100px) {
+    width: 80%;
+  } ;
+`;
 
 const CardTitle = styled.h4`
-	color: white;
-	font-size: 1.2rem;
-	position: relative;
-	top: -2rem;
+  color: white;
+  font-size: 1.2rem;
+  position: relative;
+  top: -2rem;
 
-	@media only screen and (max-width: 1100px) {
-		text-align: center;
-	};
+  @media only screen and (max-width: 1100px) {
+    text-align: center;
+  }
 
-	@media only screen and (max-width: 375px) {
-		font-size: 1rem;
-	};
+  @media only screen and (max-width: 375px) {
+    font-size: 1rem;
+  }
 
-	@media only screen and (max-width: 300px) {
-		font-size: 0.8rem;
-	};
-`
+  @media only screen and (max-width: 300px) {
+    font-size: 0.8rem;
+  } ;
+`;
 
 const CardLocation = styled.h5`
-	color: white;
-	font-size: 0.8rem;
-	font-weight: 500;
-	position: relative;
-	top: -1.8rem;
+  color: hsl(180, 66%, 49%);
+  font-size: 0.8rem;
+  font-weight: 500;
+  position: relative;
+  top: -1.8rem;
 
-	@media only screen and (max-width: 1100px) {
-		text-align: center;
-	};
-`
+  @media only screen and (max-width: 1100px) {
+    text-align: center;
+  } ;
+`;
 
 const CardText = styled.p`
-	font-size: 0.8rem;
-	color: hsl(257, 7%, 63%);
-	position: relative;
-	top: -1rem;
+  font-size: 0.8rem;
+  color: hsl(257, 7%, 63%);
+  position: relative;
+  top: -1rem;
 
-	@media only screen and (max-width: 1100px) {
-		text-align: center;
-	};
+  @media only screen and (max-width: 1100px) {
+    text-align: center;
+  }
 
-	@media only screen and (max-width: 300px) {
-		font-size: 0.7rem;
-	};
-`
+  @media only screen and (max-width: 300px) {
+    font-size: 0.7rem;
+  } ;
+`;
 
 const CardLogo = styled.div`
-	width: 50px;
-	height: 50px;
-	background-color: hsl(257, 27%, 26%);
-	padding: 2%;
-	border-radius: 25px;
-	position: relative;
-	top: -3.5rem;
+  width: 50px;
+  height: 50px;
+  background-color: hsl(257, 27%, 26%);
+  padding: 2%;
+  border-radius: 25px;
+  position: relative;
+  top: -3.5rem;
 
-	@media only screen and (max-width: 1100px) {
-		left: 50%;
-		transform: translateX(-50%);
-	};
+  @media only screen and (max-width: 1100px) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-	& .cardLogoImg{
-		font-size: 30px;
-		position: relative;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%);
-	}
-`
+  & .cardLogoImg {
+    font-size: 30px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+`;
