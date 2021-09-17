@@ -7,7 +7,6 @@ type CardType = {
 	header: string,
 	location: string,
 	text: string,
-	image: string,
 	id: string
 };
 
@@ -19,7 +18,11 @@ card: CardType,
 export const Card = ({ card }: CardProps) => {
 	return (
 			<CardContent id={card.id}>
-				<CardLogo> <SmileTwoTone className="smile" twoToneColor="hsl(180, 66%, 49%)" /> </CardLogo>
+				<CardLogo> 
+					{card.id === "first" && <SmileTwoTone className="cardLogoImg" twoToneColor="hsl(180, 66%, 49%)" />}
+					{card.id === "second" && <LikeTwoTone className="cardLogoImg" twoToneColor="hsl(180, 66%, 49%)" /> }
+					{card.id === "third" &&<BulbTwoTone className="cardLogoImg" twoToneColor="hsl(180, 66%, 49%)" />}					
+				</CardLogo>
 				<CardTitle> {card.header} </CardTitle>
 				<CardLocation> {card.location} </CardLocation>
 				<CardText>{card.text}</CardText>
@@ -112,7 +115,7 @@ const CardLogo = styled.div`
 		transform: translateX(-50%);
 	};
 
-	& .smile{
+	& .cardLogoImg{
 		font-size: 30px;
 		position: relative;
 		left: 50%;

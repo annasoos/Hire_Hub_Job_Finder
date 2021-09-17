@@ -31,6 +31,7 @@ export const Featured = () => {
 		},
 	];
 
+
 	return (
 		<FeaturedSection>
 			<Search />

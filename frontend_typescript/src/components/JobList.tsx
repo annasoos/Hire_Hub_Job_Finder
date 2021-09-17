@@ -50,10 +50,9 @@ export const JobList = () => {
             <Location color={cyan}> {job.location} </Location>
             <Company color={grey}> {job.company} </Company>
             <Skills color={cyan}>
-              {" "}
               {job.skills.map((skill: string, index: number) => (
                 <span key={index}> {skill} </span>
-              ))}{" "}
+              ))}
             </Skills>
             <Description color={white}> {job.description} </Description>
           </JobContent>
