@@ -27,10 +27,23 @@ export const JobList = () => {
 		setData(res.data);
 	}
 
-  useEffect(() => {
+	useEffect(() => {
 		getData("./jobs.json");
 		setTimeout(() => setIsLoaded(true), 1500);
+	}, []);
+
+	useEffect(() => {
+		if(!localStorage.getItem("jobList")){
+			localStorage.setItem("jobList", JSON.stringify(data))
+		} else {
+			localStorage.setItem("jobList", JSON.stringify(data));
+		}
   }, []);
+
+	useEffect(() => {
+		localStorage.setItem("jobList", JSON.stringify(data));
+	}, [data]);
+
 
   if (!isLoaded) {
     return (

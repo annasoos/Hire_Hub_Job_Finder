@@ -58,6 +58,7 @@ const CardContent = styled.div`
 
   @media only screen and (max-width: 1100px) {
     width: 80%;
+		margin: 2rem;
   } ;
 `;
 

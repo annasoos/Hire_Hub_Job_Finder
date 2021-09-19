@@ -22,7 +22,7 @@ export const Search = () => {
             <Label htmlFor="location">Where would you like to work?</Label>
             <Input
               className="input"
-              placeholder="City, state or country (optional)"
+              placeholder="City name (optional)"
               allowClear
               type="text"
               name="location"

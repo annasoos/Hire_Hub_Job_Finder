@@ -24,7 +24,7 @@
 		"position": "Test automation engineer",
 		"company": "Tern Systems",
 		"isFeatured": true,
-		"level": "Junior/Medior",
+		"level": "Medior",
 		"location": "Amsterdam",
 		"skills": ["Linux", "Pyton", "ISTQB"],
 		"description": "We’re looking for a highly skilled Test Automation Engineer to join our team in delivering mission-critical Air Traffic Control Systems. You will be able to apply your knowledge and experience in designing, implementing, verifying, and deploying automated tests and improvements. You will be working closely with development teams, and other experts in operational systems, becoming a vital part of ensuring that our products meet the highest quality standards."

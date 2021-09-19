@@ -11,7 +11,7 @@ import HeaderLogo from "./images/logo_white.png";
 //import components
 import { Hero } from "./components/Hero";
 import { Featured } from "./components/Featured";
-import { Review } from "./components/Review";
+import { Newsletter } from "./components/Newsletter";
 import { Footer } from "./components/Footer";
 import { PostForm } from "./components/PostForm";
 import { JobList } from './components/JobList';
@@ -95,7 +95,7 @@ function Home() {
 		<>
 			<Hero />
 			<Featured />
-			<Review />
+			<Newsletter />
 			<Footer />
 		</>
 	);
@@ -265,9 +265,12 @@ const HamburgerMenu = styled.div`
 		transition-duration: 500ms;
 		transform-origin: top center;
 
+		pointer-events: none;
+
 		&#open{
 			opacity: 1;
 			animation: appear 500ms;
+			pointer-events: auto;
 		}
 
 		@media only screen and (min-width: 768px) {

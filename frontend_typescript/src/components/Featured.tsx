@@ -46,11 +46,11 @@ const FeaturedSection = styled.section`
 	background-color: hsl(218, 28%, 13%);
 
 	@media only screen and (max-width: 1090px) {
-		padding: 15rem 0;
+		padding: 15rem 0 0 0;
 	};
 
 	@media only screen and (max-width: 400px) {
-		padding: 18rem 0;
+		padding: 18rem 0 0 0;
 	};
 `;
 

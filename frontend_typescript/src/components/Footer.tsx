@@ -8,8 +8,21 @@ import {
   GooglePlusCircleFilled,
 } from "@ant-design/icons";
 
+interface IFooterLinks {
+	linkName: string,
+	path: string
+};
+
+interface IFooter {
+	name: string,
+	links: IFooterLinks[]
+};
+
 export const Footer = () => {
-  const items = [
+	
+  let items: IFooter[] = [];
+	
+	items = [
     {
       name: "Conditions",
       links: [
@@ -41,7 +54,7 @@ export const Footer = () => {
         <div></div>
       </LogoLink>
 
-      {items.map((item, index) => (
+      {items.map((item: IFooter, index: number) => (
         <LinkContainer key={index}>
           <h3> {item.name} </h3>
           {item.links.map((link, index) => (
