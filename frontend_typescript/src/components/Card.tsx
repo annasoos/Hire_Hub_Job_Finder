@@ -2,18 +2,11 @@ import styled from "@emotion/styled";
 import { BulbTwoTone } from "@ant-design/icons";
 import { LikeTwoTone } from "@ant-design/icons";
 import { SmileTwoTone } from "@ant-design/icons";
+import {IJob} from "./JobList";
 
 type CardPropsType = {
-  cardElement: {
-    id: number;
-    position: string;
-    company: string;
-    isFeatured: boolean;
-    level: string;
-    location: string;
-    skills: string[];
-    description: string;
-  };
+	key: number,
+  cardElement: IJob
 };
 
 export const Card = ({ cardElement }: CardPropsType) => {

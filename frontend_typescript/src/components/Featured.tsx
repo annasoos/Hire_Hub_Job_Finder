@@ -2,20 +2,14 @@ import { useState, useEffect } from "react";
 import styled from '@emotion/styled';
 import { Card } from "./Card";
 import { Search } from "./Search";
-import axios from "axios";
 import {IJob} from "./JobList";
+import { getData } from "../api/Fetch"
 
 export const Featured = () => {
 
-	const[featured, setFeatured] = useState<IJob[]>([]);
+	const[data, setData] = useState<IJob[]>([]);
 
-	const getCards = async (url: string) : Promise<void> => {
-		let response = await axios.get(url);
-		let res = await response;
-		setFeatured(res.data)
-	}
-
-	useEffect(() => {getCards("./jobs.json")}, [])
+	useEffect(() => {	getData("./jobs.json").then(setData)}, []);
 
 	return (
 		<FeaturedSection>
@@ -25,7 +19,7 @@ export const Featured = () => {
 			<Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aliquid provident quasi possimus autem!</Text>
 
 			<CardContainer>
-				{featured.map((card: IJob, index: number) => (
+				{data.map((card: IJob, index: number) => (
 					card.isFeatured === true && <Card key={index} cardElement={card} />
 				))}
 				<BlueLine />

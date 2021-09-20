@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import axios from "axios";
+import { getData } from "../api/Fetch";
 
 const grey = "hsl(0, 0%, 75%)";
 const cyan = "hsl(180, 66%, 49%)";
@@ -21,24 +21,17 @@ export const JobList = () => {
   const [data, setData] = useState<IJob[]>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-	const getData = async (url: string) : Promise<void> => {
-		let response = await axios.get(url);
-		let res = await response;
-		setData(res.data);
-	}
-
-	useEffect(() => {
-		getData("./jobs.json");
-		setTimeout(() => setIsLoaded(true), 1500);
-	}, []);
-
 	useEffect(() => {
 		if(!localStorage.getItem("jobList")){
 			localStorage.setItem("jobList", JSON.stringify(data))
 		} else {
 			localStorage.setItem("jobList", JSON.stringify(data));
 		}
-  }, []);
+
+		getData("./jobs.json").then(setData)
+		setTimeout(() => setIsLoaded(true), 1500);
+	}, []);
+
 
 	useEffect(() => {
 		localStorage.setItem("jobList", JSON.stringify(data));
