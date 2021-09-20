@@ -6,8 +6,8 @@
 
 The user should be able to…
   - See all the jobs exesting in the database listed in the page
-	- Filter these listings based on Title, City, Company name, Level, and Keywords 
-	- Post a new job and send it to the database
+  - Filter these listings based on Title, City, Company name, Level, and Keywords 
+  - Post a new job and send it to the database
 
 ## Implementation
 
