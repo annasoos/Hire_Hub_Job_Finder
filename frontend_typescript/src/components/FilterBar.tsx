@@ -49,7 +49,7 @@ export const FilterBar = () => {
 
 const FilterContainer = styled.section`
   width: 70%;
-  height: 10rem;
+  height: 6rem;
   padding: 0 2rem;
   position: relative;
   left: 50%;
@@ -94,7 +94,7 @@ const FilterContent = styled.div`
 		color: hsl(217, 28%, 15%);
 
     &:hover {
-      background-color: hsla(180, 66%, 49%, 0.5);
+      background-color: hsl(219, 30%, 18%);
 			color: white;
     }
 

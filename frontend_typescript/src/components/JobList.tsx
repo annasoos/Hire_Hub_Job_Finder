@@ -70,20 +70,21 @@ export const JobList = () => {
   }
 };
 
-const LoadingText = styled.div`
-  height: 50%;
-  font-size: 2rem;
-  color: white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+const LoadingText = styled.div({
+  height: '50%',
+  fontSize: 35,
+	fontWeight: 700,
+  color: 'white',
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  textAlign: 'center',
 
-  @media screen and (max-width: 1090px) {
-    font-size: 1.5rem;
+	'@media(max-width: 1090px)': {
+    fontSize: '1.5rem'
   }
-`;
+});
 
 const JobContainer = styled.div`
   height: auto;
@@ -99,6 +100,7 @@ const JobContent = styled.div`
   padding: 2rem 2rem;
   margin: 2rem 0;
   box-shadow: hsl(216, 53%, 9%) 0px 8px 14px;
+	border-radius: 10px;
 
   position: relative;
   left: 50%;

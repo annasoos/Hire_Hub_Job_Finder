@@ -14,18 +14,23 @@ const layout = {
 };
 
 export const PostForm = () => {
+
+	const [form] = Form.useForm();
+
   const onFinish = () => {
     console.log("Posted");
   };
 
   return (
     <PostFormContainer>
+			<PostTitle>Post a job & find the newest member of your team with us!</PostTitle>
       <PostFormContent>
-        <Form {...layout} name="nest-messages" onFinish={onFinish}>
+        <Form form={form} {...layout} name="nest-messages" onFinish={onFinish} colon={false}>
           {/* POSITION NAME */}
           <Form.Item
             label={<label style={{ color: "white" }}>Position name:</label>}
             style={{ color: "white" }}
+						required
             rules={[
               {
                 required: true,
@@ -39,6 +44,7 @@ export const PostForm = () => {
           {/* COMPANY NAME */}
           <Form.Item
             label={<label style={{ color: "white" }}>Company name:</label>}
+						required
             rules={[
               {
                 required: true,
@@ -76,6 +82,7 @@ export const PostForm = () => {
             label={
               <label style={{ color: "white" }}>Location of the work:</label>
             }
+						required
             rules={[
               {
                 required: true,
@@ -90,10 +97,9 @@ export const PostForm = () => {
           {/* DESCRIPTION */}
           <Form.Item
             label={
-              <label style={{ color: "white" }}>
-                Detailed description of the position:
-              </label>
+              <label style={{ color: "white" }}>Detailed description:</label>
             }
+						required
             rules={[
               {
                 required: true,
@@ -102,7 +108,7 @@ export const PostForm = () => {
               },
             ]}
           >
-            <Input.TextArea />
+            <Input.TextArea rows={5} />
           </Form.Item>
 
           {/* BUTTON */}
@@ -119,49 +125,72 @@ export const PostForm = () => {
   );
 };
 
-const PostFormContainer = styled.section`
-	position: relative;
-  width: 100%;
-	height: auto;
-	min-height: 80vh;
-  padding: 5% 10%;
-`;
+const PostFormContainer = styled.section({
+  position: "relative",
+  width: "100%",
+  height: "auto",
+  minHeight: "80vh",
+  padding: "0 10% 5% 10%",
+});
 
-const PostFormContent = styled.div`
-  width: 80%;
-  height: 80%;
+const PostTitle = styled.h1({
+	color: 'white',
+	width: "53%",
+	textAlign: "right",
+  fontSize: 30,
+	fontWeight: 700,
+	textIndent: "3rem",
+	padding: '0 0 2rem 0',
+	transition: 'all 1s ease-in-out',
 
-  & .ant-form-item-label > label::after {
-    content: "";
-  }
+	"@media(max-width: 1090px)": {
+		width: "100%",
+		textAlign: "center",
+		textIndent: "unset",
+	},
 
-  & .ant-form-item-label > label .ant-form-item-optional {
-    color: hsl(0, 0%, 75%);
-  }
-
-	@media only screen and (max-width: 1090px) {
-		margin-top: 78%;
-	};
-
-	& .ant-input{
-		@media only screen and (max-width: 1090px) {
-			width: 100%;
-	};
+	"@media(max-width: 450px)": {
+		fontSize: 25
 	}
-`;
+});
 
-const SearchImg = styled.img`
-  position: absolute;
-	width: 32%;
-	right: 10%;
-	top: -3%;
-	z-index: 1;
-	transition: all 1s ease-in-out;
+const PostFormContent = styled.div({
+  width: "80%",
+  height: "80%",
 
-	@media only screen and (max-width: 1090px) {
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 70%;
-	};
-`
+  "& .ant-form-item-label": {
+    "& label": {
+      "& span.ant-form-item-optional": {
+        color: "hsl(0, 0%, 75%)",
+				fontSize: 14,
+      },
+    },
+  },
+  "@media(max-width: 1090px)": {
+    marginTop: "78%",
+  },
+  "& .ant-input": {
+    "@media(max-width: 1090px)": {
+      width: "100%",
+    },
+  },
+});
+
+const SearchImg = styled.img({
+  position: "absolute",
+  width: "36%",
+  right: "5%",
+  top: "5%",
+  transition: "all 1s ease-in-out",
+
+  "@media(max-width: 1090px)": {
+    position: "absolute",
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: "70%",
+  },
+
+	"@media(max-width: 450px)": {
+    top: "10%"
+  },
+});
