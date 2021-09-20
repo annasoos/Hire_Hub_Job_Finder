@@ -2,8 +2,8 @@ import React from 'react'
 
 export const RegistrationPage = () => {
 	return (
-		<div>
-			
+		<div style={{color:"white", textAlign: "center"}}>
+			Registration form here ... <br />.. <br />.. <br /> .. <br /> .. <br />
 		</div>
 	)
 }

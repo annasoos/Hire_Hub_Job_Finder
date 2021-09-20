@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { getData } from "../api/Fetch";
+import { FilterBar } from "./FilterBar";
 
 const grey = "hsl(0, 0%, 75%)";
 const cyan = "hsl(180, 66%, 49%)";
@@ -10,7 +11,7 @@ export interface IJob {
   id: number;
   position: string;
   company: string;
-	isFeatured: boolean;
+  isFeatured: boolean;
   level: string;
   location: string;
   skills: string[];
@@ -21,72 +22,73 @@ export const JobList = () => {
   const [data, setData] = useState<IJob[]>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-	useEffect(() => {
-		if(!localStorage.getItem("jobList")){
-			localStorage.setItem("jobList", JSON.stringify(data))
-		} else {
-			localStorage.setItem("jobList", JSON.stringify(data));
-		}
+  useEffect(() => {
+    if (!localStorage.getItem("jobList")) {
+      localStorage.setItem("jobList", JSON.stringify(data));
+    } else {
+      localStorage.setItem("jobList", JSON.stringify(data));
+    }
 
-		getData("./jobs.json").then(setData)
-		setTimeout(() => setIsLoaded(true), 1500);
-	}, []);
+    getData("./jobs.json").then(setData);
+    setTimeout(() => setIsLoaded(true), 1500);
+  }, []);
 
-
-	useEffect(() => {
-		localStorage.setItem("jobList", JSON.stringify(data));
-	}, [data]);
-
+  useEffect(() => {
+    localStorage.setItem("jobList", JSON.stringify(data));
+  }, [data]);
 
   if (!isLoaded) {
     return (
-			<JobContainer>
-				<LoadingText>Searching for the best carreer options...</LoadingText>
-			</JobContainer>
-		)
+      <JobContainer>
+        <LoadingText>Searching for the best carreer options...</LoadingText>
+      </JobContainer>
+    );
   } else {
     return (
-      <JobContainer>
-        {data.map((job: IJob, index: number) => (
-          <JobContent key={index}>
-            <Position color={white}>
-              <b>{job.position}</b>
-            </Position>
-            <Level color={grey}> - {job.level} </Level>
-            <Location color={cyan}> {job.location} </Location>
-            <Company color={grey}> {job.company} </Company>
-            <Skills color={cyan}>
-              {job.skills.map((skill: string, index: number) => (
-                <span key={index}> {skill} </span>
-              ))}
-            </Skills>
-            <Description color={white}> {job.description} </Description>
-          </JobContent>
-        ))}
-      </JobContainer>
+      <>
+        <FilterBar />
+        <JobContainer>
+          {data.map((job: IJob, index: number) => (
+            <JobContent key={index}>
+              <Position color={white}>
+                <b>{job.position}</b>
+              </Position>
+              <Level color={grey}> - {job.level} </Level>
+              <Location color={cyan}> {job.location} </Location>
+              <Company color={grey}> {job.company} </Company>
+              <Skills color={cyan}>
+                {job.skills.map((skill: string, index: number) => (
+                  <span key={index}> {skill} </span>
+                ))}
+              </Skills>
+              <Description color={white}> {job.description} </Description>
+            </JobContent>
+          ))}
+        </JobContainer>
+      </>
     );
   }
 };
 
 const LoadingText = styled.div`
-	height: 50%;
-	font-size: 2rem;
-	color: white;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	text-align: center;
+  height: 50%;
+  font-size: 2rem;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 
-	@media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     font-size: 1.5rem;
   }
 `;
 
 const JobContainer = styled.div`
-	height: auto;
-	min-height: 50vh;
-	position: relative;
+  height: auto;
+  min-height: 50vh;
+  position: relative;
 `;
 
 const JobContent = styled.div`
@@ -102,7 +104,7 @@ const JobContent = styled.div`
   left: 50%;
   transform: translateX(-50%);
 
-	cursor: pointer;
+  cursor: pointer;
 `;
 
 const Position = styled.span(
