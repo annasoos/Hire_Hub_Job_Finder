@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { BulbTwoTone } from "@ant-design/icons";
 import { LikeTwoTone } from "@ant-design/icons";
 import { SmileTwoTone } from "@ant-design/icons";
-import { CardPropsType } from "../interfaces/type_alises";
+import { CardPropsType } from "../types/type_aliases";
 
 export const Card = (props: CardPropsType) => {
   return (

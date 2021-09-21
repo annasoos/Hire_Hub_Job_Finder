@@ -7,37 +7,38 @@ import {
   TwitterCircleFilled,
   GooglePlusCircleFilled,
 } from "@ant-design/icons";
-import { IFooter } from "../interfaces/interfaces"
+import { IFooter } from "../interfaces/interfaces";
+import { FooterItem } from "../classes/classes";
+import { FooterLinksType } from "../types/type_aliases"
 
 export const Footer = () => {
+
+	const firstLinks: FooterLinksType[]= [
+		{ linkName: "General Terms and Conditions", path: "#" },
+		{ linkName: "Terms of Use", path: "#" },
+		{ linkName: "Privacy Policy", path: "#" },
+	];
+
+	const secondLinks: FooterLinksType[]= [
+		{ linkName: "About Us", path: "#" },
+		{ linkName: "Careers", path: "#" },
+		{ linkName: "Media Offer", path: "#" },
+	];
+	
+	const thirdLinks: FooterLinksType[]= [
+		{ linkName: "Customer Service", path: "#" },
+		{ linkName: "Contact Us", path: "#" },
+	];
+
+	const footerOne:IFooter = new FooterItem("Conditions", firstLinks );
+	const footerTwo:IFooter = new FooterItem("Company", secondLinks);
+	const footerThree:IFooter = new FooterItem("Support", thirdLinks);
+	
 	
   let items: IFooter[] = [];
-	
-	items = [
-    {
-      name: "Conditions",
-      links: [
-        { linkName: "General Terms and Conditions", path: "#" },
-        { linkName: "Terms of Use", path: "#" },
-        { linkName: "Privacy Policy", path: "#" },
-      ],
-    },
-    {
-      name: "Company",
-      links: [
-        { linkName: "About Us", path: "#" },
-        { linkName: "Careers", path: "#" },
-        { linkName: "Media Offer", path: "#" },
-      ],
-    },
-    {
-      name: "Support",
-      links: [
-        { linkName: "Customer Service", path: "#" },
-        { linkName: "Contact Us", path: "#" },
-      ],
-    },
-  ];
+	items.push(footerOne);
+	items.push(footerTwo);
+	items.push(footerThree);
 
   return (
     <FooterContainer>

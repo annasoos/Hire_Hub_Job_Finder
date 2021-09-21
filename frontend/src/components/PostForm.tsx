@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, Input, Form, Select, notification } from "antd";
 import styled from "@emotion/styled";
 import SearchImage from "../images/People search-rafiki.svg";
+import { newJobType } from "../types/type_aliases";
 
 const { Option } = Select;
 
@@ -16,23 +17,11 @@ const layout = {
 
 export const PostForm = () => {
 
-  type newJobType = {
-    position: string;
-    company: string;
-    level: string;
-    location: string;
-    description: string;
-  };
-
   const [newJob, setNewJob] = useState<newJobType>();
 
   const [form] = Form.useForm();
 
-  const openNotificationWithIcon = (
-    type: string,
-    message: string,
-    description: string
-  ): void => {
+  const openNotificationWithIcon = (type: string, message: string, description: string ): void => {
     if (type === "success")
       notification[type]({ message: message, description: description });
     return;

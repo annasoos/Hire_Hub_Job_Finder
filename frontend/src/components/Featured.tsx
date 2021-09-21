@@ -13,7 +13,7 @@ export const Featured = () => {
 		getData("http://localhost:8080/api/find-a-job").then(setData);
 	}, []);
 
-	const filtered:IJob[] = data.slice(-3);
+	const filtered:IJob[] = data.slice(0, 3);
 
 	return (
 		<FeaturedSection>

@@ -1,4 +1,4 @@
-import { FooterLinksType } from "./type_alises";
+import { FooterLinksType } from "../types/type_aliases";
 
 export interface IFooter {
 	name: string,
@@ -9,7 +9,6 @@ export interface IJob {
   id: number;
   position: string;
   company: string;
-  isFeatured: boolean;
   level: string;
   location: string;
   skills: string[];
