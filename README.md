@@ -7,7 +7,7 @@
 The user should be able to…
   - See all the jobs exesting in the database listed in the page
   - Filter these listings based on Title, City, Company name, Level, and Keywords 
-  - Post a new job and send it to the database
+  - Create a new job and post it to the database
 
 ## Implementation
 
@@ -17,9 +17,10 @@ The user should be able to…
 - React.js
 - Emotions Styled Components
 - And Desing
+- Node.js (Express.js)
 
 ### TODO
 
 - Add business logic to filterbar
-- Add business logic to post form
+- Connect Post a job form to server
 - Add new features (e.g: Registartion and Login opportunity, Newsletter subscription)
