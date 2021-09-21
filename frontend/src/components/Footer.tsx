@@ -7,9 +7,9 @@ import {
   TwitterCircleFilled,
   GooglePlusCircleFilled,
 } from "@ant-design/icons";
-import { IFooter } from "../interfaces/interfaces";
-import { FooterItem } from "../classes/classes";
-import { FooterLinksType } from "../types/type_aliases"
+import { IFooter } from "../interfaces/IFooter";
+import { FooterItem } from "../classes/FooterItem.ts";
+import { FooterLinksType } from "../types/FooterLinksType"
 
 export const Footer = () => {
 
@@ -67,51 +67,51 @@ export const Footer = () => {
   );
 };
 
-const FooterContainer = styled.section`
-  width: 100%;
-  height: auto;
-  padding: 5rem 10%;
+const FooterContainer = styled.section({
+  width: "100%",
+  height: "auto",
+  padding: "5rem 10%",
 
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: "grid",
+  gridTemplateColumns: "repeat(5, 1fr)",
 
-  background-color: hsl(216, 53%, 9%);
-  transition: all 1s ease-in-out;
+  backgroundColor: "hsl(216, 53%, 9%)",
+  transition: "all 1s ease-in-out",
 
-  @media only screen and (max-width: 1000px) {
-    height: auto;
-    grid-template-columns: 33% 33% 33%;
-    grid-column-gap: 5%;
+  "@media only screen and (max-width: 1000px)": {
+    height: "auto",
+    gridTemplateColumns: "33% 33% 33%",
+    gridColumnGap: "5%",
+  },
+
+  "@media only screen and (max-width: 600px)": {
+    height: "auto",
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "repeat(5, 1fr)",
+    justifyItems: "center",
+    padding: "0 10%",
+    gridRowGap: "2%",
+
+    "& .imageLink": {
+      alignSelf: "center",
+    },
+  },
+})
+
+const LogoLink = styled.a({
+  cursor: "auto",
+
+  "& div": {
+    backgroundImage: `url(${FooterLogo})`,
+    height: 50,
+    width: 50,
+  },
+
+  "& div:hover": {
+    backgroundImage: `url(${FooterLogoHover})`,
+    cursor: "pointer",
   }
-
-  @media only screen and (max-width: 600px) {
-    height: auto;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(5, 1fr);
-    justify-items: center;
-    padding: 0 10%;
-    grid-row-gap: 2%;
-
-    & .imageLink {
-      align-self: center;
-    }
-  } ;
-`;
-
-const LogoLink = styled.a`
-  cursor: auto;
-
-  & div {
-    background-image: url(${FooterLogo});
-    height: 50px;
-    width: 50px;
-  }
-
-  & div:hover {
-    background-image: url(${FooterLogoHover});
-    cursor: pointer;
-  }
-`;
+})
 
 const LinkContainer = styled.ul`
   & li {

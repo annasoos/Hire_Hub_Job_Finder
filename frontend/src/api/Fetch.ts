@@ -1,5 +1,5 @@
 import axios from "axios";
-import {IJob} from "../interfaces/interfaces";
+import { IJob } from "../interfaces/IJob";
 
 export async function getData(url: string): Promise<IJob[]> {
   let response = await axios.get(url);

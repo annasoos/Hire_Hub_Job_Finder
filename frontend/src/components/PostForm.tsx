@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, Input, Form, Select, notification } from "antd";
 import styled from "@emotion/styled";
 import SearchImage from "../images/People search-rafiki.svg";
-import { newJobType } from "../types/type_aliases";
+import { NewJobType } from "../types/NewJobType";
 
 const { Option } = Select;
 
@@ -17,7 +17,7 @@ const layout = {
 
 export const PostForm = () => {
 
-  const [newJob, setNewJob] = useState<newJobType>();
+  const [newJob, setNewJob] = useState<NewJobType>();
 
   const [form] = Form.useForm();
 
@@ -27,7 +27,7 @@ export const PostForm = () => {
     return;
   };
 
-  const onFinish = (values: newJobType): void => {
+  const onFinish = (values: NewJobType): void => {
     setNewJob(values);
   };
 

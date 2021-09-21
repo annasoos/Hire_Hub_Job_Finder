@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { getData } from "../api/Fetch";
 import { FilterBar } from "./FilterBar";
-import { IJob } from "../interfaces/interfaces"
+import { IJob } from "../interfaces/IJob"
 
 
 export const JobList = () => {

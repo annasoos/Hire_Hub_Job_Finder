@@ -1,10 +1,3 @@
-import { FooterLinksType } from "../types/type_aliases";
-
-export interface IFooter {
-	name: string,
-	links: FooterLinksType[]
-};
-
 export interface IJob {
   id: number;
   position: string;

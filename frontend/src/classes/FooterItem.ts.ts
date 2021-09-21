@@ -1,5 +1,5 @@
-import { IFooter } from "../interfaces/interfaces";
-import { FooterLinksType } from "../types/type_aliases";
+import { IFooter } from "../interfaces/IFooter";
+import { FooterLinksType } from "../types/FooterLinksType";
 
 export class FooterItem implements IFooter {
 	name: string;
