@@ -5,36 +5,22 @@ import { SmileTwoTone } from "@ant-design/icons";
 import {IJob} from "./JobList";
 
 type CardPropsType = {
-	key: number,
-  cardElement: IJob
+  cardElement: IJob,
+	position: number
 };
 
-export const Card = ({ cardElement }: CardPropsType) => {
+export const Card = (props: CardPropsType) => {
+	console.log(props)
   return (
-    <CardContent id={cardElement.id.toString()}>
+    <CardContent>
       <CardLogo>
-        {cardElement.id === 1 && (
-          <SmileTwoTone
-            className="cardLogoImg"
-            twoToneColor="hsl(180, 66%, 49%)"
-          />
-        )}
-        {cardElement.id === 2 && (
-          <LikeTwoTone
-            className="cardLogoImg"
-            twoToneColor="hsl(180, 66%, 49%)"
-          />
-        )}
-        {cardElement.id === 3 && (
-          <BulbTwoTone
-            className="cardLogoImg"
-            twoToneColor="hsl(180, 66%, 49%)"
-          />
-        )}
+        {props.position === 0 && ( <SmileTwoTone className="cardLogoImg" twoToneColor="hsl(180, 66%, 49%)"/> )}
+        {props.position === 1 && ( <LikeTwoTone className="cardLogoImg" twoToneColor="hsl(180, 66%, 49%)"/> )}
+        {props.position === 2 && ( <BulbTwoTone className="cardLogoImg" twoToneColor="hsl(180, 66%, 49%)" /> )}
       </CardLogo>
-      <CardTitle> {cardElement.position} </CardTitle>
-      <CardLocation> {cardElement.location} </CardLocation>
-      <CardText>{cardElement.description}</CardText>
+      <CardTitle> {props.cardElement.position} </CardTitle>
+      <CardLocation> {props.cardElement.location} </CardLocation>
+      <CardText>{props.cardElement.description}</CardText>
     </CardContent>
   );
 };

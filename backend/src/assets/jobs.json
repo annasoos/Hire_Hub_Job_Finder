@@ -3,7 +3,6 @@
 		"id": 1,
 		"position": "Information Analyst",
 		"company": "Howden",
-		"isFeatured": true,
 		"level": "Junior",
 		"location": "Budapest",
 		"skills": ["SQL", ".NET", "SharePoint"],
@@ -13,7 +12,6 @@
 		"id": 2,
 		"position": "Cloud Data Engineer",
 		"company": "Thyssenkrupp",
-		"isFeatured": true,
 		"level": "Senior",
 		"location": "London",
 		"skills": ["C#", "Phyton", "Java", "Azure"],
@@ -23,7 +21,6 @@
 		"id": 3,
 		"position": "Test automation engineer",
 		"company": "Tern Systems",
-		"isFeatured": true,
 		"level": "Medior",
 		"location": "Amsterdam",
 		"skills": ["Linux", "Pyton", "ISTQB"],
@@ -33,7 +30,6 @@
 		"id": 4,
 		"position": "Lead Java developer",
 		"company": "JSX Solutions",
-		"isFeatured": false,
 		"level": "Senior",
 		"location": "London",
 		"skills": ["DevOps", "Linux", "C++", "Agile", "Jenkins", "Spring", "JavaScript"],
@@ -43,10 +39,9 @@
 		"id": 5,
 		"position": "Automated Software Tester",
 		"company": "Netlock",
-		"isFeatured": false,
 		"level": "Medior",
 		"location": "Krakow",
 		"skills": ["Selenium", "Git", "JavaScript", "JSON"],
-		"description": "If you are interested in cryptography, blockchain, fintech or business IT solutions, then this is the place for you! Netlock is owned by DOCLER, one of the most dynamically developing company groups in Hungary, as a leading developer of electronically authenticated business solutions."
+		"description": "If you are interested in cryptography, blockchain, fintech or business IT solutions, then this is the place for you! Netlock is owned by DOCLER, one of the most dynamically developing company groups in Hungary, as a leading developer of electronically authenticated business solutions. You will be working in the city center of Krakow, have a daily contact with the tester team, cooperate with our development team, and enjoy our beautiful office. Send you CV and attach a cover letter about your motivation."
 	}
 ]

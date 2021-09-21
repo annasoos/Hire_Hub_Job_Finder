@@ -9,7 +9,11 @@ export const Featured = () => {
 
 	const[data, setData] = useState<IJob[]>([]);
 
-	useEffect(() => {	getData("./jobs.json").then(setData)}, []);
+	useEffect(() => {	
+		getData("http://localhost:8080/api/find-a-job").then(setData);
+	}, []);
+
+	const filtered:IJob[] = data.slice(-3);
 
 	return (
 		<FeaturedSection>
@@ -19,9 +23,7 @@ export const Featured = () => {
 			<Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aliquid provident quasi possimus autem!</Text>
 
 			<CardContainer>
-				{data.map((card: IJob, index: number) => (
-					card.isFeatured === true && <Card key={index} cardElement={card} />
-				))}
+				{filtered.map((card: IJob, index: number) => (<Card key={index} cardElement={card} position={index} /> ))}
 				<BlueLine />
 			</CardContainer>
 
