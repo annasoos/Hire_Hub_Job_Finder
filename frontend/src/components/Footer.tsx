@@ -7,16 +7,7 @@ import {
   TwitterCircleFilled,
   GooglePlusCircleFilled,
 } from "@ant-design/icons";
-
-interface IFooterLinks {
-	linkName: string,
-	path: string
-};
-
-interface IFooter {
-	name: string,
-	links: IFooterLinks[]
-};
+import { IFooter } from "../interfaces/interfaces"
 
 export const Footer = () => {
 	

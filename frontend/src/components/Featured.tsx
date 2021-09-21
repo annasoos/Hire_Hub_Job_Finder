@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styled from '@emotion/styled';
 import { Card } from "./Card";
 import { Search } from "./Search";
-import {IJob} from "./JobList";
+import {IJob} from "../interfaces/interfaces";
 import { getData } from "../api/Fetch"
 
 export const Featured = () => {

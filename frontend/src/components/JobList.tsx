@@ -2,45 +2,32 @@ import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { getData } from "../api/Fetch";
 import { FilterBar } from "./FilterBar";
+import { IJob } from "../interfaces/interfaces"
 
-const grey = "hsl(0, 0%, 75%)";
-const cyan = "hsl(180, 66%, 49%)";
-const white = "white";
-
-export interface IJob {
-  id: number;
-  position: string;
-  company: string;
-  isFeatured: boolean;
-  level: string;
-  location: string;
-  skills: string[];
-  description: string;
-}
 
 export const JobList = () => {
-  const [data, setData] = useState<IJob[]>([]);
+	const [data, setData] = useState<IJob[]>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
+	
   useEffect(() => {
-    getData("http://localhost:8080/api/find-a-job").then(setData);
+		getData("http://localhost:8080/api/find-a-job").then(setData);
     setTimeout(() => setIsLoaded(true), 1500);
   }, []);
-
-
+	
+	
   if (!isLoaded) {
-    return (
-      <JobContainer>
+		return (
+			<JobContainer>
         <LoadingText>Searching for the best carreer options...</LoadingText>
       </JobContainer>
     );
   } else {
-    return (
-      <>
+		return (
+			<>
         <FilterBar />
         <JobContainer>
           {data.map((job: IJob, index: number) => (
-            <JobContent key={index}>
+						<JobContent key={index}>
               <Position color={white}>
                 <b>{job.position}</b>
               </Position>
@@ -49,8 +36,8 @@ export const JobList = () => {
               <Company color={grey}> {job.company} </Company>
               <Skills color={cyan}>
                 {job.skills.map((skill: string, index: number) => (
-                  <span key={index}> {skill} </span>
-                ))}
+									<span key={index}> {skill} </span>
+									))}
               </Skills>
               <Description color={white}> {job.description} </Description>
             </JobContent>
@@ -61,8 +48,12 @@ export const JobList = () => {
   }
 };
 
+const grey = "hsl(0, 0%, 75%)";
+const cyan = "hsl(180, 66%, 49%)";
+const white = "white";
+
 const LoadingText = styled.div({
-  height: '50%',
+	height: '50%',
   fontSize: 35,
 	fontWeight: 700,
   color: 'white',
