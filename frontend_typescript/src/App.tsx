@@ -58,7 +58,7 @@ const App = () => {
 						<span className="bar"></span>
 					</Hamburger>
 
-					<HamburgerMenu id={hamMenu} onClick={() => {setHamMenu("closed"); setHamIcon("closed")}}>
+					<HamburgerMenu id={hamMenu} onClick={(): void => {setHamMenu("closed"); setHamIcon("closed")}}>
 						<Link className="dropdown" to="/find-a-job">Find a job</Link>
 						<Link className="dropdown" to="/post-a-job">Post a job</Link>
 						<hr />

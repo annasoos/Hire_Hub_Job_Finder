@@ -1,4 +1,5 @@
-import { Button, Input, Form, Select } from "antd";
+import { useState, useEffect } from "react";
+import { Button, Input, Form, Select, notification } from "antd";
 import styled from "@emotion/styled";
 import SearchImage from "../images/People search-rafiki.svg";
 
@@ -14,51 +15,92 @@ const layout = {
 };
 
 export const PostForm = () => {
-
-	const [form] = Form.useForm();
-
-  const onFinish = () => {
-    console.log("Posted");
+	
+  type newJobType = {
+    position: string;
+    company: string;
+    level: string;
+    location: string;
+    description: string;
   };
+
+  const [newJob, setNewJob] = useState<newJobType>();
+
+  const [form] = Form.useForm();
+
+  const openNotificationWithIcon = (
+    type: string,
+    message: string,
+    description: string
+  ): void => {
+    if (type === "success")
+      notification[type]({ message: message, description: description });
+    return;
+  };
+
+  const onFinish = (values: newJobType): void => {
+    setNewJob(values);
+  };
+
+  useEffect(() => {
+    if (newJob !== undefined) {
+      openNotificationWithIcon(
+        "success",
+        "Successful!",
+        `Candidates can now see the ${newJob.position} position you have posted`
+      );
+    }
+  }, [newJob]);
 
   return (
     <PostFormContainer>
-			<PostTitle>Post a job & find the newest member of your team with us!</PostTitle>
+      <PostTitle>
+        Post a job & find the newest member of your team with us!
+      </PostTitle>
       <PostFormContent>
-        <Form form={form} {...layout} name="nest-messages" onFinish={onFinish} colon={false}>
+        <Form
+          {...layout}
+          form={form}
+          name="nest-messages"
+          onFinish={onFinish}
+          colon={false}
+					autoComplete="off"
+        >
           {/* POSITION NAME */}
           <Form.Item
             label={<label style={{ color: "white" }}>Position name:</label>}
+            name="position"
             style={{ color: "white" }}
-						required
+            required
             rules={[
               {
                 required: true,
-                message: "Please provide a name for the position",
+                message: "Please provide a name for the position.",
               },
             ]}
           >
-            <Input />
+            <Input id="positionInput" />
           </Form.Item>
 
           {/* COMPANY NAME */}
           <Form.Item
             label={<label style={{ color: "white" }}>Company name:</label>}
-						required
+            name="company"
+            required
             rules={[
               {
                 required: true,
-                message:
-                  "Please provide the name of the company you are recruiting for",
+                message: "Please provide the name of the company.",
               },
             ]}
           >
-            <Input />
+            <Input id="companyInput" />
           </Form.Item>
 
           {/* LEVEL */}
           <Form.Item
             label={<label style={{ color: "white" }}>Level:</label>}
+            name="level"
             rules={[
               {
                 required: false,
@@ -68,7 +110,10 @@ export const PostForm = () => {
           >
             <Input.Group compact>
               <Form.Item noStyle>
-                <Select placeholder="Select the level of the position">
+                <Select
+                  placeholder="Select the level of the position"
+                  id="levelInput"
+                >
                   <Option value="Junior">Junior</Option>
                   <Option value="Medior">Medior</Option>
                   <Option value="Senior">Senior</Option>
@@ -82,16 +127,17 @@ export const PostForm = () => {
             label={
               <label style={{ color: "white" }}>Location of the work:</label>
             }
-						required
+            name="location"
+            required
             rules={[
               {
                 required: true,
                 message:
-                  "Please provide the location of the office (if it is a remote position, you can clarify it in the description field.",
+                  "Please provide the location of the office (if it is a remote position, you can clarify it in the description field.)",
               },
             ]}
           >
-            <Input placeholder="City name only" />
+            <Input placeholder="City name only" id="locationInput" />
           </Form.Item>
 
           {/* DESCRIPTION */}
@@ -99,16 +145,16 @@ export const PostForm = () => {
             label={
               <label style={{ color: "white" }}>Detailed description:</label>
             }
-						required
+            name="description"
+            required
             rules={[
               {
                 required: true,
-                message:
-                  "Please provide a description about the expactations and the compensation package",
+                message: "Please provide a description.",
               },
             ]}
           >
-            <Input.TextArea rows={5} />
+            <Input.TextArea rows={5} id="descriptionInput" />
           </Form.Item>
 
           {/* BUTTON */}
@@ -134,24 +180,24 @@ const PostFormContainer = styled.section({
 });
 
 const PostTitle = styled.h1({
-	color: 'white',
-	width: "53%",
-	textAlign: "right",
+  color: "white",
+  width: "53%",
+  textAlign: "right",
   fontSize: 30,
-	fontWeight: 700,
-	textIndent: "3rem",
-	padding: '0 0 2rem 0',
-	transition: 'all 1s ease-in-out',
+  fontWeight: 700,
+  textIndent: "3rem",
+  padding: "0 0 2rem 0",
+  transition: "all 1s ease-in-out",
 
-	"@media(max-width: 1090px)": {
-		width: "100%",
-		textAlign: "center",
-		textIndent: "unset",
-	},
+  "@media(max-width: 1090px)": {
+    width: "100%",
+    textAlign: "center",
+    textIndent: "unset",
+  },
 
-	"@media(max-width: 450px)": {
-		fontSize: 25
-	}
+  "@media(max-width: 450px)": {
+    fontSize: 25,
+  },
 });
 
 const PostFormContent = styled.div({
@@ -162,7 +208,7 @@ const PostFormContent = styled.div({
     "& label": {
       "& span.ant-form-item-optional": {
         color: "hsl(0, 0%, 75%)",
-				fontSize: 14,
+        fontSize: 14,
       },
     },
   },
@@ -190,7 +236,7 @@ const SearchImg = styled.img({
     width: "70%",
   },
 
-	"@media(max-width: 450px)": {
-    top: "10%"
+  "@media(max-width: 450px)": {
+    top: "10%",
   },
 });
