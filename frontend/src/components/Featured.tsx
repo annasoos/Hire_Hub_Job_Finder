@@ -109,7 +109,6 @@ const CardContainer = styled.div({
 	},
 })
 
-
 const BlueLine = styled.div({
 	height: 6,
 	width: "70%",

@@ -71,7 +71,6 @@ const FilterContainer = styled.section({
   },
 })
 
-
 const FilterContent = styled.div({
   height: "100%",
   width: "100%",

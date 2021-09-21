@@ -35,7 +35,6 @@ const CardContent = styled.div({
   }
 })
 
-
 const CardTitle = styled.h4({
   color: "white",
   fontSize: "1.2rem",
@@ -66,7 +65,6 @@ const CardLocation = styled.h5({
     textAlign: "center",
   }
 })
-
 
 const CardText = styled.p({
   fontSize: "0.8rem",

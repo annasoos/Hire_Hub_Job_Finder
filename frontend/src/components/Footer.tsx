@@ -113,59 +113,58 @@ const LogoLink = styled.a({
   }
 })
 
-const LinkContainer = styled.ul`
-  & li {
-    color: white;
-    font-weight: 300;
-    padding-bottom: 1rem;
+const LinkContainer = styled.ul({
+  "& li": {
+    color: "white",
+    fontWeight: 300,
+    paddingBottom: "1rem",
 
-    & a {
-      &:hover {
-        color: hsl(180, 66%, 49%);
-      }
-    }
-  }
+    "& a": {
+      "&:hover": {
+        color: "hsl(180, 66%, 49%)",
+      },
+    },
+  },
 
-  & h3 {
-    color: white;
-    font-weight: 700;
-    padding-bottom: 1.3rem;
-  }
+  "& h3": {
+    color: "white",
+    fontWeight: 700,
+    paddingBottom: "1.3rem",
+  },
 
-  @media only screen and (max-width: 600px) {
-    text-align: center;
-  } ;
-`;
+  "@media only screen and (max-width: 600px)": {
+    textAlign: "center",
+  },
+})
 
-const SocialContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-  transition: all 1s ease-in-out;
+const SocialContainer = styled.div({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-around",
+  width: "100%",
+  transition: "all 1s ease-in-out",
 
-  @media only screen and (max-width: 1000px) {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 2;
-    grid-row-end: 3;
-  }
+  "@media only screen and (max-width: 1000px)": {
+    gridColumnStart: "1",
+    gridColumnEnd: "2",
+    gridRowStart: "2",
+    gridRowEnd: "3",
+  },
 
-  @media only screen and (max-width: 600px) {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 5;
-    grid-row-end: -1;
-  }
+  "@media only screen and (max-width: 600px)": {
+    gridColumnStart: "1",
+    gridColumnEnd: "2",
+    gridRowStart: "5",
+    gridRowEnd: "-1",
+  },
 
-  & .socialIcon {
-    font-size: 25px;
-    cursor: pointer;
-		color:white;
+  "& .socialIcon": {
+    fontSize: 25,
+    cursor: "pointer",
+		color: "white",
 
-    &:hover {
-      filter: invert(56%) sepia(76%) saturate(400%) hue-rotate(131deg)
-        brightness(101%) contrast(94%);
-    }
-  }
-`;
+    "&:hover": {
+      filter: "invert(56%) sepia(76%) saturate(400%) hue-rotate(131deg) brightness(101%) contrast(94%)",
+    },
+  },
+})

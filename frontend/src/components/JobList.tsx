@@ -68,46 +68,43 @@ const LoadingText = styled.div({
   }
 });
 
-const JobContainer = styled.div`
-  height: auto;
-  min-height: 50vh;
-  position: relative;
-	padding: 1rem 0 5rem 0;
-`;
+const JobContainer = styled.div({
+  height: "auto",
+  minHeight: "50vh",
+  position: "relative",
+	padding: "1rem 0 5rem 0",
+})
 
-const JobContent = styled.div`
-  font-size: 1rem;
-  width: 70%;
-  height: auto;
-  background-color: hsl(219, 30%, 18%);
-  padding: 2rem 2rem;
-  margin: 2rem 0;
-  box-shadow: hsl(216, 53%, 9%) 0px 8px 14px;
-	border-radius: 10px;
+const JobContent = styled.div({
+  fontSize: "1rem",
+  width: "70%",
+  height: "auto",
+  backgroundColor: "hsl(219, 30%, 18%)",
+  padding: "2rem 2rem",
+  margin: "2rem 0",
+  boxShadow: "hsl(216, 53%, 9%) 0px 8px 14px",
+	borderRadius: 10,
 
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  position: "relative",
+  left: "50%",
+  transform: "translateX(-50%)",
 
-  cursor: pointer;
-`;
+  cursor: "pointer"
+})
 
-const Position = styled.span(
-  {
+const Position = styled.span({
     fontSize: 20,
   },
   (props) => ({ color: props.color })
 );
 
-const Level = styled.span(
-  {
+const Level = styled.span({
     paddingLeft: 10,
   },
   (props) => ({ color: props.color })
 );
 
-const Location = styled.h5(
-  {
+const Location = styled.h5({
     paddingTop: 20,
   },
   (props) => ({ color: props.color })
@@ -117,8 +114,7 @@ const Company = styled.h5((props) => ({ color: props.color }));
 
 const Skills = styled.div((props) => ({ color: props.color }));
 
-const Description = styled.p(
-  {
+const Description = styled.p({
     fontSize: 18,
     fontWeight: 300,
     paddingTop: 20,
