@@ -23,19 +23,10 @@ export const JobList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!localStorage.getItem("jobList")) {
-      localStorage.setItem("jobList", JSON.stringify(data));
-    } else {
-      localStorage.setItem("jobList", JSON.stringify(data));
-    }
-
-    getData("./jobs.json").then(setData);
+    getData("http://localhost:8080/api/find-a-job").then(setData);
     setTimeout(() => setIsLoaded(true), 1500);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("jobList", JSON.stringify(data));
-  }, [data]);
 
   if (!isLoaded) {
     return (
@@ -90,6 +81,7 @@ const JobContainer = styled.div`
   height: auto;
   min-height: 50vh;
   position: relative;
+	padding: 1rem 0 5rem 0;
 `;
 
 const JobContent = styled.div`

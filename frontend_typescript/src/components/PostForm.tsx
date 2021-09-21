@@ -15,7 +15,7 @@ const layout = {
 };
 
 export const PostForm = () => {
-	
+
   type newJobType = {
     position: string;
     company: string;
@@ -47,7 +47,7 @@ export const PostForm = () => {
       openNotificationWithIcon(
         "success",
         "Successful!",
-        `Candidates can now see the ${newJob.position} position you have posted`
+        `Candidates can now apply the ${newJob.position} position at ${newJob.company}.`
       );
     }
   }, [newJob]);
@@ -79,7 +79,7 @@ export const PostForm = () => {
               },
             ]}
           >
-            <Input id="positionInput" />
+            <Input id="positionInput" allowClear />
           </Form.Item>
 
           {/* COMPANY NAME */}
@@ -94,7 +94,7 @@ export const PostForm = () => {
               },
             ]}
           >
-            <Input id="companyInput" />
+            <Input id="companyInput" allowClear />
           </Form.Item>
 
           {/* LEVEL */}
@@ -137,7 +137,7 @@ export const PostForm = () => {
               },
             ]}
           >
-            <Input placeholder="City name only" id="locationInput" />
+            <Input placeholder="City name only" id="locationInput" allowClear />
           </Form.Item>
 
           {/* DESCRIPTION */}
@@ -154,7 +154,7 @@ export const PostForm = () => {
               },
             ]}
           >
-            <Input.TextArea rows={5} id="descriptionInput" />
+            <Input.TextArea rows={5} id="descriptionInput" allowClear />
           </Form.Item>
 
           {/* BUTTON */}
