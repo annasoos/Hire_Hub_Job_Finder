@@ -15,7 +15,7 @@ export const LoginPage = () => {
 		openNotificationWithIcon(
 			"success",
 			"Welcome back!",
-			"Browse our page and find your dream job! Good luck!"
+			"Post a job and find your new teammate! Good luck!"
 		);
   };
 
@@ -54,7 +54,7 @@ export const LoginPage = () => {
             },
           ]}
         >
-          <Input className="input"/>
+          <Input className="input" allowClear/>
         </Form.Item>
 
         <Form.Item
@@ -67,7 +67,7 @@ export const LoginPage = () => {
             },
           ]}
         >
-          <Input.Password className="input" />
+          <Input.Password className="input" allowClear />
         </Form.Item>
 
         <Form.Item
@@ -99,6 +99,7 @@ export const LoginPage = () => {
 
 const LoginContainer = styled.div({
 	width: "100%",
+	margin: "2rem 0 5rem 0",
 
 	"& .loginForm": {
 		"& .ant-row": {

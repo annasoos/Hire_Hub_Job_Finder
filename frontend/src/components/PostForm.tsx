@@ -142,7 +142,7 @@ export const PostForm = () => {
               },
             ]}
 						requiredMark="optional"
-						extra={<div style={{color: "hsl(0, 0%, 75%)", fontSize: 14}}>Please provide keywords separated by comma (e.g: Java, .NET, Agile)</div>}
+						extra={<div style={{color: "hsl(0, 0%, 75%)", fontSize: 14}}>Please provide keywords separated by comma (e.g: Java, Git, Agile)</div>}
           >
             <Input id="locationInput" allowClear />
           </Form.Item>
@@ -186,11 +186,11 @@ const PostFormContainer = styled.section({
 
 const PostTitle = styled.h1({
   color: "white",
-  width: "100%",
+  width: "70%",
   textAlign: "center",
   fontSize: 30,
   fontWeight: 700,
-	margin: 0,
+	margin: "auto",
   transition: "all 1s ease-in-out",
 
   "@media(max-width: 1090px)": {
@@ -216,7 +216,7 @@ const PostFormContent = styled.div({
     },
   },
   "@media(max-width: 1090px)": {
-    marginTop: "78%",
+    marginTop: "55%",
   },
   "& .ant-input": {
     "@media(max-width: 1090px)": {
@@ -236,7 +236,7 @@ const SearchImg = styled.img({
     position: "absolute",
     left: "50%",
     transform: "translateX(-50%)",
-    width: "70%",
+    width: "50%",
   },
 
   "@media(max-width: 450px)": {

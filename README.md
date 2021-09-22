@@ -21,6 +21,8 @@ The user should be able to…
 
 ### TODO
 
+- Improve design and responsivity of ANTD forms (post, signup, login)
 - Add business logic to filterbar
 - Connect Post a job form to server
-- Add new features (e.g: Registartion and Login opportunity, Newsletter subscription)
+- Add business logic to Registartion and Login (JWT)
+- Add new features (e.g: Newsletter subscription)
