@@ -18,19 +18,19 @@ export const Hero = () => {
 
 const HeroSection = styled.section({
 	position: "relative",
-  width: "100%",
+	width: "100%",
 	height: "auto",
 	minHeight: "50%",
-  padding: "0 10%",
+	padding: "0 10%",
 	border: "1px solid hsl(218, 28%, 13%)",  /*need this line to got the right image position in mobile view -- TODO: reorganize and have relative position to image so it can be included in the auto height of the section */
 })
 
 const Title = styled.h1({
 	width: "40%",
-  fontSize: 70,
+	fontSize: 70,
 	fontWeight: 700,
 	letterSpacing: "-0.05em",
-  color: "white",
+	color: "white",
 	transition: "all 1s ease-in-out",
 	
 	"@media only screen and (max-width: 1200px)": {
@@ -56,7 +56,7 @@ const Title = styled.h1({
 
 const Text = styled.p({
 	width: "40%",
-  fontSize: 22,
+	fontSize: 22,
 	color: "hsl(257, 7%, 63%)",
 	padding: "2rem 0",
 	transition: "all 1s ease-in-out",
@@ -77,17 +77,17 @@ const Button = styled.button({
 	height: "2.5rem",
 	width: "10rem",
 	marginTop: "1rem",
-
-  color: "white",
+	
+	color: "white",
 	backgroundColor: "hsl(180, 66%, 49%)",
 	borderRadius: 20,
 
 	transition: "left 1s ease-in-out",
-
-  "&:hover": {
+	
+	"&:hover": {
 		backgroundColor: "hsla(180, 66%, 49%, 0.5)",
 	},
-
+	
 	"@media only screen and (max-width: 1090px)": {
 		left: "50%",
 		transform: "translateX(-50%)",
@@ -95,7 +95,7 @@ const Button = styled.button({
 })
 
 const HeroImg = styled.img({
-  position: "absolute",
+	position: "absolute",
 	width: "40%",
 	right: "10%",
 	top: "5%",

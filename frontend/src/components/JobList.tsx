@@ -62,9 +62,9 @@ const LoadingText = styled.div({
   left: '50%',
   transform: 'translate(-50%, -50%)',
   textAlign: 'center',
-
+	
 	'@media(max-width: 1090px)': {
-    fontSize: '1.5rem'
+		fontSize: '1.5rem'
   }
 });
 

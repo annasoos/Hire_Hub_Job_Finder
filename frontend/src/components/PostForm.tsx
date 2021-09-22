@@ -8,10 +8,10 @@ const { Option } = Select;
 
 const layout = {
   labelCol: {
-    span: 6,
+    span: 10,
   },
   wrapperCol: {
-    span: 10,
+    span: 11,
   },
 };
 
@@ -46,6 +46,7 @@ export const PostForm = () => {
       <PostTitle>
         Post a job & find the newest member of your team with us!
       </PostTitle>
+      <SearchImg src={SearchImage} alt="illustration" />
       <PostFormContent>
         <Form
           {...layout}
@@ -129,6 +130,23 @@ export const PostForm = () => {
             <Input placeholder="City name only" id="locationInput" allowClear />
           </Form.Item>
 
+					{/* SKILLS */}
+          <Form.Item
+            label={
+              <label style={{ color: "white" }}>Required skills/technologies:</label>
+            }
+            name="skills"
+            rules={[
+              {
+                required: false,
+              },
+            ]}
+						requiredMark="optional"
+						extra={<div style={{color: "hsl(0, 0%, 75%)", fontSize: 14}}>Please provide keywords separated by comma (e.g: Java, .NET, Agile)</div>}
+          >
+            <Input id="locationInput" allowClear />
+          </Form.Item>
+
           {/* DESCRIPTION */}
           <Form.Item
             label={
@@ -147,15 +165,13 @@ export const PostForm = () => {
           </Form.Item>
 
           {/* BUTTON */}
-          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 10 }}>
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 14 }}>
             <Button type="primary" htmlType="submit">
               Post
             </Button>
           </Form.Item>
         </Form>
       </PostFormContent>
-
-      <SearchImg src={SearchImage} alt="illustration" />
     </PostFormContainer>
   );
 };
@@ -165,23 +181,21 @@ const PostFormContainer = styled.section({
   width: "100%",
   height: "auto",
   minHeight: "80vh",
-  padding: "0 10% 5% 10%",
+  padding: "3%",
 });
 
 const PostTitle = styled.h1({
   color: "white",
-  width: "53%",
-  textAlign: "right",
+  width: "100%",
+  textAlign: "center",
   fontSize: 30,
   fontWeight: 700,
-  textIndent: "3rem",
-  padding: "0 0 2rem 0",
+	margin: 0,
   transition: "all 1s ease-in-out",
 
   "@media(max-width: 1090px)": {
     width: "100%",
     textAlign: "center",
-    textIndent: "unset",
   },
 
   "@media(max-width: 450px)": {
@@ -212,10 +226,10 @@ const PostFormContent = styled.div({
 });
 
 const SearchImg = styled.img({
-  position: "absolute",
-  width: "36%",
-  right: "5%",
-  top: "5%",
+  position: "relative",
+	left: "50%",
+	transform: "translateX(-50%)",
+	width: "30%",
   transition: "all 1s ease-in-out",
 
   "@media(max-width: 1090px)": {

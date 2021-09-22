@@ -33,10 +33,10 @@ export const Featured = () => {
 
 
 const FeaturedSection = styled.section({
-  width: "100%",
+	width: "100%",
 	height: "auto",
 	position: "relative",
-  margin: "9rem 0 0 0",
+	margin: "9rem 0 0 0",
 	padding: "10rem 0",
 
 	backgroundColor: "hsl(218, 28%, 13%)",
@@ -52,9 +52,9 @@ const FeaturedSection = styled.section({
 
 const Title = styled.h1({
 	width: "50%",
-  fontSize: 40,
+	fontSize: 40,
 	fontWeight: 700,
-  color: "white",
+	color: "white",
 	textAlign: "center",
 	paddingBottom: "1rem",
 
@@ -75,7 +75,7 @@ const Title = styled.h1({
 
 const Text = styled.p({
 	width: "40%",
-  fontSize: "1rem",
+	fontSize: "1rem",
 	color: "hsl(257, 7%, 63%)",
 	textAlign: "center",
 
