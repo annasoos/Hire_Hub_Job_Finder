@@ -1,10 +1,60 @@
+import { useState } from 'react';
+import axios from "axios";
 import { Form, Input, Button, notification } from "antd";
 import styled from "@emotion/styled";
-import { LoginSuccessType } from "../types/LoginSuccessType";
+import { RegUserType } from "../types/RegUserType";
 import businessManIllustration from "../images/Businessman-pana.svg";
 import laptopGirlIllustration from "../images/Startup life-pana.svg";
 
 export const RegistrationPage = () => {
+
+	const [form] = Form.useForm();
+
+	const [firstName, setFirstName] = useState<string>("");
+	const [lastName, setLastName] = useState<string>("");
+	const [email, setEmail] = useState<string>("");
+	const [password, setPassword] = useState<string>("");
+
+	const registration = async () => {
+
+		const newUser = { firstName, lastName, email, password };
+
+		await axios.post("http://localhost:8080/api/signup", newUser)
+			.then(res => {
+				if (res.status === 201) {
+					console.log("New user added", res);
+					openNotificationWithIcon(
+						"success",
+						"Welcome!",
+						"Post a job and find your new teammate! Good luck!"
+					);
+					setFirstName("");
+					setLastName("");
+					setEmail("");
+					setPassword("");
+				} 
+			})
+			.catch(error => {
+				console.log("An error occured: ", error.response)
+				if (error.response.status === 400) {
+					openNotificationWithIcon(
+						"error",
+						"Oops..something went wrong!",
+						"Please provide all the necessary data."
+					);
+				} 
+				else if (error.response.status === 409) {
+					openNotificationWithIcon(
+						"error",
+						"Oops..something went wrong!",
+						"It looks like you've already registered in our system. Please try and login."
+					);
+				}
+			})
+		
+		form.resetFields()  //nem működik, miért?????
+	}
+
   const openNotificationWithIcon = (
     type: string,
     message: string,
@@ -15,13 +65,9 @@ export const RegistrationPage = () => {
     return;
   };
 
-  const onFinish = (values: LoginSuccessType) => {
-    console.log("Success:", values);
-    openNotificationWithIcon(
-      "success",
-      "Welcome!",
-      "Post a job and find your new teammate! Good luck!"
-    );
+
+  /* const onFinish = (values: RegUserType) => {
+    console.log("Success finish:", values);
   };
 
   const onFinishFailed = (errorInfo: object) => {
@@ -31,7 +77,7 @@ export const RegistrationPage = () => {
       "Oops..something went wrong!",
       "Please try again."
     );
-  };
+  }; */
 
   return (
     <RegContainer>
@@ -50,8 +96,7 @@ export const RegistrationPage = () => {
         initialValues={{
           remember: true,
         }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        onFinish={registration}
         autoComplete="off"
         colon={false}
       >
@@ -66,7 +111,7 @@ export const RegistrationPage = () => {
             },
           ]}
         >
-          <Input className="input" allowClear />
+          <Input className="input" allowClear onChange={(e) => {setFirstName(e.target.value)}} />
         </Form.Item>
 
         {/* LAST NAME*/}
@@ -80,7 +125,7 @@ export const RegistrationPage = () => {
             },
           ]}
         >
-          <Input className="input" allowClear />
+          <Input className="input" allowClear onChange={(e) => {setLastName(e.target.value)}} />
         </Form.Item>
 
         {/* EMAIL */}
@@ -91,10 +136,11 @@ export const RegistrationPage = () => {
             {
               required: true,
               message: "Please add your e-mail adress!",
+							type: "email"
             },
           ]}
         >
-          <Input className="input" allowClear />
+          <Input className="input" allowClear onChange={(e) => {setEmail(e.target.value)}} />
         </Form.Item>
 
         {/* PASSWORD */}
@@ -108,7 +154,7 @@ export const RegistrationPage = () => {
             },
           ]}
         >
-          <Input.Password className="input" allowClear />
+          <Input.Password className="input" allowClear onChange={(e) => {setPassword(e.target.value)}}/>
         </Form.Item>
 
         <Form.Item
