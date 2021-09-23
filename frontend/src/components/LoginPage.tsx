@@ -1,46 +1,68 @@
-import { Form, Input, Button, Checkbox, notification } from "antd";
+import { useState } from "react";
+import axios from "axios";
+import { Form, Input, Button, Checkbox } from "antd";
+import { openNotificationWithIcon } from "../functions/Notification";
 import styled from "@emotion/styled";
-import { LoginSuccessType } from "../types/LoginSuccessType";
+//import { LoginSuccessType } from "../types/LoginSuccessType";
 
 export const LoginPage = () => {
+  const [form] = Form.useForm();
 
-	const openNotificationWithIcon = (type: string, message: string, description: string ): void => {
-    if (type === "success" || type === "error")
-      notification[type]({ message: message, description: description });
-    return;
-  };
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const onFinish = (values: LoginSuccessType) => {
-    console.log("Success:", values);
-		openNotificationWithIcon(
-			"success",
-			"Welcome back!",
-			"Post a job and find your new teammate! Good luck!"
-		);
-  };
+  const login = async () => {
+    const loginUser = { email, password };
 
-  const onFinishFailed = (errorInfo: object) => {
-    console.log("Failed:", errorInfo);
-		openNotificationWithIcon(
-			"error",
-			"Oops..something went wrong!",
-			"Please enter a correct e-mail adress and password."
-		);
+    await axios
+      .post("http://localhost:8080/api/login", loginUser)
+      .then((res) => {
+        if (res.status === 200) {
+          console.log("User logged in", res);
+          openNotificationWithIcon(
+            "success",
+            "Welcome back!",
+            "Good to see you again!"
+          );
+          setEmail("");
+          setPassword("");
+        }
+      })
+      .catch((error) => {
+        console.log("An error occured: ", error.response);
+
+        if (error.response.status === 400) {
+          openNotificationWithIcon(
+            "error",
+            "Oops..something went wrong!",
+            "Please provide all the necessary data."
+          );
+        } else if (error.response.status === 409) {
+          openNotificationWithIcon(
+            "error",
+            "Oops..something went wrong!",
+            "E-mail address or password is incorrect. Please try again!"
+          );
+        }
+      });
+
+    form.resetFields();
   };
 
   return (
     <LoginContainer>
       <LoginTitle>
-				If you are not yet a user of the site, you can register by <a href="/signup">clicking here</a>!
+        If you are not yet a user of the site, you can register by{" "}
+        <a href="/signup">clicking here</a>!
       </LoginTitle>
       <Form
-				className="loginForm"
+        className="loginForm"
         name="basic"
+        form={form}
         initialValues={{
           remember: true,
         }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        onFinish={login}
         autoComplete="off"
         colon={false}
       >
@@ -54,7 +76,13 @@ export const LoginPage = () => {
             },
           ]}
         >
-          <Input className="input" allowClear/>
+          <Input
+            className="input"
+            allowClear
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
         </Form.Item>
 
         <Form.Item
@@ -67,11 +95,17 @@ export const LoginPage = () => {
             },
           ]}
         >
-          <Input.Password className="input" allowClear />
+          <Input.Password
+            className="input"
+            allowClear
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
         </Form.Item>
 
         <Form.Item
-					className="rememberMe"
+          className="rememberMe"
           name="remember"
           valuePropName="checked"
           wrapperCol={{
@@ -98,19 +132,19 @@ export const LoginPage = () => {
 };
 
 const LoginContainer = styled.div({
-	width: "100%",
-	margin: "2rem 0 5rem 0",
+  width: "100%",
+  margin: "2rem 0 5rem 0",
 
-	"& .loginForm": {
-		"& .ant-row": {
-			display: "block",
-			width: "40%",
-			position: "relative",
-			left: "50%",
-			transform: "translateX(-50%)",
-		},
-	},
-})
+  "& .loginForm": {
+    "& .ant-row": {
+      display: "block",
+      width: "40%",
+      position: "relative",
+      left: "50%",
+      transform: "translateX(-50%)",
+    },
+  },
+});
 
 const LoginTitle = styled.h1({
   color: "white",
@@ -125,12 +159,11 @@ const LoginTitle = styled.h1({
     fontSize: 20,
   },
 
-	"& a": {
-		color:  "hsl(180, 66%, 49%)",
+  "& a": {
+    color: "hsl(180, 66%, 49%)",
 
-		"&:hover": {
-			fontStyle: "italic"
-		}
-	}
+    "&:hover": {
+      fontStyle: "italic",
+    },
+  },
 });
-

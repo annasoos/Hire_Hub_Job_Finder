@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { Card } from "./Card";
 import { Search } from "./Search";
 import { IJob } from "../interfaces/IJob";
-import { getData } from "../api/Fetch"
+import { getData } from "../functions/Fetch"
 
 export const Featured = () => {
 

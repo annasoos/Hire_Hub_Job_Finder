@@ -1,83 +1,58 @@
-import { useState } from 'react';
+import { useState } from "react";
 import axios from "axios";
-import { Form, Input, Button, notification } from "antd";
+import { Form, Input, Button } from "antd";
+import { openNotificationWithIcon } from "../functions/Notification";
 import styled from "@emotion/styled";
-import { RegUserType } from "../types/RegUserType";
 import businessManIllustration from "../images/Businessman-pana.svg";
 import laptopGirlIllustration from "../images/Startup life-pana.svg";
+//import { RegUserType } from "../types/RegUserType";
 
 export const RegistrationPage = () => {
+  const [form] = Form.useForm();
 
-	const [form] = Form.useForm();
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-	const [firstName, setFirstName] = useState<string>("");
-	const [lastName, setLastName] = useState<string>("");
-	const [email, setEmail] = useState<string>("");
-	const [password, setPassword] = useState<string>("");
+  const registration = async () => {
+    const newUser = { firstName, lastName, email, password };
 
-	const registration = async () => {
+    await axios
+      .post("http://localhost:8080/api/signup", newUser)
+      .then((res) => {
+        if (res.status === 201) {
+          console.log("New user added", res);
+          openNotificationWithIcon(
+            "success",
+            "Welcome!",
+            "Post a job and find your new teammate! Good luck!"
+          );
+          setFirstName("");
+          setLastName("");
+          setEmail("");
+          setPassword("");
+        }
+      })
+      .catch((error) => {
+        console.log("An error occured: ", error.response);
+        if (error.response.status === 400) {
+          openNotificationWithIcon(
+            "error",
+            "Oops..something went wrong!",
+            "Please provide all the necessary data."
+          );
+        } else if (error.response.status === 409) {
+          openNotificationWithIcon(
+            "error",
+            "Oops..something went wrong!",
+            "It looks like you've already registered in our system. Please try and login."
+          );
+        }
+      });
 
-		const newUser = { firstName, lastName, email, password };
-
-		await axios.post("http://localhost:8080/api/signup", newUser)
-			.then(res => {
-				if (res.status === 201) {
-					console.log("New user added", res);
-					openNotificationWithIcon(
-						"success",
-						"Welcome!",
-						"Post a job and find your new teammate! Good luck!"
-					);
-					setFirstName("");
-					setLastName("");
-					setEmail("");
-					setPassword("");
-				} 
-			})
-			.catch(error => {
-				console.log("An error occured: ", error.response)
-				if (error.response.status === 400) {
-					openNotificationWithIcon(
-						"error",
-						"Oops..something went wrong!",
-						"Please provide all the necessary data."
-					);
-				} 
-				else if (error.response.status === 409) {
-					openNotificationWithIcon(
-						"error",
-						"Oops..something went wrong!",
-						"It looks like you've already registered in our system. Please try and login."
-					);
-				}
-			})
-		
-		form.resetFields()  //nem működik, miért?????
-	}
-
-  const openNotificationWithIcon = (
-    type: string,
-    message: string,
-    description: string
-  ): void => {
-    if (type === "success" || type === "error")
-      notification[type]({ message: message, description: description });
-    return;
+    form.resetFields();
   };
-
-
-  /* const onFinish = (values: RegUserType) => {
-    console.log("Success finish:", values);
-  };
-
-  const onFinishFailed = (errorInfo: object) => {
-    console.log("Failed:", errorInfo);
-    openNotificationWithIcon(
-      "error",
-      "Oops..something went wrong!",
-      "Please try again."
-    );
-  }; */
 
   return (
     <RegContainer>
@@ -87,12 +62,17 @@ export const RegistrationPage = () => {
         database. <br /> Let us help you find the newest member of your team!
       </RegText>
       <RegImgContainer>
-        <img id="businessMan" src={businessManIllustration} alt="illustration" />
+        <img
+          id="businessMan"
+          src={businessManIllustration}
+          alt="illustration"
+        />
         <img id="laptopGirl" src={laptopGirlIllustration} alt="illustration" />
       </RegImgContainer>
       <Form
         className="regForm"
         name="basic"
+        form={form}
         initialValues={{
           remember: true,
         }}
@@ -111,7 +91,13 @@ export const RegistrationPage = () => {
             },
           ]}
         >
-          <Input className="input" allowClear onChange={(e) => {setFirstName(e.target.value)}} />
+          <Input
+            className="input"
+            allowClear
+            onChange={(e) => {
+              setFirstName(e.target.value);
+            }}
+          />
         </Form.Item>
 
         {/* LAST NAME*/}
@@ -125,22 +111,34 @@ export const RegistrationPage = () => {
             },
           ]}
         >
-          <Input className="input" allowClear onChange={(e) => {setLastName(e.target.value)}} />
+          <Input
+            className="input"
+            allowClear
+            onChange={(e) => {
+              setLastName(e.target.value);
+            }}
+          />
         </Form.Item>
 
         {/* EMAIL */}
         <Form.Item
-          label={<label style={{ color: "white" }}>E-mail adress:</label>}
+          label={<label style={{ color: "white" }}>E-mail address:</label>}
           name="email"
           rules={[
             {
               required: true,
-              message: "Please add your e-mail adress!",
-							type: "email"
+              message: "Please add your e-mail address!",
+              type: "email",
             },
           ]}
         >
-          <Input className="input" allowClear onChange={(e) => {setEmail(e.target.value)}} />
+          <Input
+            className="input"
+            allowClear
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
         </Form.Item>
 
         {/* PASSWORD */}
@@ -154,7 +152,13 @@ export const RegistrationPage = () => {
             },
           ]}
         >
-          <Input.Password className="input" allowClear onChange={(e) => {setPassword(e.target.value)}}/>
+          <Input.Password
+            className="input"
+            allowClear
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
         </Form.Item>
 
         <Form.Item
@@ -186,10 +190,10 @@ const RegContainer = styled.div({
       transform: "translateX(-50%)",
     },
   },
-	
-	"@media(max-width: 1090px)": {
-		minHeight: "55vh",
-	},
+
+  "@media(max-width: 1090px)": {
+    minHeight: "55vh",
+  },
 });
 
 const RegTitle = styled.h1({
@@ -233,13 +237,12 @@ const RegImgContainer = styled.div({
   flexDirection: "row",
   justifyContent: "space-between",
 
-	"@media(max-width: 1090px)": {
-		height: 350,
-		bottom: "-6.5rem",
-	},
+  "@media(max-width: 1090px)": {
+    height: 350,
+    bottom: "-6.5rem",
+  },
 
-	"@media(max-width: 500px)": {
-		display: "none"
-	},
-
+  "@media(max-width: 500px)": {
+    display: "none",
+  },
 });

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { getData } from "../api/Fetch";
+import { getData } from "../functions/Fetch";
 import { FilterBar } from "./FilterBar";
 import { IJob } from "../interfaces/IJob"
 

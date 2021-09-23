@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { User } from './model/users.schema';
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { connect } from "./config/database";
 
 const server = express();
@@ -21,7 +22,8 @@ server.use(express.static(path.resolve(__dirname, "../../frontend/build")));
 
 /* server.get("/*", (req, res) => {
 	res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
-});  ----> NOT WORKING, WHY??? */
+});
+----> NOT WORKING, WHY??? */
 
 server.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
@@ -46,7 +48,7 @@ server.get("/signup", (req, res) => {
 // GET JSON
 
 server.get("/api/find-a-job", (req, res) => {
-  res.sendFile(path.join(__dirname, "../src/assets", "jobs.json"));
+  res.sendFile(path.join(__dirname, "./assets", "jobs.json"));
 });
 
 // REGISTRATION
@@ -79,7 +81,7 @@ server.post("/api/signup", (req, res) => {
 
 // LOGIN
 
-/* server.post("/api/login", async (req, res) => {
+server.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
 
   if (!(email && password)) {
@@ -96,14 +98,13 @@ server.post("/api/signup", (req, res) => {
       );
       logUser.token = token;
 
-      console.log("Login successful");
-      console.log(logUser);
+      console.log("Login successful", logUser);
       res.status(200).json({ msg: "User logged in", token });
     } else {
       res.status(409).json({ msg: "Email adress or password is incorrect" });
     }
   }
-}); */
+});
 
 // LISTENING
 
