@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import styled from "@emotion/styled";
 import { getData } from "../functions/Fetch";
 import { FilterBar } from "./FilterBar";
-import { IJob } from "../interfaces/IJob"
+import { IJob } from "../interfaces/IJob";
+import { cyan, lightgray, white} from "../style_guide";
+import { LoadingText, JobContainer, JobContent, Position, Level, Location, Company, Skills, Description } from "./JobList.style";
 
 
 export const JobList = () => {
@@ -31,9 +32,9 @@ export const JobList = () => {
               <Position color={white}>
                 <b>{job.position}</b>
               </Position>
-              <Level color={grey}> - {job.level} </Level>
+              <Level color={lightgray}> - {job.level} </Level>
               <Location color={cyan}> {job.location} </Location>
-              <Company color={grey}> {job.company} </Company>
+              <Company color={lightgray}> {job.company} </Company>
               <Skills color={cyan}>
                 {job.skills.map((skill: string, index: number) => (
 									<span key={index}> {skill} </span>
@@ -47,77 +48,3 @@ export const JobList = () => {
     );
   }
 };
-
-const grey = "hsl(0, 0%, 75%)";
-const cyan = "hsl(180, 66%, 49%)";
-const white = "white";
-
-const LoadingText = styled.div({
-	height: '50%',
-  fontSize: 35,
-	fontWeight: 700,
-  color: 'white',
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  textAlign: 'center',
-	
-	'@media(max-width: 1090px)': {
-		fontSize: '1.5rem'
-  }
-});
-
-const JobContainer = styled.div({
-  height: "auto",
-  minHeight: "50vh",
-  position: "relative",
-	padding: "1rem 0 5rem 0",
-})
-
-const JobContent = styled.div({
-  fontSize: "1rem",
-  width: "70%",
-  height: "auto",
-  backgroundColor: "hsl(219, 30%, 18%)",
-  padding: "2rem 2rem",
-  margin: "2rem 0",
-  boxShadow: "hsl(216, 53%, 9%) 0px 8px 14px",
-	borderRadius: 10,
-
-  position: "relative",
-  left: "50%",
-  transform: "translateX(-50%)",
-
-  cursor: "pointer"
-})
-
-const Position = styled.span({
-    fontSize: 20,
-  },
-  (props) => ({ color: props.color })
-);
-
-const Level = styled.span({
-    paddingLeft: 10,
-  },
-  (props) => ({ color: props.color })
-);
-
-const Location = styled.h5({
-    paddingTop: 20,
-  },
-  (props) => ({ color: props.color })
-);
-
-const Company = styled.h5((props) => ({ color: props.color }));
-
-const Skills = styled.div((props) => ({ color: props.color }));
-
-const Description = styled.p({
-    fontSize: 18,
-    fontWeight: 300,
-    paddingTop: 20,
-  },
-  (props) => ({ color: props.color })
-);

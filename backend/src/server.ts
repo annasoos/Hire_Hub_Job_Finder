@@ -48,7 +48,7 @@ server.get("/signup", (req, res) => {
 // GET JSON
 
 server.get("/api/find-a-job", (req, res) => {
-  res.sendFile(path.join(__dirname, "./assets", "jobs.json"));
+  res.sendFile(path.join(__dirname, "../src/assets", "jobs.json"));
 });
 
 // REGISTRATION
