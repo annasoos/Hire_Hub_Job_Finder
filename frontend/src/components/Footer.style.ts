@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import FooterLogo from "../images/footer_logo.svg";
 import FooterLogoHover from "../images/footer_logo_hover.svg";
+import { footerBG, cyan } from '../style_guide';
 
 export const FooterContainer = styled.section({
   width: "100%",
@@ -10,7 +11,7 @@ export const FooterContainer = styled.section({
   display: "grid",
   gridTemplateColumns: "repeat(5, 1fr)",
 
-  backgroundColor: "hsl(216, 53%, 9%)",
+  backgroundColor: `${footerBG}`,
   transition: "all 1s ease-in-out",
 
   "@media only screen and (max-width: 1000px)": {
@@ -56,7 +57,7 @@ export const LinkContainer = styled.ul({
 
     "& a": {
       "&:hover": {
-        color: "hsl(180, 66%, 49%)",
+        color: `${cyan}`,
       },
     },
   },

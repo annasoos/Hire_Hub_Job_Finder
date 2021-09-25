@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { lightgray } from '../style_guide';
 
 export const PostFormContainer = styled.section({
   position: "relative",
@@ -34,7 +35,7 @@ export const PostFormContent = styled.div({
   "& .ant-form-item-label": {
     "& label": {
       "& span.ant-form-item-optional": {
-        color: "hsl(0, 0%, 75%)",
+        color: `${lightgray}`,
         fontSize: 14,
       },
     },

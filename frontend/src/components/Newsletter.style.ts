@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
+import { cyan, cyanHover, darkBlue, lightgray } from '../style_guide';
 
 export const NewsletterContainer = styled.section({
   width: "100%",
   height: 350,
-  backgroundColor: "hsl(219, 30%, 18%)",
+  backgroundColor: `${darkBlue}`,
   padding: "2rem",
 
   display: "flex",
@@ -46,7 +47,7 @@ export const NewsletterTitle = styled.h1({
 });
 
 export const NewsletterText = styled.p({
-  color: "hsl(0, 0%, 75%)",
+  color: `${lightgray}`,
   textAlign: "center",
   width: "50%",
 
@@ -62,12 +63,12 @@ export const Button = styled.button({
   height: "2.5rem",
 
   color: "white",
-  backgroundColor: "hsl(180, 66%, 49%)",
+  backgroundColor: `${cyan}`,
   borderRadius: 20,
   width: "10rem",
   marginTop: "1rem",
 
   "&:hover": {
-    backgroundColor: "hsla(180, 66%, 49%, 0.5)",
+    backgroundColor: `${cyanHover}`,
   },
 });

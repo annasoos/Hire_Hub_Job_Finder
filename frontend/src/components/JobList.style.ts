@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { darkBlue, footerBG } from '../style_guide';
 
 export const LoadingText = styled.div({
 	height: '50%',
@@ -27,10 +28,10 @@ export const JobContent = styled.div({
   fontSize: "1rem",
   width: "70%",
   height: "auto",
-  backgroundColor: "hsl(219, 30%, 18%)",
+  backgroundColor: `${darkBlue}`,
   padding: "2rem 2rem",
   margin: "2rem 0",
-  boxShadow: "hsl(216, 53%, 9%) 0px 8px 14px",
+  boxShadow: `${footerBG} 0px 8px 14px`,
 	borderRadius: 10,
 
   position: "relative",

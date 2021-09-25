@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { cyanHover, footerBG, featuredBG, darkBlue } from '../style_guide';
 
 export const FilterContainer = styled.section({
   width: "70%",
@@ -8,8 +9,8 @@ export const FilterContainer = styled.section({
   left: "50%",
   transform: "translateX(-50%)",
 
-  backgroundColor: "hsla(180, 66%, 45%, 0.6)",
-  boxShadow: "hsl(216, 53%, 9%) 0px 8px 14px",
+  backgroundColor: `${cyanHover}`,
+  boxShadow: `${footerBG} 0px 8px 14px`,
   borderRadius: 10,
 
   zIndex: 1,
@@ -44,10 +45,10 @@ export const FilterContent = styled.div({
     margin: "0 1rem 0 1rem",
     borderRadius: 10,
     border: "none",
-		color: "hsl(217, 28%, 15%)",
+		color: `${featuredBG}`,
 
     "&:hover": {
-      backgroundColor: "hsl(219, 30%, 18%)",
+      backgroundColor: `${darkBlue}`,
 			color: "white",
     },
 

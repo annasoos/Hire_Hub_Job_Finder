@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { cyanHover, darkBlue, lightgray, footerBG } from '../style_guide';
 
 export const SearchContainer = styled.section({
   width: "80%",
@@ -9,8 +10,8 @@ export const SearchContainer = styled.section({
   top: "-5rem",
   transform: "translateX(-50%)",
 
-  backgroundColor: "hsl(219, 30%, 18%)",
-  boxShadow: "hsl(216, 53%, 9%) 0px 8px 14px",
+  backgroundColor: `${darkBlue}`,
+  boxShadow: `${footerBG} 0px 8px 14px`,
   borderRadius: 10,
 
   zIndex: 1,
@@ -47,7 +48,7 @@ export const SearchContent = styled.div({
     border: "none",
 
     "&:hover": {
-      backgroundColor: "hsla(180, 66%, 49%, 0.5)",
+      backgroundColor: `${cyanHover}`,
     },
 
     "@media only screen and (max-width: 1090px)": {
@@ -79,7 +80,7 @@ export const SearchContent = styled.div({
 })
 
 export const Label = styled.label({
-  color: "hsl(0, 0%, 75%)",
+  color: `${lightgray}`,
   fontSize: "0.9rem",
   margin: "0 1rem",
   fontStyle: "italic",

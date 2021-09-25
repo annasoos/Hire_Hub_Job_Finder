@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { gray, cyan, mainBG } from '../style_guide';
 
 export const FeaturedSection = styled.section({
 	width: "100%",
@@ -7,7 +8,7 @@ export const FeaturedSection = styled.section({
 	margin: "9rem 0 0 0",
 	padding: "10rem 0",
 
-	backgroundColor: "hsl(218, 28%, 13%)",
+	backgroundColor: `${mainBG}`,
 
 	"@media only screen and (max-width: 1090px)": {
 		padding: "15rem 0 0 0",
@@ -44,7 +45,7 @@ export const Title = styled.h1({
 export const Text = styled.p({
 	width: "40%",
 	fontSize: "1rem",
-	color: "hsl(257, 7%, 63%)",
+	color: `${gray}`,
 	textAlign: "center",
 
 	position: "relative",
@@ -80,7 +81,7 @@ export const CardContainer = styled.div({
 export const BlueLine = styled.div({
 	height: 6,
 	width: "70%",
-	backgroundColor: "hsl(180, 66%, 49%)",
+	backgroundColor: `${cyan}`,
 
 	position: "absolute",
 	left: "50%",

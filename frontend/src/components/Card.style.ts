@@ -1,13 +1,14 @@
 import styled from "@emotion/styled";
+import { gray, cyan, footerBG, darkBlue, purple } from '../style_guide';
 
 export const CardContent = styled.div({
   width: "31%",
   minHeight: "14rem",
   height: "auto",
-  backgroundColor: "hsl(219, 30%, 18%)",
+  backgroundColor: `${darkBlue}`,
   padding: "2rem 2rem",
   zIndex: 1,
-  boxShadow: "hsl(216, 53%, 9%) 0px 8px 14px",
+  boxShadow: `${footerBG} 0px 8px 14px`,
   cursor: "pointer",
 
   "@media only screen and (max-width: 1100px)": {
@@ -36,7 +37,7 @@ export const CardTitle = styled.h4({
 });
 
 export const CardLocation = styled.h5({
-  color: "hsl(180, 66%, 49%)",
+  color: `${cyan}`,
   fontSize: "0.8rem",
   fontWeight: 500,
   position: "relative",
@@ -49,7 +50,7 @@ export const CardLocation = styled.h5({
 
 export const CardText = styled.p({
   fontSize: "0.8rem",
-  color: "hsl(257, 7%, 63%)",
+  color: `${gray}`,
   position: "relative",
   top: "-1rem",
 
@@ -65,7 +66,7 @@ export const CardText = styled.p({
 export const CardLogo = styled.div({
   width: 50,
   height: 50,
-  backgroundColor: "hsl(257, 27%, 26%)",
+  backgroundColor: `${purple}`,
   padding: "2%",
   borderRadius: 25,
   position: "relative",

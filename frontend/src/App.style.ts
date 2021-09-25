@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { lightgray, gray, cyan, cyanHover, footerBG, mainBG } from './style_guide';
 
 export const NavBar = styled.nav({
 	width: "100%",
@@ -40,7 +41,7 @@ export const NavBar = styled.nav({
 		justifyContent: "flex-end",
 		alignItems: "center",
 	
-		color: "hsl(257, 7%, 63%)",
+		color: `${lightgray}`,
 	
 		"@media screen and (max-width: 1090px)": {
 		display: "none",
@@ -67,13 +68,13 @@ export const NavBar = styled.nav({
 	},
 	
 	"& #signup": {
-		color: "hsl(218, 28%, 13%)",
-		backgroundColor: "hsl(180, 66%, 49%)",
+		color: `${mainBG}`,
+		backgroundColor: `${cyan}`,
 		borderRadius: 20,
 		padding: "0.45rem 1.5em",
 	
 		"&:hover": {
-			backgroundColor: "hsla(180, 66%, 49%, 0.5)",
+			backgroundColor: `${cyanHover}`,
 			color: "white",
 		},
 	},
@@ -93,7 +94,7 @@ export const Hamburger = styled.div({
 		height: 5,
 		margin: "6px auto",
 		transition: "all 0.3s ease-in-out",
-		backgroundColor: "hsl(0, 0%, 75%)",
+		backgroundColor: `${lightgray}`,
 		borderRadius: 2,
 	},
 	
@@ -115,7 +116,7 @@ export const HamburgerMenu = styled.div({
 	width: "80%",
 	display: "flex",
 	flexDirection: "column",
-	backgroundColor: "hsl(216, 53%, 9%)",
+	backgroundColor: `${footerBG}`,
 	borderRadius: 10,
 
 	position: "absolute",
@@ -147,14 +148,14 @@ export const HamburgerMenu = styled.div({
 		cursor: "pointer",
 
 		"&:active": {
-			color: "hsl(180, 66%, 49%)",
+			color: `${cyan}`,
 		},
 	},
 
 	"& hr": {
 		height: 1,
 		width: "80%",
-		backgroundColor: "hsl(257, 7%, 63%)",
+		backgroundColor: `${gray}`,
 
 		position: "relative",
 		left: "50%",
@@ -163,11 +164,11 @@ export const HamburgerMenu = styled.div({
 
 	"& #mobileSignup": {
 		color: "white",
-		backgroundColor: "hsl(180, 66%, 49%)",
+		backgroundColor: `${cyan}`,
 		borderRadius: 20,
 
 		"&:active": {
-			backgroundColor: "hsla(180, 66%, 49%, 0.5)",
+			backgroundColor: `${cyanHover}`,
 		},
 	},
 });

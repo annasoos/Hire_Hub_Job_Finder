@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { cyan } from '../style_guide';
 
 export const LoginContainer = styled.div({
   width: "100%",
@@ -29,7 +30,7 @@ export const LoginTitle = styled.h1({
   },
 
   "& a": {
-    color: "hsl(180, 66%, 49%)",
+    color: `${cyan}`,
 
     "&:hover": {
       fontStyle: "italic",
