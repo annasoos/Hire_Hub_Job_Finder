@@ -32,7 +32,7 @@ export const JobList = () => {
               <Position color={white}>
                 <b>{job.position}</b>
               </Position>
-              <Level color={lightgray}> - {job.level} </Level>
+              {job.level.length > 0 ? <Level color={lightgray}> - {job.level} </Level> : null}
               <Location color={cyan}> {job.location} </Location>
               <Company color={lightgray}> {job.company} </Company>
               <Skills color={cyan}>

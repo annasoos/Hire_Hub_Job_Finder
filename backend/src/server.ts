@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import fs from 'fs';
 import cors from "cors";
 import dotenv from "dotenv";
 import { User } from './model/users.schema';
@@ -104,6 +105,17 @@ server.post("/api/login", async (req, res) => {
       res.status(409).json({ msg: "Email adress or password is incorrect" });
     }
   }
+});
+
+// POST NEW JOB
+
+server.use(express.json());
+server.use(express.urlencoded({ extended: false }));
+
+server.post('/api/post-a-job', (req, res) => {
+	console.log(req.body)
+	// res.status(200).json({ msg: "Success" })
+	// fs.writeFileSync(path.resolve(__dirname, "../src/assets", "jobs.json"), JSON.stringify(newJob));
 });
 
 // LISTENING

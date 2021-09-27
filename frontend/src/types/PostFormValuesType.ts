@@ -1,9 +1,8 @@
-export type NewJobType = {
-	id: string;
+export type PostFormValuesType = {
   position: string;
   company: string;
-  level: string;
+  level: string | undefined;
   location: string;
-  skills: string[];
+  skills: string;
   description: string;
 };

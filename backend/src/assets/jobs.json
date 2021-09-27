@@ -43,5 +43,14 @@
 		"location": "Krakow",
 		"skills": ["Selenium", "Git", "JavaScript", "JSON"],
 		"description": "If you are interested in cryptography, blockchain, fintech or business IT solutions, then this is the place for you! Netlock is owned by DOCLER, one of the most dynamically developing company groups in Hungary, as a leading developer of electronically authenticated business solutions. You will be working in the city center of Krakow, have a daily contact with the tester team, cooperate with our development team, and enjoy our beautiful office. Send you CV and attach a cover letter about your motivation."
+	},
+	{
+		"id": 6,
+		"position": "JavaScript Developer",
+		"company": "Kinsta",
+		"level": "",
+		"location": "Remote",
+		"skills": ["JavaScript", "Figma", "Miro"],
+		"description": "We are looking for a motivated and professional senior Product Designer to help us grow and enhance the best hosting service and site management dashboard on the market. This is an opportunity to work in a dynamically growing international company where what you do has a direct and immediate impact."
 	}
 ]
