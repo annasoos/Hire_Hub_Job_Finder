@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { gray, cyan, footerBG, darkBlue, purple } from '../style_guide';
+import { gray, cyan, footerBG, darkBlue, purple } from '../../style_guide';
 
 export const CardContent = styled.div({
   width: "31%",

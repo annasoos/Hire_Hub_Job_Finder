@@ -1,21 +1,25 @@
-import { useState } from "react";
 import axios from "axios";
 import { Form, Input, Button } from "antd";
-import { RegContainer, RegTitle, RegImgContainer, RegText } from "./Registration.style";
-import { openNotificationWithIcon } from "../functions/Notification";
-import businessManIllustration from "../images/Businessman-pana.svg";
-import laptopGirlIllustration from "../images/Startup life-pana.svg";
-//import { RegUserType } from "../types/RegUserType";
+import {
+  RegContainer,
+  RegTitle,
+  RegImgContainer,
+  RegText,
+} from "./Registration.style";
+import { openNotificationWithIcon } from "../../functions/Notification";
+import businessManIllustration from "../../images/Businessman-pana.svg";
+import laptopGirlIllustration from "../../images/Startup life-pana.svg";
+import { RegUserType } from "../../types/RegUserType";
 
 export const RegistrationPage = () => {
   const [form] = Form.useForm();
 
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const registration = async (values: RegUserType) => {
+    const firstName = values.firstName;
+    const lastName = values.lastName;
+    const email = values.email;
+    const password = values.password;
 
-  const registration = async () => {
     const newUser = { firstName, lastName, email, password };
 
     await axios
@@ -28,10 +32,6 @@ export const RegistrationPage = () => {
             "Welcome!",
             "Post a job and find your new teammate! Good luck!"
           );
-          setFirstName("");
-          setLastName("");
-          setEmail("");
-          setPassword("");
         }
       })
       .catch((error) => {
@@ -91,13 +91,7 @@ export const RegistrationPage = () => {
             },
           ]}
         >
-          <Input
-            className="input"
-            allowClear
-            onChange={(e) => {
-              setFirstName(e.target.value);
-            }}
-          />
+          <Input className="input" allowClear />
         </Form.Item>
 
         {/* LAST NAME*/}
@@ -111,13 +105,7 @@ export const RegistrationPage = () => {
             },
           ]}
         >
-          <Input
-            className="input"
-            allowClear
-            onChange={(e) => {
-              setLastName(e.target.value);
-            }}
-          />
+          <Input className="input" allowClear />
         </Form.Item>
 
         {/* EMAIL */}
@@ -132,13 +120,7 @@ export const RegistrationPage = () => {
             },
           ]}
         >
-          <Input
-            className="input"
-            allowClear
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
+          <Input className="input" allowClear />
         </Form.Item>
 
         {/* PASSWORD */}
@@ -152,13 +134,7 @@ export const RegistrationPage = () => {
             },
           ]}
         >
-          <Input.Password
-            className="input"
-            allowClear
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
+          <Input.Password className="input" allowClear />
         </Form.Item>
 
         <Form.Item
@@ -175,4 +151,3 @@ export const RegistrationPage = () => {
     </RegContainer>
   );
 };
-

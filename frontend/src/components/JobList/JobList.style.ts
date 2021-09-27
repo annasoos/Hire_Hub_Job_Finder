@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { darkBlue, footerBG } from '../style_guide';
+import { darkBlue, footerBG } from '../../style_guide';
 
 export const LoadingText = styled.div({
 	height: '50%',

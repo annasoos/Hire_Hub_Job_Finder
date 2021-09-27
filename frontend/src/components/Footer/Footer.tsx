@@ -5,9 +5,9 @@ import {
   GooglePlusCircleFilled,
 } from "@ant-design/icons";
 import { FooterContainer, LogoLink, LinkContainer, SocialContainer } from "./Footer.style";
-import { IFooter } from "../interfaces/IFooter";
-import { FooterItem } from "../classes/FooterItem.ts";
-import { FooterLinksType } from "../types/FooterLinksType"
+import { IFooter } from "../../interfaces/IFooter";
+import { FooterItem } from "../../classes/FooterItem.ts";
+import { FooterLinksType } from "../../types/FooterLinksType"
 
 export const Footer = () => {
 

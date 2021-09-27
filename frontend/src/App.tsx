@@ -10,14 +10,14 @@ import './App.less';
 import { NavBar, Hamburger, HamburgerMenu } from './App.style';
 import HeaderLogo from "./images/logo_white.png";
 //import components
-import { Hero } from "./components/Hero";
-import { Featured } from "./components/Featured";
-import { Newsletter } from "./components/Newsletter";
-import { Footer } from "./components/Footer";
-import { PostForm } from "./components/PostForm";
-import { JobList } from './components/JobList';
-import { LoginPage } from "./components/LoginPage";
-import { RegistrationPage } from "./components/RegistrationPage";
+import { Hero } from "./components/Hero/Hero";
+import { Featured } from "./components/Featured/Featured";
+import { Newsletter } from "./components/Newsletter/Newsletter";
+import { Footer } from "./components/Footer/Footer";
+import { PostForm } from "./components/PostPage/PostPage";
+import { JobList } from './components/JobList/JobList';
+import { LoginPage } from "./components/Login/LoginPage";
+import { RegistrationPage } from "./components/Registration/RegistrationPage";
 
 
 const App = () => {

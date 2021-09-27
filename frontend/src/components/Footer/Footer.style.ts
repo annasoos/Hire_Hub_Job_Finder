@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import FooterLogo from "../images/footer_logo.svg";
-import FooterLogoHover from "../images/footer_logo_hover.svg";
-import { footerBG, cyan } from '../style_guide';
+import FooterLogo from "../../images/footer_logo.svg";
+import FooterLogoHover from "../../images/footer_logo_hover.svg";
+import { footerBG, cyan } from '../../style_guide';
 
 export const FooterContainer = styled.section({
   width: "100%",

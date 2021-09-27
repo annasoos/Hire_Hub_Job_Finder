@@ -3,7 +3,7 @@ import { CardContent, CardTitle,  CardLocation, CardText, CardLogo } from './Car
 import { BulbTwoTone } from "@ant-design/icons";
 import { LikeTwoTone } from "@ant-design/icons";
 import { SmileTwoTone } from "@ant-design/icons";
-import { CardPropsType } from "../types/CardPropsType";
+import { CardPropsType } from "../../types/CardPropsType";
 
 export const Card:FC<CardPropsType> = ({ cardElement, position }) => { // TODO destructure props
   return (

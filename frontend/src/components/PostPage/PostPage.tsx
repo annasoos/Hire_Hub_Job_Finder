@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import { Button, Input, Form, Select, notification } from "antd";
-import { PostFormContainer, PostFormContent, PostTitle, SearchImg } from "./PostForm.style";
-import SearchImage from "../images/People search-rafiki.svg";
-import { NewJobType } from "../types/NewJobType";
+import jwt_decode from "jwt-decode";
+import { Button, Input, Form, Select } from "antd";
+import { PostFormContainer, PostFormContent, PostTitle, SearchImg } from "./PostPage.style";
+import SearchImage from "../../images/People search-rafiki.svg";
+import { NewJobType } from "../../types/NewJobType";
+import { openNotificationWithIcon } from "../../functions/Notification";
 
 const { Option } = Select;
 
@@ -18,20 +20,22 @@ const layout = {
 export const PostForm = () => {
 
   const [newJob, setNewJob] = useState<NewJobType>();
-
+	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
   const [form] = Form.useForm();
+	const token = localStorage.getItem("token");
 
-  const openNotificationWithIcon = (type: string, message: string, description: string ): void => {
-    if (type === "success")
-      notification[type]({ message: message, description: description });
-    return;
-  };
+	useEffect(() => {
+		if (token){
+			//const decoded = jwt_decode(token);
+			setIsLoggedIn(true);
+		}
+	},[token])
 
-  const onFinish = (values: NewJobType): void => {
+  const submit = (values: NewJobType): void => {
     setNewJob(values);
   };
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (newJob !== undefined) {
       openNotificationWithIcon(
         "success",
@@ -39,20 +43,17 @@ export const PostForm = () => {
         `Candidates can now apply the ${newJob.position} position at ${newJob.company}.`
       );
     }
-  }, [newJob]);
+  }, [newJob]); */
 
-  return (
-    <PostFormContainer>
-      <PostTitle>
-        Post a job & find the newest member of your team with us!
-      </PostTitle>
-      <SearchImg src={SearchImage} alt="illustration" />
-      <PostFormContent>
+	const renderForm = () => {
+		if(isLoggedIn){
+			return (
+				<PostFormContent>
         <Form
           {...layout}
           form={form}
           name="nest-messages"
-          onFinish={onFinish}
+          onFinish={submit}
           colon={false}
 					autoComplete="off"
         >
@@ -172,6 +173,24 @@ export const PostForm = () => {
           </Form.Item>
         </Form>
       </PostFormContent>
+			)
+		} else {
+			return (
+				<h2> Sorry, only registered users can post new positions. <br /> But don't worry, you can easily create a new account by <a href="/signup">clicking here</a>! </h2>
+			)
+		}
+	}
+
+  return (
+    <PostFormContainer>
+      <PostTitle>
+        Post a job & find the newest member of your team with us!
+      </PostTitle>
+      <SearchImg src={SearchImage} alt="illustration" />
+
+			{/* CONDITIONAL RENDERING BASED ON REGISTRATION */}
+      {renderForm()}
+
     </PostFormContainer>
   );
 };

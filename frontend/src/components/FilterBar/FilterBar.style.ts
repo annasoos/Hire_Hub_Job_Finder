@@ -1,16 +1,15 @@
 import styled from "@emotion/styled";
-import { cyanHover, darkBlue, lightgray, footerBG } from '../style_guide';
+import { cyanHover, footerBG, featuredBG, darkBlue } from '../../style_guide';
 
-export const SearchContainer = styled.section({
-  width: "80%",
-  height: "10rem",
+export const FilterContainer = styled.section({
+  width: "70%",
+  height: "6rem",
   padding: "0 2rem",
-  position: "absolute",
+  position: "relative",
   left: "50%",
-  top: "-5rem",
   transform: "translateX(-50%)",
 
-  backgroundColor: `${darkBlue}`,
+  backgroundColor: `${cyanHover}`,
   boxShadow: `${footerBG} 0px 8px 14px`,
   borderRadius: 10,
 
@@ -24,9 +23,9 @@ export const SearchContainer = styled.section({
   "@media only screen and (max-width: 400px)": {
     height: "20rem",
   },
-})
+});
 
-export const SearchContent = styled.div({
+export const FilterContent = styled.div({
   height: "100%",
   width: "100%",
   display: "flex",
@@ -35,20 +34,22 @@ export const SearchContent = styled.div({
   alignItems: "center",
   transition: "all 1s ease-in-out",
 
-  "@media only screen and (max-width: 1090px)": {
+ "@media only screen and (max-width: 1090px)": {
     flexDirection: "column",
     padding: "1rem",
   },
 
-  "& .searchBtn": {
+  "& .filterBtn": {
     fontSize: "1rem",
     width: "10rem",
-    margin: "1.4rem 1rem 0 1rem",
+    margin: "0 1rem 0 1rem",
     borderRadius: 10,
     border: "none",
+		color: `${featuredBG}`,
 
     "&:hover": {
-      backgroundColor: `${cyanHover}`,
+      backgroundColor: `${darkBlue}`,
+			color: "white",
     },
 
     "@media only screen and (max-width: 1090px)": {
@@ -76,17 +77,13 @@ export const SearchContent = styled.div({
         fontSize: "0.7rem",
       },
     },
-  },
-})
 
-export const Label = styled.label({
-  color: `${lightgray}`,
-  fontSize: "0.9rem",
-  margin: "0 1rem",
-  fontStyle: "italic",
+		"& .ant-switch": {
+			marginLeft: "0.5rem",
+		},
 
-  "@media only screen and (max-width: 600px)": {
-    margin: 0,
-    fontSize: "0.8rem",
+		"&.ant-switch-handle::before": {
+			width: 18,
+		},
   },
-})
+});

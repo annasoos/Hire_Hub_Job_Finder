@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { cyan, cyanHover, darkBlue, lightgray } from '../style_guide';
+import { cyan, cyanHover, darkBlue, lightgray } from '../../style_guide';
 
 export const NewsletterContainer = styled.section({
   width: "100%",

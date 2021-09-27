@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { gray, cyan, mainBG } from '../style_guide';
+import { gray, cyan, mainBG } from '../../style_guide';
 
 export const FeaturedSection = styled.section({
 	width: "100%",

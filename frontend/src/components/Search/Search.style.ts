@@ -1,15 +1,16 @@
 import styled from "@emotion/styled";
-import { cyanHover, footerBG, featuredBG, darkBlue } from '../style_guide';
+import { cyanHover, darkBlue, lightgray, footerBG } from '../../style_guide';
 
-export const FilterContainer = styled.section({
-  width: "70%",
-  height: "6rem",
+export const SearchContainer = styled.section({
+  width: "80%",
+  height: "10rem",
   padding: "0 2rem",
-  position: "relative",
+  position: "absolute",
   left: "50%",
+  top: "-5rem",
   transform: "translateX(-50%)",
 
-  backgroundColor: `${cyanHover}`,
+  backgroundColor: `${darkBlue}`,
   boxShadow: `${footerBG} 0px 8px 14px`,
   borderRadius: 10,
 
@@ -23,9 +24,9 @@ export const FilterContainer = styled.section({
   "@media only screen and (max-width: 400px)": {
     height: "20rem",
   },
-});
+})
 
-export const FilterContent = styled.div({
+export const SearchContent = styled.div({
   height: "100%",
   width: "100%",
   display: "flex",
@@ -34,22 +35,20 @@ export const FilterContent = styled.div({
   alignItems: "center",
   transition: "all 1s ease-in-out",
 
- "@media only screen and (max-width: 1090px)": {
+  "@media only screen and (max-width: 1090px)": {
     flexDirection: "column",
     padding: "1rem",
   },
 
-  "& .filterBtn": {
+  "& .searchBtn": {
     fontSize: "1rem",
     width: "10rem",
-    margin: "0 1rem 0 1rem",
+    margin: "1.4rem 1rem 0 1rem",
     borderRadius: 10,
     border: "none",
-		color: `${featuredBG}`,
 
     "&:hover": {
-      backgroundColor: `${darkBlue}`,
-			color: "white",
+      backgroundColor: `${cyanHover}`,
     },
 
     "@media only screen and (max-width: 1090px)": {
@@ -77,13 +76,17 @@ export const FilterContent = styled.div({
         fontSize: "0.7rem",
       },
     },
-
-		"& .ant-switch": {
-			marginLeft: "0.5rem",
-		},
-
-		"&.ant-switch-handle::before": {
-			width: 18,
-		},
   },
-});
+})
+
+export const Label = styled.label({
+  color: `${lightgray}`,
+  fontSize: "0.9rem",
+  margin: "0 1rem",
+  fontStyle: "italic",
+
+  "@media only screen and (max-width: 600px)": {
+    margin: 0,
+    fontSize: "0.8rem",
+  },
+})

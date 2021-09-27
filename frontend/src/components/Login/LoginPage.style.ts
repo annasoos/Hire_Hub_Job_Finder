@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { cyan } from '../style_guide';
+import { cyan } from '../../style_guide';
 
 export const LoginContainer = styled.div({
   width: "100%",

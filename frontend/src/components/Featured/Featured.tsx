@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { Card } from "./Card";
-import { Search } from "./Search";
+import { Card } from "../Card/Card";
+import { Search } from "../Search/Search";
 import { FeaturedSection, Title, Text, CardContainer, BlueLine } from "./Featured.style";
-import { IJob } from "../interfaces/IJob";
-import { getData } from "../functions/Fetch"
+import { IJob } from "../../interfaces/IJob";
+import { getData } from "../../functions/Fetch"
 
 export const Featured = () => {
 

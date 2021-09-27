@@ -1,18 +1,18 @@
-import { useState } from "react";
 import axios from "axios";
 import { LoginTitle, LoginContainer } from "./LoginPage.style";
 import { Form, Input, Button, Checkbox } from "antd";
-import { openNotificationWithIcon } from "../functions/Notification";
-//import { LoginSuccessType } from "../types/LoginSuccessType";
+import { openNotificationWithIcon } from "../../functions/Notification";
+import { LoginSuccessType } from "../../types/LoginSuccessType";
 
 export const LoginPage = () => {
   const [form] = Form.useForm();
 
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const login = async (values:LoginSuccessType) => {
+		const email = values.email;
+		const password = values.password;
+		const remember = values.remember;
 
-  const login = async () => {
-    const loginUser = { email, password };
+    const loginUser = { email, password, remember };
 
     await axios
       .post("http://localhost:8080/api/login", loginUser)
@@ -24,8 +24,7 @@ export const LoginPage = () => {
             "Welcome back!",
             "Good to see you again!"
           );
-          setEmail("");
-          setPassword("");
+					localStorage.setItem("token", res.data.token)
         }
       })
       .catch((error) => {
@@ -52,8 +51,7 @@ export const LoginPage = () => {
   return (
     <LoginContainer>
       <LoginTitle>
-        If you are not yet a user of the site, you can register by{" "}
-        <a href="/signup">clicking here</a>!
+        If you are not yet a user of the site, you can register by <a href="/signup">clicking here</a>!
       </LoginTitle>
       <Form
         className="loginForm"
@@ -79,9 +77,6 @@ export const LoginPage = () => {
           <Input
             className="input"
             allowClear
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
           />
         </Form.Item>
 
@@ -98,9 +93,6 @@ export const LoginPage = () => {
           <Input.Password
             className="input"
             allowClear
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
           />
         </Form.Item>
 

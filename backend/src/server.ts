@@ -96,7 +96,7 @@ server.post("/api/login", async (req, res) => {
         process.env.TOKEN_KEY,
         { expiresIn: "2h" }
       );
-      logUser.token = token;
+      // logUser.token = token;  ---> bementem a DB-be a user tokent. Nincs rá szükség
 
       console.log("Login successful", logUser);
       res.status(200).json({ msg: "User logged in", token });

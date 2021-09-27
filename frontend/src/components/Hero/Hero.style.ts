@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { cyan, cyanHover, mainBG, gray } from '../style_guide';
+import { cyan, cyanHover, mainBG, gray } from '../../style_guide';
 
 export const HeroSection = styled.section({
 	position: "relative",
