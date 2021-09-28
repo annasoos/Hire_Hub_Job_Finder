@@ -7,7 +7,7 @@
 The user should be able to…
   - See all the jobs exesting in the database listed in the page
   - Filter these listings based on Title, City, Company name, Level, and Keywords 
-	- Registrate and Login with email adress
+  - Registrate and Login with email adress
   - Create a new job and post it to the database  (allowed only for registered users)
 
 ## Implementation
