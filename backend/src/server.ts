@@ -17,33 +17,33 @@ server.use(cors({ origin: "http://localhost:3000" }));
 
 // STATIC
 
-server.use(express.static(path.resolve(__dirname, "../../frontend/build")));
+server.use(express.static(path.resolve(__dirname, "/build")));
 
 // REFRESH ENDPOINTS
 
-/* server.get("/*", (req, res) => {
+/* server.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
 });
 ----> NOT WORKING, WHY??? */
 
 server.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 server.get("/find-a-job", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 server.get("/post-a-job", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 server.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 server.get("/signup", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 // GET JSON
