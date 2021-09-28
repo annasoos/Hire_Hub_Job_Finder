@@ -6,9 +6,7 @@
 	"scripts": {
     "start": "node .",
     "postinstall": "tsc",
-    "watch-ts": "tsc -w",
-		"frontend": "cd frontend && npm start",
-		"heroku-postbuild": "cd frontend && npm install && npm run build"
+    "watch-ts": "tsc -w"
 	},
   "keywords": [],
   "author": "",
