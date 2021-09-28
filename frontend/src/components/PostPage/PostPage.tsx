@@ -1,20 +1,19 @@
 import { useState, useEffect } from "react";
+import { Button, Input, Form, Select } from "antd";
+import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
-import { Button, Input, Form, Select } from "antd";
+import SearchImage from "../../images/People search-rafiki.svg";
+import { NewJobType } from "../../types/NewJobType";
+import { PostFormValuesType } from "../../types/PostFormValuesType";
+import { openNotificationWithIcon } from "../../functions/Notification";
 import {
   PostFormContainer,
   PostFormContent,
   PostTitle,
   SearchImg,
 } from "./PostPage.style";
-import SearchImage from "../../images/People search-rafiki.svg";
-import { NewJobType } from "../../types/NewJobType";
-import { PostFormValuesType } from "../../types/PostFormValuesType";
-import { openNotificationWithIcon } from "../../functions/Notification";
 import { lightgray } from "../../style_guide";
-
 
 const { Option } = Select;
 
@@ -40,15 +39,13 @@ export const PostForm = () => {
   }, [token]);
 
   const submit = async (values: PostFormValuesType): Promise<void> => {
-    const newID = uuidv4(); // generate random id
-    const skillsArray = values.skills.replace(/,/g, "").split(" ");
-		let levelOfJob;
+    const newID: string = uuidv4(); // generate random id
+    const skillsArray: string[] = values.skills.replace(/,/g, "").split(" ");
+    let levelOfJob: string = "";
 
-		 if(values.level === undefined) {
-			 levelOfJob = ""
-		 } else {
-			 levelOfJob = values.level
-		 };
+    if (values.level !== undefined) {
+      levelOfJob = values.level;
+    }
 
     const newJob: NewJobType = {
       id: newID,
@@ -60,20 +57,31 @@ export const PostForm = () => {
       description: values.description,
     };
 
-    console.log(newJob);
-		
-    let response = await axios.post("http://localhost:8080/api/post-a-job", newJob);
-  };
+		console.log(newJob)
 
-  /* useEffect(() => {
-    if (newJob !== undefined) {
-      openNotificationWithIcon(
-        "success",
-        "Successful!",
-        `Candidates can now apply the ${newJob.position} position at ${newJob.company}.`
-      );
-    }
-  }, [newJob]); */
+    await axios
+      .post("http://localhost:8080/api/post-a-job", newJob)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          openNotificationWithIcon(
+            "success",
+            "Successful!",
+            `Candidates can now apply the ${newJob.position} position at ${newJob.company}.`
+          );
+        }
+      })
+      .catch((error) => {
+        console.log("An error occured: ", error);
+        openNotificationWithIcon(
+          "error",
+          "Oops...something went wrong!",
+          "Please try again!"
+        );
+      });
+
+		form.resetFields();
+  };
 
   const renderForm = () => {
     if (isLoggedIn) {
@@ -127,7 +135,7 @@ export const PostForm = () => {
                   required: false,
                 },
               ]}
-							requiredMark="optional"
+              requiredMark="optional"
             >
               <Select
                 placeholder="Select the level of the position"
@@ -169,11 +177,12 @@ export const PostForm = () => {
                 </label>
               }
               name="skills"
-							required
+              required
               rules={[
                 {
                   required: true,
-									message: "Please provide the most important skills expected from the applicants"
+                  message:
+                    "Please provide the most important skills expected from the applicants",
                 },
               ]}
               extra={

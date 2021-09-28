@@ -1,9 +1,9 @@
 import express from "express";
 import path from "path";
-import fs from 'fs';
+import fs from "fs";
 import cors from "cors";
 import dotenv from "dotenv";
-import { User } from './model/users.schema';
+import { User } from "./model/users.schema";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { connect } from "./config/database";
@@ -98,8 +98,7 @@ server.post("/api/login", async (req, res) => {
         { expiresIn: "2h" }
       );
       // logUser.token = token;  ---> bementem a DB-be a user tokent. Nincs rá szükség
-
-      console.log("Login successful", logUser);
+			console.log("Login successful", logUser);
       res.status(200).json({ msg: "User logged in", token });
     } else {
       res.status(409).json({ msg: "Email adress or password is incorrect" });
@@ -110,12 +109,28 @@ server.post("/api/login", async (req, res) => {
 // POST NEW JOB
 
 server.use(express.json());
-server.use(express.urlencoded({ extended: false }));
+server.use(express.urlencoded({ extended: false })); // --> BODY PARSER MIDDLEWAREs
 
-server.post('/api/post-a-job', (req, res) => {
-	console.log(req.body)
-	// res.status(200).json({ msg: "Success" })
-	// fs.writeFileSync(path.resolve(__dirname, "../src/assets", "jobs.json"), JSON.stringify(newJob));
+type NewJobServerType = {
+	id: string;
+  position: string;
+  company: string;
+  level: string;
+  location: string;
+  skills: string[];
+  description: string;
+};
+
+server.post("/api/post-a-job", (req, res) => {
+	const newJob: NewJobServerType = req.body;
+  const data = fs.readFileSync(path.resolve(__dirname, "../src/assets/jobs.json"), "utf-8");
+	const dataArray: NewJobServerType[] = JSON.parse(data);
+	dataArray.splice(0, 0, newJob);  // splice(start, deleteCount, item)
+
+	fs.writeFileSync(path.resolve(__dirname, "../src/assets/jobs.json"), JSON.stringify(dataArray, null, 2));
+
+	res.status(200).json({ msg: "Success" })
+
 });
 
 // LISTENING
