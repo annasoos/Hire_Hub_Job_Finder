@@ -21,10 +21,12 @@ server.use(express.static(path.resolve(__dirname, "../../frontend/build")));
 
 // REFRESH ENDPOINTS
 
-/* server.get("*", (req, res) => {
+/*
+server.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
-});
-----> NOT WORKING, WHY??? */
+}); ---> HA EZT ADOM MEG A HERO ÉS A FIND A JOB OLDAL A FETCHNÉL ELHAL, MINTHA NEM ÉRNÉ EL A STATE-ET ".map is not a function"
+*/
+
 
 server.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../../frontend/build", "index.html"));
