@@ -6,6 +6,9 @@ export const RegContainer = styled.div({
   position: "relative",
 
   "& .regForm": {
+		"& .input": {
+			borderRadius: 10,
+		},
     "& .ant-row": {
       display: "block",
       width: "40%",

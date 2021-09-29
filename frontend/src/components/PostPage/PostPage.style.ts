@@ -10,6 +10,9 @@ export const PostFormContainer = styled.section({
 
 	"& h2":{
 		color: `${white}`,
+		fontSize: 25,
+		fontWeight: 600,
+		lineHeight: "2",
 		width: "80%",
 		textAlign: "center",
 		margin: "auto",
@@ -60,7 +63,8 @@ export const PostFormContent = styled.div({
   "@media(max-width: 1090px)": {
     marginTop: "55%",
   },
-  "& .ant-input": {
+  "& .input": {
+		borderRadius: 10,
     "@media(max-width: 1090px)": {
       width: "100%",
     },

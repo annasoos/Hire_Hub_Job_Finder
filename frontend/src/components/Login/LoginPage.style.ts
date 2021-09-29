@@ -6,6 +6,9 @@ export const LoginContainer = styled.div({
   margin: "2rem 0 5rem 0",
 
   "& .loginForm": {
+		"& .input": {
+			borderRadius: 10,
+		},
     "& .ant-row": {
       display: "block",
       width: "40%",

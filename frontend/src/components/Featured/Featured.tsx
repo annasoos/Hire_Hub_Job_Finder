@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+//design & components
 import { Card } from "../Card/Card";
 import { Search } from "../Search/Search";
 import { FeaturedSection, Title, Text, CardContainer, BlueLine } from "./Featured.style";
+//types & functions
 import { IJob } from "../../interfaces/IJob";
 import { getData } from "../../functions/Fetch"
 

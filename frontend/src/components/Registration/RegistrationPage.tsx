@@ -1,14 +1,11 @@
 import axios from "axios";
+//design & components
 import { Form, Input, Button } from "antd";
-import {
-  RegContainer,
-  RegTitle,
-  RegImgContainer,
-  RegText,
-} from "./Registration.style";
-import { openNotificationWithIcon } from "../../functions/Notification";
+import { RegContainer, RegTitle, RegImgContainer, RegText } from "./Registration.style";
 import businessManIllustration from "../../images/Businessman-pana.svg";
 import laptopGirlIllustration from "../../images/Startup life-pana.svg";
+//types & functions
+import { openNotificationWithIcon } from "../../functions/Notification";
 import { RegUserType } from "../../types/RegUserType";
 
 export const RegistrationPage = () => {
@@ -57,40 +54,30 @@ export const RegistrationPage = () => {
   return (
     <RegContainer>
       <RegTitle>Why register?</RegTitle>
+
       <RegText>
         After logging in, you can create and post new job opportunities to our
         database. <br /> Let us help you find the newest member of your team!
       </RegText>
+
       <RegImgContainer>
-        <img
-          id="businessMan"
-          src={businessManIllustration}
-          alt="illustration"
-        />
+        <img id="businessMan" src={businessManIllustration} alt="illustration" />
         <img id="laptopGirl" src={laptopGirlIllustration} alt="illustration" />
       </RegImgContainer>
+
       <Form
         className="regForm"
         name="basic"
         form={form}
-        initialValues={{
-          remember: true,
-        }}
         onFinish={registration}
         autoComplete="off"
-        colon={false}
-      >
+        colon={false} >
+
         {/* FIRST NAME*/}
         <Form.Item
           label={<label style={{ color: "white" }}>First Name:</label>}
           name="firstName"
-          rules={[
-            {
-              required: true,
-              message: "Please add your first name!",
-            },
-          ]}
-        >
+          rules={[{ required: true, message: "Please add your first name!" }]} >
           <Input className="input" allowClear />
         </Form.Item>
 
@@ -98,13 +85,7 @@ export const RegistrationPage = () => {
         <Form.Item
           label={<label style={{ color: "white" }}>Last Name:</label>}
           name="lastName"
-          rules={[
-            {
-              required: true,
-              message: "Please add your last name!",
-            },
-          ]}
-        >
+          rules={[{ required: true, message: "Please add your last name!" }]} >
           <Input className="input" allowClear />
         </Form.Item>
 
@@ -112,14 +93,7 @@ export const RegistrationPage = () => {
         <Form.Item
           label={<label style={{ color: "white" }}>E-mail address:</label>}
           name="email"
-          rules={[
-            {
-              required: true,
-              message: "Please add your e-mail address!",
-              type: "email",
-            },
-          ]}
-        >
+          rules={[{ required: true, message: "Please add your e-mail address!", type: "email" }]} >
           <Input className="input" allowClear />
         </Form.Item>
 
@@ -127,22 +101,11 @@ export const RegistrationPage = () => {
         <Form.Item
           label={<label style={{ color: "white" }}>Password:</label>}
           name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please add a password!",
-            },
-          ]}
-        >
+          rules={[{ required: true, message: "Please add a password!" }]} >
           <Input.Password className="input" allowClear />
         </Form.Item>
 
-        <Form.Item
-          wrapperCol={{
-            offset: 9,
-            span: 8,
-          }}
-        >
+        <Form.Item wrapperCol={{ offset: 10, span: 8 }} >
           <Button type="primary" htmlType="submit">
             Sign Up
           </Button>

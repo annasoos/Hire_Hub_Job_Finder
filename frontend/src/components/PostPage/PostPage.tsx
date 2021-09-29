@@ -3,7 +3,7 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { v4 as uuidv4 } from "uuid";
-//design
+//design & components
 import { Button, Input, Form, Select } from "antd";
 import { PostFormContainer, PostFormContent, PostTitle, SearchImg } from "./PostPage.style";
 import { lightgray } from "../../style_guide";
@@ -112,14 +112,8 @@ export const PostForm = () => {
               name="position"
               style={{ color: "white" }}
               required
-              rules={[
-                {
-                  required: true,
-                  message: "Please provide a name for the position",
-                },
-              ]}
-            >
-              <Input id="positionInput" allowClear />
+              rules={[{ required: true, message: "Please provide a name for the position" }]} >
+              <Input id="positionInput" className="input" allowClear />
             </Form.Item>
 
             {/* COMPANY NAME */}
@@ -127,31 +121,18 @@ export const PostForm = () => {
               label={<label style={{ color: "white" }}>Company name:</label>}
               name="company"
               required
-              rules={[
-                {
-                  required: true,
-                  message: "Please provide the name of the company",
-                },
-              ]}
-            >
-              <Input id="companyInput" allowClear />
+              rules={[{ required: true, message: "Please provide the name of the company" }]} >
+              <Input id="companyInput" className="input" allowClear />
             </Form.Item>
 
             {/* LEVEL */}
             <Form.Item
               label={<label style={{ color: "white" }}>Level:</label>}
               name="level"
-              rules={[
-                {
-                  required: false,
-                },
-              ]}
-              requiredMark="optional"
+              rules={[{ required: false }]}
+							requiredMark="optional"
             >
-              <Select
-                placeholder="Select the level of the position"
-                id="levelInput"
-              >
+              <Select placeholder="Select the level of the position" id="levelInput" className="input" >
                 <Option value="Junior">Junior</Option>
                 <Option value="Medior">Medior</Option>
                 <Option value="Senior">Senior</Option>
@@ -160,67 +141,34 @@ export const PostForm = () => {
 
             {/* LOCATION */}
             <Form.Item
-              label={
-                <label style={{ color: "white" }}>Location of the work:</label>
-              }
+              label={ <label style={{ color: "white" }}>Location of the work:</label> }
               name="location"
               required
-              rules={[
-                {
-                  required: true,
-                  message:
-                    "Please provide the location of the office (if it is a remote position, you can add 'Remote')",
-                },
-              ]}
-            >
-              <Input
-                placeholder="City name only"
-                id="locationInput"
-                allowClear
-              />
+              rules={[{ required: true, message: "Please provide the location of the office (if it is a remote position, you can add 'Remote')" }]} >
+              <Input placeholder="City name only" id="locationInput" className="input" allowClear />
             </Form.Item>
 
             {/* SKILLS */}
             <Form.Item
-              label={
-                <label style={{ color: "white" }}>
-                  Required skills/technologies:
-                </label>
-              }
-              name="skills"
-              required
-              rules={[
-                {
-                  required: true,
-                  message:
-                    "Please provide the most important skills expected from the applicants",
-                },
-              ]}
+              label={ <label style={{ color: "white" }}> Required skills/technologies: </label> } 
+							name="skills"
+							required
+              rules={[{ required: true, message: "Please provide the most important skills expected from the applicants" }]}
               extra={
                 <div style={{ color: `${lightgray}`, fontSize: 14 }}>
                   Please provide keywords separated by comma (e.g: Java, Git,
                   Agile)
-                </div>
-              }
-            >
-              <Input id="locationInput" allowClear />
+                </div>}>
+              <Input id="locationInput" className="input" allowClear />
             </Form.Item>
 
             {/* DESCRIPTION */}
             <Form.Item
-              label={
-                <label style={{ color: "white" }}>Detailed description:</label>
-              }
+              label={ <label style={{ color: "white" }}>Detailed description:</label> }
               name="description"
               required
-              rules={[
-                {
-                  required: true,
-                  message: "Please provide a description",
-                },
-              ]}
-            >
-              <Input.TextArea rows={5} id="descriptionInput" allowClear />
+              rules={[{ required: true, message: "Please provide a description" }]} >
+              <Input.TextArea rows={5} id="descriptionInput" className="input" allowClear />
             </Form.Item>
 
             {/* BUTTON */}
@@ -235,10 +183,8 @@ export const PostForm = () => {
     } else {
       return (
         <h2>
-          {" "}
-          Sorry, only registered users can post new positions. <br /> But don't
-          worry, you can easily create a new account by{" "}
-          <a href="/signup">clicking here</a>!{" "}
+          Sorry, only registered users can post new positions. <br /> 
+					But don't worry, you can easily create a new account by <a href="/signup">clicking here</a>!
         </h2>
       );
     }

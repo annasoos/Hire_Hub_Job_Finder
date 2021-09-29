@@ -1,6 +1,8 @@
 import axios from "axios";
+//design & components
+import { Form, Input, Button } from "antd";
 import { LoginTitle, LoginContainer } from "./LoginPage.style";
-import { Form, Input, Button, Checkbox } from "antd";
+//types & functions
 import { openNotificationWithIcon } from "../../functions/Notification";
 import { LoginSuccessType } from "../../types/LoginSuccessType";
 

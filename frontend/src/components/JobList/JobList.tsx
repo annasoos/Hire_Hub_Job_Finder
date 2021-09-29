@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import { getData } from "../../functions/Fetch";
+//design & components
 import { FilterBar } from "../FilterBar/FilterBar";
 import { IJob } from "../../interfaces/IJob";
 import { cyan, lightgray, white} from "../../style_guide";
 import { LoadingText, JobContainer, JobContent, Position, Level, Location, Company, Skills, Description } from "./JobList.style";
+//types & functions
+import { getData } from "../../functions/Fetch";
 
 
 export const JobList = () => {
