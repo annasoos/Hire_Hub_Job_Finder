@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { lightgray, cyan, white } from '../../style_guide';
+import { lightgray, cyan, white } from "../../style_guide";
 
 export const PostFormContainer = styled.section({
   position: "relative",
@@ -8,25 +8,24 @@ export const PostFormContainer = styled.section({
   minHeight: "80vh",
   padding: "3%",
 
-	"& h2":{
-		color: `${white}`,
-		fontSize: 25,
-		fontWeight: 600,
-		lineHeight: "2",
-		width: "80%",
-		textAlign: "center",
-		margin: "auto",
-		padding: "1rem 0 3rem 0",
+  "& h2": {
+    color: `${white}`,
+    fontSize: 25,
+    fontWeight: 600,
+    lineHeight: "2",
+    width: "80%",
+    textAlign: "center",
+    margin: "auto",
+    padding: "1rem 0 3rem 0",
 
-		"& a": {
-			color: `${cyan}`,
-	
-			"&:hover": {
-				fontStyle: "italic",
-			},
-		},
-	}
+    "& a": {
+      color: `${cyan}`,
 
+      "&:hover": {
+        fontStyle: "italic",
+      },
+    },
+  },
 });
 
 export const PostTitle = styled.h1({
@@ -35,7 +34,7 @@ export const PostTitle = styled.h1({
   textAlign: "center",
   fontSize: 30,
   fontWeight: 700,
-	margin: "auto",
+  margin: "auto",
   transition: "all 1s ease-in-out",
 
   "@media(max-width: 1090px)": {
@@ -63,19 +62,20 @@ export const PostFormContent = styled.div({
   "@media(max-width: 1090px)": {
     marginTop: "55%",
   },
-  "& .input": {
-		borderRadius: 10,
-    "@media(max-width: 1090px)": {
-      width: "100%",
+  "& .input, .ant-input-affix-wrapper-textarea-with-clear-btn, .ant-select:not(.ant-select-customize-input) .ant-select-selector":
+    {
+      borderRadius: 10,
+      "@media(max-width: 1090px)": {
+        width: "100%",
+      },
     },
-  },
 });
 
 export const SearchImg = styled.img({
   position: "relative",
-	left: "50%",
-	transform: "translateX(-50%)",
-	width: "30%",
+  left: "50%",
+  transform: "translateX(-50%)",
+  width: "30%",
   transition: "all 1s ease-in-out",
 
   "@media(max-width: 1090px)": {

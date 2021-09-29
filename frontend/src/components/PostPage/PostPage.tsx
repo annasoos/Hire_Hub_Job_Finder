@@ -127,6 +127,7 @@ export const PostForm = () => {
 
             {/* LEVEL */}
             <Form.Item
+						className="input"
               label={<label style={{ color: "white" }}>Level:</label>}
               name="level"
               rules={[{ required: false }]}
