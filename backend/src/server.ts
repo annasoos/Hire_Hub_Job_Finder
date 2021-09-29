@@ -62,8 +62,7 @@ server.post("/api/signup", (req, res) => {
   if (!(firstName && lastName && email && password)) {
     res.status(400).json({ msg: "Required data missing" });
   } else {
-    User.findOne({ email }, async (error: object, doc: any) => {
-      // a "doc" dobja vissza a választ, ha létezik már a bekapott email
+    User.findOne({ email }, async (error: object, doc: any) => { // a "doc" dobja vissza a választ, ha létezik már a bekapott email
       if (error) throw error;
       if (doc) res.status(409).json({ msg: "User already registered" });
       if (!doc) {
@@ -99,9 +98,7 @@ server.post("/api/login", async (req, res) => {
         process.env.TOKEN_KEY,
         { expiresIn: "2h" }
       );
-      // logUser.token = token;  ---> bementem a DB-be a user tokent. Nincs rá szükség
-			console.log("Login successful", logUser);
-      res.status(200).json({ msg: "User logged in", token });
+      res.status(200).json({ msg: "User logged in", token, logUser });
     } else {
       res.status(409).json({ msg: "Email adress or password is incorrect" });
     }

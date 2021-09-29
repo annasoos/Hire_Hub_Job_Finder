@@ -10,9 +10,8 @@ export const LoginPage = () => {
   const login = async (values:LoginSuccessType) => {
 		const email = values.email;
 		const password = values.password;
-		const remember = values.remember;
 
-    const loginUser = { email, password, remember };
+    const loginUser = { email, password };
 
     await axios
       .post("http://localhost:8080/api/login", loginUser)
@@ -53,13 +52,11 @@ export const LoginPage = () => {
       <LoginTitle>
         If you are not yet a user of the site, you can register by <a href="/signup">clicking here</a>!
       </LoginTitle>
+
       <Form
         className="loginForm"
         name="basic"
         form={form}
-        initialValues={{
-          remember: true,
-        }}
         onFinish={login}
         autoComplete="off"
         colon={false}
@@ -74,10 +71,7 @@ export const LoginPage = () => {
             },
           ]}
         >
-          <Input
-            className="input"
-            allowClear
-          />
+          <Input className="input" allowClear />
         </Form.Item>
 
         <Form.Item
@@ -90,30 +84,10 @@ export const LoginPage = () => {
             },
           ]}
         >
-          <Input.Password
-            className="input"
-            allowClear
-          />
+          <Input.Password className="input" allowClear />
         </Form.Item>
 
-        <Form.Item
-          className="rememberMe"
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{
-            offset: 9,
-            span: 8,
-          }}
-        >
-          <Checkbox style={{ color: "white" }}>Remember me</Checkbox>
-        </Form.Item>
-
-        <Form.Item
-          wrapperCol={{
-            offset: 9,
-            span: 8,
-          }}
-        >
+        <Form.Item  wrapperCol={{ offset: 9, span: 8 }} >
           <Button type="primary" htmlType="submit">
             Login
           </Button>

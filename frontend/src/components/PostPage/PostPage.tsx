@@ -1,19 +1,17 @@
 import { useState, useEffect } from "react";
-import { Button, Input, Form, Select } from "antd";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 import { v4 as uuidv4 } from "uuid";
+//design
+import { Button, Input, Form, Select } from "antd";
+import { PostFormContainer, PostFormContent, PostTitle, SearchImg } from "./PostPage.style";
+import { lightgray } from "../../style_guide";
 import SearchImage from "../../images/People search-rafiki.svg";
+//types & functions
 import { NewJobType } from "../../types/NewJobType";
 import { PostFormValuesType } from "../../types/PostFormValuesType";
 import { openNotificationWithIcon } from "../../functions/Notification";
-import {
-  PostFormContainer,
-  PostFormContent,
-  PostTitle,
-  SearchImg,
-} from "./PostPage.style";
-import { lightgray } from "../../style_guide";
 
 const { Option } = Select;
 
@@ -29,15 +27,27 @@ const layout = {
 export const PostForm = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [form] = Form.useForm();
-  const token = localStorage.getItem("token");
+  const token:string|null = localStorage.getItem("token");
+	dotenv.config();
+	const tokenKey:string = process.env.REACT_APP_TOKEN_KEY!
 
-  useEffect(() => {
+  //check whether token saved to local storage is expired
+	useEffect(() => {
     if (token) {
-      //const decoded = jwt_decode(token);
-      setIsLoggedIn(true);
+			jwt.verify(token, tokenKey, function(err, decoded) {
+				if (err) {
+					console.log(err)
+					setIsLoggedIn(false);
+				} else {
+					console.log(decoded);
+					setIsLoggedIn(true);
+				}
+			});
     }
-  }, [token]);
+  }, [token, tokenKey]);
 
+
+	//create new job object and send it to the server
   const submit = async (values: PostFormValuesType): Promise<void> => {
     const newID: string = uuidv4(); // generate random id
     const skillsArray: string[] = values.skills.replace(/,/g, "").split(" ");
@@ -83,6 +93,7 @@ export const PostForm = () => {
 		form.resetFields();
   };
 
+	// conditional rendering based on user authentication
   const renderForm = () => {
     if (isLoggedIn) {
       return (
@@ -239,8 +250,6 @@ export const PostForm = () => {
         Post a job & find the newest member of your team with us!
       </PostTitle>
       <SearchImg src={SearchImage} alt="illustration" />
-
-      {/* CONDITIONAL RENDERING BASED ON REGISTRATION */}
       {renderForm()}
     </PostFormContainer>
   );
