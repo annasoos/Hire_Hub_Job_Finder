@@ -94,10 +94,9 @@ server.post("/api/login", async (req, res) => {
 
     if (logUser && logPass) {
       const token = jwt.sign(
-        { user_id: logUser._id, email },
+        { user_id: logUser._id, email, firstName: logUser.firstName, lastName: logUser.lastName }, //I will get these when I decode the token
         process.env.TOKEN_KEY,
-        { expiresIn: "2h" }
-      );
+        { expiresIn: "2h" });
       res.status(200).json({ msg: "User logged in", token, logUser });
     } else {
       res.status(409).json({ msg: "Email adress or password is incorrect" });

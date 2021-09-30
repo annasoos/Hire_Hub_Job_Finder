@@ -5,7 +5,6 @@ const UserSchema = new mongoose.Schema({
   lastName: { type: String, default: null },
   email: { type: String, unique: true },
   password: { type: String },
-  token: { type: String },
 });
 
 // we define the Mongoose Schema , which determines the shape of our MongoDB documents

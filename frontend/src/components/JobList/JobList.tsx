@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 //design & components
 import { FilterBar } from "../FilterBar/FilterBar";
 import { IJob } from "../../interfaces/IJob";

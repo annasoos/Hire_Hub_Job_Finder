@@ -1,17 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 import { v4 as uuidv4 } from "uuid";
 //design & components
 import { Button, Input, Form, Select } from "antd";
-import { PostFormContainer, PostFormContent, PostTitle, SearchImg } from "./PostPage.style";
+import { PostFormContainer, PostFormContent, PostTitle, SearchImg, WelcomeTitle } from "./PostPage.style";
 import { lightgray } from "../../style_guide";
 import SearchImage from "../../images/People search-rafiki.svg";
-//types & functions
+//types & functions & context
 import { NewJobType } from "../../types/NewJobType";
 import { PostFormValuesType } from "../../types/PostFormValuesType";
 import { openNotificationWithIcon } from "../../functions/Notification";
+import { UserContext } from "../../context/UserContext";
 
 const { Option } = Select;
 
@@ -27,25 +26,17 @@ const layout = {
 export const PostForm = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [form] = Form.useForm();
-  const token:string|null = localStorage.getItem("token");
-	dotenv.config();
-	const tokenKey:string = process.env.REACT_APP_TOKEN_KEY!
-
-  //check whether token saved to local storage is expired
+	const userContext = useContext(UserContext);
+	
+  //check whether user is logged in
 	useEffect(() => {
-    if (token) {
-			jwt.verify(token, tokenKey, function(err, decoded) {
-				if (err) {
-					console.log(err)
-					setIsLoggedIn(false);
-				} else {
-					console.log(decoded);
-					setIsLoggedIn(true);
-				}
-			});
-    }
-  }, [token, tokenKey]);
-
+    if (userContext.loggedInUser) {
+			setIsLoggedIn(true)
+			console.log(userContext.loggedInUser)
+		} else {
+			setIsLoggedIn(false)
+		}
+  }, []);
 
 	//create new job object and send it to the server
   const submit = async (values: PostFormValuesType): Promise<void> => {
@@ -98,6 +89,7 @@ export const PostForm = () => {
     if (isLoggedIn) {
       return (
         <PostFormContent>
+					<WelcomeTitle> Welcome <span>{userContext.loggedInUser.lastName}</span>! </WelcomeTitle>
           <Form
             {...layout}
             form={form}

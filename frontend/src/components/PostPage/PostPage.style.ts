@@ -89,3 +89,18 @@ export const SearchImg = styled.img({
     top: "10%",
   },
 });
+
+export const WelcomeTitle = styled.h2({
+	color: "white",
+  fontSize: 25,
+  fontWeight: 700,
+	position: "relative",
+  left: "50%",
+  transform: "translateX(-50%)",
+  width: "30%",
+  transition: "all 1s ease-in-out",
+
+	"& span": {
+		color: `${cyan}`
+	}
+}) 
