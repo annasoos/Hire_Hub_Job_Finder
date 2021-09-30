@@ -179,3 +179,19 @@ export const LogoutBtn = styled.button({
 		color: "white"
 	}
 })
+
+export const UserDisplay = styled.p({
+	color: `${gray}`,
+	fontSize: 14,
+	position: "absolute",
+	right: "13%",
+	top: "10%",
+
+	"& span":{
+		color: `${cyan}`
+	},
+
+	"@media screen and (max-width: 1090px)": {
+		display: "none"
+	}
+})

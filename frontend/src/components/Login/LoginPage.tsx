@@ -32,26 +32,26 @@ export const LoginPage:FC<TokenSetterPropsType> = ({tokenSetter}) => {
 					localStorage.setItem("token", res.data.token);
 					tokenSetter(res.data.token);
 					history.push("/")
-        }
+        } else {
+					console.log(res)
+				}
       })
       .catch((error) => {
         console.log("An error occured: ", error.response);
-
-        if (error.response.status === 400) {
-          openNotificationWithIcon(
-            "error",
-            "Oops..something went wrong!",
-            "Please provide all the necessary data."
-          );
-        } else if (error.response.status === 409) {
+				if (error.response.status === 409) {
           openNotificationWithIcon(
             "error",
             "Oops..something went wrong!",
             "E-mail address or password is incorrect. Please try again!"
           );
-        }
+        } else {
+					openNotificationWithIcon(
+            "error",
+            "Oops..something went wrong!",
+            "An error occured. Please try again!"
+          );
+				}
       });
-
     form.resetFields();
   };
 
@@ -95,7 +95,7 @@ export const LoginPage:FC<TokenSetterPropsType> = ({tokenSetter}) => {
           <Input.Password className="input" allowClear />
         </Form.Item>
 
-        <Form.Item  wrapperCol={{ offset: 9, span: 8 }} >
+        <Form.Item  wrapperCol={{ offset: 10, span: 8 }} >
           <Button type="primary" htmlType="submit">
             Login
           </Button>

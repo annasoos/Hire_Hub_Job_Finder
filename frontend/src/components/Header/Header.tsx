@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { useHistory } from 'react-router';
 //design
-import { NavBar, Hamburger, HamburgerMenu, LogoutBtn } from "./Header.style";
+import { NavBar, Hamburger, HamburgerMenu, LogoutBtn, UserDisplay } from "./Header.style";
 import HeaderLogo from "../../images/logo_white.png";
 //types & functions & context
 import { TokenSetterPropsType } from "../../types/TokenSetterPropsType";
@@ -71,7 +71,9 @@ export const Header:FC<TokenSetterPropsType> = ({tokenSetter}) => {
 			{userContext.loggedInUser ? <LogoutBtn onClick={logout}>Logout</LogoutBtn> : <NavLink to="/login">Login</NavLink>}
 			<NavLink className="dropdown" to="/signup" id="mobileSignup"> Sign Up </NavLink>
 		</HamburgerMenu>
-
+		{	userContext.loggedInUser ? 
+		<UserDisplay> Logged in as <span>{userContext.loggedInUser.lastName} {userContext.loggedInUser.firstName}</span> </UserDisplay> 
+		: null }
 	</NavBar>
 	)
 }

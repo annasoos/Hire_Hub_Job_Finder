@@ -84,24 +84,26 @@ server.post("/api/signup", (req, res) => {
 // LOGIN
 
 server.post("/api/login", async (req, res) => {
-  const { email, password } = req.body;
+	const { email, password } = req.body;
+	try {
+		const logUser = await User.findOne({ email });
+		let logPass;
+		if(logUser){
+			logPass = await bcrypt.compare(password, logUser.password);
+		}
 
-  if (!(email && password)) {
-    res.status(400).json({ msg: "Required data missing" });
-  } else {
-    const logUser = await User.findOne({ email });
-    const logPass = await bcrypt.compare(password, logUser.password);
-
-    if (logUser && logPass) {
-      const token = jwt.sign(
-        { user_id: logUser._id, email, firstName: logUser.firstName, lastName: logUser.lastName }, // I will get these when I decode the token
-        process.env.TOKEN_KEY,
-        { expiresIn: "2h" });
-      res.status(200).json({ msg: "User logged in", token, logUser });
-    } else {
-      res.status(409).json({ msg: "Email adress or password is incorrect" });
-    }
-  }
+		if (logUser && logPass) {
+			const token = jwt.sign(
+				{ user_id: logUser._id, email, firstName: logUser.firstName, lastName: logUser.lastName }, // I will get these when I decode the token
+				process.env.TOKEN_KEY,
+				{ expiresIn: "2h" });
+			res.status(200).json({ msg: "User logged in", token, logUser });
+		} else {
+			res.status(409).json({ msg: "Email adress or password is incorrect" });
+		}
+	} catch (error) {
+		console.log(error)
+	}
 });
 
 // POST NEW JOB
