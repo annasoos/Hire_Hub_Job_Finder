@@ -23,7 +23,6 @@ The user should be able to…
 
 ### TODO
 
-- Display the logged in user's name in the header
 - Improve design and responsivity of ANTD forms (post, signup, login)
 - Add business logic to filterbar and searchbar (on Find a job subpage and Landing page)
 - Add new features (e.g: Newsletter subscription)
