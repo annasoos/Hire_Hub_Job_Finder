@@ -4,8 +4,8 @@ import { createContext, useState } from 'react';
 import { LoggedInUserType } from "../types/LoggedInUserType";
 
 type UserContextType = {
-    loggedInUser: LoggedInUserType;
-    setLoggedInUser: React.Dispatch<React.SetStateAction<LoggedInUserType>>
+    loggedInUser: LoggedInUserType | null;
+    setLoggedInUser: React.Dispatch<React.SetStateAction<LoggedInUserType | null>>
 }
 
 type ContextProviderProps = {
@@ -15,7 +15,7 @@ type ContextProviderProps = {
 export const UserContext = createContext({} as UserContextType);
 
 export const UserContextProvider = ({children}: ContextProviderProps) => {
-	const [loggedInUser, setLoggedInUser] = useState({} as LoggedInUserType)
+	const [loggedInUser, setLoggedInUser] = useState<LoggedInUserType | null>(null)
 	return (
 	<UserContext.Provider value={{loggedInUser, setLoggedInUser}}>
 		{children}

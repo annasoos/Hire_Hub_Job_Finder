@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { lightgray, cyan, white } from "../../style_guide";
+import { lightgray, cyan, white, gray } from "../../style_guide";
 
 export const PostFormContainer = styled.section({
   position: "relative",
@@ -12,19 +12,25 @@ export const PostFormContainer = styled.section({
     color: `${white}`,
     fontSize: 25,
     fontWeight: 600,
-    lineHeight: "2",
     width: "80%",
     textAlign: "center",
     margin: "auto",
     padding: "1rem 0 3rem 0",
 
-    "& a": {
-      color: `${cyan}`,
+		"& h3": {
+			color: `${gray}`,
+			fontWeight: 500,
+			fontSize: 20,
+			paddingTop: "1rem",
 
-      "&:hover": {
-        fontStyle: "italic",
-      },
-    },
+			"& a": {
+				color: `${cyan}`,
+	
+				"&:hover": {
+					fontStyle: "italic",
+				},
+			},
+		},
   },
 });
 

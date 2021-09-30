@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { gray } from "../../style_guide";
 
 export const RegContainer = styled.div({
   width: "100%",
@@ -39,7 +40,7 @@ export const RegTitle = styled.h1({
 });
 
 export const RegText = styled.p({
-  color: "white",
+  color: `${gray}`,
   width: "60%",
   textAlign: "center",
   fontSize: 20,

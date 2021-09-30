@@ -1,13 +1,16 @@
+import { FC } from "react";
 import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { useHistory } from 'react-router';
 //design
 import { NavBar, Hamburger, HamburgerMenu, LogoutBtn } from "./Header.style";
 import HeaderLogo from "../../images/logo_white.png";
-//context
+//types & functions & context
+import { TokenSetterPropsType } from "../../types/TokenSetterPropsType";
+import { openNotificationWithIcon } from "../../functions/Notification";
 import { UserContext } from "../../context/UserContext";
 
-export const Header = () => {
+export const Header:FC<TokenSetterPropsType> = ({tokenSetter}) => {
 	
 	const history = useHistory();
 	const userContext = useContext(UserContext);
@@ -20,7 +23,14 @@ export const Header = () => {
   };
 
 	const logout = () => {
+		console.log("User logged out");
     localStorage.removeItem("token");
+		tokenSetter(null)
+		openNotificationWithIcon(
+			"success",
+			"Logout successful!",
+			"We hope to see you again soon!"
+		);
 		history.push("/")
   };
 
@@ -63,6 +73,5 @@ export const Header = () => {
 		</HamburgerMenu>
 
 	</NavBar>
-	
 	)
 }

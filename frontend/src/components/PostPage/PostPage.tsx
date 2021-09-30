@@ -32,11 +32,10 @@ export const PostForm = () => {
 	useEffect(() => {
     if (userContext.loggedInUser) {
 			setIsLoggedIn(true)
-			console.log(userContext.loggedInUser)
 		} else {
 			setIsLoggedIn(false)
 		}
-  }, []);
+  }, [userContext]);
 
 	//create new job object and send it to the server
   const submit = async (values: PostFormValuesType): Promise<void> => {
@@ -57,8 +56,6 @@ export const PostForm = () => {
       skills: skillsArray,
       description: values.description,
     };
-
-		console.log(newJob)
 
     await axios
       .post("http://localhost:8080/api/post-a-job", newJob)
@@ -89,7 +86,7 @@ export const PostForm = () => {
     if (isLoggedIn) {
       return (
         <PostFormContent>
-					<WelcomeTitle> Welcome <span>{userContext.loggedInUser.lastName}</span>! </WelcomeTitle>
+					<WelcomeTitle> Welcome <span>{userContext!.loggedInUser!.lastName}</span>! </WelcomeTitle>
           <Form
             {...layout}
             form={form}
@@ -176,8 +173,8 @@ export const PostForm = () => {
     } else {
       return (
         <h2>
-          Sorry, only registered users can post new positions. <br /> 
-					But don't worry, you can easily create a new account by <a href="/signup">clicking here</a>!
+          Sorry, only registered users can post new positions.
+					<h3>You can easily create a new account by <a href="/signup">clicking here</a>, <br /> or if you already have one please <a href="/login">login</a>!</h3>
         </h2>
       );
     }

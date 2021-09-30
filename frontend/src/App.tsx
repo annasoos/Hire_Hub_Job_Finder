@@ -1,7 +1,7 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import jwt from "jsonwebtoken";
-//style & components
+//design & components
 import "./App.less";
 import { Header } from "./components/Header/Header";
 import { Hero } from "./components/Hero/Hero";
@@ -17,15 +17,14 @@ import { UserContext } from "./context/UserContext";
 
 const App = () => {
   //check whether any user is logged in
-  const token = localStorage.getItem("token");
-  const tokenKey: string = process.env.REACT_APP_TOKEN_KEY!;
+	const [token, setToken] = useState<string | null>(localStorage.getItem("token"))
   const userContext = useContext(UserContext);
-
+	const tokenKey: string = process.env.REACT_APP_TOKEN_KEY!;
+	
   useEffect(() => {
-    if (token) {
+		if (token) {
       jwt.verify(token, tokenKey, function (err, decoded) {
         if (decoded) {
-          console.log(decoded);
           userContext.setLoggedInUser({
             firstName: decoded.firstName,
             lastName: decoded.lastName,
@@ -33,12 +32,17 @@ const App = () => {
           });
         }
       });
-    }
+			console.log(userContext.loggedInUser)
+    } else {
+			userContext.setLoggedInUser(null)
+			console.log(userContext.loggedInUser)
+		}
   }, [token]);
+
 
   return (
     <Router>
-      <Header />
+      <Header tokenSetter={setToken} />
       <Route exact path="/">
         <>
           <Hero />
@@ -53,7 +57,7 @@ const App = () => {
         <PostForm />
       </Route>
       <Route exact path="/login">
-        <LoginPage />
+        <LoginPage tokenSetter={setToken} />
       </Route>
       <Route exact path="/signup">
         <RegistrationPage />

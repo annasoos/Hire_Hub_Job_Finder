@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { cyan } from '../../style_guide';
+import { cyan, gray } from '../../style_guide';
 
 export const LoginContainer = styled.div({
   width: "100%",
@@ -20,11 +20,11 @@ export const LoginContainer = styled.div({
 });
 
 export const LoginTitle = styled.h1({
-  color: "white",
+  color: `${gray}`,
   width: "100%",
   textAlign: "center",
-  fontSize: 25,
-  fontWeight: 700,
+  fontSize: 23,
+  fontWeight: 500,
   padding: "0 0 2rem 0",
   transition: "all 1s ease-in-out",
 

@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { useHistory } from 'react-router';
 import axios from "axios";
 //design & components
@@ -6,8 +7,9 @@ import { LoginTitle, LoginContainer } from "./LoginPage.style";
 //types & functions & context
 import { openNotificationWithIcon } from "../../functions/Notification";
 import { LoginSuccessType } from "../../types/LoginSuccessType";
+import { TokenSetterPropsType } from "../../types/TokenSetterPropsType";
 
-export const LoginPage = () => {
+export const LoginPage:FC<TokenSetterPropsType> = ({tokenSetter}) => {
   const [form] = Form.useForm();
 	const history = useHistory();
 
@@ -27,7 +29,8 @@ export const LoginPage = () => {
             "Welcome back!",
             "Good to see you again!"
           );
-					localStorage.setItem("token", res.data.token)
+					localStorage.setItem("token", res.data.token);
+					tokenSetter(res.data.token);
 					history.push("/")
         }
       })
