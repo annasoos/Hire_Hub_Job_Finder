@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { lightgray, gray, cyan, cyanHover, footerBG, mainBG } from './style_guide';
+import { lightgray, gray, cyan, cyanHover, footerBG, mainBG } from '../../style_guide';
 
 export const NavBar = styled.nav({
 	width: "100%",
@@ -172,3 +172,10 @@ export const HamburgerMenu = styled.div({
 		},
 	},
 });
+
+export const LogoutBtn = styled.button({
+	fontWeight: 500,
+	"&:hover": {
+		color: "white"
+	}
+})

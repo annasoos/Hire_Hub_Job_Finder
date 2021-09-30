@@ -94,7 +94,7 @@ server.post("/api/login", async (req, res) => {
 
     if (logUser && logPass) {
       const token = jwt.sign(
-        { user_id: logUser._id, email, firstName: logUser.firstName, lastName: logUser.lastName }, //I will get these when I decode the token
+        { user_id: logUser._id, email, firstName: logUser.firstName, lastName: logUser.lastName }, // I will get these when I decode the token
         process.env.TOKEN_KEY,
         { expiresIn: "2h" });
       res.status(200).json({ msg: "User logged in", token, logUser });
