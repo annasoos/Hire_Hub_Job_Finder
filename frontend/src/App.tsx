@@ -32,10 +32,8 @@ const App = () => {
           });
         }
       });
-			console.log(userContext.loggedInUser)
     } else {
 			userContext.setLoggedInUser(null)
-			console.log(userContext.loggedInUser)
 		}
   }, [token]);
 
