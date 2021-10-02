@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 //design & components
 import { FilterBar } from "../FilterBar/FilterBar";
-import { IJob } from "../../interfaces/IJob";
+import { CardElementType } from "../../types/CardPropsType";
 import { cyan, lightgray, white} from "../../style_guide";
 import { LoadingText, JobContainer, JobContent, Position, Level, Location, Company, Skills, Description } from "./JobList.style";
 //types & functions
@@ -9,11 +9,12 @@ import { getData } from "../../functions/Fetch";
 
 
 export const JobList = () => {
-	const [data, setData] = useState<IJob[]>([]);
+	const [data, setData] = useState<CardElementType[]>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	
   useEffect(() => {
-		getData("http://localhost:8080/api/find-a-job").then(setData);
+		getData("http://localhost:8080/api/find-a-job")
+			.then((res) =>  setData(res.data.reverse()));
     setTimeout(() => setIsLoaded(true), 1500);
   }, []);
 	
@@ -29,7 +30,7 @@ export const JobList = () => {
 			<>
         <FilterBar />
         <JobContainer>
-          {data.map((job: IJob, index: number) => (
+          {data.map((job: CardElementType, index: number) => (
 						<JobContent key={index}>
               <Position color={white}>
                 <b>{job.position}</b>

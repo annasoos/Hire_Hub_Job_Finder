@@ -4,9 +4,9 @@ import { Card } from "../Card/Card";
 import { Search } from "../Search/Search";
 import { FeaturedSection, Title, Text, CardContainer, BlueLine } from "../Featured/Featured.style";
 //types & functions
-import { IJob } from "../../interfaces/IJob";
 import { FeaturedClassStateType } from '../../types/FeaturedClassStateType';
 import { getData } from "../../functions/Fetch";
+import { CardElementType } from '../../types/CardPropsType';
 
 export class MyComponent extends React.Component<any, FeaturedClassStateType> { // the first type argument is for defining the type of props, the other is for type of state of the component
 	constructor(props:any) {
@@ -25,8 +25,8 @@ export class MyComponent extends React.Component<any, FeaturedClassStateType> { 
 	
 
 	componentDidMount() {
-		getData("http://localhost:8080/api/find-a-job").then(data => {
-			const filtered = data.slice(0, 3);
+		getData("http://localhost:8080/api/find-a-job").then(res => {
+			const filtered = res.data.slice(0, 3);
 			this.setState({jobs: filtered});
 		});
 	}; 
@@ -41,7 +41,7 @@ export class MyComponent extends React.Component<any, FeaturedClassStateType> { 
 			<Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aliquid provident quasi possimus autem!</Text>
 
 			<CardContainer>
-				{this.state.jobs.map((card: IJob, index: number) => (<Card key={index} cardElement={card} position={index} /> ))}
+				{this.state.jobs.map((card: CardElementType, index: number) => (<Card key={index} cardElement={card} position={index} /> ))}
 				<BlueLine />
 			</CardContainer>
 

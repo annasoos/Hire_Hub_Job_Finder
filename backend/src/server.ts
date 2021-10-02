@@ -1,9 +1,9 @@
 import express from "express";
 import path from "path";
-import fs from "fs";
 import cors from "cors";
 import dotenv from "dotenv";
 import { User } from "./model/users.schema";
+import { Job } from "./model/jobs.schema";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { connect } from "./config/database";
@@ -14,6 +14,7 @@ connect();
 
 server.use(express.json());
 server.use(cors({ origin: "http://localhost:3000" }));
+server.use(express.urlencoded({ extended: false })); // --> BODY PARSER MIDDLEWAREs
 
 // STATIC
 
@@ -26,7 +27,6 @@ server.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
 }); ---> HA EZT ADOM MEG A HERO ÉS A FIND A JOB OLDAL A FETCHNÉL ELHAL, MINTHA NEM ÉRNÉ EL A STATE-ET ".map is not a function"
 */
-
 
 server.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../../frontend/build", "index.html"));
@@ -48,11 +48,17 @@ server.get("/signup", (req, res) => {
   res.sendFile(path.join(__dirname, "../../frontend/build", "index.html"));
 });
 
-// GET JSON
 
-server.get("/api/find-a-job", (req, res) => {
-  res.sendFile(path.join(__dirname, "../src/assets", "jobs.json"));
-});
+// GET ALL JOBS
+
+server.get("/api/find-a-job", async (req, res) => {
+	await Job.find({}, (error, data) => {
+			if(error) throw error;
+			if(data) {
+				res.json({data});
+			}
+	})
+})
 
 // REGISTRATION
 
@@ -106,32 +112,24 @@ server.post("/api/login", async (req, res) => {
 	}
 });
 
+
 // POST NEW JOB
 
-server.use(express.json());
-server.use(express.urlencoded({ extended: false })); // --> BODY PARSER MIDDLEWAREs
-
-type NewJobServerType = {
-	id: string;
-  position: string;
-  company: string;
-  level: string;
-  location: string;
-  skills: string[];
-  description: string;
-};
-
 server.post("/api/post-a-job", (req, res) => {
-	const newJob: NewJobServerType = req.body;
-  const data = fs.readFileSync(path.resolve(__dirname, "../src/assets/jobs.json"), "utf-8");
-	const dataArray: NewJobServerType[] = JSON.parse(data);
-	dataArray.splice(0, 0, newJob);  // splice(start, deleteCount, item)
+	const { position, company, level, location, skills, description } = req.body;
+  const newJob = new Job({
+    position,
+    company,
+		level,
+		location,
+		skills,
+		description
+  });
 
-	fs.writeFileSync(path.resolve(__dirname, "../src/assets/jobs.json"), JSON.stringify(dataArray, null, 2));
-
-	res.status(200).json({ msg: "Success" })
-
+  newJob.save();
+    res.status(200).json({ msg: "New job created" });
 });
+
 
 // LISTENING
 

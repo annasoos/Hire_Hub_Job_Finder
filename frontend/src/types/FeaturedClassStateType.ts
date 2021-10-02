@@ -1,5 +1,5 @@
-import { IJob } from "../interfaces/IJob"
+import { CardElementType } from "../types/CardPropsType"
 
 export type FeaturedClassStateType = {
-	jobs: IJob[]
+	jobs: CardElementType[]
 }

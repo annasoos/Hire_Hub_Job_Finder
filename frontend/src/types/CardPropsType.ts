@@ -1,6 +1,14 @@
-import { IJob } from "../interfaces/IJob";
+
+export type CardElementType = {
+	position: string;
+	company: string;
+	level: string;
+	location: string;
+	skills: string[];
+	description: string;
+}
 
 export type CardPropsType = {
-  cardElement: IJob,
+  cardElement: CardElementType,
 	position: number
 };

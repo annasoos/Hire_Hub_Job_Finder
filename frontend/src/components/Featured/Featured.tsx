@@ -4,9 +4,9 @@ import { Card } from "../Card/Card";
 import { Search } from "../Search/Search";
 import { FeaturedSection, Title, Text, CardContainer, BlueLine } from "./Featured.style";
 //types & functions
-import { IJob } from "../../interfaces/IJob";
 import { FeaturedClassStateType } from '../../types/FeaturedClassStateType';
 import { getData } from "../../functions/Fetch"
+import { CardElementType } from "../../types/CardPropsType";
 
 
 export class Featured extends React.Component<any, FeaturedClassStateType> {
@@ -18,11 +18,11 @@ export class Featured extends React.Component<any, FeaturedClassStateType> {
 	}
 
 	componentDidMount() {
-		getData("http://localhost:8080/api/find-a-job").then(data => {
-			const filtered = data.slice(0, 3);
+		getData("http://localhost:8080/api/find-a-job").then(res => {
+			const filtered = res.data.reverse().slice(0, 3);
 			this.setState({jobs: filtered});
 		});
-	};	
+	};
 	
   render() {
     return (
@@ -33,7 +33,7 @@ export class Featured extends React.Component<any, FeaturedClassStateType> {
 			<Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aliquid provident quasi possimus autem!</Text>
 
 			<CardContainer>
-				{this.state.jobs.map((card: IJob, index: number) => (<Card key={index} cardElement={card} position={index} /> ))}
+				{this.state.jobs.map((card: CardElementType, index: number) => (<Card key={index} cardElement={card} position={index} /> ))}
 				<BlueLine />
 			</CardContainer>
 

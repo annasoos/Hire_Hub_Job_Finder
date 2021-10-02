@@ -141,7 +141,7 @@ export const HamburgerMenu = styled.div({
 		right: "10%",
 	},
 
-	"& a": {
+	"& a, button": {
 		padding: "0.4rem 0.2rem",
 		margin: "0.8rem 0.5rem",
 		color: "white",
