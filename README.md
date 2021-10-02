@@ -20,6 +20,7 @@ The user should be able to…
 - Ant Design
 - Node.js (Express.js)
 - JSON Web Token
+- MongoDB
 
 ### TODO
 
