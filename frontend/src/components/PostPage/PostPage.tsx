@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 //design & components
 import { Button, Input, Form, Select } from "antd";
 import { PostFormContainer, PostFormContent, PostTitle, SearchImg, WelcomeTitle } from "./PostPage.style";
@@ -39,7 +38,6 @@ export const PostForm = () => {
 
 	//create new job object and send it to the server
   const submit = async (values: PostFormValuesType): Promise<void> => {
-    const newID: string = uuidv4(); // generate random id
     const skillsArray: string[] = values.skills.replace(/,/g, "").split(" ");
     let levelOfJob: string = "";
 
@@ -48,7 +46,6 @@ export const PostForm = () => {
     }
 
     const newJob: NewJobType = {
-      id: newID,
       position: values.position,
       company: values.company,
       level: levelOfJob,

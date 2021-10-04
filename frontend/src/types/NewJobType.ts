@@ -1,5 +1,4 @@
 export type NewJobType = {
-	id: string;
   position: string;
   company: string;
   level: string;

@@ -8,7 +8,7 @@ import { LoadingText, JobContainer, JobContent, Position, Level, Location, Compa
 import { getData } from "../../functions/Fetch";
 import { JobListClassStateType } from "../../types/JobListClassStateType";
 
-export class JobList extends React.Component<any, JobListClassStateType> {
+export class MyComponent2 extends React.Component<any, JobListClassStateType> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -61,3 +61,50 @@ export class JobList extends React.Component<any, JobListClassStateType> {
     }
   }
 }
+
+// ----------------FUNCTIONAL VERSION -------------------
+/*
+export const JobList = () => {
+	const [data, setData] = useState<CardElementType[]>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+	
+  useEffect(() => {
+		getData("http://localhost:8080/api/find-a-job")
+			.then((res) =>  setData(res.data.reverse()));
+    setTimeout(() => setIsLoaded(true), 1500);
+  }, []);
+	
+	
+  if (!isLoaded) {
+		return (
+			<JobContainer>
+        <LoadingText>Searching for the best carreer options...</LoadingText>
+      </JobContainer>
+    );
+  } else {
+		return (
+			<>
+        <FilterBar />
+        <JobContainer>
+          {data.map((job: CardElementType, index: number) => (
+						<JobContent key={index}>
+              <Position color={white}>
+                <b>{job.position}</b>
+              </Position>
+              {job.level.length > 0 ? <Level color={lightgray}> - {job.level} </Level> : null}
+              <Location color={cyan}> {job.location} </Location>
+              <Company color={lightgray}> {job.company} </Company>
+              <Skills color={cyan}>
+                {job.skills.map((skill: string, index: number) => (
+									<span key={index}>{skill}&nbsp;&nbsp;&nbsp;</span>
+									))}
+              </Skills>
+              <Description color={white}> {job.description} </Description>
+            </JobContent>
+          ))}
+        </JobContainer>
+      </>
+    );
+  }
+};
+*/

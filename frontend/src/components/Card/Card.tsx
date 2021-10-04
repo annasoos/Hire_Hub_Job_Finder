@@ -8,7 +8,7 @@ import { cyan } from "../../style_guide"
 //types & functions
 import { CardPropsType } from "../../types/CardPropsType";
 
-export const Card:FC<CardPropsType> = ({ cardElement, position }) => { // TODO destructure props
+export const Card:FC<CardPropsType> = ({ cardElement, position }) => { 
   return (
     <CardContent>
       <CardLogo>
