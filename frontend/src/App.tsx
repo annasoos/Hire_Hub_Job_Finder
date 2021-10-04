@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import jwt from "jsonwebtoken";
 //design & components
 import "./App.less";
-import { Header } from "./components/Header/Header";
+import Header from "./components/Header/Header";
 import { Hero } from "./components/Hero/Hero";
 import { Featured } from "./components/Featured/Featured";
 import { Newsletter } from "./components/Newsletter/Newsletter";
@@ -40,7 +40,9 @@ const App = () => {
 
   return (
     <Router>
-      <Header tokenSetter={setToken} />
+			<Route>
+      	<Header tokenSetter={setToken} />
+			</Route>
       <Route exact path="/">
         <>
           <Hero />

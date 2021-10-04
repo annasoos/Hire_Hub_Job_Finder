@@ -4,8 +4,8 @@ import { createContext, useState } from 'react';
 import { LoggedInUserType } from "../types/LoggedInUserType";
 
 type UserContextType = {
-    loggedInUser: LoggedInUserType | null;
-    setLoggedInUser: React.Dispatch<React.SetStateAction<LoggedInUserType | null>>
+  loggedInUser: LoggedInUserType | null;
+  setLoggedInUser: React.Dispatch<React.SetStateAction<LoggedInUserType | null>>
 }
 
 type ContextProviderProps = {

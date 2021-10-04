@@ -1,79 +1,91 @@
-import { FC } from "react";
-import { useState, useContext } from "react";
-import { NavLink } from "react-router-dom";
-import { useHistory } from 'react-router';
+import React from "react";
+import { NavLink, withRouter, RouteComponentProps } from "react-router-dom";
 //design
 import { NavBar, Hamburger, HamburgerMenu, LogoutBtn, UserDisplay } from "./Header.style";
 import HeaderLogo from "../../images/logo_white.png";
 //types & functions & context
+import { HeaderClassStateType } from "../../types/HeaderClassStateType";
 import { TokenSetterPropsType } from "../../types/TokenSetterPropsType";
 import { openNotificationWithIcon } from "../../functions/Notification";
 import { UserContext } from "../../context/UserContext";
 
-export const Header:FC<TokenSetterPropsType> = ({tokenSetter}) => {
-	
-	const history = useHistory();
-	const userContext = useContext(UserContext);
-	const [hamMenu, setHamMenu] = useState<"open" | "closed">("closed");
-  const [hamIcon, setHamIcon] = useState<"open" | "closed">("closed");
+class Header extends React.Component<TokenSetterPropsType & RouteComponentProps<{}>, HeaderClassStateType> { 
 
-  const mobileMenu = () => {
-    hamMenu === "open" ? setHamMenu("closed") : setHamMenu("open");
-    hamIcon === "open" ? setHamIcon("closed") : setHamIcon("open");
+	static contextType = UserContext;
+
+	constructor (props:TokenSetterPropsType & RouteComponentProps<{}>) {
+		super(props)
+
+		this.state = {
+			hamMenu: "closed",
+			hamIcon: "closed"
+		}
+	}
+
+  mobileMenu = () => {
+    this.state.hamMenu === "open" ? this.setState({hamMenu: "closed"}) : this.setState({hamMenu: "open"});
+    this.state.hamIcon === "open" ? this.setState({hamIcon: "closed"}) : this.setState({hamIcon: "open"});
   };
 
-	const logout = () => {
+	logout = () => {
 		console.log("User logged out");
     localStorage.removeItem("token");
-		tokenSetter(null)
+		this.props.tokenSetter(null)
 		openNotificationWithIcon(
 			"success",
 			"Logout successful!",
 			"We hope to see you again soon!"
 		);
-		history.push("/")
+		this.props.history.push('/')
   };
 
-	return (
+	render () {
 
-	<NavBar>
-		<a href="/">
-			<img src={HeaderLogo} alt="hire_hub_logo" />
-		</a>
-		<ul>
-			<li>
-				<NavLink to="/find-a-job">Find a job</NavLink>
-			</li>
-			<li>
-				<NavLink to="/post-a-job">Post a job</NavLink>
-			</li>
-		</ul>
+		const userContext = this.context;
 
-		<ul>
-			<li>
-				{userContext.loggedInUser ? <LogoutBtn onClick={logout}>Logout</LogoutBtn> : <NavLink to="/login">Login</NavLink>}
-			</li>
-			<li>
-				<NavLink id="signup" to="/signup"> Sign Up </NavLink>
-			</li>
-		</ul>
+		return (
+		<NavBar>
+			<a href="/">
+				<img src={HeaderLogo} alt="hire_hub_logo" />
+			</a>
+			<ul>
+				<li>
+					<NavLink to="/find-a-job">Find a job</NavLink>
+				</li>
+				<li>
+					<NavLink to="/post-a-job">Post a job</NavLink>
+				</li>
+			</ul>
 
-		<Hamburger id={hamIcon} onClick={mobileMenu}>
-			<span className="bar"></span>
-			<span className="bar"></span>
-			<span className="bar"></span>
-		</Hamburger>
+			<ul>
+				<li>
+					{userContext.loggedInUser ? <LogoutBtn onClick={this.logout}>Logout</LogoutBtn> : <NavLink to="/login">Login</NavLink>}
+				</li>
+				<li>
+					<NavLink id="signup" to="/signup"> Sign Up </NavLink>
+				</li>
+			</ul>
 
-		<HamburgerMenu id={hamMenu} onClick={(): void => { setHamMenu("closed"); setHamIcon("closed") }}>
-			<NavLink className="dropdown" to="/find-a-job"> Find a job </NavLink>
-			<NavLink className="dropdown" to="/post-a-job"> Post a job </NavLink>
-			<hr />
-			{userContext.loggedInUser ? <LogoutBtn onClick={logout}>Logout</LogoutBtn> : <NavLink to="/login">Login</NavLink>}
-			<NavLink className="dropdown" to="/signup" id="mobileSignup"> Sign Up </NavLink>
-		</HamburgerMenu>
-		{	userContext.loggedInUser ? 
-		<UserDisplay> Logged in as <span>{userContext.loggedInUser.lastName} {userContext.loggedInUser.firstName}</span> </UserDisplay> 
-		: null }
-	</NavBar>
-	)
-}
+			<Hamburger id={this.state.hamIcon} onClick={this.mobileMenu}>
+				<span className="bar"></span>
+				<span className="bar"></span>
+				<span className="bar"></span>
+			</Hamburger>
+
+			<HamburgerMenu id={this.state.hamMenu} onClick={(): void => { this.setState({hamMenu: "closed", hamIcon: "closed"})}}>
+				<NavLink className="dropdown" to="/find-a-job"> Find a job </NavLink>
+				<NavLink className="dropdown" to="/post-a-job"> Post a job </NavLink>
+				<hr />
+				{userContext.loggedInUser ? <LogoutBtn onClick={this.logout}>Logout</LogoutBtn> : <NavLink to="/login">Login</NavLink>}
+				<NavLink className="dropdown" to="/signup" id="mobileSignup"> Sign Up </NavLink>
+			</HamburgerMenu>
+			
+			{	userContext.loggedInUser ? 
+			<UserDisplay> Logged in as <span>{userContext.loggedInUser.lastName} {userContext.loggedInUser.firstName}</span> </UserDisplay> 
+			: null }
+		</NavBar>
+		)
+	}
+};
+
+export default withRouter(Header);

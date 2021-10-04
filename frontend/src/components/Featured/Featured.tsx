@@ -9,8 +9,8 @@ import { getData } from "../../functions/Fetch"
 import { CardElementType } from "../../types/CardPropsType";
 
 
-export class Featured extends React.Component<any, FeaturedClassStateType> {
-	constructor(props:any) {
+export class Featured extends React.Component<{}, FeaturedClassStateType> {
+	constructor(props: {}) {
 		super(props)
 		this.state={
 			jobs: []

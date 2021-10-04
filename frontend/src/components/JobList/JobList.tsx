@@ -8,8 +8,8 @@ import { LoadingText, JobContainer, JobContent, Position, Level, Location, Compa
 import { getData } from "../../functions/Fetch";
 import { JobListClassStateType } from "../../types/JobListClassStateType";
 
-export class JobList extends React.Component<any, JobListClassStateType> {
-  constructor(props: any) {
+export class JobList extends React.Component<{}, JobListClassStateType> {
+  constructor(props: {}) {
     super(props);
     this.state = {
       data: [],
