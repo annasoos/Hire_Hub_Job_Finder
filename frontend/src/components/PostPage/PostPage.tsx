@@ -1,18 +1,18 @@
-import { useState, useEffect, useContext } from "react";
+import { FC } from "react";
 import axios from "axios";
 //design & components
 import { Button, Input, Form, Select } from "antd";
 import { PostFormContainer, PostFormContent, PostTitle, SearchImg, WelcomeTitle } from "./PostPage.style";
 import { lightgray } from "../../style_guide";
 import SearchImage from "../../images/People search-rafiki.svg";
-//types & functions & context
+//types & functions & hoc
 import { NewJobType } from "../../types/NewJobType";
 import { PostFormValuesType } from "../../types/PostFormValuesType";
+import { PostFormPropsType } from "../../types/PostFormPropsType";
 import { openNotificationWithIcon } from "../../functions/Notification";
-import { UserContext } from "../../context/UserContext";
+import withCurrentUser from "../HOC/withCurrentUser";
 
 const { Option } = Select;
-
 const layout = {
   labelCol: {
     span: 10,
@@ -22,19 +22,8 @@ const layout = {
   },
 };
 
-export const PostForm = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+const PostForm:FC<PostFormPropsType> = ({isLoggedIn, user}) => {
   const [form] = Form.useForm();
-	const userContext = useContext(UserContext);
-	
-  //check whether user is logged in
-	useEffect(() => {
-    if (userContext.loggedInUser) {
-			setIsLoggedIn(true)
-		} else {
-			setIsLoggedIn(false)
-		}
-  }, [userContext]);
 
 	//create new job object and send it to the server
   const submit = async (values: PostFormValuesType): Promise<void> => {
@@ -78,12 +67,12 @@ export const PostForm = () => {
 		form.resetFields();
   };
 
-	// conditional rendering based on user authentication
+	// conditional rendering based on user authentication (isLoggedIn and user props from HOC)
   const renderForm = () => {
     if (isLoggedIn) {
       return (
         <PostFormContent>
-					<WelcomeTitle> Welcome <span>{userContext!.loggedInUser!.lastName}</span>! </WelcomeTitle>
+					<WelcomeTitle> Welcome <span>{user!.lastName}</span>! </WelcomeTitle>
           <Form
             {...layout}
             form={form}
@@ -187,3 +176,5 @@ export const PostForm = () => {
     </PostFormContainer>
   );
 };
+
+export default withCurrentUser(PostForm);
