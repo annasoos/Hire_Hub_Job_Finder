@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 import { NavLink, withRouter, RouteComponentProps } from "react-router-dom";
 //design
 import { NavBar, Hamburger, HamburgerMenu, LogoutBtn, UserDisplay } from "./Header.style";
@@ -9,7 +9,7 @@ import { TokenSetterPropsType } from "../../types/TokenSetterPropsType";
 import { openNotificationWithIcon } from "../../functions/Notification";
 import { UserContext } from "../../context/UserContext";
 
-class Header extends React.Component<TokenSetterPropsType & RouteComponentProps<{}>, HeaderClassStateType> { 
+class Header extends Component<TokenSetterPropsType & RouteComponentProps<{}>, HeaderClassStateType> { 
 
 	static contextType = UserContext;
 

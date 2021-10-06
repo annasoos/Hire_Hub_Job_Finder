@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 //design & components
 import { FilterBar } from "../FilterBar/FilterBar";
 import { CardElementType } from "../../types/CardPropsType";
@@ -8,7 +8,7 @@ import { LoadingText, JobContainer, JobContent, Position, Level, Location, Compa
 import { getData } from "../../functions/Fetch";
 import { JobListClassStateType } from "../../types/JobListClassStateType";
 
-export class JobList extends React.Component<{}, JobListClassStateType> {
+export class JobList extends Component<{}, JobListClassStateType> {
   constructor(props: {}) {
     super(props);
     this.state = {

@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 //design & components
 import { Card } from "../Card/Card";
 import { Search } from "../Search/Search";
@@ -9,7 +9,7 @@ import { getData } from "../../functions/Fetch"
 import { CardElementType } from "../../types/CardPropsType";
 
 
-export class Featured extends React.Component<{}, FeaturedClassStateType> {
+export class Featured extends Component<{}, FeaturedClassStateType> {
 	constructor(props: {}) {
 		super(props)
 		this.state={
