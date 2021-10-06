@@ -12,9 +12,9 @@ const server = express();
 dotenv.config();
 connect();
 
-server.use(express.json());
 server.use(cors({ origin: "http://localhost:3000" }));
-server.use(express.urlencoded({ extended: false })); // --> BODY PARSER MIDDLEWAREs
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
 
 // STATIC
 
@@ -58,7 +58,24 @@ server.get("/api/find-a-job", async (req, res) => {
 				res.json({data});
 			}
 	})
-})
+});
+
+// POST NEW JOB
+
+server.post("/api/post-a-job", (req, res) => {
+	const { position, company, level, location, skills, description } = req.body;
+  const newJob = new Job({
+    position,
+    company,
+		level,
+		location,
+		skills,
+		description
+  });
+
+  newJob.save();
+    res.status(200).json({ msg: "New job created" });
+});
 
 // REGISTRATION
 
@@ -110,24 +127,6 @@ server.post("/api/login", async (req, res) => {
 	} catch (error) {
 		console.log(error)
 	}
-});
-
-
-// POST NEW JOB
-
-server.post("/api/post-a-job", (req, res) => {
-	const { position, company, level, location, skills, description } = req.body;
-  const newJob = new Job({
-    position,
-    company,
-		level,
-		location,
-		skills,
-		description
-  });
-
-  newJob.save();
-    res.status(200).json({ msg: "New job created" });
 });
 
 
