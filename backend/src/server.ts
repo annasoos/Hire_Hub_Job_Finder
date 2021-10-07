@@ -20,35 +20,6 @@ server.use(express.urlencoded({ extended: true }));
 
 server.use(express.static(path.resolve(__dirname, "../../frontend/build")));
 
-// REFRESH ENDPOINTS
-
-/*
-server.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
-}); ---> HA EZT ADOM MEG A HERO ÉS A FIND A JOB OLDAL A FETCHNÉL ELHAL, MINTHA NEM ÉRNÉ EL A STATE-ET ".map is not a function"
-*/
-
-server.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/build", "index.html"));
-});
-
-server.get("/find-a-job", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/build", "index.html"));
-});
-
-server.get("/post-a-job", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/build", "index.html"));
-});
-
-server.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/build", "index.html"));
-});
-
-server.get("/signup", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/build", "index.html"));
-});
-
-
 // GET ALL JOBS
 
 server.get("/api/find-a-job", async (req, res) => {
@@ -58,6 +29,12 @@ server.get("/api/find-a-job", async (req, res) => {
 				res.json({data});
 			}
 	})
+});
+
+// INDEX ENDPOINT --> it needs to be after data get request otherwise the database fetch doesnt work. Catch-all route always should be after static middleware and other get routes
+
+server.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, "../../frontend/build", "index.html"));
 });
 
 // POST NEW JOB
@@ -117,7 +94,7 @@ server.post("/api/login", async (req, res) => {
 
 		if (logUser && logPass) {
 			const token = jwt.sign(
-				{ user_id: logUser._id, email, firstName: logUser.firstName, lastName: logUser.lastName }, // I will get these when I decode the token
+				{ user_id: logUser._id, email, firstName: logUser.firstName, lastName: logUser.lastName }, // Decoded token will contain the data I specify here
 				process.env.TOKEN_KEY,
 				{ expiresIn: "2h" });
 			res.status(200).json({ msg: "User logged in", token, logUser });
