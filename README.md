@@ -10,6 +10,10 @@ The user should be able to…
   - Registrate and Login with email adress
   - Create a new job and post it to the database (allowed only for registered users)
 
+### Links
+
+- Live Site URL: [Hire Hub](https://hire-hub.herokuapp.com/)
+
 ## Implementation
 
 ### Built with
