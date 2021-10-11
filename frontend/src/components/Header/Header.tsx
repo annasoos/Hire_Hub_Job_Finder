@@ -10,6 +10,13 @@ import { UserContext } from "../../context/UserContext";
 
 class Header extends Component<RouteComponentProps<{}>, HeaderClassStateType> { 
 
+	/*
+	You can get access to the history object’s properties and the closest <Route>'s match via the withRouter higher-order component. 
+	If you would like to access the router history in class components, history has to be passed as a prop from react router, so it should be a direct child of a Route component.
+	It used by "props.history.push()"
+	withRouter HOC will pass updated match, location, and history props to the wrapped component whenever it renders, so I need to add the types of these props with importing RouteComponentProps
+	*/
+
 	static contextType = UserContext;
 
 	constructor (props: RouteComponentProps<{}>) {
