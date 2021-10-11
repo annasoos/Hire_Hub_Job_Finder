@@ -3,7 +3,7 @@ import { Component } from "react";
 import { FilterBar } from "../FilterBar/FilterBar";
 import { CardElementType } from "../../types/CardPropsType";
 import { cyan, lightgray, white } from "../../style_guide";
-import { LoadingText, JobContainer, JobContent, Position, Level, Location, Company, Skills, Description } from "../JobList/JobList.style";
+import { LoadingText, JobListSection, JobContainer, JobContent, Position, Level, Location, Company, Skills, Description } from "../JobList/JobList.style";
 //types & functions
 import { getData } from "../../functions/Fetch";
 import { JobListClassStateType } from "../../types/JobListClassStateType";
@@ -34,7 +34,7 @@ export class JobList extends Component<{}, JobListClassStateType> {
       );
     } else {
       return (
-        <>
+        <JobListSection>
           <FilterBar />
           <JobContainer>
             {this.state.data.map((job: CardElementType, index: number) => (
@@ -56,7 +56,7 @@ export class JobList extends Component<{}, JobListClassStateType> {
               </JobContent>
             ))}
           </JobContainer>
-        </>
+        </JobListSection>
       );
     }
   }

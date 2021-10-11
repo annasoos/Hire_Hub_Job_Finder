@@ -13,14 +13,6 @@ import { openNotificationWithIcon } from "../../functions/Notification";
 import withCurrentUser from "../HOC/withCurrentUser";
 
 const { Option } = Select;
-const layout = {
-  labelCol: {
-    span: 10,
-  },
-  wrapperCol: {
-    span: 11,
-  },
-};
 
 const PostForm:FC<PostFormPropsType> = ({isLoggedIn, user}) => {
   const [form] = Form.useForm();
@@ -74,7 +66,7 @@ const PostForm:FC<PostFormPropsType> = ({isLoggedIn, user}) => {
         <PostFormContent>
 					<WelcomeTitle> Welcome <span>{user!.lastName}</span>! </WelcomeTitle>
           <Form
-            {...layout}
+						className="postForm"
             form={form}
             name="nest-messages"
             onFinish={submit}
@@ -102,7 +94,7 @@ const PostForm:FC<PostFormPropsType> = ({isLoggedIn, user}) => {
 
             {/* LEVEL */}
             <Form.Item
-						className="input"
+							className="input"
               label={<label style={{ color: "white" }}>Level:</label>}
               name="level"
               rules={[{ required: false }]}
@@ -148,7 +140,7 @@ const PostForm:FC<PostFormPropsType> = ({isLoggedIn, user}) => {
             </Form.Item>
 
             {/* BUTTON */}
-            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 14 }}>
+            <Form.Item>
               <Button type="primary" htmlType="submit">
                 Post
               </Button>

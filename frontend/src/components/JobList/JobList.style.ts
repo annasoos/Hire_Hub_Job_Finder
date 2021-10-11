@@ -3,24 +3,33 @@ import { darkBlue, footerBG } from '../../style_guide';
 
 export const LoadingText = styled.div({
 	height: '50%',
-  fontSize: 35,
-	fontWeight: 700,
-  color: 'white',
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
+
+  fontSize: 35,
+	fontWeight: 700,
+  color: 'white',
   textAlign: 'center',
+
+	transition: "all 1s ease-in-out",
 	
 	'@media(max-width: 1090px)': {
 		fontSize: '1.5rem'
   }
 });
 
+export const JobListSection = styled.div({
+	"@media screen and (max-width: 1090px)":{
+		marginTop: "2rem",
+	}
+})
+
 export const JobContainer = styled.div({
+  position: "relative",
   height: "auto",
   minHeight: "50vh",
-  position: "relative",
 	padding: "1rem 0 5rem 0",
 });
 
@@ -61,12 +70,24 @@ export const Location = styled.h5({
 
 export const Company = styled.h5((props) => ({ color: props.color }));
 
-export const Skills = styled.div((props) => ({ color: props.color }));
+export const Skills = styled.div({
+	transition: "all 1s ease-in-out",
+	
+	"& span":{
+		'@media(max-width: 1000px)': {
+			display: 'block',
+			fontSize: "0.8rem"
+		}
+	}
+	},
+	(props) => ({ color: props.color })
+);
 
 export const Description = styled.p({
     fontSize: 18,
     fontWeight: 300,
     paddingTop: 20,
+		textAlign: "justify",
   },
   (props) => ({ color: props.color })
 );

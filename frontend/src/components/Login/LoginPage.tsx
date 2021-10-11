@@ -95,7 +95,7 @@ export const LoginPage:FC<TokenSetterPropsType> = ({tokenSetter}) => {
           <Input.Password className="input" allowClear />
         </Form.Item>
 
-        <Form.Item  wrapperCol={{ offset: 10, span: 8 }} >
+        <Form.Item>
           <Button type="primary" htmlType="submit">
             Login
           </Button>
