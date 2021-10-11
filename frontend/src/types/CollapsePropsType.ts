@@ -1,5 +1,5 @@
-import { CardElementType } from "./CardPropsType";
+import { JobElementType } from "./JobElementType";
 
 export type CollapsePropsType = {
-	list: CardElementType[]
-}
+  list: JobElementType[];
+};

@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UserContextProvider } from "./context/UserContext";
+import { JobContextProvider } from "./context/JobContext";
 
 ReactDOM.render(
   <React.StrictMode>
+		<JobContextProvider>
 		<UserContextProvider>
     	<App />
 		</UserContextProvider>
+		</JobContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

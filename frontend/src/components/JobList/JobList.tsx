@@ -3,9 +3,9 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 //design & components
 import { FilterBar } from "../FilterBar/FilterBar";
 import { CollapseBar } from "../Collapse/Collapse";
-import { CardElementType } from "../../types/CardPropsType";
+import { JobElementType } from "../../types/JobElementType";
 import { cyan, lightgray, white } from "../../style_guide";
-import { LoadingText, JobListSection, JobContainer, JobContent, Position, Level, Location, Company, Skills, Description } from "../JobList/JobList.style";
+import { LoadingText, JobListSection,  JobContainer, JobContent, Position, Level, Location, Company, Skills, Description } from "../JobList/JobList.style";
 //types & functions & context
 import { getData } from "../../functions/Fetch";
 import { JobListClassStateType } from "../../types/JobListClassStateType";
@@ -31,8 +31,7 @@ class JobList extends Component<RouteComponentProps<{}>, JobListClassStateType> 
   }
 
   render() {
-
-		const userContext = this.context;
+    const userContext = this.context;
 
     if (!this.state.isLoaded) {
       return (
@@ -45,13 +44,17 @@ class JobList extends Component<RouteComponentProps<{}>, JobListClassStateType> 
         <JobListSection>
           <FilterBar />
           <JobContainer>
-						{(userContext.loggedInUser) ? <CollapseBar list={this.state.data}/> : null }
-            {this.state.data.map((job: CardElementType, index: number) => (
+            {userContext.loggedInUser ? (
+              <CollapseBar />
+            ) : null}
+            {this.state.data.map((job: JobElementType, index: number) => (
               <JobContent key={index}>
                 <Position color={white}>
                   <b>{job.position}</b>
                 </Position>
-                {job.level.length > 0 ? <Level color={lightgray}> - {job.level} </Level> : null}
+                {job.level.length > 0 ? (
+                  <Level color={lightgray}> - {job.level} </Level>
+                ) : null}
                 <Location color={cyan}> {job.location} </Location>
                 <Company color={lightgray}> {job.company} </Company>
                 <Skills color={cyan}>

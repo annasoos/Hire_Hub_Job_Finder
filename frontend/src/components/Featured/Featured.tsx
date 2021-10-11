@@ -4,40 +4,35 @@ import { Card } from "../Card/Card";
 import { Search } from "../Search/Search";
 import { FeaturedSection, Title, Text, CardContainer, BlueLine } from "./Featured.style";
 //types & functions
-import { FeaturedClassStateType } from '../../types/FeaturedClassStateType';
-import { getData } from "../../functions/Fetch"
-import { CardElementType } from "../../types/CardPropsType";
+import { JobElementType } from "../../types/JobElementType";
+import { JobContext } from "../../context/JobContext";
 
+export class Featured extends Component<{}, {}> {
+	static contextType = JobContext;
 
-export class Featured extends Component<{}, FeaturedClassStateType> {
-	constructor(props: {}) {
-		super(props)
-		this.state={
-			jobs: []
-		}
-	}
-
-	componentDidMount() {
-		getData("http://localhost:8080/api/find-a-job").then(res => {
-			const filtered = res.data.reverse().slice(0, 3);
-			this.setState({jobs: filtered});
-		});
-	};
-	
   render() {
+
+		const jobContext = this.context;
+
     return (
-		<FeaturedSection>
-			<Search />
+      <FeaturedSection>
+        <Search />
 
-			<Title>Featured Positions</Title>
-			<Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aliquid provident quasi possimus autem!</Text>
+        <Title>Featured Positions</Title>
+        <Text>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+          aliquid provident quasi possimus autem!
+        </Text>
 
-			<CardContainer>
-				{this.state.jobs.map((card: CardElementType, index: number) => (<Card key={index} cardElement={card} position={index} /> ))}
-				<BlueLine />
-			</CardContainer>
-
-		</FeaturedSection>
-		)
+        <CardContainer>
+          {jobContext.jobList
+						.slice(0, 3)
+						.map((card: JobElementType, index: number) => (
+            <Card key={index} cardElement={card} position={index} />
+          ))}
+          <BlueLine />
+        </CardContainer>
+      </FeaturedSection>
+    );
   }
 }

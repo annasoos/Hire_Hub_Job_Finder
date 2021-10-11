@@ -1,15 +1,6 @@
-
-export type CardElementType = {
-	position: string;
-	company: string;
-	level: string;
-	location: string;
-	skills: string[];
-	description: string;
-	creator: string
-}
+import { JobElementType } from "./JobElementType";
 
 export type CardPropsType = {
-  cardElement: CardElementType,
+  cardElement: JobElementType,
 	position: number
 };

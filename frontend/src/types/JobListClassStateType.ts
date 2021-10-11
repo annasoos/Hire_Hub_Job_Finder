@@ -1,6 +1,6 @@
-import { CardElementType } from "../types/CardPropsType"
+import { JobElementType } from "./JobElementType";
 
 export type JobListClassStateType = {
-	data: CardElementType[],
-	isLoaded: boolean
-}
+  data: JobElementType[];
+  isLoaded: boolean;
+};

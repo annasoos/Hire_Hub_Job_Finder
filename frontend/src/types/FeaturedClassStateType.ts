@@ -1,5 +1,5 @@
-import { CardElementType } from "../types/CardPropsType"
+import { JobElementType } from "../types/JobElementType"
 
 export type FeaturedClassStateType = {
-	jobs: CardElementType[]
+	jobs: JobElementType[]
 }
