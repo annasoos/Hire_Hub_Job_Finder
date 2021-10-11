@@ -8,6 +8,7 @@ const JobSchema = new mongoose.Schema(
   location: { type: String, default: null },
   skills: { type: Array, default: null },
   description: { type: String, default: null },
+	creator: { type: String, deafult: null }
 	},
 	{
 		collection: "jobs"

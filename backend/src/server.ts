@@ -40,14 +40,15 @@ server.get('*', (req, res) => {
 // POST NEW JOB
 
 server.post("/api/post-a-job", (req, res) => {
-	const { position, company, level, location, skills, description } = req.body;
+	const { position, company, level, location, skills, description, creator } = req.body;
   const newJob = new Job({
     position,
     company,
 		level,
 		location,
 		skills,
-		description
+		description,
+		creator
   });
 
   newJob.save();

@@ -5,4 +5,5 @@ export type NewJobType = {
   location: string;
   skills: string[];
   description: string;
+	creator: string
 };

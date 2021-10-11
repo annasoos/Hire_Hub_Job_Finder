@@ -33,6 +33,7 @@ const PostForm:FC<PostFormPropsType> = ({isLoggedIn, user}) => {
       location: values.location,
       skills: skillsArray,
       description: values.description,
+			creator: user!.email,
     };
 
     await axios

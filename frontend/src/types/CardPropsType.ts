@@ -6,6 +6,7 @@ export type CardElementType = {
 	location: string;
 	skills: string[];
 	description: string;
+	creator: string
 }
 
 export type CardPropsType = {

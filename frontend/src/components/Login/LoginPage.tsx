@@ -1,17 +1,19 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { useHistory } from 'react-router';
 import axios from "axios";
 //design & components
 import { Form, Input, Button } from "antd";
 import { LoginTitle, LoginContainer } from "./LoginPage.style";
+import loginIllustration from "../../images/Fingerprint-pana.svg";
 //types & functions & context
 import { openNotificationWithIcon } from "../../functions/Notification";
 import { LoginSuccessType } from "../../types/LoginSuccessType";
-import { TokenSetterPropsType } from "../../types/TokenSetterPropsType";
+import { UserContext } from "../../context/UserContext";
 
-export const LoginPage:FC<TokenSetterPropsType> = ({tokenSetter}) => {
+export const LoginPage:FC = () => {
   const [form] = Form.useForm();
 	const history = useHistory();
+	const userContext = useContext(UserContext);
 
   const login = async (values:LoginSuccessType) => {
 		const email = values.email;
@@ -30,7 +32,7 @@ export const LoginPage:FC<TokenSetterPropsType> = ({tokenSetter}) => {
             "Good to see you again!"
           );
 					localStorage.setItem("token", res.data.token);
-					tokenSetter(res.data.token);
+					userContext.setToken(res.data.token);
 					history.push("/")
         } else {
 					console.log(res)
@@ -57,6 +59,7 @@ export const LoginPage:FC<TokenSetterPropsType> = ({tokenSetter}) => {
 
   return (
     <LoginContainer>
+			<img id="fingerprint" src={loginIllustration} alt="illustration" />
       <LoginTitle>
         If you are not yet a user of the site, you can register by <a href="/signup">clicking here</a>!
       </LoginTitle>

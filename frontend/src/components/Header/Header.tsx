@@ -5,15 +5,14 @@ import { NavBar, Hamburger, HamburgerMenu, LogoutBtn, UserDisplay } from "./Head
 import HeaderLogo from "../../images/logo_white.png";
 //types & functions & context
 import { HeaderClassStateType } from "../../types/HeaderClassStateType";
-import { TokenSetterPropsType } from "../../types/TokenSetterPropsType";
 import { openNotificationWithIcon } from "../../functions/Notification";
 import { UserContext } from "../../context/UserContext";
 
-class Header extends Component<TokenSetterPropsType & RouteComponentProps<{}>, HeaderClassStateType> { 
+class Header extends Component<RouteComponentProps<{}>, HeaderClassStateType> { 
 
 	static contextType = UserContext;
 
-	constructor (props:TokenSetterPropsType & RouteComponentProps<{}>) {
+	constructor (props: RouteComponentProps<{}>) {
 		super(props)
 
 		this.state = {
@@ -30,7 +29,7 @@ class Header extends Component<TokenSetterPropsType & RouteComponentProps<{}>, H
 	logout = () => {
 		console.log("User logged out");
     localStorage.removeItem("token");
-		this.props.tokenSetter(null)
+		this.context.setToken(null);
 		openNotificationWithIcon(
 			"success",
 			"Logout successful!",
@@ -80,7 +79,7 @@ class Header extends Component<TokenSetterPropsType & RouteComponentProps<{}>, H
 				<NavLink className="dropdown" to="/signup" id="mobileSignup"> Sign Up </NavLink>
 			</HamburgerMenu>
 			
-			{	userContext.loggedInUser ? 
+			{userContext.loggedInUser ? 
 			<UserDisplay> Logged in as <span>{userContext.loggedInUser.lastName} {userContext.loggedInUser.firstName}</span> </UserDisplay> 
 			: null }
 		</NavBar>

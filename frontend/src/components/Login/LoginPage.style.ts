@@ -2,11 +2,23 @@ import styled from "@emotion/styled";
 import { cyan, gray } from '../../style_guide';
 
 export const LoginContainer = styled.div({
+	position: "relative",
   width: "100%",
 	minHeight: "50vh",
   margin: "2rem 0 5rem 0",
 
 	transition: "all 1s ease-in-out",
+	
+	"@media screen and (max-width: 400px)":{
+		minHeight: "100vh"
+	},
+
+	"& img":{
+		position: "absolute",
+		bottom: "-5.9rem",
+		left: "5%",
+		height: 320,
+	},
 
   "& .loginForm": {
 		"& .input": {

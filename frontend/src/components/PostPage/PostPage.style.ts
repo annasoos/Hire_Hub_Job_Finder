@@ -9,12 +9,16 @@ export const PostFormContainer = styled.section({
   padding: "3%",
 
   "& h2": {
+		position: "relative",
+		left: "50%",
+		transform: "translateX(-50%)",
+    width: "80%",
+    padding: "1rem 0 3rem 0",
+
     color: `${white}`,
     fontSize: 25,
     fontWeight: 600,
-    width: "80%",
     textAlign: "center",
-    padding: "1rem 0 3rem 0",
 
 		"@media screen and (max-width: 700px)":{
 			fontSize: 20,
