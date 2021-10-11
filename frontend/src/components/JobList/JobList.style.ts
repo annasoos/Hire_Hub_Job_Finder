@@ -82,6 +82,10 @@ export const JobContent = styled.div({
 		margin: "1rem 0",
 		cursor: "default",
 		backgroundColor: `${footerBG}`,
+
+		"@media screen and (max-width: 500px)":{
+			paddingBottom: "3rem",
+		},
 	},
 
 	"& .myPostPosLev":{
@@ -150,7 +154,7 @@ export const DeleteIcon = styled.img({
 	"@media screen and (max-width: 500px)":{
 		right: "30%",
 		top: "auto",
-		bottom: "5%"
+		bottom: "9%"
 	}
 });
 
@@ -162,8 +166,9 @@ export const EditIcon = styled.img({
 	transition: "all 1s ease-in-out",
 
 	"@media screen and (max-width: 500px)":{
-		right: "65%",
+		right: 0,
+		left: "30%",
 		top: "auto",
-		bottom: "5%"
+		bottom: "9%"
 	}
 })
