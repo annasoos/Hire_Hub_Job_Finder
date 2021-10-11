@@ -21,18 +21,6 @@ export const NavBar = styled.nav({
 		padding: "3.5rem 10%",
 	},
 	
-	"& img": {
-		height: "3.5rem",
-		paddingRight: "5rem",
-		marginBottom: "1rem",
-	
-		"@media screen and (max-width: 600px)": {
-			height: "3rem",
-			padding: 0,
-			margin: 0,
-		},
-	},
-	
 	"& ul": {
 		width: "30%",
 		display: "flex",
@@ -79,6 +67,18 @@ export const NavBar = styled.nav({
 		},
 	},
 });
+
+export const HeaderLogo = styled.img({
+	height: "3.5rem",
+	paddingRight: "5rem",
+	marginBottom: "1rem",
+
+	"@media screen and (max-width: 600px)": {
+		height: "3rem",
+		padding: 0,
+		margin: 0,
+	},
+})
 
 export const Hamburger = styled.div({
 	display: "none",

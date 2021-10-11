@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { NavLink, withRouter, RouteComponentProps } from "react-router-dom";
 //design
-import { NavBar, Hamburger, HamburgerMenu, LogoutBtn, UserDisplay } from "./Header.style";
-import HeaderLogo from "../../images/logo_white.png";
+import { NavBar, HeaderLogo, Hamburger, HamburgerMenu, LogoutBtn, UserDisplay } from "./Header.style";
+import headerLogo from "../../images/logo_white.png";
 //types & functions & context
 import { HeaderClassStateType } from "../../types/HeaderClassStateType";
 import { openNotificationWithIcon } from "../../functions/Notification";
@@ -45,7 +45,7 @@ class Header extends Component<RouteComponentProps<{}>, HeaderClassStateType> {
 		return (
 		<NavBar>
 			<a href="/">
-				<img src={HeaderLogo} alt="hire_hub_logo" />
+				<HeaderLogo src={headerLogo} alt="hire_hub_logo" />
 			</a>
 			<ul>
 				<li>
