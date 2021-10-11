@@ -1,5 +1,7 @@
 import { Component } from "react";
-import { Collapse, Tooltip } from "antd";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { Collapse, Tooltip, Button } from "antd";
+import { PlusCircleOutlined } from "@ant-design/icons";
 //design & components
 import { FilterBar } from "../FilterBar/FilterBar";
 import { CardElementType } from "../../types/CardPropsType";
@@ -12,10 +14,10 @@ import { getData } from "../../functions/Fetch";
 import { JobListClassStateType } from "../../types/JobListClassStateType";
 import { UserContext } from "../../context/UserContext";
 
-export class JobList extends Component<{}, JobListClassStateType> {
+class JobList extends Component<RouteComponentProps<{}>, JobListClassStateType> {
   static contextType = UserContext;
 
-  constructor(props: {}) {
+  constructor(props: RouteComponentProps<{}>) {
     super(props);
     this.state = {
       data: [],
@@ -59,6 +61,7 @@ export class JobList extends Component<{}, JobListClassStateType> {
 										</Tooltip>	
                   </JobContent>
                 ))}
+							<Button id="addBtn" onClick={() => this.props.history.push('/post-a-job')}><PlusCircleOutlined />Post a new job</Button>
             </Panel>
           </Collapse>
         );
@@ -102,3 +105,5 @@ export class JobList extends Component<{}, JobListClassStateType> {
     }
   }
 }
+
+export default withRouter(JobList);

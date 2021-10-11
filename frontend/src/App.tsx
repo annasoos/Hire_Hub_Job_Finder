@@ -6,7 +6,7 @@ import { Hero } from "./components/Hero/Hero";
 import { Featured } from "./components/Featured/Featured";
 import { Newsletter } from "./components/Newsletter/Newsletter";
 import PostForm from "./components/PostPage/PostPage";
-import { JobList } from "./components/JobList/JobList";
+import JobList from "./components/JobList/JobList";
 import { LoginPage } from "./components/Login/LoginPage";
 import { RegistrationPage } from "./components/Registration/RegistrationPage";
 import { Footer } from "./components/Footer/Footer";

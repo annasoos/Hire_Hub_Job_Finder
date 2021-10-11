@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { darkBlue, footerBG, cyanHover } from "../../style_guide";
+import { darkBlue, footerBG, cyanHover, cyan } from "../../style_guide";
 
 export const LoadingText = styled.div({
   height: "50%",
@@ -56,6 +56,15 @@ export const JobContainer = styled.div({
 			border: "none",
 			borderRadius: 10,
 			backgroundColor: "transparent",
+
+			"& #addBtn": {
+				margin: "0.5rem 0",
+
+				"&:hover": {
+					backgroundColor: `${cyan}`,
+					color: "white",
+				},
+			},
 		}
   },
 });
@@ -98,7 +107,7 @@ export const JobContent = styled.div({
 	}
 });
 
-export const Position = styled.span(  {
+export const Position = styled.span({
     fontSize: 20,
   },
   (props) => ({ color: props.color })
@@ -118,7 +127,11 @@ export const Location = styled.h5(
   (props) => ({ color: props.color })
 );
 
-export const Company = styled.h5((props) => ({ color: props.color }));
+export const Company = styled.h5({
+	margin: 0,
+},
+(props) => ({ color: props.color })
+);
 
 export const Skills = styled.div(
   {
