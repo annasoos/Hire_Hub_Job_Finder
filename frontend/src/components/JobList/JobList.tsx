@@ -1,14 +1,11 @@
 import { Component } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { Collapse, Tooltip, Button } from "antd";
-import { PlusCircleOutlined } from "@ant-design/icons";
 //design & components
 import { FilterBar } from "../FilterBar/FilterBar";
+import { CollapseBar } from "../Collapse/Collapse";
 import { CardElementType } from "../../types/CardPropsType";
 import { cyan, lightgray, white } from "../../style_guide";
-import { LoadingText, JobListSection, JobContainer, JobContent, Position, Level, Location, Company, Skills, Description, DeleteIcon, EditIcon } from "../JobList/JobList.style";
-import Delete from "../../images/delete_icon.svg";
-import Edit from "../../images/edit_icon.svg";
+import { LoadingText, JobListSection, JobContainer, JobContent, Position, Level, Location, Company, Skills, Description } from "../JobList/JobList.style";
 //types & functions & context
 import { getData } from "../../functions/Fetch";
 import { JobListClassStateType } from "../../types/JobListClassStateType";
@@ -34,39 +31,8 @@ class JobList extends Component<RouteComponentProps<{}>, JobListClassStateType> 
   }
 
   render() {
-    const { Panel } = Collapse;
-    const userContext = this.context;
 
-    const collapseRender = () => {
-      if (userContext.loggedInUser) {
-        return (
-          <Collapse className="collapse" ghost bordered={false}>
-            <Panel header="Your Postings" key="1">
-              {this.state.data
-                .filter((job: CardElementType) => job.creator === userContext.loggedInUser.email)
-                .map((job: CardElementType, index: number) => (
-                  <JobContent className="inCollapse" key={index}>
-                    <Position className="myPostPosLev" color={white}>
-                      <b>{job.position}</b>
-                    </Position> <br />
-                    {job.level.length > 0 ? (
-                      <Level className="myPostPosLev" color={lightgray}> {job.level} </Level>
-                    ) : null}
-                    <Company color={lightgray}> {job.company} </Company>
-										<Tooltip title="Edit">
-											<EditIcon src={Edit} alt="edit_logo"/>
-										</Tooltip>	
-										<Tooltip title="Delete">
-											<DeleteIcon src={Delete} alt="delete_logo"/>
-										</Tooltip>	
-                  </JobContent>
-                ))}
-							<Button id="addBtn" onClick={() => this.props.history.push('/post-a-job')}><PlusCircleOutlined />Post a new job</Button>
-            </Panel>
-          </Collapse>
-        );
-      }
-    };
+		const userContext = this.context;
 
     if (!this.state.isLoaded) {
       return (
@@ -79,16 +45,13 @@ class JobList extends Component<RouteComponentProps<{}>, JobListClassStateType> 
         <JobListSection>
           <FilterBar />
           <JobContainer>
-            {collapseRender()}
-
+						{(userContext.loggedInUser) ? <CollapseBar list={this.state.data}/> : null }
             {this.state.data.map((job: CardElementType, index: number) => (
               <JobContent key={index}>
                 <Position color={white}>
                   <b>{job.position}</b>
                 </Position>
-                {job.level.length > 0 ? (
-                  <Level color={lightgray}> - {job.level} </Level>
-                ) : null}
+                {job.level.length > 0 ? <Level color={lightgray}> - {job.level} </Level> : null}
                 <Location color={cyan}> {job.location} </Location>
                 <Company color={lightgray}> {job.company} </Company>
                 <Skills color={cyan}>
