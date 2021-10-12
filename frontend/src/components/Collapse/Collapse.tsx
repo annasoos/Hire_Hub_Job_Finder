@@ -50,7 +50,7 @@ export const CollapseBar = () => {
 
   return (
 		<CollapseSection>
-    	<Collapse className="collapse" ghost bordered={false}>
+    	<Collapse className="collapse" ghost bordered={false} defaultActiveKey={['1']}>
     	  <Panel header="Your Postings" key="1">
     	    {jobContext.jobList!
     	      .filter((job: JobElementType) => job.creator === userContext.loggedInUser!.email)

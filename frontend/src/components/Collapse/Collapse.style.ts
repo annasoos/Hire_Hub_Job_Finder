@@ -1,12 +1,9 @@
 import styled from '@emotion/styled';
-import { cyan, cyanHover, footerBG, gray } from '../../style_guide';
+import { cyan, cyanHover, footerBG } from '../../style_guide';
 
 export const CollapseSection = styled.div({
 	position: "relative",
   height: "auto",
-  minHeight: "50vh",
-  padding: "1rem 0 5rem 0",
-
 	transition: "all 1s ease-in-out",
 
 	"& .collapse": {

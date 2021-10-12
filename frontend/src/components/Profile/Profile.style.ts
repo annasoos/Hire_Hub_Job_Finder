@@ -1,52 +1,115 @@
 import styled from "@emotion/styled";
-import { gray } from "../../style_guide";
+import { cyanHover, footerBG, gray } from "../../style_guide";
 
 export const ProfileSection = styled.section({
 	position: "relative",
 	width: "100%",
 	height: "auto",
 	minHeight: "60vh",
+	paddingBottom: "5rem",
+	transition: "all 1s ease-in-out",
 
-	"& img#circular":{
-		position: "absolute",
-		left: "50%",
-		transform: "translateX(-50%)",
-		top: "-12%",
-		height: 600,
-	},
+	"& #errorIcon":{
+		width: "100%",
+		padding: "2rem 0",
+		color: "white",
+		fontSize: 70,
+		textAlign: "center",
+
+		"@media screen and (max-width:600px)": {
+			fontSize: 30
+		},
+	}
 });
 
-export const PhotoSection = styled.div({
+export const ProfileName = styled.h1({
 	position: "relative",
-	left: "50%",
-	top: "20%",
-	transform: "translateX(-50%)",
-	height: 400,
-	width: 400,
-	display: "flex",
-	flexDirection: "column",
-	justifyContent: "center",
-	alignItems: "center",
+	width: "50%",
+	margin: '5rem 6% 0 auto',
+	color: "white",
+	textAlign: "center",
+	fontSize: "2.5rem",
+	fontWeight: 700,
+	letterSpacing: "0.05em",
 
-  backgroundColor: "hsl(216, 53%, 9%, 0.9)",
-  padding: "2rem 2rem",
-  margin: "2rem 0",
-  borderRadius: "50%",
-
-	zIndex: 1,
-
-	"& p":{
-		color: "white",
-		textAlign: "center",
-		fontSize: "1.5rem",
-		fontWeight: 700
-	}
+	"@media screen and (max-width:1090px)": {
+		width: "70%",
+		left: "50%",
+		transform: "translateX(-50%)",
+		margin: "2rem 0",
+		fontSize: "2rem",
+	},
 });
 
 export const ProfilePhoto = styled.img({
 	position: "relative",
-	height: 250,
-	borderRadius: "50%",
+	left: "10%",
+	top: "-7rem",
+	height: 500,
+
+	"@media screen and (max-width:1090px)": {
+		height: 250,
+		left: "50%",
+		top: "1rem",
+		transform: "translateX(-50%)",
+	},
+});
+
+export const UserInfoSection = styled.div({
+	display: "grid",
+	gridTemplateColumns: "repeat(2, 1fr)",
+	gridTemplateRows: "repeat(3, 1fr)",
+	gridRowGap: 10,
+
+	width: "40%",
+	position: "absolute",
+	right: "10%",
+	top: "10%",
+	marginTop: "2rem",
+	padding: "1rem",
+
+	backgroundColor: `${cyanHover}`,
+	boxShadow: `${footerBG} 0px 8px 14px`,
+	border: "none",
+	borderRadius: 10,
+	color: "white",
+	fontSize: "1rem",
+	fontWeight: 600,
+
+	transition: "all 1s ease-in-out",
+
+	"& div>.profileIcon":{
+		paddingRight: "0.7rem",
+	},
+
+	"& div:nth-child(even)": {
+		fontWeight: 300,
+		textAlign: "right",
+
+		"@media screen and (max-width:1090px)":{
+			textAlign: "center",
+		},
+	},
+
+	"@media screen and (max-width:1090px)":{
+		position: "relative",
+		width: "70%",
+    left: "50%",
+    transform: "translateX(-50%)",
+		marginTop: "4rem",
+		gridTemplateColumns: "repeat(1, 1fr)",
+		gridTemplateRows: "repeat(6, 1fr)",
+		textAlign: "center",
+	},
+
+	"@media screen and (max-width:500px)":{
+		fontSize: 16,
+
+		"& #profileEmail": {
+			fontSize: 14,
+		},
+	},
+
 });
 
 export const ErrorTitle = styled.h1({
@@ -55,6 +118,7 @@ export const ErrorTitle = styled.h1({
 	fontSize: "2rem",
 	fontWeight: 700,
 	textAlign: "center",
+	transition: "all 1s ease-in-out",
 
 	"@media screen and (max-width:600px)": {
 		fontSize: "1.5rem"
@@ -62,10 +126,11 @@ export const ErrorTitle = styled.h1({
 });
 
 export const ErrorSubTitle = styled.p({
-	padding: "2rem 0 5rem 0",
+	paddingBottom: "5rem",
 	fontSize: "1.5rem",
 	color: `${gray}`,
 	textAlign: "center",
+	transition: "all 1s ease-in-out",
 
 	"@media screen and (max-width:600px)": {
 		fontSize: "1rem"
