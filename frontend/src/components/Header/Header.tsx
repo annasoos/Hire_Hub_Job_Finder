@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { NavLink, withRouter, RouteComponentProps } from "react-router-dom";
 //design
+import { Tooltip } from "antd";
 import { NavBar, HeaderLogo, Hamburger, HamburgerMenu, LogoutBtn, UserDisplay } from "./Header.style";
 import headerLogo from "../../images/logo_white.png";
 //types & functions & context
@@ -87,7 +88,7 @@ class Header extends Component<RouteComponentProps<{}>, HeaderClassStateType> {
 			</HamburgerMenu>
 			
 			{userContext.loggedInUser ? 
-			<UserDisplay> Logged in as <a href="/profile">{userContext.loggedInUser.lastName} {userContext.loggedInUser.firstName}</a> </UserDisplay> 
+			<UserDisplay> Logged in as <Tooltip title="Profile" placement="right"><a href="/profile">{userContext.loggedInUser.firstName} {userContext.loggedInUser.lastName}</a></Tooltip> </UserDisplay> 
 			: null }
 		</NavBar>
 		)
