@@ -9,6 +9,7 @@ import PostForm from "./components/PostPage/PostPage";
 import { JobList } from "./components/JobList/JobList";
 import { LoginPage } from "./components/Login/LoginPage";
 import { RegistrationPage } from "./components/Registration/RegistrationPage";
+import { Profile } from "./components/Profile/Profile";
 import { Footer } from "./components/Footer/Footer";
 
 const App = () => {
@@ -36,6 +37,9 @@ const App = () => {
       </Route>
       <Route exact path="/signup">
         <RegistrationPage />
+      </Route>
+			<Route exact path="/profile">
+        <Profile />
       </Route>
       <Footer />
     </Router>

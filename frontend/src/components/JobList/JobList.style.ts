@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { darkBlue, footerBG, cyanHover, cyan } from "../../style_guide";
+import { darkBlue, footerBG } from "../../style_guide";
 
 export const LoadingText = styled.div({
   height: "50%",
@@ -33,40 +33,6 @@ export const JobContainer = styled.div({
   padding: "1rem 0 5rem 0",
 
 	transition: "all 1s ease-in-out",
-
-  "& .collapse": {
-    width: "70%",
-    position: "relative",
-    left: "50%",
-    transform: "translateX(-50%)",
-		margin: "1rem 0",
-
-    backgroundColor: `${cyanHover}`,
-    boxShadow: `${footerBG} 0px 8px 14px`,
-		border: "none",
-    borderRadius: 10,
-
-		"& .ant-collapse-header":{
-			color: "white",
-			fontWeight: 700,
-		},
-
-		"& .ant-collapse-content":{
-			padding: 0,
-			border: "none",
-			borderRadius: 10,
-			backgroundColor: "transparent",
-
-			"& #addBtn": {
-				margin: "0.5rem 0",
-
-				"&:hover": {
-					backgroundColor: `${cyan}`,
-					color: "white",
-				},
-			},
-		}
-  },
 });
 
 export const JobContent = styled.div({

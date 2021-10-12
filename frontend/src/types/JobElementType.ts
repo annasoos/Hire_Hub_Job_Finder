@@ -5,5 +5,5 @@ export type JobElementType = {
 	location: string;
 	skills: string[];
 	description: string;
-	creator: string
+	creator: string;
 }

@@ -3,8 +3,9 @@
 
 export const lightgray = "hsl(0, 0%, 75%)";
 export const gray = "hsl(257, 7%, 63%)";
-export const cyan = "hsl(180, 66%, 49%)";
+export const cyan = "hsl(180, 66%, 49%)"; // hex: #2acfcf
 export const cyanHover = "hsla(180, 66%, 49%, 0.5)";
+export const red = "hsl(0, 87%, 67%)";
 export const white = "white";
 
 export const featuredBG = "hsl(217, 28%, 15%)";  //Featured background

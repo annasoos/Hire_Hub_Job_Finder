@@ -87,7 +87,7 @@ class Header extends Component<RouteComponentProps<{}>, HeaderClassStateType> {
 			</HamburgerMenu>
 			
 			{userContext.loggedInUser ? 
-			<UserDisplay> Logged in as <span>{userContext.loggedInUser.lastName} {userContext.loggedInUser.firstName}</span> </UserDisplay> 
+			<UserDisplay> Logged in as <a href="/profile">{userContext.loggedInUser.lastName} {userContext.loggedInUser.firstName}</a> </UserDisplay> 
 			: null }
 		</NavBar>
 		)

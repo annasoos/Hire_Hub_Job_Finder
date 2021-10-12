@@ -189,8 +189,12 @@ export const UserDisplay = styled.p({
 	fontSize: 14,
 	transition: "all 1s ease-in-out",
 
-	"& span":{
-		color: `${cyan}`
+	"& a":{
+		color: `${cyan}`,
+
+		"&:hover": {
+			fontStyle: "italic",
+		}
 	},
 
 	"@media screen and (max-width: 1090px)": {
