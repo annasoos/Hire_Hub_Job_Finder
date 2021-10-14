@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { cyanHover, footerBG, featuredBG, darkBlue } from '../../style_guide';
+import { cyanHover, footerBG, featuredBG, darkBlue } from "../../style_guide";
 
 export const FilterContainer = styled.section({
   width: "70%",
@@ -11,7 +11,7 @@ export const FilterContainer = styled.section({
 
   backgroundColor: `${cyanHover}`,
   boxShadow: `${footerBG} 0px 8px 14px`,
-  borderRadius: 10,
+  borderRadius: "15px 0",
 
   zIndex: 1,
 
@@ -34,7 +34,7 @@ export const FilterContent = styled.div({
   alignItems: "center",
   transition: "all 1s ease-in-out",
 
- "@media only screen and (max-width: 1090px)": {
+  "@media only screen and (max-width: 1090px)": {
     flexDirection: "column",
     padding: "1rem",
   },
@@ -43,13 +43,13 @@ export const FilterContent = styled.div({
     fontSize: "1rem",
     width: "10rem",
     margin: "0 1rem 0 1rem",
-    borderRadius: 10,
+    borderRadius: "15px 0",
     border: "none",
-		color: `${featuredBG}`,
+    color: `${featuredBG}`,
 
     "&:hover": {
       backgroundColor: `${darkBlue}`,
-			color: "white",
+      color: "white",
     },
 
     "@media only screen and (max-width: 1090px)": {
@@ -61,7 +61,7 @@ export const FilterContent = styled.div({
     width: "100%",
 
     "& .input": {
-      borderRadius: 10,
+      borderRadius: "15px 0",
       width: "95%",
       transition: "all 1s ease-in-out",
 
@@ -78,12 +78,12 @@ export const FilterContent = styled.div({
       },
     },
 
-		"& .ant-switch": {
-			marginLeft: "0.5rem",
-		},
+    "& .ant-switch": {
+      marginLeft: "0.5rem",
+    },
 
-		"&.ant-switch-handle::before": {
-			width: 18,
-		},
+    "&.ant-switch-handle::before": {
+      width: 18,
+    },
   },
 });

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { cyan, cyanHover, darkBlue, lightgray } from '../../style_guide';
+import { cyan, cyanHover, darkBlue, lightgray } from "../../style_guide";
 
 export const NewsletterContainer = styled.section({
   width: "100%",
@@ -17,7 +17,7 @@ export const NewsletterContainer = styled.section({
   transition: "all 1s ease-in-out",
 
   "& .input": {
-    borderRadius: 10,
+    borderRadius: "15px 0",
     width: "50%",
     transition: "all 1s ease-in-out",
 
@@ -64,7 +64,7 @@ export const Button = styled.button({
 
   color: "white",
   backgroundColor: `${cyan}`,
-  borderRadius: 20,
+  borderRadius: 50,
   width: "10rem",
   marginTop: "1rem",
 

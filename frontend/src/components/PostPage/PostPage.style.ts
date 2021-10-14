@@ -9,9 +9,9 @@ export const PostFormContainer = styled.section({
   padding: "3%",
 
   "& h2": {
-		position: "relative",
-		left: "50%",
-		transform: "translateX(-50%)",
+    position: "relative",
+    left: "50%",
+    transform: "translateX(-50%)",
     width: "80%",
     padding: "1rem 0 3rem 0",
 
@@ -20,35 +20,35 @@ export const PostFormContainer = styled.section({
     fontWeight: 600,
     textAlign: "center",
 
-		"@media screen and (max-width: 700px)":{
-			fontSize: 20,
-		},
+    "@media screen and (max-width: 700px)": {
+      fontSize: 20,
+    },
 
-		"& h3": {
-			color: `${gray}`,
-			fontWeight: 500,
-			fontSize: 20,
-			paddingTop: "1rem",
+    "& h3": {
+      color: `${gray}`,
+      fontWeight: 500,
+      fontSize: 20,
+      paddingTop: "1rem",
 
-			"@media screen and (max-width: 700px)":{
-				fontSize: 16
-			},
+      "@media screen and (max-width: 700px)": {
+        fontSize: 16,
+      },
 
-			"& a": {
-				color: `${cyan}`,
-	
-				"&:hover": {
-					fontStyle: "italic",
-				},
-			},
-		},
+      "& a": {
+        color: `${cyan}`,
+
+        "&:hover": {
+          fontStyle: "italic",
+        },
+      },
+    },
   },
 });
 
 export const PostTitle = styled.h1({
-	position: "relative",
-	left: "50%",
-	transform: "translateX(-50%)",
+  position: "relative",
+  left: "50%",
+  transform: "translateX(-50%)",
   width: "70%",
 
   color: "white",
@@ -58,9 +58,9 @@ export const PostTitle = styled.h1({
   transition: "all 1s ease-in-out",
 
   "@media(max-width: 1090px)": {
-		marginTop: "2rem",
+    marginTop: "2rem",
     textAlign: "center",
-		fontSize: 25,
+    fontSize: 25,
   },
 
   "@media(max-width: 450px)": {
@@ -72,10 +72,10 @@ export const PostFormContent = styled.div({
   width: "100%",
   height: "80%",
 
-	"& .postForm": {
-		"& .input": {
-			borderRadius: 10,
-		},
+  "& .postForm": {
+    "& .input": {
+      borderRadius: "15px 0",
+    },
 
     "& .ant-row": {
       position: "relative",
@@ -84,34 +84,34 @@ export const PostFormContent = styled.div({
       width: "50%",
       transform: "translateX(-50%)",
 
-			"@media screen and (max-width: 1090px)":{
-				width: "70%",
-			}
-		},
-
-		"& .ant-btn": {
-			position: "relative",
-			left: "50%",
-			transform: "translateX(-50%)",
-			marginTop: 24,
-		},
-
-		"& .ant-input-affix-wrapper-textarea-with-clear-btn, .ant-select:not(.ant-select-customize-input) .ant-select-selector":
-    {
-      borderRadius: 10,
+      "@media screen and (max-width: 1090px)": {
+        width: "70%",
+      },
     },
 
-		"& .ant-form-item-label": {
-			"& label": {
-				"@media screen and (max-width: 420px)":{
-					margin: "0.3rem 0"
-			},
-				"& span.ant-form-item-optional": {
-					color: `${lightgray}`,
-					fontSize: 14,
-				},
-			},
-		},
+    "& .ant-btn": {
+      position: "relative",
+      left: "50%",
+      transform: "translateX(-50%)",
+      marginTop: 24,
+    },
+
+    "& .ant-input-affix-wrapper-textarea-with-clear-btn, .ant-select:not(.ant-select-customize-input) .ant-select-selector":
+      {
+        borderRadius: "15px 0",
+      },
+
+    "& .ant-form-item-label": {
+      "& label": {
+        "@media screen and (max-width: 420px)": {
+          margin: "0.3rem 0",
+        },
+        "& span.ant-form-item-optional": {
+          color: `${lightgray}`,
+          fontSize: 14,
+        },
+      },
+    },
   },
 });
 
@@ -135,16 +135,16 @@ export const SearchImg = styled.img({
 });
 
 export const WelcomeTitle = styled.h2({
-	color: "white",
+  color: "white",
   fontSize: 25,
   fontWeight: 700,
-	position: "relative",
+  position: "relative",
   left: "50%",
   transform: "translateX(-50%)",
   width: "30%",
   transition: "all 1s ease-in-out",
 
-	"& span": {
-		color: `${cyan}`
-	}
-}) 
+  "& span": {
+    color: `${cyan}`,
+  },
+});

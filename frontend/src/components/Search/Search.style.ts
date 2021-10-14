@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { cyanHover, darkBlue, lightgray, footerBG } from '../../style_guide';
+import { cyanHover, darkBlue, lightgray, footerBG } from "../../style_guide";
 
 export const SearchContainer = styled.section({
   width: "80%",
@@ -12,7 +12,7 @@ export const SearchContainer = styled.section({
 
   backgroundColor: `${darkBlue}`,
   boxShadow: `${footerBG} 0px 8px 14px`,
-  borderRadius: 10,
+  borderRadius: "15px 0",
 
   zIndex: 1,
 
@@ -24,7 +24,7 @@ export const SearchContainer = styled.section({
   "@media only screen and (max-width: 400px)": {
     height: "20rem",
   },
-})
+});
 
 export const SearchContent = styled.div({
   height: "100%",
@@ -44,7 +44,6 @@ export const SearchContent = styled.div({
     fontSize: "1rem",
     width: "10rem",
     margin: "1.4rem 1rem 0 1rem",
-    borderRadius: 10,
     border: "none",
 
     "&:hover": {
@@ -60,9 +59,9 @@ export const SearchContent = styled.div({
     width: "100%",
 
     "& .input": {
-      borderRadius: 10,
       width: "95%",
       transition: "all 1s ease-in-out",
+      borderRadius: "15px 0",
 
       "@media only screen and (max-width: 1090px)": {
         textAlign: "center",
@@ -77,7 +76,7 @@ export const SearchContent = styled.div({
       },
     },
   },
-})
+});
 
 export const Label = styled.label({
   color: `${lightgray}`,
@@ -89,4 +88,4 @@ export const Label = styled.label({
     margin: 0,
     fontSize: "0.8rem",
   },
-})
+});

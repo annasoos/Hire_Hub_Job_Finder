@@ -32,7 +32,7 @@ export const JobContainer = styled.div({
   minHeight: "50vh",
   padding: "1rem 0 5rem 0",
 
-	transition: "all 1s ease-in-out",
+  transition: "all 1s ease-in-out",
 });
 
 export const JobContent = styled.div({
@@ -43,37 +43,38 @@ export const JobContent = styled.div({
   padding: "2rem 2rem",
   margin: "2rem 0",
   boxShadow: `${footerBG} 0px 8px 14px`,
-  borderRadius: 10,
+  borderRadius: "15px 0",
 
   position: "relative",
   left: "50%",
   transform: "translateX(-50%)",
 
   cursor: "pointer",
-	transition: "all 1s ease-in-out",
+  transition: "all 1s ease-in-out",
 
-	"&.inCollapse": {
-		width: "100%",
-		margin: "1rem 0",
-		cursor: "default",
-		backgroundColor: `${footerBG}`,
+  "&.inCollapse": {
+    width: "100%",
+    margin: "1rem 0",
+    cursor: "default",
+    backgroundColor: `${footerBG}`,
 
-		"@media screen and (max-width: 500px)":{
-			paddingBottom: "3rem",
-		},
-	},
+    "@media screen and (max-width: 500px)": {
+      paddingBottom: "3rem",
+    },
+  },
 
-	"& .myPostPosLev":{
-		padding: 0,
-		transition: "all 1s ease-in-out",
+  "& .myPostPosLev": {
+    padding: 0,
+    transition: "all 1s ease-in-out",
 
-		"@media screen and (max-width: 500px)":{
-			fontSize: 18
-		}
-	}
+    "@media screen and (max-width: 500px)": {
+      fontSize: 18,
+    },
+  },
 });
 
-export const Position = styled.span({
+export const Position = styled.span(
+  {
     fontSize: 20,
   },
   (props) => ({ color: props.color })
@@ -93,10 +94,11 @@ export const Location = styled.h5(
   (props) => ({ color: props.color })
 );
 
-export const Company = styled.h5({
-	margin: 0,
-},
-(props) => ({ color: props.color })
+export const Company = styled.h5(
+  {
+    margin: 0,
+  },
+  (props) => ({ color: props.color })
 );
 
 export const Skills = styled.div(
@@ -124,30 +126,30 @@ export const Description = styled.p(
 );
 
 export const DeleteIcon = styled.img({
-	position: "absolute",
-	right: "10%",
-	top: "60%",
-	cursor: "pointer",
-	transition: "all 1s ease-in-out",
+  position: "absolute",
+  right: "10%",
+  top: "60%",
+  cursor: "pointer",
+  transition: "all 1s ease-in-out",
 
-	"@media screen and (max-width: 500px)":{
-		right: "30%",
-		top: "auto",
-		bottom: "9%"
-	}
+  "@media screen and (max-width: 500px)": {
+    right: "30%",
+    top: "auto",
+    bottom: "9%",
+  },
 });
 
 export const EditIcon = styled.img({
-	position: "absolute",
-	right: "10%",
-	top: "30%",
-	cursor: "pointer",
-	transition: "all 1s ease-in-out",
+  position: "absolute",
+  right: "10%",
+  top: "30%",
+  cursor: "pointer",
+  transition: "all 1s ease-in-out",
 
-	"@media screen and (max-width: 500px)":{
-		right: 0,
-		left: "30%",
-		top: "auto",
-		bottom: "9%"
-	}
-})
+  "@media screen and (max-width: 500px)": {
+    right: 0,
+    left: "30%",
+    top: "auto",
+    bottom: "9%",
+  },
+});

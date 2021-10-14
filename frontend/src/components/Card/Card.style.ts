@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { gray, cyan, footerBG, darkBlue, purple } from '../../style_guide';
+import { gray, cyan, footerBG, darkBlue, purple } from "../../style_guide";
 
 export const CardContent = styled.div({
   width: "31%",
@@ -9,12 +9,13 @@ export const CardContent = styled.div({
   padding: "2rem 2rem",
   zIndex: 1,
   boxShadow: `${footerBG} 0px 8px 14px`,
+  borderRadius: "15px 0",
   cursor: "pointer",
 
   "@media only screen and (max-width: 1100px)": {
-	  width: "80%",
-		margin: "2rem",
-  }
+    width: "80%",
+    margin: "2rem",
+  },
 });
 
 export const CardTitle = styled.h4({
@@ -33,7 +34,7 @@ export const CardTitle = styled.h4({
 
   "@media only screen and (max-width: 300px)": {
     fontSize: "0.8rem",
-  }
+  },
 });
 
 export const CardLocation = styled.h5({
@@ -45,7 +46,7 @@ export const CardLocation = styled.h5({
 
   "@media only screen and (max-width: 1100px)": {
     textAlign: "center",
-  }
+  },
 });
 
 export const CardText = styled.p({
@@ -60,7 +61,7 @@ export const CardText = styled.p({
 
   "@media only screen and (max-width: 300px)": {
     fontSize: "0.7rem",
-  }
+  },
 });
 
 export const CardLogo = styled.div({
@@ -68,7 +69,7 @@ export const CardLogo = styled.div({
   height: 50,
   backgroundColor: `${purple}`,
   padding: "2%",
-  borderRadius: 25,
+  borderRadius: 50,
   position: "relative",
   top: "-3.5rem",
 

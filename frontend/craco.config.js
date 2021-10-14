@@ -13,7 +13,7 @@ module.exports = {
 							"@btn-primary-color": "#fff",
 							"@btn-primary-bg": "hsl(180, 66%, 49%)",
 							"@btn-height-base": "2.5rem",
-							"@btn-border-radius-base": "25px",
+							"@btn-border-radius-base": "50px",
 						 },
             javascriptEnabled: true,
           },
