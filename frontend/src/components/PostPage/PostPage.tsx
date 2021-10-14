@@ -69,8 +69,7 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
       return (
         <PostFormContent>
           <WelcomeTitle>
-            {" "}
-            Welcome <span>{user!.lastName}</span>!{" "}
+            Welcome <span>{user!.firstName}</span>!{" "}
           </WelcomeTitle>
           <Form
             className="postForm"

@@ -11,11 +11,13 @@ import { LoginPage } from "./components/Login/LoginPage";
 import { RegistrationPage } from "./components/Registration/RegistrationPage";
 import { Profile } from "./components/Profile/Profile";
 import { Footer } from "./components/Footer/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
 
   return (
     <Router>
+			<ScrollToTop />
 			<Route>
       	<Header />
 			</Route>
