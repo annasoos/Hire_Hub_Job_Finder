@@ -3,12 +3,13 @@ import axios from "axios";
 //design & components
 import { Collapse, Tooltip, Button, Modal } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { lightgray, white } from "../../style_guide";
+import { footerBG, lightgray, mainBG, white } from "../../style_guide";
 import { JobElementType } from "../../types/JobElementType";
-import { JobContent, Position, Level, Company, DeleteIcon, EditIcon } from "../JobList/JobList.style";
+import { JobContent, Position, Level, Company, DeleteIcon, EditIcon, EyeIcon } from "../JobList/JobList.style";
 import { CollapseSection, ModalContent } from "./Collapse.style";
 import Delete from "../../images/delete_icon.svg";
 import Edit from "../../images/edit_icon.svg";
+import Eye from "../../images/eye_icon.svg";
 //context & function
 import { openNotificationWithIcon } from "../../functions/Notification";
 import { UserContext } from "../../context/UserContext";
@@ -20,18 +21,23 @@ export const CollapseBar = () => {
   const jobContext = useContext(JobContext);
   const { Panel } = Collapse;
   const history = useHistory();
-	const [isModalVisible, setIsModalVisible] = useState(false);
+	const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+	const [isDetailsModalVisible, setIsDetailsModalVisible] = useState(false);
 	
-	const showModal = () => {
-		setIsModalVisible(true);
+	const showDeleteModal = () => {
+		setIsDeleteModalVisible(true);
+  };
+
+	const showDetailsModal = () => {
+		setIsDetailsModalVisible(true);
   };
 	
 	const handleCancel = () => {
-		setIsModalVisible(false);
+		setIsDeleteModalVisible(false);
 	};
 	
   const handleOk = () => {
-    setIsModalVisible(false);
+    setIsDeleteModalVisible(false);
 	/* 	await axios
       .delete(`http://localhost:8080/api/find-a-job/:${id}`)
       .then((res) => {
@@ -47,15 +53,21 @@ export const CollapseBar = () => {
       }) */
   };
 
+	const handleClose = () => {
+		setIsDetailsModalVisible(false);
+	};
+
 
   return (
 		<CollapseSection>
-    	<Collapse className="collapse" ghost bordered={false} defaultActiveKey={['1']}>
-    	  <Panel header="Your Listings" key="1">
+    	<Collapse className="collapse" ghost bordered={false}>
+
+				{/* YOUR LISTINGS */}
+    	  <Panel header="Your listings" key="1">
     	    {jobContext.jobList!
     	      .filter((job: JobElementType) => job.creator === userContext.loggedInUser!.email)
     	      .map((job: JobElementType, index: number) => (
-    	        <JobContent className="inCollapse" key={index}>
+    	        <JobContent className="inCollapse" key={index} color={footerBG}>
     	          <Position className="myPostPosLev" color={white}> <b>{job.position}</b> </Position>
     	          <br />
     	          {job.level.length > 0 ? (
@@ -68,10 +80,10 @@ export const CollapseBar = () => {
     	            <EditIcon src={Edit} alt="edit_logo" />
     	          </Tooltip>
     	          <Tooltip title="Delete" placement="bottom">
-    	            <DeleteIcon src={Delete} alt="delete_logo" onClick={showModal} />
+    	            <DeleteIcon src={Delete} alt="delete_logo" onClick={showDeleteModal} />
     	          </Tooltip>
 								
-								<Modal title="Confirmation" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+								<Modal title="Confirmation" visible={isDeleteModalVisible} onOk={handleOk} onCancel={handleCancel}>
 									<ModalContent>
 										<img src={Delete} alt="delete_icon" />
 										<p>You are about to delete this listing</p>
@@ -87,6 +99,39 @@ export const CollapseBar = () => {
     	      Post a new job
     	    </Button>
     	  </Panel>
+
+				{/* YOUR FAVOURITES */}
+    	  <Panel header="Your favourites" key="2">
+				{jobContext.jobList!
+    	      .filter((job: JobElementType) => job.creator === userContext.loggedInUser!.email)
+    	      .map((job: JobElementType, index: number) => (
+    	        <JobContent className="inCollapse" key={index} color={mainBG}>
+    	          <Position className="myPostPosLev" color={white}> <b>{job.position}</b> </Position>
+    	          <br />
+    	          {job.level.length > 0 ? (
+    	            <Level className="myPostPosLev" color={lightgray}>
+    	              {job.level}
+    	            </Level>
+    	          ) : null}
+    	          <Company color={lightgray}> {job.company} </Company>
+    	          <Tooltip title="Open">
+    	            <EyeIcon src={Eye} alt="eye_logo" onClick={showDetailsModal} />
+    	          </Tooltip>
+								
+								<Modal title="Details" visible={isDetailsModalVisible} onCancel={handleClose} footer={[
+            			<Button key="back" onClick={handleClose}>
+              			Close
+            			</Button>]}>
+									<ModalContent>
+										<p>Description:</p>
+										<p className="details">{job.description}</p>
+									</ModalContent>
+								</Modal>
+								
+    	        </JobContent>
+    	      ))}
+    	  </Panel>
+				
     	</Collapse>
 		</CollapseSection>
   );

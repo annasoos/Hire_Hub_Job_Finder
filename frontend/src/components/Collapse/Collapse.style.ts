@@ -60,4 +60,8 @@ export const ModalContent = styled.div({
       fontSize: "1.2rem",
     },
   },
+
+	"& p.details": {
+		fontWeight: 500
+	}
 });

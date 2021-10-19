@@ -35,42 +35,43 @@ export const JobContainer = styled.div({
   transition: "all 1s ease-in-out",
 });
 
-export const JobContent = styled.div({
-  position: "relative",
-  left: "50%",
-  transform: "translateX(-50%)",
+export const JobContent = styled.div(
+  {
+    position: "relative",
+    left: "50%",
+    transform: "translateX(-50%)",
+    fontSize: "1rem",
+    width: "70%",
+    height: "auto",
+    backgroundColor: `${darkBlue}`,
+    padding: "2rem 2rem",
+    margin: "2rem 0",
+    boxShadow: `${footerBG} 0px 8px 14px`,
+    borderRadius: "15px 0",
 
-  fontSize: "1rem",
-  width: "70%",
-  height: "auto",
-  backgroundColor: `${darkBlue}`,
-  padding: "2rem 2rem",
-  margin: "2rem 0",
-  boxShadow: `${footerBG} 0px 8px 14px`,
-  borderRadius: "15px 0",
-
-  transition: "all 1s ease-in-out",
-
-  "&.inCollapse": {
-    width: "100%",
-    margin: "1rem 0",
-    cursor: "default",
-    backgroundColor: `${footerBG}`,
-
-    "@media screen and (max-width: 500px)": {
-      paddingBottom: "3rem",
-    },
-  },
-
-  "& .myPostPosLev": {
-    padding: 0,
     transition: "all 1s ease-in-out",
 
-    "@media screen and (max-width: 500px)": {
-      fontSize: 18,
+    "&.inCollapse": {
+      width: "100%",
+      margin: "1rem 0",
+      cursor: "default",
+
+      "@media screen and (max-width: 500px)": {
+        paddingBottom: "3rem",
+      },
+    },
+
+    "& .myPostPosLev": {
+      padding: 0,
+      transition: "all 1s ease-in-out",
+
+      "@media screen and (max-width: 500px)": {
+        fontSize: 18,
+      },
     },
   },
-});
+  (props) => ({ backgroundColor: props.color })
+);
 
 export const Position = styled.span(
   {
@@ -153,22 +154,37 @@ export const EditIcon = styled.img({
   },
 });
 
+export const EyeIcon = styled.img({
+  position: "absolute",
+  right: "10%",
+  top: "45%",
+  cursor: "pointer",
+  transition: "all 1s ease-in-out",
+
+  "@media screen and (max-width: 500px)": {
+    right: 0,
+    left: "30%",
+    top: "auto",
+    bottom: "9%",
+  },
+});
+
 export const FavButton = styled.button({
-	position: "absolute",
+  position: "absolute",
   right: 36,
   top: 36,
   cursor: "pointer",
-	height: 36,
+  height: 36,
   width: 36,
   transition: "all 1s ease-in-out",
 
-	"& .unliked":{
-		fontSize: 32,
-		color: "white"
-	},
+  "& .unliked": {
+    fontSize: 32,
+    color: "white",
+  },
 
-	"& .liked":{
-		fontSize: 32,
-		color: `${red}`
-	}
-})
+  "& .liked": {
+    fontSize: 32,
+    color: `${red}`,
+  },
+});
