@@ -1,6 +1,3 @@
-// Prisma Client: An auto-generated and type-safe query builder for Node.js & TypeScript. It can be used as an alternative to Prisma bindings to access data in your applications.
-
-
 // Import the PrismaClient constructor from the @prisma/client node module and instantiate PrismaClient.
 const { PrismaClient } = require("@prisma/client")
 const prisma = new PrismaClient()
