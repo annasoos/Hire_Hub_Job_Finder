@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 //design & components
+import { Tooltip } from "antd";
+import { HeartFilled } from '@ant-design/icons';
 import { FilterBar } from "../FilterBar/FilterBar";
 import { CollapseBar } from "../Collapse/Collapse";
 import { JobElementType } from "../../types/JobElementType";
 import { cyan, lightgray, white } from "../../style_guide";
-import { LoadingText, JobListSection,  JobContainer, JobContent, Position, Level, Location, Company, Skills, Description } from "../JobList/JobList.style";
+import { LoadingText, JobListSection,  JobContainer, JobContent, Position, Level, Location, Company, Skills, Description, FavButton } from "../JobList/JobList.style";
 //types & context
 import { UserContext } from "../../context/UserContext";
 import { JobContext } from "../../context/JobContext";
@@ -13,6 +15,10 @@ export const JobList = () => {
 
 	const userContext = useContext(UserContext);
   const jobContext = useContext(JobContext);
+
+	const addToFavourites = (job:JobElementType) => {
+
+	}
 
   if (!jobContext.isLoaded) {
     return (
@@ -28,6 +34,7 @@ export const JobList = () => {
           {userContext.loggedInUser ? <CollapseBar /> : null}
           {jobContext.jobList.map((job: JobElementType, index: number) => (
             <JobContent key={index}>
+							{userContext.loggedInUser ? <FavButton onClick={() => addToFavourites(job)}> <Tooltip title="Add to favourites"> <HeartFilled className="unliked" /> </Tooltip> </FavButton> : null}
               <Position color={white}>
                 <b>{job.position}</b>
               </Position>

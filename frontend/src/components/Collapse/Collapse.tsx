@@ -67,7 +67,7 @@ export const CollapseBar = () => {
     	          <Tooltip title="Edit">
     	            <EditIcon src={Edit} alt="edit_logo" />
     	          </Tooltip>
-    	          <Tooltip title="Delete">
+    	          <Tooltip title="Delete" placement="bottom">
     	            <DeleteIcon src={Delete} alt="delete_logo" onClick={showModal} />
     	          </Tooltip>
 								
