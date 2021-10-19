@@ -23,7 +23,13 @@ async function feed(parent, args, context, info) {
 	//Limit-Offset Pagination: Request a specific chunk of the list by providing the indices of the items to be retrieved (in fact, you’re mostly providing the start index (offset) as well as a count of items to be retrieved (limit)).
 	//Limit and offset have different names in the Prisma API: The limit is called take, meaning you’re “taking” x elements after a provided start index. The start index is called skip, since you’re skipping that many elements in the list before collecting the items to be returned. If skip is not provided, it’s 0 by default. The pagination then always starts from the beginning of the list.
 
-  return jobs
+	// how many elements are currently stored in the database
+	const count = await context.prisma.job.count({ where })
+
+  return {
+		jobs,
+		count
+	}
 }
 
 module.exports = {
