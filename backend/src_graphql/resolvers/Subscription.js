@@ -14,7 +14,6 @@ const newUser = {
   },
 }
 
-
 function newJobSubscribe(parent, args, context, info) {
   return context.pubsub.asyncIterator("NEW_JOB")
 }

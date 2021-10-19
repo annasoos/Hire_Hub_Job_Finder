@@ -21,7 +21,7 @@ async function post (parent, args, context, info) {
 		},
 	})
 
-	//context.pubsub.publish("NEW_JOB", newJob)
+	context.pubsub.publish("NEW_JOB", newJob)
 
 	return newJob
 }
@@ -36,6 +36,8 @@ async function signup(parent, args, context, info) {
 
   // generating a JSON Web Token which is signed with an APP_SECRET
   const token = jwt.sign({ userId: user.id }, APP_SECRET)
+
+	context.pubsub.publish("NEW_USER", newUser)
 
   // return the token and the user in an object that adheres to the shape of an AuthPayload object from GraphQL schema
   return {
