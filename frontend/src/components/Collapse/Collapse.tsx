@@ -51,14 +51,12 @@ export const CollapseBar = () => {
   return (
 		<CollapseSection>
     	<Collapse className="collapse" ghost bordered={false} defaultActiveKey={['1']}>
-    	  <Panel header="Your Postings" key="1">
+    	  <Panel header="Your Listings" key="1">
     	    {jobContext.jobList!
     	      .filter((job: JobElementType) => job.creator === userContext.loggedInUser!.email)
     	      .map((job: JobElementType, index: number) => (
     	        <JobContent className="inCollapse" key={index}>
-    	          <Position className="myPostPosLev" color={white}>
-    	            <b>{job.position}</b>
-    	          </Position>{" "}
+    	          <Position className="myPostPosLev" color={white}> <b>{job.position}</b> </Position>
     	          <br />
     	          {job.level.length > 0 ? (
     	            <Level className="myPostPosLev" color={lightgray}>
