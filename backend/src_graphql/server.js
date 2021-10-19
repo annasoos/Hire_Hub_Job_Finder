@@ -7,6 +7,7 @@ const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
 const User = require('./resolvers/User')
 const Job = require('./resolvers/Job')
+const Like = require('./resolvers/Like')
 const Subscription = require('./resolvers/Subscription')
 
 const { PrismaClient } = require('@prisma/client')
@@ -20,7 +21,8 @@ const resolvers = {
   Mutation,
 	Subscription,
   User,
-  Job
+  Job,
+	Like
 }
 
 // The ApolloServer constructor requires two parameters: your schema definition and your set of resolvers.

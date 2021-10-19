@@ -4,6 +4,8 @@ const { APP_SECRET, getUserId } = require('../utils')
 
 // All Prisma CRUD operations are asynchronous. This is not a problem as Apollo Server is capable of detecting, and automatically resolving any Promise object that is returned from resolver functions.
 
+//----------------------------POST------------------------------
+
 async function post (parent, args, context, info) {
 	const { userId } = context;
 
@@ -26,6 +28,7 @@ async function post (parent, args, context, info) {
 	return newJob
 }
 
+//----------------------SIGNUP--------------------------------
 
 async function signup(parent, args, context, info) {
   // the first thing to do is encrypt the User’s password using the bcryptjs library
@@ -45,6 +48,8 @@ async function signup(parent, args, context, info) {
     user,
   }
 }
+
+//-------------------------LOGIN------------------------------
 
 async function login(parent, args, context, info) {
   // using PrismaClient instance to retrieve an existing User record by the email address that was sent along as an argument in the login mutation
@@ -68,8 +73,26 @@ async function login(parent, args, context, info) {
   }
 }
 
+//-----------------------------LIKE-----------------------
+
+async function like(parent, args, context, info) {
+  // validate the incoming JWT with the getUserId helper function. If it’s valid, the function will return the userId of the User who is making the request.
+  const userId = context.userId
+
+  // like.create method will be used to create a new Like that’s connected to the User and the Link.
+  const newLike = context.prisma.like.create({
+    data: {
+      user: { connect: { id: userId } },
+      job: { connect: { id: Number(args.jobId) } },
+    }
+  })
+
+  return newLike
+}
+
 module.exports = {
   signup,
   login,
   post,
+	like
 }

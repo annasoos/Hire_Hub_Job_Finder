@@ -25,12 +25,9 @@ export const FooterContainer = styled.section({
     gridTemplateColumns: "1fr",
     gridTemplateRows: "repeat(5, 1fr)",
     justifyItems: "center",
+		alignItems: "center",
     padding: "0 10%",
     gridRowGap: "2%",
-
-    "& .imageLink": {
-      alignSelf: "center",
-    },
   },
 });
 

@@ -11,12 +11,13 @@ generator client {
 
 //Data model: Defines your application models. Each model will be mapped to a table in the underlying database.
 model User {
-  id        Int     @id @default(autoincrement())
-  firstName String  
-  lastName  String  
-  email     String  @unique
-	password  String
-	posts     Job[]
+  id        	Int     @id @default(autoincrement())
+  firstName 	String  
+  lastName  	String  
+  email     	String  @unique
+	password  	String
+	posts     	Job[]
+	likes       Like[]
 }
 
 model Job {
@@ -29,4 +30,17 @@ model Job {
 	description String
 	creator     User   @relation(fields: [creatorId], references: [id]) // We’re adding an extra field to store the id of the User who posts a Job // in relations we telling Prisma that creatorId will be equal to the id field in the User table. --> ennek segítségével tudjuk a user Jobs listáját felölteni, mert a prisma összeköti az infokat a két adatbázis között
 	creatorId   Int
+	likes       Like[]
+}
+
+// Notice how you’re adding a new relation field called postedBy to the Link model that points to a User instance. The User model then has a links field that’s a list of Links. To do this, we need to also define the relation by annotating the postedBy field with the @relation attribute. This is required for every relation field in your Prisma schema, and all you’re doing is defining what the foreign key of the related table will be. So in this case, we’re adding an extra field to store the id of the User who posts a Link, and then telling Prisma that postedById will be equal to the id field in the User table.
+
+model Like {  // It has one-to-many relationships to the User and the Job type.
+  id     Int  @id @default(autoincrement())
+  job    Job @relation(fields: [jobId], references: [id])
+  jobId  Int
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  @@unique([jobId, userId])
 }
