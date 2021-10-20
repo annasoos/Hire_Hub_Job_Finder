@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { darkBlue, footerBG, red } from "../../style_guide";
+import { darkBlue, footerBG } from "../../style_guide";
 
 export const LoadingText = styled.div({
   height: "50%",
@@ -116,23 +116,3 @@ export const Description = styled.p(
   },
   (props) => ({ color: props.color })
 );
-
-export const FavButton = styled.button({
-  position: "absolute",
-  right: 36,
-  top: 36,
-  cursor: "pointer",
-  height: 36,
-  width: 36,
-  transition: "all 1s ease-in-out",
-
-  "& .unliked": {
-    fontSize: 32,
-    color: "white",
-  },
-
-  "& .liked": {
-    fontSize: 32,
-    color: `${red}`,
-  },
-});
