@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { cyanHover, footerBG, featuredBG, darkBlue } from "../../style_guide";
+import { footerBG, featuredBG, darkBlue } from "../../style_guide";
 
 export const FilterContainer = styled.section({
   width: "70%",
@@ -9,7 +9,7 @@ export const FilterContainer = styled.section({
   left: "50%",
   transform: "translateX(-50%)",
 
-  backgroundColor: `${cyanHover}`,
+  background: "radial-gradient(circle, hsl(180, 66%, 49%) 20%, hsl(180, 66%, 49%, 0.5) 100%)",
   boxShadow: `${footerBG} 0px 8px 14px`,
   borderRadius: "15px 0",
 

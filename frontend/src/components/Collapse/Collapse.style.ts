@@ -13,7 +13,7 @@ export const CollapseSection = styled.div({
     transform: "translateX(-50%)",
     margin: "1rem 0",
 
-    backgroundColor: `${cyanHover}`,
+		background: "radial-gradient(circle, hsl(180, 66%, 49%) 20%, hsl(180, 66%, 49%, 0.5) 100%)",
     boxShadow: `${footerBG} 0px 8px 14px`,
     border: "none",
     borderRadius: "15px 0",
@@ -39,29 +39,4 @@ export const CollapseSection = styled.div({
       },
     },
   },
-});
-
-export const ModalContent = styled.div({
-  "& img": {
-    position: "relative",
-    left: "50%",
-    transform: "translateX(-50%)",
-    height: 60,
-    marginBottom: 20,
-    filter:
-      "invert(53%) sepia(22%) saturate(1974%) hue-rotate(317deg) brightness(102%) contrast(87%)",
-  },
-
-  "& p": {
-    textAlign: "center",
-
-    "&:first-of-type": {
-      fontWeight: 700,
-      fontSize: "1.2rem",
-    },
-  },
-
-	"& p.details": {
-		fontWeight: 500
-	}
 });

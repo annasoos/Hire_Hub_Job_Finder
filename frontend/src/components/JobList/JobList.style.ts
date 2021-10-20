@@ -53,20 +53,12 @@ export const JobContent = styled.div(
 
     "&.inCollapse": {
       width: "100%",
+			padding: "1rem 2rem",
       margin: "1rem 0",
       cursor: "default",
 
       "@media screen and (max-width: 500px)": {
         paddingBottom: "3rem",
-      },
-    },
-
-    "& .myPostPosLev": {
-      padding: 0,
-      transition: "all 1s ease-in-out",
-
-      "@media screen and (max-width: 500px)": {
-        fontSize: 18,
       },
     },
   },
@@ -124,50 +116,6 @@ export const Description = styled.p(
   },
   (props) => ({ color: props.color })
 );
-
-export const DeleteIcon = styled.img({
-  position: "absolute",
-  right: "10%",
-  top: "60%",
-  cursor: "pointer",
-  transition: "all 1s ease-in-out",
-
-  "@media screen and (max-width: 500px)": {
-    right: "30%",
-    top: "auto",
-    bottom: "9%",
-  },
-});
-
-export const EditIcon = styled.img({
-  position: "absolute",
-  right: "10%",
-  top: "30%",
-  cursor: "pointer",
-  transition: "all 1s ease-in-out",
-
-  "@media screen and (max-width: 500px)": {
-    right: 0,
-    left: "30%",
-    top: "auto",
-    bottom: "9%",
-  },
-});
-
-export const EyeIcon = styled.img({
-  position: "absolute",
-  right: "10%",
-  top: "45%",
-  cursor: "pointer",
-  transition: "all 1s ease-in-out",
-
-  "@media screen and (max-width: 500px)": {
-    right: 0,
-    left: "30%",
-    top: "auto",
-    bottom: "9%",
-  },
-});
 
 export const FavButton = styled.button({
   position: "absolute",
