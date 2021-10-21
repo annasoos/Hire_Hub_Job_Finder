@@ -10,6 +10,7 @@ The user should be able to…
   - Registrate and Login with email adress
   - Create a new job and post it to the database (allowed only for registered users)
   - Edit and Delete their own listings
+  - Add favourite jobs to profile
 
 ### Links
 
@@ -31,4 +32,6 @@ The user should be able to…
 
 - Add business logic to Edit and Delete gomb next to listings of autenticated user
 - Add business logic to filterbar and searchbar (on Find a job subpage and Landing page)
+- Add business logic to Add to favourite button
+- Add pagination
 - Add new features (e.g: Newsletter subscription)
