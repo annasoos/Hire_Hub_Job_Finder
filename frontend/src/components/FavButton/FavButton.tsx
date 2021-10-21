@@ -12,7 +12,7 @@ export const FavButton:FC<Omit<CollapseContentPropsType, "key">> = ({job}) => {
 	const [isLiked, setIsLiked] = useState<"liked" | "unliked">("unliked")
 
 	const addToFavourites = (job:JobElementType) => {
-		if(isLiked === "liked") { setIsLiked("unliked") }
+		if (isLiked === "liked") { setIsLiked("unliked") }
 		else { setIsLiked("liked")}
 	}
 

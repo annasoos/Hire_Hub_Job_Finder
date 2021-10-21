@@ -10,7 +10,8 @@ export const EyeIcon = styled.img({
 
   "@media screen and (max-width: 500px)": {
     right: 0,
-    left: "30%",
+    left: "50%",
+		transform: "translateX(-50%)",
     top: "auto",
     bottom: "9%",
   },

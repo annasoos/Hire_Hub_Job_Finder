@@ -35,17 +35,17 @@ async function signup(parent, args, context, info) {
   const password = await bcrypt.hash(args.password, 10)
 
   // use PrismaClient instance to store the new User record in the database
-  const user = await context.prisma.user.create({ data: { ...args, password } })
+  const newUser = await context.prisma.user.create({ data: { ...args, password } })
 
   // generating a JSON Web Token which is signed with an APP_SECRET
-  const token = jwt.sign({ userId: user.id }, APP_SECRET)
+  const token = jwt.sign({ userId: newUser.id }, APP_SECRET)
 
 	context.pubsub.publish("NEW_USER", newUser)
 
   // return the token and the user in an object that adheres to the shape of an AuthPayload object from GraphQL schema
   return {
     token,
-    user,
+    newUser,
   }
 }
 
