@@ -4,7 +4,7 @@ const { APP_SECRET, getUserId } = require('../utils')
 
 // All Prisma CRUD operations are asynchronous. This is not a problem as Apollo Server is capable of detecting, and automatically resolving any Promise object that is returned from resolver functions.
 
-//----------------------------POST------------------------------
+//-------------------------POST----------------------------
 
 async function post (parent, args, context, info) {
 	const { userId } = context;
@@ -28,7 +28,7 @@ async function post (parent, args, context, info) {
 	return newJob
 }
 
-//----------------------SIGNUP--------------------------------
+//------------------------SIGNUP----------------------------
 
 async function signup(parent, args, context, info) {
   // the first thing to do is encrypt the User’s password using the bcryptjs library
@@ -49,11 +49,15 @@ async function signup(parent, args, context, info) {
   }
 }
 
-//-------------------------LOGIN------------------------------
+//-------------------------LOGIN----------------------------
 
 async function login(parent, args, context, info) {
   // using PrismaClient instance to retrieve an existing User record by the email address that was sent along as an argument in the login mutation
-  const user = await context.prisma.user.findUnique({ where: { email: args.email } })
+  const user = await context.prisma.user.findUnique({ 
+		where: { 
+			email: args.email 
+		} 
+	})
   if (!user) {
     throw new Error('No such user found')
   }
@@ -73,14 +77,14 @@ async function login(parent, args, context, info) {
   }
 }
 
-//-----------------------------LIKE-----------------------
+//--------------------------LIKE---------------------------
 
 async function like(parent, args, context, info) {
   // validate the incoming JWT with the getUserId helper function. If it’s valid, the function will return the userId of the User who is making the request.
   const userId = context.userId
 
   // like.create method will be used to create a new Like that’s connected to the User and the Link.
-  const newLike = context.prisma.like.create({
+  const newLike = await context.prisma.like.create({
     data: {
       user: { connect: { id: userId } },
       job: { connect: { id: Number(args.jobId) } },
@@ -90,9 +94,77 @@ async function like(parent, args, context, info) {
   return newLike
 }
 
+//------------------------DELETE JOB-----------------------
+
+async function deleteJob(parent, args, context, info) {
+
+	// If the job I would like to delete has any likes, we need to use cascading deletes, beacuse of the relations between the two tables.
+	// To resolve this error, you can:
+		 // Make the relation optional
+		// Change the author of the posts to another user before deleting the user
+		// Delete a user and all their posts with two separate queries in a transaction (all queries must succeed) ---> we do this
+
+	const likesOfDeletedJob = await context.prisma.like.findMany({
+		where: {
+			jobId: Number(args.jobId)
+		},
+	})
+
+	if (likesOfDeletedJob.length === 0) {
+		const deleteJob = await context.prisma.job.delete({
+			where: {
+				id: Number(args.jobId)
+			},
+			select: {  // a select határozza meg, hogy mit szeretnék látni a return értékben
+				position: true,
+				company: true,
+			},
+		})
+
+		return {
+			deleteJob,
+			message: 'Posting deleted from "Job" table',
+		}
+
+	} else {
+			
+		let deleteLike = context.prisma.like.deleteMany({
+			where: {
+				jobId: Number(args.jobId)
+			},
+			select: {
+				count: true
+			}
+		})
+
+		let deleteJob = context.prisma.job.delete({
+			where: {
+				id: Number(args.jobId)
+			},
+			select: { 
+				position: true,
+				company: true,
+			},
+		})
+		
+		const transaction = await context.prisma.$transaction([deleteLike, deleteJob])
+		const deletedLikesCount = transaction[0].count
+		deleteJob = transaction[1]
+		
+		return {
+			deleteJob,
+			deletedLikesCount,
+			message: 'Posting deleted both from Job and Like tables',
+		}
+	}
+}
+
+//-------------------------EXPORT---------------------------
+
 module.exports = {
   signup,
   login,
   post,
-	like
+	like,
+	deleteJob
 }

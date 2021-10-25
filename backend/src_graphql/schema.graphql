@@ -12,6 +12,7 @@ type Mutation {
 	signup(firstName: String!, lastName: String!, email: String!, password: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
 	like(jobId: ID!): Like
+	deleteJob(jobId: ID!): Delete!
 }
 
 # Subscriptions are a GraphQL feature that allows a server to send data to its clients when a specific event happens.
@@ -53,4 +54,10 @@ type Like {
   id: ID!
   job: Job!
   user: User!
+}
+
+type Delete {
+	deleteJob: Job!
+	deletedLikesCount: Int
+	message: String!
 }
