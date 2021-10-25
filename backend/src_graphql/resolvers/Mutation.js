@@ -40,8 +40,6 @@ async function signup(parent, args, context, info) {
   // generating a JSON Web Token which is signed with an APP_SECRET
   const token = jwt.sign({ userId: newUser.id }, APP_SECRET)
 
-	context.pubsub.publish("NEW_USER", newUser)
-
   // return the token and the user in an object that adheres to the shape of an AuthPayload object from GraphQL schema
   return {
     token,
@@ -123,6 +121,8 @@ async function deleteJob(parent, args, context, info) {
 			},
 		})
 
+		context.pubsub.publish("DELETED_JOB", deleteJob)
+
 		return {
 			deleteJob,
 			message: 'Listing deleted from "Job" table',
@@ -152,6 +152,7 @@ async function deleteJob(parent, args, context, info) {
 		const transaction = await context.prisma.$transaction([deleteLike, deleteJob])
 		const deletedLikesCount = transaction[0].count
 		deleteJob = transaction[1]
+		context.pubsub.publish("DELETED_JOB", deleteJob)
 		
 		return {
 			deleteJob,
@@ -174,6 +175,9 @@ async function updateJob(parent, args, context, info) {
 			description: args.description,
 		},
 	})
+
+	context.pubsub.publish("UPDATED_JOB", updateJob)
+
 	return {
 		updateJob,
 		message: 'Listing updated',

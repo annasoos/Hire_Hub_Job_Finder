@@ -18,10 +18,9 @@ type Mutation {
 
 # Subscriptions are a GraphQL feature that allows a server to send data to its clients when a specific event happens.
 type Subscription {
-	newUser: User
-	newJob: Job
-	# updatedJob: Job
-	# deletedJob: Job
+	newJob: Job!
+	deleteJob: Job!
+	updateJob: Job!
 }
 
 type User {
