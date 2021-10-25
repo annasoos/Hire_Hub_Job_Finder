@@ -2,6 +2,8 @@ const { ApolloServer } = require('apollo-server')
 const fs = require('fs')
 const path = require('path')
 const { getUserId } = require('./utils')
+const { prisma } = require('./lib/prisma')
+const { pubsub } = require('./lib/pubsub')
 // Resolvers define the technique for fetching the types defined in the schema.
 const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
@@ -9,12 +11,6 @@ const User = require('./resolvers/User')
 const Job = require('./resolvers/Job')
 const Like = require('./resolvers/Like')
 const Subscription = require('./resolvers/Subscription')
-
-const { PrismaClient } = require('@prisma/client')
-const prisma = new PrismaClient()
-
-const { PubSub } = require('apollo-server')
-const pubsub = new PubSub()
 
 const resolvers = {
   Query,
