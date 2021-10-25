@@ -41,7 +41,7 @@ type Job {
 	company: String!
 	skills: String!
 	description: String!
-	creator: User # the relation between User and Job should be bi-directional
+	creator: User! # the relation between User and Job should be bi-directional
 	likes: [Like!]!
 }
 
