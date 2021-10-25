@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { APP_SECRET, getUserId } = require('../utils')
 
-// All Prisma CRUD operations are asynchronous. This is not a problem as Apollo Server is capable of detecting, and automatically resolving any Promise object that is returned from resolver functions.
+// All Prisma CRUD operations are asynchronous. Apollo Server is capable of detecting, and automatically resolving any Promise object that is returned from resolver functions.
 
 //-------------------------POST----------------------------
 
@@ -46,6 +46,7 @@ async function signup(parent, args, context, info) {
   return {
     token,
     newUser,
+		message: "User created"
   }
 }
 
@@ -74,6 +75,7 @@ async function login(parent, args, context, info) {
   return {
     token,
     user,
+		message: "User successfully logged in"
   }
 }
 
@@ -123,7 +125,7 @@ async function deleteJob(parent, args, context, info) {
 
 		return {
 			deleteJob,
-			message: 'Posting deleted from "Job" table',
+			message: 'Listing deleted from "Job" table',
 		}
 
 	} else {
@@ -154,8 +156,27 @@ async function deleteJob(parent, args, context, info) {
 		return {
 			deleteJob,
 			deletedLikesCount,
-			message: 'Posting deleted both from Job and Like tables',
+			message: 'Listing deleted both from Job and Like tables',
 		}
+	}
+}
+
+//------------------------UPDATE JOB-----------------------
+
+async function updateJob(parent, args, context, info) {
+	const updateJob = await context.prisma.job.update({
+		where: {
+			id: Number(args.jobId)
+		},
+		data: {
+			level: args.level,
+			skills: args.skills,
+			description: args.description,
+		},
+	})
+	return {
+		updateJob,
+		message: 'Listing updated',
 	}
 }
 
@@ -166,5 +187,6 @@ module.exports = {
   login,
   post,
 	like,
-	deleteJob
+	deleteJob,
+	updateJob
 }
