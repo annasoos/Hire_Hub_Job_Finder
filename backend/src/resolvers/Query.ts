@@ -21,16 +21,48 @@ const Query: GraphQLFieldResolveFn = {
       take: args.take,
     });
 
-    // If no filter string is provided, then the where object will be just an empty object and no filtering conditions will be applied by Prisma Client when it returns the response for the links query.
-
-    // Limit-Offset Pagination:
-    // Limit and offset have different names in the Prisma API: The limit is called take, meaning you’re “taking” x elements after a provided start index. The start index is called skip, since you’re skipping that many elements in the list before collecting the items to be returned. If skip is not provided, it’s 0 by default.
-
     const count = await context.prisma.job.count({ where });
 
     return {
       jobs,
       count,
+    };
+  },
+
+	ownListings: async (parent, args, context, info) => {
+
+		const where = {
+			creator: {
+				id: context.userId
+			}
+		};
+    const jobs = await context.prisma.job.findMany({ where });
+		const count = await context.prisma.job.count({ where });
+
+    return {
+      jobs,
+			count
+    };
+  },
+
+	favourites: async (parent, args, context, info) => {
+
+    const where = {
+			likes: {
+				every: {
+					user: {
+						id: context.userId
+					}
+				}
+			}
+		};
+		// some returns elements when any one of them matches the condition while every returns elements when all of them matches the condition.
+    const jobs = await context.prisma.job.findMany({ where });
+		const count = await context.prisma.job.count({ where });
+
+    return {
+      jobs,
+			count
     };
   },
 };
