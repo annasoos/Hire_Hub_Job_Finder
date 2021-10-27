@@ -2,15 +2,31 @@ import { GraphQLFieldResolveFn } from "../utils/types";
 
 const Query: GraphQLFieldResolveFn = {
   feed: async (parent, args, context, info) => {
-    const where = args.input.filter
-      ? {
-          AND: [
+		const filter = () => {
+			if(args.input.filter.isJunior) {
+				return ( {
+					OR: [
+						{	level: "Junior" },
+						{ level: "" }
+					],
+					AND: [
             { position: { contains: args.input.filter.position } },
             { location: { contains: args.input.filter.location } },
             { company: { contains: args.input.filter.company } },
           ],
-        }
-      : {};
+				})
+			} else {
+				return ( {
+					AND: [
+            { position: { contains: args.input.filter.position } },
+            { location: { contains: args.input.filter.location } },
+            { company: { contains: args.input.filter.company } },
+          ],
+				})
+			}
+		}
+
+    const where = filter()
 
     const jobs = await context.prisma.job.findMany({ where, skip: args.input.skip, take: args.input.take, orderBy: args.input.orderBy });
     const count = await context.prisma.job.count({ where });
