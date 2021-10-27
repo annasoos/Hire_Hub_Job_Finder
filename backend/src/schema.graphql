@@ -19,7 +19,17 @@ input FeedFilters {
 input FeedInput {
 	filter: FeedFilters,
 	skip: Int,
-	take: Int
+	take: Int,
+	orderBy: FeedOrderBy
+}
+
+input FeedOrderBy {
+  createdAt: Sort
+}
+
+enum Sort {
+  asc
+  desc
 }
 
 type Mutation {
@@ -58,6 +68,7 @@ type Job {
 	skills: String!
 	description: String!
 	creator: User! # the relation between User and Job should be bi-directional
+	createdAt: String!
 	likes: [Like!]!
 }
 

@@ -30,6 +30,7 @@ model Job {
 	description String
 	creator     User   @relation(fields: [creatorId], references: [id]) // We’re adding an extra field to store the id of the User who posts a Job // in relations we telling Prisma that creatorId will be equal to the id field in the User table. --> ennek segítségével tudjuk a user Jobs listáját felölteni, mert a prisma összeköti az infokat a két adatbázis között
 	creatorId   Int
+	createdAt   DateTime @default(now())
 	likes       Like[]
 }
 

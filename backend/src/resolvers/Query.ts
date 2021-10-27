@@ -12,11 +12,7 @@ const Query: GraphQLFieldResolveFn = {
         }
       : {};
 
-    const jobs = await context.prisma.job.findMany({
-      where,
-      skip: args.skip,
-      take: args.take,
-    });
+    const jobs = await context.prisma.job.findMany({ where, skip: args.input.skip, take: args.input.take, orderBy: args.input.orderBy });
     const count = await context.prisma.job.count({ where });
 
     return {
@@ -31,7 +27,7 @@ const Query: GraphQLFieldResolveFn = {
         id: context.userId,
       },
     };
-		
+
     const jobs = await context.prisma.job.findMany({ where });
     const count = await context.prisma.job.count({ where });
 
