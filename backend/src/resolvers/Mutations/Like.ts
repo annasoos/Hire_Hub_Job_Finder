@@ -1,4 +1,4 @@
-import { GraphQLResolveFn } from '../../lib/types';
+import { GraphQLResolveFn } from '../../utils/types';
 
 const like: GraphQLResolveFn = async (parent, args, context, info) => {
   // validate the incoming JWT with the getUserId helper function. If it’s valid, the function will return the userId of the User who is making the request.

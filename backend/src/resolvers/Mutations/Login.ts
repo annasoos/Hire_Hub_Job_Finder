@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { GraphQLResolveFn } from '../../lib/types';
-import { APP_SECRET, getUserId } from '../../utils';
+import { GraphQLResolveFn } from '../../utils/types';
+import { APP_SECRET, getUserId } from '../../utils/tokenVerification';
 
 const login: GraphQLResolveFn = async (parent, args, context, info) => {
   // using PrismaClient instance to retrieve an existing User record by the email address that was sent along as an argument in the login mutation

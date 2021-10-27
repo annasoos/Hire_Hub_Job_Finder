@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { APP_SECRET, getUserId } from '../../utils';
-import { GraphQLResolveFn } from '../../lib/types';
+import { APP_SECRET, getUserId } from '../../utils/tokenVerification';
+import { GraphQLResolveFn } from '../../utils/types';
 
 const signup: GraphQLResolveFn  = async (parent, args, context, info) => {
   // the first thing to do is encrypt the User’s password using the bcryptjs library

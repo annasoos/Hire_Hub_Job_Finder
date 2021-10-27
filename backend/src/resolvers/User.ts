@@ -1,4 +1,4 @@
-import { GraphQLFieldResolveFn } from "../lib/types";
+import { GraphQLFieldResolveFn } from "../utils/types";
 
 const User: GraphQLFieldResolveFn = {
   posts: (parent, args, context) => {

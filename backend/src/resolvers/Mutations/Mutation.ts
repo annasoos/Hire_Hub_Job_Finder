@@ -4,7 +4,8 @@ import login from "./Login"
 import signup from "./Signup"
 import deleteListing from "./DeleteJob"
 import updateListing from "./UpdateJob"
-import { GraphQLFieldResolveFn } from '../../lib/types'
+import updateUser from "./UpdateUser"
+import { GraphQLFieldResolveFn } from '../../utils/types'
 
 const Mutation: GraphQLFieldResolveFn = {
 	post,
@@ -12,7 +13,8 @@ const Mutation: GraphQLFieldResolveFn = {
 	signup,
 	login,
 	deleteListing,
-	updateListing
+	updateListing,
+	updateUser
 }
 
 export default Mutation;

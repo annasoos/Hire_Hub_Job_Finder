@@ -1,4 +1,4 @@
-import { GraphQLResolveFn } from '../../lib/types';
+import { GraphQLResolveFn } from '../../utils/types';
 
 const deleteListing: GraphQLResolveFn = async (parent, args, context, info) => {
 

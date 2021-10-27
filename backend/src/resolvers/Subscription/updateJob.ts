@@ -1,5 +1,5 @@
-import { GraphQLResolveFn } from '../../lib/types';
-import { GraphQLSubscriptionFn } from '../../lib/types';
+import { GraphQLResolveFn } from '../../utils/types';
+import { GraphQLSubscriptionFn } from '../../utils/types';
 
 const updateJobSubscribe: GraphQLResolveFn = async (parent, args, context, info) => {
   return context.pubsub.asyncIterator("UPDATED_JOB");

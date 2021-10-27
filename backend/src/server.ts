@@ -1,9 +1,9 @@
 import { ApolloServer } from 'apollo-server'
 import fs from 'fs'
 import path from 'path'
-import { getUserId } from './utils'
-import { prisma } from './lib/prisma'
-import { pubsub } from './lib/pubsub'
+import { getUserId } from './utils/tokenVerification'
+import { prisma } from './utils/prisma'
+import { pubsub } from './utils/pubsub'
 // Resolvers define the technique for fetching the types defined in the schema.
 import Query from './resolvers/Query'
 import Mutation from './resolvers/Mutations/Mutation'

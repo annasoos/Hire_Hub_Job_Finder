@@ -1,5 +1,5 @@
-import { GraphQLResolveFn } from '../../lib/types';
-import { GraphQLSubscriptionFn } from '../../lib/types';
+import { GraphQLResolveFn } from '../../utils/types';
+import { GraphQLSubscriptionFn } from '../../utils/types';
 
 const deleteJobSubscribe: GraphQLResolveFn = async (parent, args, context, info) => {
   return context.pubsub.asyncIterator("DELETED_JOB");

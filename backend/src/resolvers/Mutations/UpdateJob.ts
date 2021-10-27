@@ -1,4 +1,4 @@
-import { GraphQLResolveFn } from '../../lib/types';
+import { GraphQLResolveFn } from '../../utils/types';
 
 const updateListing: GraphQLResolveFn = async (parent, args, context, info) => {
 	const updateJob = await context.prisma.job.update({

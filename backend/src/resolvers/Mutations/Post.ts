@@ -1,4 +1,4 @@
-import { GraphQLResolveFn } from '../../lib/types';
+import { GraphQLResolveFn } from '../../utils/types';
 
 const post: GraphQLResolveFn  = async (parent, args, context, info) => {
 	const { userId } = context;
