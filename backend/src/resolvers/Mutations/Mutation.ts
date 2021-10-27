@@ -5,6 +5,7 @@ import signup from "./Signup"
 import deleteListing from "./DeleteJob"
 import updateListing from "./UpdateJob"
 import updateUser from "./UpdateUser"
+import deleteLike from "./DeleteLike"
 import { GraphQLFieldResolveFn } from '../../utils/types'
 
 const Mutation: GraphQLFieldResolveFn = {
@@ -14,7 +15,8 @@ const Mutation: GraphQLFieldResolveFn = {
 	login,
 	deleteListing,
 	updateListing,
-	updateUser
+	updateUser,
+	deleteLike
 }
 
 export default Mutation;
