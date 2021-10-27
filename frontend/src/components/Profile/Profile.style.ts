@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { cyanHover, footerBG, gray } from "../../style_guide";
+import { cyan, cyanHover, footerBG, gray } from "../../style_guide";
 
 export const ProfileSection = styled.section({
   position: "relative",
@@ -91,6 +91,24 @@ export const UserInfoSection = styled.div({
     },
   },
 
+	"& #userEditBtn": {
+		position: "relative",
+  	left: "50%",
+		transform: "translateX(-50%)",
+		gridColumn: "1 / span 2",
+  	height: "2.5rem",
+  	width: "5rem",
+
+		"&:hover": {
+			backgroundColor: `${cyan}`,
+			color: "white",
+		},
+
+		"@media screen and (max-width:1090px)": {
+			gridColumn: "1"
+		},
+	},
+
   "@media screen and (max-width:1090px)": {
     position: "relative",
     width: "70%",
@@ -133,5 +151,24 @@ export const ErrorSubTitle = styled.p({
 
   "@media screen and (max-width:600px)": {
     fontSize: "1rem",
+  },
+});
+
+export const EditUserModalContent = styled.div({
+  "& img": {
+    position: "relative",
+    left: "50%",
+    transform: "translateX(-50%)",
+    height: 220,
+    marginBottom: 20,
+  },
+
+  "& p": {
+    textAlign: "center",
+
+    "&:first-of-type": {
+      fontWeight: 700,
+      fontSize: "1.2rem",
+    },
   },
 });

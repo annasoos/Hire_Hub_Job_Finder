@@ -37,6 +37,7 @@ export const FavButton:FC<Omit<CollapseContentPropsType, "key">> = ({job}) => {
 				<HeartFilled className={isLiked}/> 
 			</Tooltip>
 		</HeartButton>
+		
 		<Modal
 		title="Add to favourite"
 		visible={isLikeModalVisible}

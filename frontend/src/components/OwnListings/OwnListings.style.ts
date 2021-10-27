@@ -48,3 +48,22 @@ export const DeleteModalContent = styled.div({
     },
   },
 });
+
+export const EditModalContent = styled.div({
+  "& img": {
+    position: "relative",
+    left: "50%",
+    transform: "translateX(-50%)",
+    height: 250,
+    marginBottom: 20,
+  },
+
+  "& p": {
+    textAlign: "center",
+
+    "&:first-of-type": {
+      fontWeight: 700,
+      fontSize: "1.2rem",
+    },
+  },
+});
