@@ -3,38 +3,33 @@ import { FC, useState } from "react";
 import { Tooltip, Modal } from "antd";
 import { footerBG, lightgray, white } from "../../style_guide";
 import { JobContent, Position, Company } from "../JobList/JobList.style";
-import { DeleteIcon, EditIcon, DeleteModalContent } from "./OwnListings.style";
+import { DeleteIcon, EditIcon, DeleteModalContent, EditModalContent } from "./OwnListings.style";
 import Delete from "../../images/delete_icon.svg";
 import Edit from "../../images/edit_icon.svg";
+import listingEdit from "../../images/ListingEdit-pana.svg";
 // types
 import { CollapseContentPropsType } from "../../types/CollapseContentPropsType";
 
 export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+  const [isEditListingModalVisible, setIsEditListingModalVisible] = useState(false);
 
-  const showDeleteModal = () => {
-    setIsDeleteModalVisible(true);
-  };
-
-  const handleCancel = () => {
+  const handleDeleteCancel = () => {
     setIsDeleteModalVisible(false);
   };
 
-  const handleOk = () => {
+  const handleDeleteOk = () => {
+    /* 	ide jön majd a business logic + notification  */
     setIsDeleteModalVisible(false);
-    /* 	await axios
-      .delete(`http://localhost:8080/api/find-a-job/:${id}`)
-      .then((res) => {
-        if (res.status === 200) {
-          openNotificationWithIcon(
-            "success",
-            "Deleted!",
-          	"Listing successfully deleted from database"
-          );
-        } else {
-					console.log(res)
-				}
-      }) */
+  };
+
+	const handleEditCancel = () => {
+    setIsEditListingModalVisible(false);
+  };
+
+  const handleEditOk = () => {
+    /* 	ide jön majd a business logic + notification  */
+    setIsEditListingModalVisible(false);
   };
 
   return (
@@ -45,17 +40,17 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
       <br />
       <Company color={lightgray}> {job.company} </Company>
       <Tooltip title="Edit">
-        <EditIcon src={Edit} alt="edit_logo" />
+        <EditIcon src={Edit} alt="edit_logo" onClick={() => setIsEditListingModalVisible(true)} />
       </Tooltip>
       <Tooltip title="Delete" placement="bottom">
-        <DeleteIcon src={Delete} alt="delete_logo" onClick={showDeleteModal} />
+        <DeleteIcon src={Delete} alt="delete_logo" onClick={() => setIsDeleteModalVisible(true)} />
       </Tooltip>
 
       <Modal
         title="Confirmation"
         visible={isDeleteModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        onOk={handleDeleteOk}
+        onCancel={handleDeleteCancel}
       >
         <DeleteModalContent>
           <img src={Delete} alt="delete_icon" />
@@ -64,6 +59,20 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
           <p>Are you sure?</p>
         </DeleteModalContent>
       </Modal>
+
+			<Modal
+        title="Edit your listing"
+        visible={isEditListingModalVisible}
+        onOk={handleEditOk}
+        onCancel={handleEditCancel}
+      >
+        <EditModalContent>
+          <img src={listingEdit} alt="listing_edit" />
+          <p>Lorem ipsum</p>
+          <p>lorem ipsum</p>
+        </EditModalContent>
+      </Modal>
+
     </JobContent>
   );
 };
