@@ -2,15 +2,12 @@ import { GraphQLFieldResolveFn } from "../utils/types";
 
 const Query: GraphQLFieldResolveFn = {
   feed: async (parent, args, context, info) => {
-    const where = args.filter
+    const where = args.input.filter
       ? {
-          OR: [
-            { position: { contains: args.filter } },
-            { level: { contains: args.filter } },
-            { location: { contains: args.filter } },
-            { company: { contains: args.filter } },
-            { skills: { contains: args.filter } },
-            { description: { contains: args.filter } },
+          AND: [
+            { position: { contains: args.input.filter.position } },
+            { location: { contains: args.input.filter.location } },
+            { company: { contains: args.input.filter.company } },
           ],
         }
       : {};
@@ -20,7 +17,6 @@ const Query: GraphQLFieldResolveFn = {
       skip: args.skip,
       take: args.take,
     });
-
     const count = await context.prisma.job.count({ where });
 
     return {
@@ -29,40 +25,39 @@ const Query: GraphQLFieldResolveFn = {
     };
   },
 
-	ownListings: async (parent, args, context, info) => {
-
-		const where = {
-			creator: {
-				id: context.userId
-			}
-		};
+  ownListings: async (parent, args, context, info) => {
+    const where = {
+      creator: {
+        id: context.userId,
+      },
+    };
+		
     const jobs = await context.prisma.job.findMany({ where });
-		const count = await context.prisma.job.count({ where });
+    const count = await context.prisma.job.count({ where });
 
     return {
       jobs,
-			count
+      count,
     };
   },
 
-	favourites: async (parent, args, context, info) => {
-
+  favourites: async (parent, args, context, info) => {
     const where = {
-			likes: {
-				every: {
-					user: {
-						id: context.userId
-					}
-				}
-			}
-		};
-		// some returns elements when any one of them matches the condition while every returns elements when all of them matches the condition.
+      likes: {
+        every: {
+          user: {
+            id: context.userId,
+          },
+        },
+      },
+    };
+    // some returns elements when any one of them matches the condition while every returns elements when all of them matches the condition.
     const jobs = await context.prisma.job.findMany({ where });
-		const count = await context.prisma.job.count({ where });
+    const count = await context.prisma.job.count({ where });
 
     return {
       jobs,
-			count
+      count,
     };
   },
 };

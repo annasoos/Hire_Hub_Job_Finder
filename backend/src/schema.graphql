@@ -1,5 +1,5 @@
 type Query {
-	feed(filter: String, skip: Int, take: Int): Feed!
+	feed(input: FeedInput): Feed!
 	ownListings: Feed!
 	favourites: Feed!
 }
@@ -7,6 +7,19 @@ type Query {
 type Feed {
 	jobs: [Job!]!
 	count: Int!
+}
+
+input FeedFilters {
+	position: String
+	location: String
+	company: String
+	isJunior: Boolean
+}
+
+input FeedInput {
+	filter: FeedFilters,
+	skip: Int,
+	take: Int
 }
 
 type Mutation {
@@ -39,7 +52,7 @@ type User {
 type Job {
 	id: ID!
 	position: String!
-	level: String!
+	level: String
 	location: String!
 	company: String!
 	skills: String!
