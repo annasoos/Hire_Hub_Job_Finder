@@ -35,8 +35,7 @@ export const JobContainer = styled.div({
   transition: "all 1s ease-in-out",
 });
 
-export const JobContent = styled.div(
-  {
+export const JobContent = styled.div({
     position: "relative",
     left: "50%",
     transform: "translateX(-50%)",
@@ -88,7 +87,7 @@ export const Location = styled.h5(
 
 export const Company = styled.h5(
   {
-    margin: 0,
+    marginBottom: "0.5em",
   },
   (props) => ({ color: props.color })
 );

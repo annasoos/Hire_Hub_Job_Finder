@@ -22,3 +22,23 @@ export const HeartButton = styled.button({
     color: `${red}`,
   },
 });
+
+export const LikeModalContent = styled.div({
+  "& #inModalHeart": {
+    position: "relative",
+    left: "50%",
+    transform: "translateX(-50%)",
+    fontSize: 60,
+    marginBottom: 20,
+    color: `${red}`,
+  },
+
+  "& p": {
+    textAlign: "center",
+
+    "&:first-of-type": {
+      fontWeight: 700,
+      fontSize: "1.2rem",
+    },
+  },
+});

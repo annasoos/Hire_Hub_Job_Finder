@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { cyan, cyanHover, footerBG } from "../../style_guide";
+import { cyan, footerBG } from "../../style_guide";
 
 export const CollapseSection = styled.div({
   position: "relative",
