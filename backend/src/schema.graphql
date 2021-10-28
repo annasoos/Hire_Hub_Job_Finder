@@ -1,5 +1,5 @@
 type Query {
-	feed(input: FeedInput): Feed!
+	feed(filter: FeedFilters, skip: Int, take: Int, orderBy: FeedOrderBy): Feed!
 	ownListings: Feed!
 	favourites: Feed!
 }
@@ -14,13 +14,6 @@ input FeedFilters {
 	location: String
 	company: String
 	isJunior: Boolean
-}
-
-input FeedInput {
-	filter: FeedFilters,
-	skip: Int,
-	take: Int,
-	orderBy: FeedOrderBy
 }
 
 input FeedOrderBy {
@@ -69,9 +62,11 @@ type Job {
 	skills: String!
 	description: String!
 	creator: User! # the relation between User and Job should be bi-directional
-	createdAt: String!
+	createdAt: DateTime!
 	likes: [Like!]!
 }
+
+scalar DateTime
 
 type AuthPayload {
   token: String

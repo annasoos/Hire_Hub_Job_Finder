@@ -3,24 +3,26 @@ import { GraphQLFieldResolveFn } from "../utils/types";
 const Query: GraphQLFieldResolveFn = {
   feed: async (parent, args, context, info) => {
 		const filter = () => {
-			if(args.input.filter.isJunior) {
-				return ( {
+			if (!args.filter) {
+				return {}
+			} else if (args.filter && args.filter.isJunior) {
+				return ({
 					OR: [
 						{	level: "Junior" },
 						{ level: "" }
 					],
 					AND: [
-            { position: { contains: args.input.filter.position } },
-            { location: { contains: args.input.filter.location } },
-            { company: { contains: args.input.filter.company } },
+            { position: { contains: args.filter.position } },
+            { location: { contains: args.filter.location } },
+            { company: { contains: args.filter.company } },
           ],
 				})
-			} else {
+			} else if (args.filter && !args.filter.isJunior) {
 				return ( {
 					AND: [
-            { position: { contains: args.input.filter.position } },
-            { location: { contains: args.input.filter.location } },
-            { company: { contains: args.input.filter.company } },
+            { position: { contains: args.filter.position } },
+            { location: { contains: args.filter.location } },
+            { company: { contains: args.filter.company } },
           ],
 				})
 			}
@@ -28,7 +30,7 @@ const Query: GraphQLFieldResolveFn = {
 
     const where = filter()
 
-    const jobs = await context.prisma.job.findMany({ where, skip: args.input.skip, take: args.input.take, orderBy: args.input.orderBy });
+    const jobs = await context.prisma.job.findMany({ where, skip: args.skip, take: args.take, orderBy: args.orderBy });
     const count = await context.prisma.job.count({ where });
 
     return {
