@@ -2,17 +2,8 @@
 
 import { createContext, useState, useEffect } from 'react';
 import jwt from "jsonwebtoken";
-import { LoggedInUserType } from "../types/LoggedInUserType";
-
-type UserContextType = {
-  loggedInUser: LoggedInUserType | null;
-  setLoggedInUser: React.Dispatch<React.SetStateAction<LoggedInUserType | null>>
-  setToken: React.Dispatch<React.SetStateAction<string | null>>
-}
-
-type ContextProviderProps = {
-	children: React.ReactNode
-}
+import { UserContextType, ContextProviderProps } from "../types/UserContextTypes";
+import { LoggedInUserType } from '../types/LoggedInUserType';
 
 export const UserContext = createContext({} as UserContextType);
 

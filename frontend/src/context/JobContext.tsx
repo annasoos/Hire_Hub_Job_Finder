@@ -2,16 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { JobResponseType } from "../types/JobResponseType";
 import { JobElementType } from "../types/JobElementType";
-
-type JobContextType = {
-  jobList: JobElementType[],
-	isLoaded: boolean,
-	setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>
-};
-
-type ContextProviderProps = {
-  children: React.ReactNode;
-};
+import { JobContextType, ContextProviderProps } from "../types/JobContextTypes";
 
 export const JobContext = createContext({} as JobContextType);
 
