@@ -1,16 +1,16 @@
-import { useQuery, gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
-const FEED_QUERY = gql`
-{
-	feed {
-		jobs {
-			position
-			level
-			location
-			company
-			skills
-			description
-			}
-		}
-	}
+export const FEED_QUERY = gql`
+  query {
+    feed {
+      jobs {
+        position
+        level
+        location
+        company
+        skills
+        description
+      }
+    }
+  }
 `;

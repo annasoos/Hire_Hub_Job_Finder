@@ -34,11 +34,7 @@ export const JobList = () => {
               ) : null}
               <Location color={cyan}> {job.location} </Location>
               <Company color={lightgray}> {job.company} </Company>
-              <Skills color={cyan}>
-                {job.skills.map((skill: string, index: number) => (
-                  <span key={index}>{skill}&nbsp;&nbsp;&nbsp;</span>
-                ))}
-              </Skills>
+              <Skills color={cyan}> {job.skills} </Skills>
               <Description color={white}> {job.description} </Description>
             </JobContent>
           ))}
