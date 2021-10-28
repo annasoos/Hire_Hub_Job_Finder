@@ -24,7 +24,7 @@ export const CollapseBar = () => {
 				{/* YOUR LISTINGS */}
     	  <Panel header="Your listings" key="1">
     	    {jobContext.jobList!
-    	      .filter((job: JobElementType) => job.creator === userContext.loggedInUser!.email)
+    	      .filter((job: JobElementType) => job.creator.email === userContext.loggedInUser!.email)
     	      .map((job: JobElementType, index: number) => (
     	        <OwnListings job={job} key={index}/>
     	      ))}
@@ -37,7 +37,7 @@ export const CollapseBar = () => {
 				{/* YOUR FAVOURITES */}
     	  <Panel header="Your favourites" key="2">
 				{jobContext.jobList!
-    	      .filter((job: JobElementType) => job.creator === userContext.loggedInUser!.email)
+    	      .filter((job: JobElementType) => job.creator.email === userContext.loggedInUser!.email)
     	      .map((job: JobElementType, index: number) => (
     	        <Favourites job={job} key={index}/>
     	      ))}
