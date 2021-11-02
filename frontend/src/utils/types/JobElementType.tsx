@@ -3,7 +3,7 @@ export type JobElementType = {
 	company: string;
 	level: string;
 	location: string;
-	skills: string[];
+	skills: string;
 	description: string;
 	creator: {
 		email: string

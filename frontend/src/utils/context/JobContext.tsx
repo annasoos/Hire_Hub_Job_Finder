@@ -1,8 +1,10 @@
 import { createContext, useState, useEffect } from "react";
 import { useQuery } from '@apollo/client';
-import { FEED_QUERY } from "../GqlQueries";
+// types
 import { JobElementType } from "../types/JobElementType";
 import { JobContextType, ContextProviderProps } from "../types/JobContextTypes";
+// queries
+import { FEED_QUERY } from "../GqlQueries";
 
 export const JobContext = createContext({} as JobContextType);
 

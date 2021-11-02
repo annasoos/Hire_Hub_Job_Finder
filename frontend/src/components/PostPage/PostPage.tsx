@@ -1,5 +1,5 @@
 import { FC, useContext } from "react";
-import axios from "axios";
+import { useMutation } from "@apollo/client";
 //design & components
 import { Button, Input, Form, Select } from "antd";
 import { PostFormContainer, PostFormContent, PostTitle, SearchImg, WelcomeTitle } from "./PostPage.style";
@@ -12,18 +12,20 @@ import { PostFormPropsType } from "../../utils/types/PostFormPropsType";
 import { openNotificationWithIcon } from "../../utils/functions/Notification";
 import withCurrentUser from "../HOC/withCurrentUser";
 import { JobContext } from "../../utils/context/JobContext";
+// queries
+import { CREATE_JOB_MUTATION } from "../../utils/GqlQueries";
 
 const { Option } = Select;
 
 const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
   const [form] = Form.useForm();
 	const jobContext = useContext(JobContext);
+	const [createJob, { data, loading, error }] = useMutation(CREATE_JOB_MUTATION);
 
-  //create new job object and send it to the server
   const submit = async (values: PostFormValuesType): Promise<void> => {
-    const skillsArray: string[] = values.skills.replace(/,/g, "").split(" ");
-    let levelOfJob: string = "";
+    //const skillsArray: string[] = values.skills.replace(/,/g, "").split(" "); --> in SQLite I can only use string
 
+    let levelOfJob: string = "";
     if (values.level !== undefined) {
       levelOfJob = values.level;
     }
@@ -33,31 +35,33 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
       company: values.company,
       level: levelOfJob,
       location: values.location,
-      skills: skillsArray,
+      skills: values.skills,
       description: values.description,
       creator: { email: user!.email },
     };
 
-    await axios
-      .post("http://localhost:8080/api/post-a-job", newJob)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          openNotificationWithIcon(
-            "success",
-            "Successful!",
-            `Candidates can now apply the ${newJob.position} position at ${newJob.company}.`
-          );
-        }
-      })
-      .catch((error) => {
-        console.log("An error occured: ", error);
-        openNotificationWithIcon(
-          "error",
-          "Oops...something went wrong!",
-          "Please try again!"
-        );
-      });
+		createJob({ variables: newJob })
+
+		if (data) {
+			openNotificationWithIcon(
+				"success",
+				"Successful!",
+				`Candidates can now apply the ${newJob.position} position at ${newJob.company}.`
+			);
+		} else if (loading) {
+			openNotificationWithIcon(
+				"info",
+				"Submitting your post...",
+				"Please wait, it takes only a second!"
+			);
+			
+		} else if (error) {
+			openNotificationWithIcon(
+				"error",
+				"Oops...something went wrong!",
+				"Please try again!"
+			);
+		}
 
     form.resetFields();
 		jobContext.setIsLoaded(false);
