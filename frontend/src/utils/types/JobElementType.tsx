@@ -1,7 +1,7 @@
 export type JobElementType = {
 	position: string;
 	company: string;
-	level: string;
+	level: string | undefined;
 	location: string;
 	skills: string;
 	description: string;

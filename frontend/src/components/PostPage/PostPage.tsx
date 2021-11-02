@@ -25,23 +25,19 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
   const submit = async (values: PostFormValuesType): Promise<void> => {
     //const skillsArray: string[] = values.skills.replace(/,/g, "").split(" "); --> in SQLite I can only use string
 
-    let levelOfJob: string = "";
-    if (values.level !== undefined) {
-      levelOfJob = values.level;
-    }
-
     const newJob: JobElementType = {
       position: values.position,
       company: values.company,
-      level: levelOfJob,
+      level: values.level,
       location: values.location,
       skills: values.skills,
       description: values.description,
       creator: { email: user!.email },
     };
 
-		createJob({ variables: newJob })
+		createJob({ variables: newJob }, /* onCompleted: () => ..., onError: () => ... */)
 
+		// The useMutation hook also supports onCompleted and onError options if you prefer to use callbacks.
 		if (data) {
 			openNotificationWithIcon(
 				"success",
@@ -54,7 +50,6 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
 				"Submitting your post...",
 				"Please wait, it takes only a second!"
 			);
-			
 		} else if (error) {
 			openNotificationWithIcon(
 				"error",
