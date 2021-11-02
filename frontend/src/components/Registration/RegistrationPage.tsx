@@ -1,4 +1,5 @@
-import axios from "axios";
+import { useMutation } from '@apollo/client';
+import { useHistory } from "react-router";
 //design & components
 import { Form, Input, Button } from "antd";
 import { RegContainer, RegTitle, RegImgContainer, RegText } from "./Registration.style";
@@ -7,46 +8,38 @@ import laptopGirlIllustration from "../../utils/images/Startup life-pana.svg";
 //types & functions
 import { openNotificationWithIcon } from "../../utils/functions/Notification";
 import { RegUserType } from "../../utils/types/RegUserType";
+// queries
+import { SIGNUP_MUTATION } from "../../utils/GqlQueries";
 
 export const RegistrationPage = () => {
   const [form] = Form.useForm();
+	const history = useHistory();
+	const [signupUser] = useMutation(SIGNUP_MUTATION);
 
   const registration = async (values: RegUserType) => {
-    const firstName = values.firstName;
-    const lastName = values.lastName;
-    const email = values.email;
-    const password = values.password;
-
-    const newUser = { firstName, lastName, email, password };
-
-    await axios
-      .post("http://localhost:8080/api/signup", newUser)
-      .then((res) => {
-        if (res.status === 201) {
-          console.log("New user added", res);
-          openNotificationWithIcon(
-            "success",
-            "Welcome!",
-            "Post a job and find your new teammate! Good luck!"
-          );
-        }
-      })
-      .catch((error) => {
-        console.log("An error occured: ", error.response);
-        if (error.response.status === 400) {
-          openNotificationWithIcon(
-            "error",
-            "Oops..something went wrong!",
-            "Please provide all the necessary data."
-          );
-        } else if (error.response.status === 409) {
-          openNotificationWithIcon(
-            "error",
-            "Oops..something went wrong!",
-            "It looks like you've already registered in our system. Please try and login."
-          );
-        }
-      });
+		signupUser({
+      variables: {
+				firstName: values.firstName,
+				lastName: values.lastName,
+        email: values.email,
+        password: values.password,
+      }
+    })
+		.then(() => {
+			openNotificationWithIcon(
+				"success",
+				"Welcome!",
+				"You can now log in and post new jobs to our database!"
+			);
+			history.push('/login');
+		})
+		.catch(e => {  //hogyan különböztessem meg a hiba státuszokat????
+			openNotificationWithIcon(
+				"error",
+        "Oops..something went wrong!",
+        "It looks like you've already registered in our system. Please try and login."
+			);
+		})
 
     form.resetFields();
   };

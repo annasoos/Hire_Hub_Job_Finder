@@ -43,9 +43,9 @@ export const SIGNUP_MUTATION = gql`
     $password: String!
   ) {
     signup(
-			firsName: $firstName
-			lastName: $lastName
-      email: $email
+			firstName: $firstName,
+			lastName: $lastName,
+      email: $email,
       password: $password
     ) {
       token
