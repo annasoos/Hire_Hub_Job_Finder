@@ -4,14 +4,14 @@ import axios from "axios";
 import { Button, Input, Form, Select } from "antd";
 import { PostFormContainer, PostFormContent, PostTitle, SearchImg, WelcomeTitle } from "./PostPage.style";
 import { lightgray } from "../../style_guide";
-import SearchImage from "../../images/People search-rafiki.svg";
+import SearchImage from "../../utils/images/People search-rafiki.svg";
 //types & functions & hoc
-import { JobElementType } from "../../types/JobElementType";
-import { PostFormValuesType } from "../../types/PostFormValuesType";
-import { PostFormPropsType } from "../../types/PostFormPropsType";
-import { openNotificationWithIcon } from "../../functions/Notification";
+import { JobElementType } from "../../utils/types/JobElementType";
+import { PostFormValuesType } from "../../utils/types/PostFormValuesType";
+import { PostFormPropsType } from "../../utils/types/PostFormPropsType";
+import { openNotificationWithIcon } from "../../utils/functions/Notification";
 import withCurrentUser from "../HOC/withCurrentUser";
-import { JobContext } from "../../context/JobContext";
+import { JobContext } from "../../utils/context/JobContext";
 
 const { Option } = Select;
 
@@ -35,7 +35,7 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
       location: values.location,
       skills: skillsArray,
       description: values.description,
-      creator: user!.email,
+      creator: { email: user!.email },
     };
 
     await axios

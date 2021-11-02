@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, ComponentType } from "react";
-import { UserContext } from "../../context/UserContext";
+import { UserContext } from "../../utils/context/UserContext";
 
 export function withCurrentUser <T> (Component: ComponentType<T>) {
 

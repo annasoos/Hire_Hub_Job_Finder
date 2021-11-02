@@ -3,11 +3,11 @@ import { NavLink, withRouter, RouteComponentProps } from "react-router-dom";
 //design
 import { Tooltip } from "antd";
 import { NavBar, HeaderLogo, Hamburger, HamburgerMenu, LogoutBtn, UserDisplay } from "./Header.style";
-import headerLogo from "../../images/logo_white.png";
+import headerLogo from "../../utils/images/logo_white.png";
 //types & functions & context
-import { HeaderClassStateType } from "../../types/HeaderClassStateType";
-import { openNotificationWithIcon } from "../../functions/Notification";
-import { UserContext } from "../../context/UserContext";
+import { HeaderClassStateType } from "../../utils/types/HeaderClassStateType";
+import { openNotificationWithIcon } from "../../utils/functions/Notification";
+import { UserContext } from "../../utils/context/UserContext";
 
 class Header extends Component<RouteComponentProps<{}>, HeaderClassStateType> { 
 

@@ -7,9 +7,9 @@ import { CollapseSection } from "./Collapse.style";
 import { Favourites } from "../Favourites/Favourites";
 import { OwnListings } from "../OwnListings/OwnListings";
 //context & function
-import { JobElementType } from "../../types/JobElementType";
-import { UserContext } from "../../context/UserContext";
-import { JobContext } from "../../context/JobContext";
+import { JobElementType } from "../../utils/types/JobElementType";
+import { UserContext } from "../../utils/context/UserContext";
+import { JobContext } from "../../utils/context/JobContext";
 
 export const CollapseBar = () => {
 	const history = useHistory();

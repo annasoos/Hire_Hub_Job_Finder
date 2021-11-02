@@ -1,4 +1,4 @@
-import { JobElementType } from "../types/JobElementType";
+import { JobElementType } from "./JobElementType";
 
 export type JobContextType = {
   jobList: JobElementType[],

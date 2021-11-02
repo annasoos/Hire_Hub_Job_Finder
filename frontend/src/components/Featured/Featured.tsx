@@ -4,8 +4,8 @@ import { Card } from "../Card/Card";
 import { Search } from "../Search/Search";
 import { FeaturedSection, Title, Text, CardContainer, BlueLine } from "./Featured.style";
 //types & functions
-import { JobElementType } from "../../types/JobElementType";
-import { JobContext } from "../../context/JobContext";
+import { JobElementType } from "../../utils/types/JobElementType";
+import { JobContext } from "../../utils/context/JobContext";
 
 export class Featured extends Component<{}, {}> {
 	static contextType = JobContext;

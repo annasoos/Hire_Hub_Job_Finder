@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { UserContextProvider } from "./context/UserContext";
-import { JobContextProvider } from "./context/JobContext";
+import { UserContextProvider } from "./utils/context/UserContext";
+import { JobContextProvider } from "./utils/context/JobContext";
 import {
   ApolloProvider,
   ApolloClient,

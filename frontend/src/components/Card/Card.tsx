@@ -6,7 +6,7 @@ import { LikeTwoTone } from "@ant-design/icons";
 import { SmileTwoTone } from "@ant-design/icons";
 import { cyan } from "../../style_guide"
 //types & functions
-import { CardPropsType } from "../../types/CardPropsType";
+import { CardPropsType } from "../../utils/types/CardPropsType";
 
 export const Card:FC<CardPropsType> = ({ cardElement, position }) => { 
   return (

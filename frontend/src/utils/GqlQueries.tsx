@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const FEED_QUERY = gql`
   query {
-    feed (orderBy:{ createdAt:desc }) {
+    feed(orderBy: { createdAt: desc }) {
       jobs {
         position
         level
@@ -10,9 +10,9 @@ export const FEED_QUERY = gql`
         company
         skills
         description
-				creator {
-					email
-				}
+        creator {
+          email
+        }
       }
     }
   }

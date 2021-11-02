@@ -2,11 +2,11 @@ import axios from "axios";
 //design & components
 import { Form, Input, Button } from "antd";
 import { RegContainer, RegTitle, RegImgContainer, RegText } from "./Registration.style";
-import businessManIllustration from "../../images/Businessman-pana.svg";
-import laptopGirlIllustration from "../../images/Startup life-pana.svg";
+import businessManIllustration from "../../utils/images/Businessman-pana.svg";
+import laptopGirlIllustration from "../../utils/images/Startup life-pana.svg";
 //types & functions
-import { openNotificationWithIcon } from "../../functions/Notification";
-import { RegUserType } from "../../types/RegUserType";
+import { openNotificationWithIcon } from "../../utils/functions/Notification";
+import { RegUserType } from "../../utils/types/RegUserType";
 
 export const RegistrationPage = () => {
   const [form] = Form.useForm();

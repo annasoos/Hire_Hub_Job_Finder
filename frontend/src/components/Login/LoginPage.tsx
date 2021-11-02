@@ -4,11 +4,11 @@ import axios from "axios";
 //design & components
 import { Form, Input, Button } from "antd";
 import { LoginTitle, LoginContainer } from "./LoginPage.style";
-import loginIllustration from "../../images/Fingerprint-pana.svg";
+import loginIllustration from "../../utils/images/Fingerprint-pana.svg";
 //types & functions & context
-import { openNotificationWithIcon } from "../../functions/Notification";
-import { LoginSuccessType } from "../../types/LoginSuccessType";
-import { UserContext } from "../../context/UserContext";
+import { openNotificationWithIcon } from "../../utils/functions/Notification";
+import { LoginSuccessType } from "../../utils/types/LoginSuccessType";
+import { UserContext } from "../../utils/context/UserContext";
 
 export const LoginPage:FC = () => {
   const [form] = Form.useForm();

@@ -1,4 +1,4 @@
-import { LoggedInUserType } from "../types/LoggedInUserType";
+import { LoggedInUserType } from "./LoggedInUserType";
 
 export type UserContextType = {
   loggedInUser: LoggedInUserType | null;

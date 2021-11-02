@@ -5,8 +5,8 @@ import { FavButton } from "../FavButton/FavButton";
 import { cyan, darkBlue, lightgray, white } from "../../style_guide";
 import { LoadingText, JobListSection,  JobContainer, JobContent, Position, Level, Location, Company, Skills, Description } from "../JobList/JobList.style";
 //types & context
-import { JobElementType } from "../../types/JobElementType";
-import { JobContext } from "../../context/JobContext";
+import { JobElementType } from "../../utils/types/JobElementType";
+import { JobContext } from "../../utils/context/JobContext";
 
 export const JobList = () => {
 
