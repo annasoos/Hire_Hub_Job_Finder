@@ -11,7 +11,7 @@ const signup: GraphQLResolveFn  = async (parent, args, context, info) => {
   const newUser = await context.prisma.user.create({ data: { ...args, password } })
 
   // generating a JSON Web Token which is signed with an APP_SECRET
-  const token = jwt.sign({ userId: newUser.id }, APP_SECRET)
+  const token = jwt.sign({ userId: newUser.id, firstName: newUser.firstName, lastName: newUser.lastName, email: newUser.email }, APP_SECRET)
 
   // return the token and the user in an object that adheres to the shape of an AuthPayload object from GraphQL schema
   return {

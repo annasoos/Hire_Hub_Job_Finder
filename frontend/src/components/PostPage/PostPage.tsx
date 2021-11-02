@@ -210,11 +210,11 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
       return (
         <h2>
           Sorry, only registered users can post new positions.
-          <h3>
+          <div>
             You can easily create a new account by{" "}
             <a href="/signup">clicking here</a>, <br /> or if you already have
             one please <a href="/login">login</a>!
-          </h3>
+          </div>
         </h2>
       );
     }

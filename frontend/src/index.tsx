@@ -11,15 +11,26 @@ import {
   createHttpLink,
   InMemoryCache
 } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
 //We create the httpLink that will connect our ApolloClient instance with the GraphQL API. The GraphQL server will be running on localhost 4000.
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000'
 });
 
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem("token");
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : ''
+    }
+  };
+});
+
 // Apollo Client stores the results of your GraphQL queries in a local, normalized, in-memory cache. This enables Apollo Client to respond almost immediately to queries for already-cached data, without even sending a network request.
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 });
 

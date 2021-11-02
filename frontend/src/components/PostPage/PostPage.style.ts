@@ -24,7 +24,7 @@ export const PostFormContainer = styled.section({
       fontSize: 20,
     },
 
-    "& h3": {
+    "& div": {
       color: `${gray}`,
       fontWeight: 500,
       fontSize: 20,

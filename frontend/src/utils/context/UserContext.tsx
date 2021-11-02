@@ -20,13 +20,15 @@ export const UserContextProvider = ({children}: ContextProviderProps) => {
             firstName: decoded.firstName,
             lastName: decoded.lastName,
             email: decoded.email,
-          });
-        }
+          })
+        } else if (err) {
+					console.log(err)
+				}
       });
     } else {
 			setLoggedInUser(null)
 		}
-  }, [token]);
+  }, [token, tokenKey]);
 
 	return (
 	<UserContext.Provider value={{loggedInUser, setLoggedInUser, setToken}}>

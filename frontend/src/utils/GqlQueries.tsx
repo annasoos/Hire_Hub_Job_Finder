@@ -20,7 +20,7 @@ export const FEED_QUERY = gql`
 
 
 export const CREATE_JOB_MUTATION = gql`
-	mutation PostMutation ($position: String!, $level: String?, $location: String!, $company: String!, $skills: String!, $description: String!) {
+	mutation PostMutation ($position: String!, $level: String, $location: String!, $company: String!, $skills: String!, $description: String!) {
 		post (
 			position: $position,
 			level: $level,
@@ -32,4 +32,35 @@ export const CREATE_JOB_MUTATION = gql`
 			id
 		}
 	}
+`;
+
+
+export const SIGNUP_MUTATION = gql`
+  mutation SignupMutation(
+		$firstName: String!
+		$lastName: String!
+    $email: String!
+    $password: String!
+  ) {
+    signup(
+			firsName: $firstName
+			lastName: $lastName
+      email: $email
+      password: $password
+    ) {
+      token
+    }
+  }
+`;
+
+
+export const LOGIN_MUTATION = gql`
+  mutation LoginMutation(
+    $email: String!
+    $password: String!
+  ) {
+    login(email: $email, password: $password) {
+      token
+    }
+  }
 `;

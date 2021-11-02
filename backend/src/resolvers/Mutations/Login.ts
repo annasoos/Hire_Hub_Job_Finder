@@ -20,7 +20,7 @@ const login: GraphQLResolveFn = async (parent, args, context, info) => {
     throw new Error('Invalid password')
   }
 
-  const token = jwt.sign({ userId: user.id }, APP_SECRET)
+  const token = jwt.sign({ userId: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email }, APP_SECRET)
 
   //  returning token and user again
   return {
