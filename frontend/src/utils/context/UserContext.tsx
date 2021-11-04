@@ -17,6 +17,7 @@ export const UserContextProvider = ({children}: ContextProviderProps) => {
       jwt.verify(token, tokenKey, function (err, decoded) {
         if (decoded) {
           setLoggedInUser({
+						userId: decoded.userId,
             firstName: decoded.firstName,
             lastName: decoded.lastName,
             email: decoded.email,

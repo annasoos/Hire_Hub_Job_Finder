@@ -32,12 +32,14 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
       location: values.location,
       skills: values.skills,
       description: values.description,
-      creator: { email: user!.email },
+      creator: { 
+				id: user!.userId,
+				email: user!.email },
+			likes: []
     };
 
-		createJob({ variables: newJob }, /* onCompleted: () => ..., onError: () => ... */)
+		createJob({ variables: newJob })
 
-		// The useMutation hook also supports onCompleted and onError options if you prefer to use callbacks.
 		if (data) {
 			openNotificationWithIcon(
 				"success",
@@ -51,6 +53,7 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
 				"Please wait, it takes only a second!"
 			);
 		} else if (error) {
+			console.log(JSON.stringify(error, null, 2));
 			openNotificationWithIcon(
 				"error",
 				"Oops...something went wrong!",

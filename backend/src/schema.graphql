@@ -26,7 +26,7 @@ enum Sort {
 }
 
 type Mutation {
-	post(position: String!, level: String!,	location: String!,	company: String!,	skills: String!,	description: String!): Job!
+	post(position: String!, level: String,	location: String!,	company: String!,	skills: String!,	description: String!): Job!
 	signup(firstName: String!, lastName: String!, email: String!, password: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
 	like(jobId: ID!): Like

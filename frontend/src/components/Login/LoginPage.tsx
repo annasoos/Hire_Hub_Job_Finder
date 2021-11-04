@@ -36,6 +36,7 @@ export const LoginPage: FC = () => {
 			history.push('/');
 		})
 		.catch(e => {  //hogyan különböztessem meg a hiba státuszokat????
+			console.log(JSON.stringify(e, null, 2));
 			openNotificationWithIcon(
 				"error",
 				"Oops..something went wrong!",

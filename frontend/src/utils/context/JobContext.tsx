@@ -22,6 +22,7 @@ export const JobContextProvider = ({ children }: ContextProviderProps) => {
 		if(!loading){
 			setIsLoaded(true)
 			setJobList(data.feed.jobs)
+			console.log(data.feed.jobs)
 		}
   }, [loading, data]);
 
