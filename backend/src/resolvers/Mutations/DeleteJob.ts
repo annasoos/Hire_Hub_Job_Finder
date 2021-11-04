@@ -3,10 +3,7 @@ import { GraphQLResolveFn } from '../../utils/types';
 const deleteListing: GraphQLResolveFn = async (parent, args, context, info) => {
 
 	// If the job I would like to delete has any likes, we need to use cascading deletes, beacuse of the relations between the two tables.
-	// To resolve this error, you can:
-		 // Make the relation optional
-		// Change the author of the posts to another user before deleting the user
-		// Delete a user and all their posts with two separate queries in a transaction (all queries must succeed) ---> we do this
+	// We delete a user and all their posts with two separate queries in a transaction (all queries must succeed)
 
 	const likesOfDeletedJob = await context.prisma.like.findMany({
 		where: {

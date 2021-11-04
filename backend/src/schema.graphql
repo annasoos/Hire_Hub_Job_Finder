@@ -36,7 +36,6 @@ type Mutation {
 	deleteLike(userId: ID!, jobId: ID!): DeleteLike!
 }
 
-# Subscriptions are a GraphQL feature that allows a server to send data to its clients when a specific event happens.
 type Subscription {
 	newJob: Job!
 	deleteJob: Job!

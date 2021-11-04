@@ -8,7 +8,7 @@ export type JobElementType = {
 	skills: string
 	description: string
 	creator: {
-		id: number
+		id: string
 		email: string
 	}
 	likes: LikeTableType[]

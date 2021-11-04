@@ -24,7 +24,7 @@ export const CollapseBar = () => {
 				{/* YOUR LISTINGS */}
     	  <Panel header="Your listings" key="1">
     	    {jobContext.jobList!
-    	      .filter((job: JobElementType) => job.creator.id == userContext.loggedInUser!.userId) // creator.id ---> number ??? miért nem működik === ????
+    	      .filter((job: JobElementType) => parseInt(job.creator.id) === userContext.loggedInUser!.userId)
     	      .map((job: JobElementType, index: number) => (
     	        <OwnListings job={job} key={index}/>
     	      ))}
@@ -35,9 +35,9 @@ export const CollapseBar = () => {
     	  </Panel>
 
 				{/* YOUR FAVOURITES */}
-    	  <Panel header="Your favourites" key="2">
+    	 <Panel header="Your favourites" key="2">
 				{jobContext.jobList!
-    	      .filter((job: JobElementType) => job.creator.id == userContext.loggedInUser!.userId) 
+    	      .filter((job: JobElementType) => parseInt(job.creator.id) === userContext.loggedInUser!.userId) 
 						.map((job: JobElementType, index: number) => (
     	      <Favourites job={job} key={index}/>
     	    ))}

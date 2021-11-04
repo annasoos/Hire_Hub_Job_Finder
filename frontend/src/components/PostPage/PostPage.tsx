@@ -33,7 +33,7 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
       skills: values.skills,
       description: values.description,
       creator: { 
-				id: user!.userId,
+				id: (user!.userId).toString(),
 				email: user!.email },
 			likes: []
     };
