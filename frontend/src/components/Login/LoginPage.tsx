@@ -16,49 +16,36 @@ export const LoginPage: FC = () => {
   const [form] = Form.useForm();
   const history = useHistory();
   const userContext = useContext(UserContext);
-	const [isLoaded, setIsLoaded] = useState(false);
-	const [isError, setIsError] = useState(false);
   const [loginUser, { data, loading, error }] = useMutation(LOGIN_MUTATION);
 
-  const login = async (values: LoginSuccessType) => {
-		try {
-			await loginUser({
-				variables: {
-					email: values.email,
-					password: values.password,
-				}
-			})
-			if (!loading) {
-				setIsLoaded(true);
-			}
-		} 
-		catch (error) {
-			setIsError(true)
-		}
-	};
+  const login = (values: LoginSuccessType) => {
+    loginUser({
+      variables: {
+        email: values.email,
+        password: values.password,
+      },
+    });
+  };
 
-	useEffect(() => {
-		if (isLoaded) {
-			localStorage.setItem("token", data.login.token);
-			userContext.setToken(data.login.token);
-			openNotificationWithIcon(
-				"success",
-				"Welcome back!",
-				"Good to see you again!"
-			);
-			history.push('/');
-		} else if (isError) {
-			console.log(JSON.stringify(error, null, 2));
-			openNotificationWithIcon(
-				"error",
-				"Oops..something went wrong!",
-				"E-mail address or password is incorrect. Please try again!"
-			);
-			form.resetFields();
-			setIsLoaded(false);
-			setIsError(false);
-		}
-  }, [isLoaded, isError]);
+	if(!loading && !error && data) {
+		if (data.login.message === "User successfully logged in") {
+      localStorage.setItem("token", data.login.token);
+      userContext.setToken(data.login.token);
+      openNotificationWithIcon(
+        "success",
+        "Welcome back!",
+        "Good to see you again!"
+      );
+      history.push("/");
+    } else if (data.login.message === "Invalid password" || data.login.message === "User not found") {
+      openNotificationWithIcon(
+        "error",
+        "Oops..something went wrong!",
+        "E-mail address or password is incorrect. Please try again!"
+      );
+      form.resetFields();
+    }
+	}
 
   return (
     <LoginContainer>
