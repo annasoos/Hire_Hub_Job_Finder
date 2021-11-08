@@ -28,8 +28,7 @@ const server = new ApolloServer({
     'utf8'
   ),
   resolvers,
-	context: ({ req }) => {
-    return {
+	context: async ({ req }) => ({
       ...req,
       prisma,
 			pubsub,
@@ -37,8 +36,7 @@ const server = new ApolloServer({
         req && req.headers.authorization
           ? getUserId(req)
           : null
-    };
-  }
+    })
 })
 // The context argument is a plain JavaScript object that every resolver in the resolver chain can read from and write to. Thus, it is basically a means for resolvers to communicate. Here we creating the context as a function which returns the context.
 // Using Prisma to read our actual database
