@@ -12,7 +12,7 @@ export const JobContext = createContext({} as JobContextType);
 export const JobContextProvider = ({ children }: ContextProviderProps) => {
   const [jobList, setJobList] = useState<JobElementType[]>([] as JobElementType[]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-	const { data, loading, error } = useQuery(FEED_QUERY);
+	const { data, loading, error, refetch } = useQuery(FEED_QUERY);
 
 		/* This hook returns three items:
 		loading: Is true as long as the request is still ongoing and the response hasn’t been received.
@@ -28,6 +28,10 @@ export const JobContextProvider = ({ children }: ContextProviderProps) => {
 			openNotificationWithIcon('error', 'Error', 'Something went wrong. Please try again later.')
 		}
   }, [data, loading, error]);
+
+	useEffect(() => {
+		refetch()
+	}, [isLoaded])
 
   return (
     <JobContext.Provider value={{ jobList, isLoaded, setIsLoaded }}>{children}</JobContext.Provider>
