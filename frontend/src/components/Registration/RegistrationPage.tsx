@@ -20,7 +20,8 @@ export const RegistrationPage = () => {
 	const [signupUser, { data, loading, error }] = useMutation(SIGNUP_MUTATION);
 
   const registration = async (values: RegUserType) => {
-		signupUser({
+		try {
+			await signupUser({
       variables: {
 				firstName: values.firstName,
 				lastName: values.lastName,
@@ -28,18 +29,17 @@ export const RegistrationPage = () => {
         password: values.password,
       }
     })
-		.then(() => {
-			if(!loading) {
+		if(!loading) {
 				setIsLoaded(true);
 			}
-		})
-		.catch((error) => {
+		}
+		catch (error) {
 			setIsError(true)
-		})
-  }
+		}
+  };
 
 	useEffect(() => {
-		if (isLoaded && !isError) {
+		if (isLoaded) {
 			openNotificationWithIcon(
 				"success",
 				"Welcome!",

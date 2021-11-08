@@ -21,24 +21,24 @@ export const LoginPage: FC = () => {
   const [loginUser, { data, loading, error }] = useMutation(LOGIN_MUTATION);
 
   const login = async (values: LoginSuccessType) => {
-    loginUser({
-      variables: {
-        email: values.email,
-        password: values.password,
-      }
-    })
-		.then(() => {
-			if(!loading) {
+		try {
+			await loginUser({
+				variables: {
+					email: values.email,
+					password: values.password,
+				}
+			})
+			if (!loading) {
 				setIsLoaded(true);
 			}
-		})
-		.catch((error) => {
+		} 
+		catch (error) {
 			setIsError(true)
-		})
+		}
 	};
 
 	useEffect(() => {
-		if (isLoaded && !isError) {
+		if (isLoaded) {
 			localStorage.setItem("token", data.login.token);
 			userContext.setToken(data.login.token);
 			openNotificationWithIcon(
