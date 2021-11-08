@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 //design & components
 import { Button, Input, Form, Select } from "antd";
@@ -20,6 +20,8 @@ const { Option } = Select;
 const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
   const [form] = Form.useForm();
 	const jobContext = useContext(JobContext);
+	const [isLoaded, setIsLoaded] = useState(false);
+	const [isError, setIsError] = useState(false);
 	const [createJob, { data, loading, error }] = useMutation(CREATE_JOB_MUTATION);
 
   const submit = async (values: PostFormValuesType): Promise<void> => {
@@ -39,20 +41,27 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
     };
 
 		createJob({ variables: newJob })
+		.then(() => {
+			if(!loading) {
+				setIsLoaded(true);
+			}
+		})
+		.catch((error) => {
+			setIsError(true)
+		})
 
     form.resetFields();
 		jobContext.setIsLoaded(false);
   };
 
 	useEffect(() => {
-		if (!loading && !error && data) {
-			console.log(data)
+		if (isLoaded && !isError && data) {
 			openNotificationWithIcon(
 				"success",
 				"Successful!",
 				`Candidates can now apply the ${data.post.position} position at ${data.post.company}.`
 			);
-		} else if (error) {
+		} else if (isError) {
 			console.log(JSON.stringify(error, null, 2));
 			openNotificationWithIcon(
 				"error",
@@ -60,7 +69,7 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
 				"Please try again!"
 			);
 		}
-	}, [data, loading, error]);
+	}, [isLoaded, isError]);
 
 
   // conditional rendering based on user authentication (isLoggedIn and user props from HOC)
