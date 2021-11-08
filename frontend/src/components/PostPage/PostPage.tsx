@@ -1,4 +1,4 @@
-import { FC, useContext } from "react";
+import { FC, useContext, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 //design & components
 import { Button, Input, Form, Select } from "antd";
@@ -40,17 +40,17 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
 
 		createJob({ variables: newJob })
 
-		if (data) {
+    form.resetFields();
+		jobContext.setIsLoaded(false);
+  };
+
+	useEffect(() => {
+		if (!loading && !error && data) {
+			console.log(data)
 			openNotificationWithIcon(
 				"success",
 				"Successful!",
-				`Candidates can now apply the ${newJob.position} position at ${newJob.company}.`
-			);
-		} else if (loading) {
-			openNotificationWithIcon(
-				"info",
-				"Submitting your post...",
-				"Please wait, it takes only a second!"
+				`Candidates can now apply the ${data.post.position} position at ${data.post.company}.`
 			);
 		} else if (error) {
 			console.log(JSON.stringify(error, null, 2));
@@ -60,10 +60,8 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
 				"Please try again!"
 			);
 		}
+	}, [data, loading, error]);
 
-    form.resetFields();
-		jobContext.setIsLoaded(false);
-  };
 
   // conditional rendering based on user authentication (isLoggedIn and user props from HOC)
   const renderForm = () => {

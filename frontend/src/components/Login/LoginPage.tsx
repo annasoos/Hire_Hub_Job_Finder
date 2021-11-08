@@ -1,4 +1,4 @@
-import { FC, useContext } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useMutation } from "@apollo/client";
 //design & components
@@ -16,7 +16,9 @@ export const LoginPage: FC = () => {
   const [form] = Form.useForm();
   const history = useHistory();
   const userContext = useContext(UserContext);
-  const [loginUser] = useMutation(LOGIN_MUTATION);
+	const [isLoaded, setIsLoaded] = useState(false);
+	const [isError, setIsError] = useState(false);
+  const [loginUser, { data, loading, error }] = useMutation(LOGIN_MUTATION);
 
   const login = async (values: LoginSuccessType) => {
     loginUser({
@@ -25,7 +27,18 @@ export const LoginPage: FC = () => {
         password: values.password,
       }
     })
-		.then(({ data }) => {
+		.then(() => {
+			if(!loading) {
+				setIsLoaded(true);
+			}
+		})
+		.catch((error) => {
+			setIsError(true)
+		})
+	};
+
+	useEffect(() => {
+		if (isLoaded && !isError) {
 			localStorage.setItem("token", data.login.token);
 			userContext.setToken(data.login.token);
 			openNotificationWithIcon(
@@ -34,18 +47,18 @@ export const LoginPage: FC = () => {
 				"Good to see you again!"
 			);
 			history.push('/');
-		})
-		.catch(e => {  //hogyan különböztessem meg a hiba státuszokat????
-			console.log(JSON.stringify(e, null, 2));
+		} else if (isError) {
+			console.log(JSON.stringify(error, null, 2));
 			openNotificationWithIcon(
 				"error",
 				"Oops..something went wrong!",
 				"E-mail address or password is incorrect. Please try again!"
 			);
-		})
-
-    form.resetFields();
-  };
+			form.resetFields();
+			setIsLoaded(false);
+			setIsError(false);
+		}
+  }, [isLoaded, isError]);
 
   return (
     <LoginContainer>

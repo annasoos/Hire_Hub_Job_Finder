@@ -58,7 +58,7 @@ const Query: GraphQLFieldResolveFn = {
   favourites: async (parent, args, context, info) => {
     const where = {
       likes: {
-        every: {
+        some: {
           user: {
             id: context.userId,
           },

@@ -20,6 +20,38 @@ export const FEED_QUERY = gql`
 `;
 
 
+export const OWN_LISTINGS_QUERY = gql`
+  query {
+    ownListings {
+      jobs {
+        position
+        level
+        location
+        company
+        skills
+        description
+      }
+    }
+  }
+`;
+
+
+export const FAVOURITES_QUERY = gql`
+  query {
+    favourites {
+      jobs {
+        position
+        level
+        location
+        company
+        skills
+        description
+      }
+    }
+  }
+`;
+
+
 export const CREATE_JOB_MUTATION = gql`
 	mutation PostMutation ($position: String!, $level: String, $location: String!, $company: String!, $skills: String!, $description: String!) {
 		post (
@@ -30,7 +62,8 @@ export const CREATE_JOB_MUTATION = gql`
 			skills: $skills,
 			description: $description
 		) {
-			id
+			position,
+			company
 		}
 	}
 `;

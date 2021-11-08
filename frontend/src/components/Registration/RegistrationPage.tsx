@@ -10,11 +10,14 @@ import { openNotificationWithIcon } from "../../utils/functions/Notification";
 import { RegUserType } from "../../utils/types/RegUserType";
 // queries
 import { SIGNUP_MUTATION } from "../../utils/GqlQueries";
+import { useEffect, useState } from 'react';
 
 export const RegistrationPage = () => {
   const [form] = Form.useForm();
 	const history = useHistory();
-	const [signupUser] = useMutation(SIGNUP_MUTATION);
+	const [isLoaded, setIsLoaded] = useState(false);
+	const [isError, setIsError] = useState(false);
+	const [signupUser, { data, loading, error }] = useMutation(SIGNUP_MUTATION);
 
   const registration = async (values: RegUserType) => {
 		signupUser({
@@ -26,24 +29,35 @@ export const RegistrationPage = () => {
       }
     })
 		.then(() => {
+			if(!loading) {
+				setIsLoaded(true);
+			}
+		})
+		.catch((error) => {
+			setIsError(true)
+		})
+  }
+
+	useEffect(() => {
+		if (isLoaded && !isError) {
 			openNotificationWithIcon(
 				"success",
 				"Welcome!",
 				"You can now log in and post new jobs to our database!"
 			);
 			history.push('/login');
-		})
-		.catch(e => {  //hogyan különböztessem meg a hiba státuszokat????
-			console.log(JSON.stringify(e, null, 2));
+		} else if (isError) {
+			console.log(JSON.stringify(error, null, 2));
 			openNotificationWithIcon(
 				"error",
         "Oops..something went wrong!",
         "It looks like you've already registered in our system. Please try and login."
 			);
-		})
-
-    form.resetFields();
-  };
+			form.resetFields();
+			setIsLoaded(false);
+			setIsError(false);
+		}
+  }, [isLoaded, isError]);
 
   return (
     <RegContainer>

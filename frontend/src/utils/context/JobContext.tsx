@@ -5,6 +5,7 @@ import { JobElementType } from "../types/JobElementType";
 import { JobContextType, ContextProviderProps } from "../types/JobContextTypes";
 // queries
 import { FEED_QUERY } from "../GqlQueries";
+import { openNotificationWithIcon } from "../functions/Notification";
 
 export const JobContext = createContext({} as JobContextType);
 
@@ -19,12 +20,14 @@ export const JobContextProvider = ({ children }: ContextProviderProps) => {
 		data: This is the actual data that was received from the server. */
 
   useEffect(() => {
-		if(!loading){
+		if (!loading && !error){
 			setIsLoaded(true)
 			setJobList(data.feed.jobs)
 			console.log(data.feed.jobs)
+		} else if (error) {
+			openNotificationWithIcon('error', 'Error', 'Something went wrong. Please try again later.')
 		}
-  }, [loading, data]);
+  }, [data, loading, error]);
 
   return (
     <JobContext.Provider value={{ jobList, isLoaded, setIsLoaded }}>{children}</JobContext.Provider>
