@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/client';
+import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router";
 //design & components
 import { Form, Input, Button } from "antd";
@@ -10,54 +10,40 @@ import { openNotificationWithIcon } from "../../utils/functions/Notification";
 import { RegUserType } from "../../utils/types/RegUserType";
 // queries
 import { SIGNUP_MUTATION } from "../../utils/GqlQueries";
-import { useEffect, useState } from 'react';
 
 export const RegistrationPage = () => {
   const [form] = Form.useForm();
-	const history = useHistory();
-	const [isLoaded, setIsLoaded] = useState(false);
-	const [isError, setIsError] = useState(false);
-	const [signupUser, { data, loading, error }] = useMutation(SIGNUP_MUTATION);
+  const history = useHistory();
+  const [signupUser, { data, loading, error }] = useMutation(SIGNUP_MUTATION);
 
-  const registration = async (values: RegUserType) => {
-		try {
-			await signupUser({
+  const registration = (values: RegUserType) => {
+    signupUser({
       variables: {
-				firstName: values.firstName,
-				lastName: values.lastName,
+        firstName: values.firstName,
+        lastName: values.lastName,
         email: values.email,
         password: values.password,
-      }
-    })
-		if(!loading) {
-				setIsLoaded(true);
-			}
-		}
-		catch (error) {
-			setIsError(true)
-		}
+      },
+    });
   };
 
-	useEffect(() => {
-		if (isLoaded) {
-			openNotificationWithIcon(
-				"success",
-				"Welcome!",
-				"You can now log in and post new jobs to our database!"
-			);
-			history.push('/login');
-		} else if (isError) {
-			console.log(JSON.stringify(error, null, 2));
-			openNotificationWithIcon(
-				"error",
+  if (!loading && !error && data) {
+    if (data.signup.message === "User created") {
+      openNotificationWithIcon(
+        "success",
+        "Welcome!",
+        "You can now log in and post new jobs to our database!"
+      );
+      history.push("/login");
+    } else if (data.signup.message === "Already registered") {
+      openNotificationWithIcon(
+        "error",
         "Oops..something went wrong!",
         "It looks like you've already registered in our system. Please try and login."
-			);
-			form.resetFields();
-			setIsLoaded(false);
-			setIsError(false);
-		}
-  }, [isLoaded, isError]);
+      );
+      form.resetFields();
+    }
+  }
 
   return (
     <RegContainer>
@@ -69,7 +55,11 @@ export const RegistrationPage = () => {
       </RegText>
 
       <RegImgContainer>
-        <img id="businessMan" src={businessManIllustration} alt="illustration" />
+        <img
+          id="businessMan"
+          src={businessManIllustration}
+          alt="illustration"
+        />
         <img id="laptopGirl" src={laptopGirlIllustration} alt="illustration" />
       </RegImgContainer>
 
@@ -79,13 +69,14 @@ export const RegistrationPage = () => {
         form={form}
         onFinish={registration}
         autoComplete="off"
-        colon={false} >
-
+        colon={false}
+      >
         {/* FIRST NAME*/}
         <Form.Item
           label={<label style={{ color: "white" }}>First Name:</label>}
           name="firstName"
-          rules={[{ required: true, message: "Please add your first name!" }]} >
+          rules={[{ required: true, message: "Please add your first name!" }]}
+        >
           <Input className="input" allowClear />
         </Form.Item>
 
@@ -93,7 +84,8 @@ export const RegistrationPage = () => {
         <Form.Item
           label={<label style={{ color: "white" }}>Last Name:</label>}
           name="lastName"
-          rules={[{ required: true, message: "Please add your last name!" }]} >
+          rules={[{ required: true, message: "Please add your last name!" }]}
+        >
           <Input className="input" allowClear />
         </Form.Item>
 
@@ -101,7 +93,14 @@ export const RegistrationPage = () => {
         <Form.Item
           label={<label style={{ color: "white" }}>E-mail address:</label>}
           name="email"
-          rules={[{ required: true, message: "Please add your e-mail address!", type: "email" }]} >
+          rules={[
+            {
+              required: true,
+              message: "Please add your e-mail address!",
+              type: "email",
+            },
+          ]}
+        >
           <Input className="input" allowClear />
         </Form.Item>
 
@@ -109,7 +108,8 @@ export const RegistrationPage = () => {
         <Form.Item
           label={<label style={{ color: "white" }}>Password:</label>}
           name="password"
-          rules={[{ required: true, message: "Please add a password!" }]} >
+          rules={[{ required: true, message: "Please add a password!" }]}
+        >
           <Input.Password className="input" allowClear />
         </Form.Item>
 
