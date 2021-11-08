@@ -2,6 +2,8 @@ import { GraphQLResolveInfo } from "graphql/type"
 
 export type Context = Record<string, any>
 
+// export type ContextType = (arg: Context) => Context
+
 export type GraphQLResolveFn = (parent: any, args: { [argName: string]: any }, context: Context, info: GraphQLResolveInfo) => any
 
 export type GraphQLFieldResolveFn = {
