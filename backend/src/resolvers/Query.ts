@@ -18,7 +18,7 @@ const Query: GraphQLFieldResolveFn = {
           ],
 				})
 			} else if (args.filter && !args.filter.isJunior) {
-				return ( {
+				return ({
 					AND: [
             { position: { contains: args.filter.position } },
             { location: { contains: args.filter.location } },

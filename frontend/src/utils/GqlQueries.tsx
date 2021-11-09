@@ -19,6 +19,25 @@ export const FEED_QUERY = gql`
   }
 `;
 
+export const FEED_SEARCH_QUERY = gql`
+  query ($filter: FeedFilters!) {
+    feed(orderBy: { createdAt: asc }, filter: $filter) {
+      jobs {
+        position
+        level
+        location
+        company
+        skills
+        description
+        creator {
+					id
+          email
+      	}
+    	}
+		}
+	}
+`;
+
 
 export const OWN_LISTINGS_QUERY = gql`
   query {

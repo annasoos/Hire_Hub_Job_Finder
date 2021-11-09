@@ -34,6 +34,6 @@ export const JobContextProvider = ({ children }: ContextProviderProps) => {
 	}, [isLoaded])
 
   return (
-    <JobContext.Provider value={{ jobList, isLoaded, setIsLoaded }}>{children}</JobContext.Provider>
+    <JobContext.Provider value={{ jobList, setJobList, isLoaded, setIsLoaded }}>{children}</JobContext.Provider>
   );
 };

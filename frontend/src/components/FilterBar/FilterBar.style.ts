@@ -26,64 +26,66 @@ export const FilterContainer = styled.section({
 });
 
 export const FilterContent = styled.div({
-  height: "100%",
-  width: "100%",
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "space-evenly",
-  alignItems: "center",
-  transition: "all 1s ease-in-out",
+	height: "100%",
 
-  "@media only screen and (max-width: 1090px)": {
-    flexDirection: "column",
-    padding: "1rem",
-  },
+	"& .searchForm": {
+		height: "100%",
+		display: "flex",
+		flexDirection: "row",
+		flexWrap: "nowrap",
+		justifyContent: "space-evenly",
+		alignItems: "center",
+		transition: "all 1s ease-in-out",
 
-  "& .filterBtn": {
-    fontSize: "1rem",
-    width: "10rem",
-    margin: "0 1rem 0 1rem",
-    borderRadius: "15px 0",
-    border: "none",
-    color: `${featuredBG}`,
+		"@media only screen and (max-width: 1090px)": {
+			flexDirection: "column",
+			padding: "1rem",
+		},
 
-    "&:hover": {
-      backgroundColor: `${darkBlue}`,
-      color: "white",
-    },
-
-    "@media only screen and (max-width: 1090px)": {
-      width: "100%",
-    },
-  },
-
-  "& div": {
-    width: "100%",
-
-    "& .input": {
-      borderRadius: "15px 0",
-      width: "95%",
-      transition: "all 1s ease-in-out",
-
-      "@media only screen and (max-width: 1090px)": {
-        textAlign: "center",
-        width: "100%",
-        textIndent: 0,
-        margin: "0.5rem 0",
-      },
-
-      "@media only screen and (max-width: 600px)": {
-        textAlign: "center",
-        fontSize: "0.7rem",
-      },
-    },
-
-    "& .ant-switch": {
-      marginLeft: "0.5rem",
-    },
-
-    "&.ant-switch-handle::before": {
-      width: 18,
-    },
-  },
+		"& .filterBtn": {
+			fontSize: "1rem",
+			width: "10rem",
+			margin: "0 1rem 0 1rem",
+			borderRadius: "15px 0",
+			border: "none",
+			color: `${featuredBG}`,
+	
+			"&:hover": {
+				backgroundColor: `${darkBlue}`,
+				color: "white",
+			},
+	
+			"@media only screen and (max-width: 1090px)": {
+				width: "100%",
+			},
+		},
+	
+		"& div": {	
+			"& .input": {
+				borderRadius: "15px 0",
+				width: "95%",
+				transition: "all 1s ease-in-out",
+	
+				"@media only screen and (max-width: 1090px)": {
+					textAlign: "center",
+					width: "100%",
+					textIndent: 0,
+					margin: "0.5rem 0",
+				},
+	
+				"@media only screen and (max-width: 600px)": {
+					textAlign: "center",
+					fontSize: "0.7rem",
+				},
+			},
+	
+			"& .ant-switch": {
+				marginLeft: "0.5rem",
+			},
+	
+			"&.ant-switch-handle::before": {
+				width: 18,
+			},
+		},
+	},
 });
