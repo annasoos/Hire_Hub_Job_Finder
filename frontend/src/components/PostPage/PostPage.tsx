@@ -20,13 +20,19 @@ const { Option } = Select;
 const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
   const [form] = Form.useForm();
 	const jobContext = useContext(JobContext);
-	const [isLoaded, setIsLoaded] = useState(false);
-	const [isError, setIsError] = useState(false);
-	const [createJob, { data, loading, error }] = useMutation(CREATE_JOB_MUTATION);
+	const [createJob, { data, loading, error }] = useMutation(CREATE_JOB_MUTATION, {
+		onCompleted: (data) => {
+			openNotificationWithIcon(
+				"success",
+				"Successful!",
+				`Candidates can now apply the ${data.post.position} position at ${data.post.company}.`
+			);
+			jobContext.setIsLoaded(false);
+			form.resetFields();
+		}
+	});
 
   const submit = async (values: PostFormValuesType): Promise<void> => {
-    //const skillsArray: string[] = values.skills.replace(/,/g, "").split(" "); --> in SQLite I can only use string
-
     const newJob: JobElementType = {
       position: values.position,
       company: values.company,
@@ -41,36 +47,7 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
     };
 
 		createJob({ variables: newJob })
-		.then(() => {
-			if(!loading) {
-				setIsLoaded(true);
-			}
-		})
-		.catch((error) => {
-			setIsError(true)
-		})
-
-    form.resetFields();
-		jobContext.setIsLoaded(false);
   };
-
-	useEffect(() => {
-		if (isLoaded && !isError && data) {
-			openNotificationWithIcon(
-				"success",
-				"Successful!",
-				`Candidates can now apply the ${data.post.position} position at ${data.post.company}.`
-			);
-		} else if (isError) {
-			console.log(JSON.stringify(error, null, 2));
-			openNotificationWithIcon(
-				"error",
-				"Oops...something went wrong!",
-				"Please try again!"
-			);
-		}
-	}, [isLoaded, isError]);
-
 
   // conditional rendering based on user authentication (isLoggedIn and user props from HOC)
   const renderForm = () => {

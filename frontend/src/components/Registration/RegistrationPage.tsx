@@ -14,7 +14,26 @@ import { SIGNUP_MUTATION } from "../../utils/GqlQueries";
 export const RegistrationPage = () => {
   const [form] = Form.useForm();
   const history = useHistory();
-  const [signupUser, { data, loading, error }] = useMutation(SIGNUP_MUTATION);
+  const [signupUser, { data, loading, error }] = useMutation(SIGNUP_MUTATION, {
+		onCompleted: (data) => {
+			openNotificationWithIcon(
+        "success",
+        "Welcome!",
+        "You can now log in and post new jobs to our database!"
+      );
+      history.push("/login");
+		},
+		onError: (error) => {
+			if (error.graphQLErrors[0].message === "Already registered") {
+				openNotificationWithIcon(
+					"error",
+					"Oops..something went wrong!",
+					"It looks like you've already registered in our system. Please try and login."
+				);
+				form.resetFields();
+			}
+		}
+	});
 
   const registration = (values: RegUserType) => {
     signupUser({
@@ -27,6 +46,8 @@ export const RegistrationPage = () => {
     });
   };
 
+
+/* --------- NEM MŰKÖDIK ---------- 
   if (!loading && !error && data) {
     if (data.signup.message === "User created") {
       openNotificationWithIcon(
@@ -43,7 +64,7 @@ export const RegistrationPage = () => {
       );
       form.resetFields();
     }
-  }
+  } */
 
   return (
     <RegContainer>
