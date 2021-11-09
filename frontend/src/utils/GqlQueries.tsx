@@ -4,6 +4,7 @@ export const FEED_QUERY = gql`
   query {
     feed(orderBy: { createdAt: asc }) {
       jobs {
+				id
         position
         level
         location
@@ -23,6 +24,7 @@ export const FEED_SEARCH_QUERY = gql`
   query ($filter: FeedFilters!) {
     feed(orderBy: { createdAt: asc }, filter: $filter) {
       jobs {
+				id
         position
         level
         location
@@ -43,6 +45,7 @@ export const OWN_LISTINGS_QUERY = gql`
   query {
     ownListings {
       jobs {
+				id
         position
         level
         location
@@ -59,6 +62,7 @@ export const FAVOURITES_QUERY = gql`
   query {
     favourites {
       jobs {
+				id
         position
         level
         location
@@ -118,4 +122,21 @@ export const LOGIN_MUTATION = gql`
 			message
     }
   }
+`;
+
+export const UPDATE_JOB_MUTATION = gql`
+	mutation UpdateJobMutation ($jobId:ID!, $level: String!, $skills: String!, $description: String!) {
+		updateListing(
+			jobId: $jobId,
+			level: $level,
+			skills: $skills,
+			description: $description
+		){
+			updateJob {
+				id
+				position
+			}
+			message
+		}
+	}
 `;

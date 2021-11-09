@@ -33,7 +33,8 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
 	});
 
   const submit = async (values: PostFormValuesType): Promise<void> => {
-    const newJob: JobElementType = {
+    const newJob: Partial<JobElementType> = {
+
       position: values.position,
       company: values.company,
       level: values.level,

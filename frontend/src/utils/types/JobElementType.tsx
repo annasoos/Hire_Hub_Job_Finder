@@ -1,6 +1,7 @@
 import { LikeTableType } from "./LikeTableType";
 
 export type JobElementType = {
+	id: string
 	position: string
 	company: string
 	level: string | undefined

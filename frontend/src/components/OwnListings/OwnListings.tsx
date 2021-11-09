@@ -1,4 +1,5 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
+import { useMutation } from "@apollo/client";
 //design & components
 import { Tooltip, Modal, Form, Button, Input, Select } from "antd";
 import { footerBG, lightgray, white } from "../../style_guide";
@@ -7,9 +8,13 @@ import { DeleteIcon, EditIcon, DeleteModalContent, EditModalContent } from "./Ow
 import Delete from "../../utils/images/delete_icon.svg";
 import Edit from "../../utils/images/edit_icon.svg";
 import listingEdit from "../../utils/images/ListingEdit-pana.svg";
-// types
+// types& functions & context
 import { CollapseContentPropsType } from "../../utils/types/CollapseContentPropsType";
 import { JobElementType } from "../../utils/types/JobElementType";
+import { openNotificationWithIcon } from "../../utils/functions/Notification";
+import { JobContext } from "../../utils/context/JobContext";
+// queries
+import { UPDATE_JOB_MUTATION } from "../../utils/GqlQueries";
 
 const { Option } = Select;
 
@@ -17,6 +22,21 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
 	const [form] = Form.useForm();
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [isEditListingModalVisible, setIsEditListingModalVisible] = useState(false);
+	const jobContext = useContext(JobContext);
+	const [updateJob, { data, loading, error }] = useMutation(UPDATE_JOB_MUTATION, {
+		onCompleted: (data) => {
+			console.log(data)
+			openNotificationWithIcon(
+				"success",
+				"Listing updated!",
+				`Succesfully updated your listing for ${data.updateListing.updateJob.position} position.`
+			);
+			jobContext.setIsLoaded(false)
+		},
+		onError: (error) => {
+			console.log(JSON.stringify(error, null, 2));
+		}
+	});
 
   const handleDeleteCancel = () => {setIsDeleteModalVisible(false)};
 	const handleEditCancel = () => {setIsEditListingModalVisible(false)};
@@ -26,7 +46,12 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
   };
 
 	const handleEditSubmit = (values: JobElementType) => {
-    console.log("hahó", values)
+    updateJob({ variables: { 
+			jobId: job.id, 
+			level: values.level, 
+			skills: values.skills, 
+			description: values.description } 
+		});
   };
 
   return (
