@@ -140,3 +140,14 @@ export const UPDATE_JOB_MUTATION = gql`
 		}
 	}
 `;
+
+export const DELETE_JOB_MUTATION = gql`
+	mutation DeleteJobMutation ($jobId:ID!) {
+		deleteListing(jobId: $jobId){
+			deleteJob {
+				position
+			}
+			message
+		}
+	}
+`;

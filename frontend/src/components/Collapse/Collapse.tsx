@@ -21,14 +21,14 @@ export const CollapseBar = () => {
 	const favourites = useQuery(FAVOURITES_QUERY);
 
 	useEffect(() => {
-		if(!ownListings.loading && ownListings.data) {
+		if(ownListings.data) {
 			setOwnList(ownListings.data.ownListings.jobs);
 		};
-		if(!favourites.loading && favourites.data) {
+		if(favourites.data) {
 			setFavList(favourites.data.favourites.jobs);
 		};
 		if(favourites.error || ownListings.error) {
-			console.log(favourites.error, ownListings.error);
+			console.log("ERROR");
 		};
 	}, [ownListings, favourites]);
 

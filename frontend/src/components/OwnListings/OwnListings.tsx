@@ -15,6 +15,7 @@ import { openNotificationWithIcon } from "../../utils/functions/Notification";
 import { JobContext } from "../../utils/context/JobContext";
 // queries
 import { UPDATE_JOB_MUTATION } from "../../utils/GqlQueries";
+import { DELETE_JOB_MUTATION } from "../../utils/GqlQueries";
 
 const { Option } = Select;
 
@@ -23,7 +24,8 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [isEditListingModalVisible, setIsEditListingModalVisible] = useState(false);
 	const jobContext = useContext(JobContext);
-	const [updateJob, { data, loading, error }] = useMutation(UPDATE_JOB_MUTATION, {
+
+	const [updateJob] = useMutation(UPDATE_JOB_MUTATION, {
 		onCompleted: (data) => {
 			console.log(data)
 			openNotificationWithIcon(
@@ -38,11 +40,28 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
 		}
 	});
 
+	const [deleteJob] = useMutation(DELETE_JOB_MUTATION, {
+		onCompleted: (data) => {
+			console.log(data)
+			openNotificationWithIcon(
+				"success",
+				"Listing deleted!",
+				`Succesfully deleted position from our database.`
+			);
+			jobContext.setIsLoaded(false)
+			setIsDeleteModalVisible(false)
+
+		},
+		onError: (error) => {
+			console.log(JSON.stringify(error, null, 2));
+		}
+	});
+
   const handleDeleteCancel = () => {setIsDeleteModalVisible(false)};
 	const handleEditCancel = () => {setIsEditListingModalVisible(false)};
 
   const handleDeleteOk = () => {
-    /* 	ide jön majd a business logic + notification  */
+    deleteJob({ variables: { jobId: job.id } });
   };
 
 	const handleEditSubmit = (values: JobElementType) => {
@@ -72,6 +91,7 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
         title="Confirmation"
         visible={isDeleteModalVisible}
         onCancel={handleDeleteCancel}
+				onOk={handleDeleteOk}
       >
         <DeleteModalContent>
           <img src={Delete} alt="delete_icon" />
