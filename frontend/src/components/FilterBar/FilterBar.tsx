@@ -27,7 +27,6 @@ export const FilterBar = () => {
 	});
 
   const search = (values: SearchValuesType) => {
-		console.log(values)
 		let isJuniorValue = values.isJunior
 		if (values.isJunior === undefined) {
 			isJuniorValue = true
