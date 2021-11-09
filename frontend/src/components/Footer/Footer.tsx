@@ -2,9 +2,9 @@
 import { FacebookFilled, LinkedinFilled, TwitterCircleFilled, GooglePlusCircleFilled } from "@ant-design/icons";
 import { FooterContainer, LogoLink, LinkContainer, SocialContainer } from "./Footer.style";
 //types & functions
-import { IFooter } from "../../interfaces/IFooter";
-import { FooterItem } from "../../classes/FooterItem.ts";
-import { FooterLinksType } from "../../types/FooterLinksType"
+import { IFooter } from "../../utils/interfaces/IFooter";
+import { FooterItem } from "../../utils/classes/FooterItem.ts";
+import { FooterLinksType } from "../../utils/types/FooterLinksType"
 
 export const Footer = () => {
 

@@ -4,11 +4,12 @@ import { Tooltip, Modal } from "antd";
 import { footerBG, lightgray, white } from "../../style_guide";
 import { JobContent, Position, Company } from "../JobList/JobList.style";
 import { DeleteIcon, EditIcon, DeleteModalContent, EditModalContent } from "./OwnListings.style";
-import Delete from "../../images/delete_icon.svg";
-import Edit from "../../images/edit_icon.svg";
-import listingEdit from "../../images/ListingEdit-pana.svg";
+import Delete from "../../utils/images/delete_icon.svg";
+import Edit from "../../utils/images/edit_icon.svg";
+import listingEdit from "../../utils/images/ListingEdit-pana.svg";
 // types
-import { CollapseContentPropsType } from "../../types/CollapseContentPropsType";
+import { CollapseContentPropsType } from "../../utils/types/CollapseContentPropsType";
+
 
 export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);

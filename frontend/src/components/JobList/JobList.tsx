@@ -5,8 +5,8 @@ import { FavButton } from "../FavButton/FavButton";
 import { cyan, darkBlue, lightgray, white } from "../../style_guide";
 import { LoadingText, JobListSection,  JobContainer, JobContent, Position, Level, Location, Company, Skills, Description } from "../JobList/JobList.style";
 //types & context
-import { JobElementType } from "../../types/JobElementType";
-import { JobContext } from "../../context/JobContext";
+import { JobElementType } from "../../utils/types/JobElementType";
+import { JobContext } from "../../utils/context/JobContext";
 
 export const JobList = () => {
 
@@ -29,16 +29,12 @@ export const JobList = () => {
               <Position color={white}>
                 <b>{job.position}</b>
               </Position>
-              {job.level.length > 0 ? (
+              {job.level ? (
                 <Level color={lightgray}> - {job.level} </Level>
               ) : null}
               <Location color={cyan}> {job.location} </Location>
               <Company color={lightgray}> {job.company} </Company>
-              <Skills color={cyan}>
-                {job.skills.map((skill: string, index: number) => (
-                  <span key={index}>{skill}&nbsp;&nbsp;&nbsp;</span>
-                ))}
-              </Skills>
+              <Skills color={cyan}> {job.skills} </Skills>
               <Description color={white}> {job.description} </Description>
             </JobContent>
           ))}

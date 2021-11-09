@@ -2,17 +2,8 @@
 
 import { createContext, useState, useEffect } from 'react';
 import jwt from "jsonwebtoken";
-import { LoggedInUserType } from "../types/LoggedInUserType";
-
-type UserContextType = {
-  loggedInUser: LoggedInUserType | null;
-  setLoggedInUser: React.Dispatch<React.SetStateAction<LoggedInUserType | null>>
-  setToken: React.Dispatch<React.SetStateAction<string | null>>
-}
-
-type ContextProviderProps = {
-	children: React.ReactNode
-}
+import { UserContextType, ContextProviderProps } from "../types/UserContextTypes";
+import { LoggedInUserType } from '../types/LoggedInUserType';
 
 export const UserContext = createContext({} as UserContextType);
 
@@ -26,16 +17,19 @@ export const UserContextProvider = ({children}: ContextProviderProps) => {
       jwt.verify(token, tokenKey, function (err, decoded) {
         if (decoded) {
           setLoggedInUser({
+						userId: decoded.userId,
             firstName: decoded.firstName,
             lastName: decoded.lastName,
             email: decoded.email,
-          });
-        }
+          })
+        } else if (err) {
+					console.log(err)
+				}
       });
     } else {
 			setLoggedInUser(null)
 		}
-  }, [token]);
+  }, [token, tokenKey]);
 
 	return (
 	<UserContext.Provider value={{loggedInUser, setLoggedInUser, setToken}}>

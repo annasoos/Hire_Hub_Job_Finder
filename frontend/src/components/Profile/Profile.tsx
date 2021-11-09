@@ -3,11 +3,11 @@ import { useContext, useState } from "react";
 import { Modal, Button } from "antd";
 import { MailOutlined, UserOutlined, FrownOutlined } from "@ant-design/icons";
 import { ProfileSection, ProfileName, ProfilePhoto, ErrorTitle, ErrorSubTitle, UserInfoSection, EditUserModalContent } from "./Profile.style";
-import profilePhoto from "../../images/Personal-data-pana.svg";
-import profileEdit from "../../images/ProfileEdit-pana.svg";
+import profilePhoto from "../../utils/images/Personal-data-pana.svg";
+import profileEdit from "../../utils/images/ProfileEdit-pana.svg";
 import { CollapseBar } from "../Collapse/Collapse";
 //context
-import { UserContext } from "../../context/UserContext";
+import { UserContext } from "../../utils/context/UserContext";
 
 export const Profile = () => {
 	const userContext = useContext(UserContext);

@@ -10,28 +10,25 @@ The user should be able to…
   - Registrate and Login with email adress
   - Create a new job and post it to the database (allowed only for registered users)
   - Edit and Delete their own listings
-  - Add favourite jobs to profile
-
-### Links
-
-- Live Site URL: [Hire Hub](https://hire-hub.herokuapp.com/)
+  - Add and remove favourite jobs
+	- Edit their personal data
 
 ## Implementation
 
 ### Built with
 
-- TypeScript
-- React.js
+- Apollo GraphQL Server (implemented with Node & TypeScript)
+- Apollo Client (implemented with React.js & TypeScript)
+- JSON Web Token
+- Prisma
+- SQLite
 - Emotions Styled Components
 - Ant Design
-- Node.js (Express.js)
-- JSON Web Token
-- MongoDB
 
 ### TODO
 
-- Add business logic to Edit and Delete gomb next to listings of autenticated user
-- Add business logic to filterbar and searchbar (on Find a job subpage and Landing page)
-- Add business logic to Add to favourite button
+- Add business logic to listing edit and delete
+- Add business logic to personal info edit
+- Add business logic to favourite button
 - Add pagination
-- Add new features (e.g: Newsletter subscription)
+- Improve search with comprehensive keyword filtering

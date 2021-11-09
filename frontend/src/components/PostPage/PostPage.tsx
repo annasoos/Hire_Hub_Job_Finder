@@ -1,66 +1,52 @@
-import { FC, useContext } from "react";
-import axios from "axios";
+import { FC, useContext, useEffect, useState } from "react";
+import { useMutation } from "@apollo/client";
 //design & components
 import { Button, Input, Form, Select } from "antd";
 import { PostFormContainer, PostFormContent, PostTitle, SearchImg, WelcomeTitle } from "./PostPage.style";
 import { lightgray } from "../../style_guide";
-import SearchImage from "../../images/People search-rafiki.svg";
+import SearchImage from "../../utils/images/People search-rafiki.svg";
 //types & functions & hoc
-import { JobElementType } from "../../types/JobElementType";
-import { PostFormValuesType } from "../../types/PostFormValuesType";
-import { PostFormPropsType } from "../../types/PostFormPropsType";
-import { openNotificationWithIcon } from "../../functions/Notification";
+import { JobElementType } from "../../utils/types/JobElementType";
+import { PostFormValuesType } from "../../utils/types/PostFormValuesType";
+import { PostFormPropsType } from "../../utils/types/PostFormPropsType";
+import { openNotificationWithIcon } from "../../utils/functions/Notification";
 import withCurrentUser from "../HOC/withCurrentUser";
-import { JobContext } from "../../context/JobContext";
+import { JobContext } from "../../utils/context/JobContext";
+// queries
+import { CREATE_JOB_MUTATION } from "../../utils/GqlQueries";
 
 const { Option } = Select;
 
 const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
   const [form] = Form.useForm();
 	const jobContext = useContext(JobContext);
+	const [createJob, { data, loading, error }] = useMutation(CREATE_JOB_MUTATION, {
+		onCompleted: (data) => {
+			openNotificationWithIcon(
+				"success",
+				"Successful!",
+				`Candidates can now apply the ${data.post.position} position at ${data.post.company}.`
+			);
+			jobContext.setIsLoaded(false);
+			form.resetFields();
+		}
+	});
 
-  //create new job object and send it to the server
   const submit = async (values: PostFormValuesType): Promise<void> => {
-    const skillsArray: string[] = values.skills.replace(/,/g, "").split(" ");
-    let levelOfJob: string = "";
-
-    if (values.level !== undefined) {
-      levelOfJob = values.level;
-    }
-
     const newJob: JobElementType = {
       position: values.position,
       company: values.company,
-      level: levelOfJob,
+      level: values.level,
       location: values.location,
-      skills: skillsArray,
+      skills: values.skills,
       description: values.description,
-      creator: user!.email,
+      creator: { 
+				id: (user!.userId).toString(),
+				email: user!.email },
+			likes: []
     };
 
-    await axios
-      .post("http://localhost:8080/api/post-a-job", newJob)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          openNotificationWithIcon(
-            "success",
-            "Successful!",
-            `Candidates can now apply the ${newJob.position} position at ${newJob.company}.`
-          );
-        }
-      })
-      .catch((error) => {
-        console.log("An error occured: ", error);
-        openNotificationWithIcon(
-          "error",
-          "Oops...something went wrong!",
-          "Please try again!"
-        );
-      });
-
-    form.resetFields();
-		jobContext.setIsLoaded(false);
+		createJob({ variables: newJob })
   };
 
   // conditional rendering based on user authentication (isLoggedIn and user props from HOC)
@@ -211,11 +197,11 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
       return (
         <h2>
           Sorry, only registered users can post new positions.
-          <h3>
+          <div>
             You can easily create a new account by{" "}
             <a href="/signup">clicking here</a>, <br /> or if you already have
             one please <a href="/login">login</a>!
-          </h3>
+          </div>
         </h2>
       );
     }

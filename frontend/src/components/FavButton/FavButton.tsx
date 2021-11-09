@@ -5,9 +5,9 @@ import { Tooltip, Modal, Button } from "antd";
 import { HeartFilled } from '@ant-design/icons';
 import { HeartButton, LikeModalContent } from "./FavButton.style";
 // types
-import { CollapseContentPropsType } from "../../types/CollapseContentPropsType";
-import { JobElementType } from "../../types/JobElementType";
-import { UserContext } from "../../context/UserContext";
+import { CollapseContentPropsType } from "../../utils/types/CollapseContentPropsType";
+import { JobElementType } from "../../utils/types/JobElementType";
+import { UserContext } from "../../utils/context/UserContext";
 
 export const FavButton:FC<Omit<CollapseContentPropsType, "key">> = ({job}) => {
 

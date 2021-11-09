@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { HeroSection, Title, Text, Button, HeroImg } from './Hero.style';
-import Illustration from "../../images/Shared workspace-pana.svg";
+import Illustration from "../../utils/images/Shared workspace-pana.svg";
 
 export const Hero = () => {
 	

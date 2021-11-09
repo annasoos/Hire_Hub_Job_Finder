@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { useQuery } from '@apollo/client';
 //design & components
 import { Collapse, Button } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
@@ -7,15 +8,29 @@ import { CollapseSection } from "./Collapse.style";
 import { Favourites } from "../Favourites/Favourites";
 import { OwnListings } from "../OwnListings/OwnListings";
 //context & function
-import { JobElementType } from "../../types/JobElementType";
-import { UserContext } from "../../context/UserContext";
-import { JobContext } from "../../context/JobContext";
+import { JobElementType } from "../../utils/types/JobElementType";
+// queries
+import { FAVOURITES_QUERY, OWN_LISTINGS_QUERY } from "../../utils/GqlQueries";
 
 export const CollapseBar = () => {
 	const history = useHistory();
-  const userContext = useContext(UserContext);
-  const jobContext = useContext(JobContext);
   const { Panel } = Collapse;
+	const [ownList, setOwnList] = useState<JobElementType[]>([] as JobElementType[]);
+	const [favList, setFavList] = useState<JobElementType[]>([] as JobElementType[]);
+	const ownListings = useQuery(OWN_LISTINGS_QUERY);
+	const favourites = useQuery(FAVOURITES_QUERY);
+
+	useEffect(() => {
+		if(!ownListings.loading && ownListings.data) {
+			setOwnList(ownListings.data.ownListings.jobs);
+		};
+		if(!favourites.loading && favourites.data) {
+			setFavList(favourites.data.favourites.jobs);
+		};
+		if(favourites.error || ownListings.error) {
+			console.log(favourites.error, ownListings.error);
+		};
+	}, [ownListings, favourites]);
 
   return (
 		<CollapseSection>
@@ -23,9 +38,7 @@ export const CollapseBar = () => {
 
 				{/* YOUR LISTINGS */}
     	  <Panel header="Your listings" key="1">
-    	    {jobContext.jobList!
-    	      .filter((job: JobElementType) => job.creator === userContext.loggedInUser!.email)
-    	      .map((job: JobElementType, index: number) => (
+    	    {ownList.map((job: JobElementType, index: number) => (
     	        <OwnListings job={job} key={index}/>
     	      ))}
     	    <Button id="addBtn" onClick={() => history.push("/post-a-job")}>
@@ -35,12 +48,10 @@ export const CollapseBar = () => {
     	  </Panel>
 
 				{/* YOUR FAVOURITES */}
-    	  <Panel header="Your favourites" key="2">
-				{jobContext.jobList!
-    	      .filter((job: JobElementType) => job.creator === userContext.loggedInUser!.email)
-    	      .map((job: JobElementType, index: number) => (
-    	        <Favourites job={job} key={index}/>
-    	      ))}
+    	 <Panel header="Your favourites" key="2">
+				{favList.map((job: JobElementType, index: number) => (
+    	      <Favourites job={job} key={index}/>
+    	    ))}
     	  </Panel>
 				
     	</Collapse>
