@@ -11,7 +11,7 @@ The user should be able to…
   - Create a new job and post it to the database (allowed only for registered users)
   - Edit and Delete their own listings
   - Add and remove favourite jobs
-	- Edit their personal data
+  - Edit their personal data
 
 ## Implementation
 
