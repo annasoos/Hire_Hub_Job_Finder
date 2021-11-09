@@ -16,6 +16,9 @@ export const FilterBar = () => {
   const [filter, { data, loading, error }] = useLazyQuery(FEED_SEARCH_QUERY, {
 		onCompleted: (data) => {
 			jobContext.setJobList(data.feed.jobs)
+			if (data.feed.jobs.length === 0) {
+			openNotificationWithIcon("error", "Sorry!", "We didn't find any job with the given parameters.");
+			}
 		},
 		onError: (error) => {
 			console.log(error)
