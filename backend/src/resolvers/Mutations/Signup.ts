@@ -20,11 +20,9 @@ const signup: GraphQLResolveFn  = async (parent, args, context, info) => {
 			newUser,
 			message: "User created"
 		}
-		
+
   } else if (user) {
-    return {
-      message: "Already registered",
-    };
+    throw new Error('Already registered')
   }
 }
 

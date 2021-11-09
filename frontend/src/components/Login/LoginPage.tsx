@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext } from "react";
 import { useHistory } from "react-router";
 import { useMutation } from "@apollo/client";
 //design & components
@@ -16,7 +16,30 @@ export const LoginPage: FC = () => {
   const [form] = Form.useForm();
   const history = useHistory();
   const userContext = useContext(UserContext);
-  const [loginUser, { data, loading, error }] = useMutation(LOGIN_MUTATION);
+  const [loginUser, { data, loading, error }] = useMutation(LOGIN_MUTATION, {
+		onError: (error) => {
+			console.log(error)
+			if (error.graphQLErrors[0].message === "Invalid password" || error.graphQLErrors[0].message === "User not found") {
+				openNotificationWithIcon(
+					"error",
+					"Oops..something went wrong!",
+					"E-mail address or password is incorrect. Please try again!"
+				);
+				form.resetFields();
+			}
+		},
+		onCompleted: (data) => {
+			console.log(data)
+			localStorage.setItem("token", data.login.token);
+			userContext.setToken(data.login.token);
+			openNotificationWithIcon(
+				"success",
+				"Welcome back!",
+				"Good to see you again!"
+			);
+			history.push("/");
+		}
+	});
 
   const login = (values: LoginSuccessType) => {
     loginUser({
@@ -27,7 +50,11 @@ export const LoginPage: FC = () => {
     });
   };
 
-	if(!loading && !error && data) {
+
+
+/*------MIÉRT NEM JÓ??------ 	
+
+	if (data) {
 		if (data.login.message === "User successfully logged in") {
       localStorage.setItem("token", data.login.token);
       userContext.setToken(data.login.token);
@@ -37,15 +64,17 @@ export const LoginPage: FC = () => {
         "Good to see you again!"
       );
       history.push("/");
-    } else if (data.login.message === "Invalid password" || data.login.message === "User not found") {
-      openNotificationWithIcon(
+    }
+	 } else if (error) {
+		if (error.graphQLErrors[0].message === "Invalid password" || error.graphQLErrors[0].message === "User not found") {
+			openNotificationWithIcon(
         "error",
         "Oops..something went wrong!",
         "E-mail address or password is incorrect. Please try again!"
       );
       form.resetFields();
-    }
-	}
+		}
+	} */
 
   return (
     <LoginContainer>

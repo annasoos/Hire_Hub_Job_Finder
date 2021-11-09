@@ -29,14 +29,10 @@ const login: GraphQLResolveFn = async (parent, args, context, info) => {
         message: "User successfully logged in",
       };
     } else {
-      return {
-        message: "Invalid password",
-      };
+			throw new Error('Invalid password')
     }
   } else if (!user) {
-    return {
-      message: "User not found",
-    };
+		throw new Error('User not found')
   }
 };
 
