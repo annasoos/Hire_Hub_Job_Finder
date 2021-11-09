@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext } from "react";
 import { useMutation } from "@apollo/client";
 //design & components
 import { Button, Input, Form, Select } from "antd";
@@ -142,8 +142,7 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
             <Form.Item
               label={
                 <label style={{ color: "white" }}>
-                  {" "}
-                  Required skills/technologies:{" "}
+                  Required skills/technologies:
                 </label>
               }
               name="skills"
