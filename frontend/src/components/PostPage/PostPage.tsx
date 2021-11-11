@@ -20,7 +20,7 @@ const { Option } = Select;
 const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
   const [form] = Form.useForm();
 	const jobContext = useContext(JobContext);
-	const [createJob, { data, loading, error }] = useMutation(CREATE_JOB_MUTATION, {
+	const [createJob] = useMutation(CREATE_JOB_MUTATION, {
 		onCompleted: (data) => {
 			openNotificationWithIcon(
 				"success",
@@ -34,7 +34,6 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
 
   const submit = async (values: PostFormValuesType): Promise<void> => {
     const newJob: Partial<JobElementType> = {
-
       position: values.position,
       company: values.company,
       level: values.level,
@@ -46,7 +45,6 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
 				email: user!.email },
 			likes: []
     };
-
 		createJob({ variables: newJob })
   };
 
@@ -72,12 +70,7 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
               name="position"
               style={{ color: "white" }}
               required
-              rules={[
-                {
-                  required: true,
-                  message: "Please provide a name for the position",
-                },
-              ]}
+              rules={[{ required: true, message: "Please provide a name for the position" }]}
             >
               <Input id="positionInput" className="input" allowClear />
             </Form.Item>
@@ -87,12 +80,7 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
               label={<label style={{ color: "white" }}>Company name:</label>}
               name="company"
               required
-              rules={[
-                {
-                  required: true,
-                  message: "Please provide the name of the company",
-                },
-              ]}
+              rules={[{ required: true, message: "Please provide the name of the company" }]}
             >
               <Input id="companyInput" className="input" allowClear />
             </Form.Item>
@@ -118,18 +106,10 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
 
             {/* LOCATION */}
             <Form.Item
-              label={
-                <label style={{ color: "white" }}>Location of the work:</label>
-              }
+              label={ <label style={{ color: "white" }}>Location of the work:</label> }
               name="location"
               required
-              rules={[
-                {
-                  required: true,
-                  message:
-                    "Please provide the location of the office (if it is a remote position, you can add 'Remote')",
-                },
-              ]}
+              rules={[{ required: true, message: "Please provide the location of the office (if it is a remote position, you can add 'Remote')" }]}
             >
               <Input
                 placeholder="City name only"
@@ -141,24 +121,13 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
 
             {/* SKILLS */}
             <Form.Item
-              label={
-                <label style={{ color: "white" }}>
-                  Required skills/technologies:
-                </label>
-              }
+              label={ <label style={{ color: "white" }}> Required skills/technologies: </label>}
               name="skills"
               required
-              rules={[
-                {
-                  required: true,
-                  message:
-                    "Please provide the most important skills expected from the applicants",
-                },
-              ]}
+              rules={[{ required: true, message: "Please provide the most important skills expected from the applicants" }]}
               extra={
                 <div style={{ color: `${lightgray}`, fontSize: 14 }}>
-                  Please provide keywords separated by comma (e.g: Java, Git,
-                  Agile)
+                  Please provide keywords separated by comma (e.g: Java, Git, Agile)
                 </div>
               }
             >
@@ -167,14 +136,10 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
 
             {/* DESCRIPTION */}
             <Form.Item
-              label={
-                <label style={{ color: "white" }}>Detailed description:</label>
-              }
+              label={ <label style={{ color: "white" }}>Detailed description:</label> }
               name="description"
               required
-              rules={[
-                { required: true, message: "Please provide a description" },
-              ]}
+              rules={[{ required: true, message: "Please provide a description" }]}
             >
               <Input.TextArea
                 rows={5}
@@ -198,9 +163,7 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
         <h2>
           Sorry, only registered users can post new positions.
           <div>
-            You can easily create a new account by{" "}
-            <a href="/signup">clicking here</a>, <br /> or if you already have
-            one please <a href="/login">login</a>!
+            You can easily create a new account by <a href="/signup">clicking here</a>, <br /> or if you already have one please <a href="/login">login</a>!
           </div>
         </h2>
       );

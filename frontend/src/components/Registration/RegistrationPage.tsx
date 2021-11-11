@@ -14,7 +14,7 @@ import { SIGNUP_MUTATION } from "../../utils/GqlQueries";
 export const RegistrationPage = () => {
   const [form] = Form.useForm();
   const history = useHistory();
-  const [signupUser, { data, loading, error }] = useMutation(SIGNUP_MUTATION, {
+  const [signupUser] = useMutation(SIGNUP_MUTATION, {
 		onCompleted: (data) => {
 			openNotificationWithIcon(
         "success",
@@ -45,26 +45,6 @@ export const RegistrationPage = () => {
       },
     });
   };
-
-
-/* --------- NEM MŰKÖDIK ---------- 
-  if (!loading && !error && data) {
-    if (data.signup.message === "User created") {
-      openNotificationWithIcon(
-        "success",
-        "Welcome!",
-        "You can now log in and post new jobs to our database!"
-      );
-      history.push("/login");
-    } else if (data.signup.message === "Already registered") {
-      openNotificationWithIcon(
-        "error",
-        "Oops..something went wrong!",
-        "It looks like you've already registered in our system. Please try and login."
-      );
-      form.resetFields();
-    }
-  } */
 
   return (
     <RegContainer>
@@ -114,13 +94,7 @@ export const RegistrationPage = () => {
         <Form.Item
           label={<label style={{ color: "white" }}>E-mail address:</label>}
           name="email"
-          rules={[
-            {
-              required: true,
-              message: "Please add your e-mail address!",
-              type: "email",
-            },
-          ]}
+          rules={[{ required: true, message: "Please add your e-mail address!", type: "email" }]}
         >
           <Input className="input" allowClear />
         </Form.Item>

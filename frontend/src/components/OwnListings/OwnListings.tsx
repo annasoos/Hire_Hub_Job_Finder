@@ -13,6 +13,7 @@ import { CollapseContentPropsType } from "../../utils/types/CollapseContentProps
 import { JobElementType } from "../../utils/types/JobElementType";
 import { openNotificationWithIcon } from "../../utils/functions/Notification";
 import { JobContext } from "../../utils/context/JobContext";
+import { OwnListingsContext } from "../../utils/context/OwnListingsContext";
 // queries
 import { UPDATE_JOB_MUTATION } from "../../utils/GqlQueries";
 import { DELETE_JOB_MUTATION } from "../../utils/GqlQueries";
@@ -24,16 +25,17 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [isEditListingModalVisible, setIsEditListingModalVisible] = useState(false);
 	const jobContext = useContext(JobContext);
+	const ownContext = useContext(OwnListingsContext);
 
 	const [updateJob] = useMutation(UPDATE_JOB_MUTATION, {
 		onCompleted: (data) => {
-			console.log(data)
 			openNotificationWithIcon(
 				"success",
 				"Listing updated!",
 				`Succesfully updated your listing for ${data.updateListing.updateJob.position} position.`
 			);
 			jobContext.setIsLoaded(false)
+			ownContext.setIsLoaded(false)
 		},
 		onError: (error) => {
 			console.log(JSON.stringify(error, null, 2));
@@ -42,28 +44,23 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
 
 	const [deleteJob] = useMutation(DELETE_JOB_MUTATION, {
 		onCompleted: (data) => {
-			console.log(data)
 			openNotificationWithIcon(
 				"success",
 				"Listing deleted!",
 				`Succesfully deleted position from our database.`
 			);
 			jobContext.setIsLoaded(false)
+			ownContext.setIsLoaded(false)
 			setIsDeleteModalVisible(false)
-
 		},
 		onError: (error) => {
 			console.log(JSON.stringify(error, null, 2));
 		}
 	});
 
-  const handleDeleteCancel = () => {setIsDeleteModalVisible(false)};
-	const handleEditCancel = () => {setIsEditListingModalVisible(false)};
-
-  const handleDeleteOk = () => {
-    deleteJob({ variables: { jobId: job.id } });
-  };
-
+  const handleDeleteCancel = () => { setIsDeleteModalVisible(false) };
+	const handleEditCancel = () => { setIsEditListingModalVisible(false) };
+  const handleDeleteOk = () => { deleteJob({ variables: { jobId: job.id } }) };
 	const handleEditSubmit = (values: JobElementType) => {
     updateJob({ variables: { 
 			jobId: job.id, 

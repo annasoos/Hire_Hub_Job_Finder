@@ -16,9 +16,8 @@ export const LoginPage: FC = () => {
   const [form] = Form.useForm();
   const history = useHistory();
   const userContext = useContext(UserContext);
-  const [loginUser, { data, loading, error }] = useMutation(LOGIN_MUTATION, {
+  const [loginUser] = useMutation(LOGIN_MUTATION, {
 		onError: (error) => {
-			console.log(error)
 			if (error.graphQLErrors[0].message === "Invalid password" || error.graphQLErrors[0].message === "User not found") {
 				openNotificationWithIcon(
 					"error",
@@ -29,7 +28,6 @@ export const LoginPage: FC = () => {
 			}
 		},
 		onCompleted: (data) => {
-			console.log(data)
 			localStorage.setItem("token", data.login.token);
 			userContext.setToken(data.login.token);
 			openNotificationWithIcon(
@@ -50,32 +48,6 @@ export const LoginPage: FC = () => {
     });
   };
 
-
-
-/*------MIÉRT NEM JÓ??------ 	
-
-	if (data) {
-		if (data.login.message === "User successfully logged in") {
-      localStorage.setItem("token", data.login.token);
-      userContext.setToken(data.login.token);
-      openNotificationWithIcon(
-        "success",
-        "Welcome back!",
-        "Good to see you again!"
-      );
-      history.push("/");
-    }
-	 } else if (error) {
-		if (error.graphQLErrors[0].message === "Invalid password" || error.graphQLErrors[0].message === "User not found") {
-			openNotificationWithIcon(
-        "error",
-        "Oops..something went wrong!",
-        "E-mail address or password is incorrect. Please try again!"
-      );
-      form.resetFields();
-		}
-	} */
-
   return (
     <LoginContainer>
       <img id="fingerprint" src={loginIllustration} alt="illustration" />
@@ -95,12 +67,7 @@ export const LoginPage: FC = () => {
         <Form.Item
           label={<label style={{ color: "white" }}>E-mail adress:</label>}
           name="email"
-          rules={[
-            {
-              required: true,
-              message: "Please input your e-mail adress!",
-            },
-          ]}
+          rules={[{ required: true, message: "Please input your e-mail adress!" }]}
         >
           <Input className="input" allowClear />
         </Form.Item>
@@ -108,12 +75,7 @@ export const LoginPage: FC = () => {
         <Form.Item
           label={<label style={{ color: "white" }}>Password:</label>}
           name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}
+          rules={[{ required: true, message: "Please input your password!" }]}
         >
           <Input.Password className="input" allowClear />
         </Form.Item>
