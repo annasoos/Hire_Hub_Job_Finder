@@ -169,3 +169,14 @@ export const UPDATE_USER_MUTATION = gql`
 		}
 	}
 `;
+
+
+export const CREATE_LIKE_MUTATION = gql`
+mutation CreateLikeMutation ($jobId: ID!) {
+		like(jobId: $jobId){
+			job {
+				position
+  		}
+		}
+	}
+`;
