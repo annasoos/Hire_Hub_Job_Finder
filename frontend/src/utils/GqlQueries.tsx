@@ -172,11 +172,20 @@ export const UPDATE_USER_MUTATION = gql`
 
 
 export const CREATE_LIKE_MUTATION = gql`
-mutation CreateLikeMutation ($jobId: ID!) {
+	mutation CreateLikeMutation ($jobId: ID!) {
 		like(jobId: $jobId){
 			job {
 				position
   		}
+		}
+	}
+`;
+
+
+export const DELETE_LIKE_MUTATION = gql`
+	mutation DeleteLikeMutation ($userId: ID!, $jobId: ID!) {
+		deleteLike(userId: $userId, jobId: $jobId){
+			message
 		}
 	}
 `;

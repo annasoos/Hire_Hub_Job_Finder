@@ -41,7 +41,6 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
 			console.log(JSON.stringify(error, null, 2));
 		}
 	});
-
 	const [deleteJob] = useMutation(DELETE_JOB_MUTATION, {
 		onCompleted: (data) => {
 			openNotificationWithIcon(
@@ -58,8 +57,6 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
 		}
 	});
 
-  const handleDeleteCancel = () => { setIsDeleteModalVisible(false) };
-	const handleEditCancel = () => { setIsEditListingModalVisible(false) };
   const handleDeleteOk = () => { deleteJob({ variables: { jobId: job.id } }) };
 	const handleEditSubmit = (values: JobElementType) => {
     updateJob({ variables: { 
@@ -87,7 +84,7 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
       <Modal
         title="Confirmation"
         visible={isDeleteModalVisible}
-        onCancel={handleDeleteCancel}
+        onCancel={() => setIsDeleteModalVisible(false)}
 				onOk={handleDeleteOk}
       >
         <DeleteModalContent>
@@ -101,9 +98,9 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
 			<Modal
 					title="Edit your listing"
 					visible={isEditListingModalVisible}
-					onCancel={handleEditCancel}
+					onCancel={() => setIsEditListingModalVisible(false)}
 					footer={[ 
-					<Button onClick={handleEditCancel}> Cancel </Button>,
+					<Button onClick={() => setIsEditListingModalVisible(false)}> Cancel </Button>,
 					<Button type="primary" htmlType="submit" onClick={() => {form.submit()}}> Save </Button> ]}
 				>
 					<EditModalContent>
