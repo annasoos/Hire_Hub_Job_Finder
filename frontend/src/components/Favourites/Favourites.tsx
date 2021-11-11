@@ -3,21 +3,21 @@ import { FC, useState } from "react";
 import { Tooltip, Button, Modal } from "antd";
 import { darkBlue, footerBG, lightblue } from "../../style_guide";
 import { JobContent, Position, Company } from "../JobList/JobList.style";
-import { EyeIcon, DetailsModalContent } from "../Favourites/Favourites.style";
+import { EyeIcon, DetailsModalContent, BrokenHeartIcon, RemoveModalContent } from "../Favourites/Favourites.style";
 import Eye from "../../utils/images/eye_icon.svg";
+import BrokenHeart from "../../utils/images/broken_heart.svg"
 // types
 import { CollapseContentPropsType } from "../../utils/types/CollapseContentPropsType";
 
 export const Favourites:FC<CollapseContentPropsType> = ({ job }) => {
-  const [isDetailsModalVisible, setIsDetailsModalVisible] = useState(false);
+  const [isDetailsModalVisible, setIsDetailsModalVisible] = useState(false)
+	const [isRemoveModalVisible, setIsRemoveModalVisible] = useState(false)
 
-  const showDetailsModal = () => {
-    setIsDetailsModalVisible(true);
-  };
-
-  const handleClose = () => {
-    setIsDetailsModalVisible(false);
-  };
+  const showDetailsModal = () => {setIsDetailsModalVisible(true)}
+  const handleClose = () => {setIsDetailsModalVisible(false)}
+	const showRemoveModal = () => {setIsRemoveModalVisible(true)}
+	const handleRemoveCancel = () => {setIsRemoveModalVisible(false)}
+  const handleRemoveOk = () => {/*  deleteLike({ variables: { jobId: job.id } })  */}
 
   return (
     <JobContent className="inCollapse" color={lightblue}>
@@ -26,9 +26,25 @@ export const Favourites:FC<CollapseContentPropsType> = ({ job }) => {
       </Position>
       <br />
       <Company color={darkBlue}> {job.company} </Company>
-      <Tooltip title="Show details">
-        <EyeIcon src={Eye} alt="eye_logo" onClick={showDetailsModal} />
+			<Tooltip title="Remove from favourites">
+        <BrokenHeartIcon src={BrokenHeart} alt="broken_heart_icon" onClick={showRemoveModal} />
       </Tooltip>
+      <Tooltip title="Show details" placement="bottom">
+        <EyeIcon src={Eye} alt="eye_icon" onClick={showDetailsModal} />
+      </Tooltip>
+
+			<Modal
+        title="Confirmation"
+        visible={isRemoveModalVisible}
+        onCancel={handleRemoveCancel}
+				onOk={handleRemoveOk}
+      >
+        <RemoveModalContent>
+          <img src={BrokenHeart} alt="delete_icon" />
+          <p>You are about to remove this listing from your Favourites.</p>
+          <p>Are you sure?</p>
+        </RemoveModalContent>
+      </Modal>
 
       <Modal
         title="Details"
