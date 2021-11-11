@@ -7,12 +7,12 @@ import { HeartFilled } from '@ant-design/icons';
 import { HeartButton, LikeModalContent } from "./FavButton.style";
 // types & context
 import { CollapseContentPropsType } from "../../utils/types/CollapseContentPropsType";
-import { JobElementType } from "../../utils/types/JobElementType";
 import { UserContext } from "../../utils/context/UserContext";
 import { openNotificationWithIcon } from "../../utils/functions/Notification";
 import { FavouritesContext } from "../../utils/context/FavouritesContext";
 // queries
 import { CREATE_LIKE_MUTATION } from "../../utils/GqlQueries";
+import { DELETE_LIKE_MUTATION } from "../../utils/GqlQueries";
 
 export const FavButton:FC<Omit<CollapseContentPropsType, "key">> = ({job}) => {
 	const userContext = useContext(UserContext);
@@ -20,7 +20,7 @@ export const FavButton:FC<Omit<CollapseContentPropsType, "key">> = ({job}) => {
 	const history = useHistory();
 	const [isLiked, setIsLiked] = useState<"liked" | "unliked">("unliked");  // set as classname used for css styling
 	const [isLikeModalVisible, setIsLikeModalVisible] = useState(false);
-	const [likedListing] = useMutation(CREATE_LIKE_MUTATION, {
+	const [likeListing] = useMutation(CREATE_LIKE_MUTATION, {
 		onError: (error) => {
 			console.log(error);
 			openNotificationWithIcon(
@@ -38,6 +38,19 @@ export const FavButton:FC<Omit<CollapseContentPropsType, "key">> = ({job}) => {
 			);
 		}
 	});
+	const [deleteLike] = useMutation(DELETE_LIKE_MUTATION, {
+		onCompleted: (data) => {
+			openNotificationWithIcon(
+				"success",
+				"Removed from favourites!",
+				`Succesfully removed listing from favourites.`
+			);
+			favContext.setIsLoaded(false)
+		},
+		onError: (error) => {
+			console.log(JSON.stringify(error, null, 2));
+		}
+	});
 
 	useEffect(() => {
 		const array = favContext.favList.filter((favElement) => favElement.position === job.position)
@@ -46,42 +59,41 @@ export const FavButton:FC<Omit<CollapseContentPropsType, "key">> = ({job}) => {
 		} else {
 			setIsLiked("liked");
 		}
-	}, [favContext.favList])
+	}, [favContext.favList, job.position])
 
-	const handleCancel = () => { setIsLikeModalVisible(false) };
-	const addToFavourites = (job:JobElementType) => {
-		if (userContext.loggedInUser) {
-			likedListing({ variables: {	jobId: job.id	}});
+	const handleHeartClick = () => {
+		if(isLiked === "unliked") {
+			userContext.loggedInUser ? likeListing({ variables: {	jobId: job.id	}}) : setIsLikeModalVisible(true)
 		} else {
-			setIsLikeModalVisible(true);
+			deleteLike({ variables: { userId: userContext.loggedInUser!.userId , jobId: job.id } });
+			setIsLiked("unliked") 
 		}
-	};
-
+	}
 
 	return (
 		<>
-		<HeartButton onClick={() => addToFavourites(job)}> 
+		<HeartButton onClick={handleHeartClick}> 
 			<Tooltip title="Add to favourites"> 
 				<HeartFilled className={isLiked}/> 
 			</Tooltip>
 		</HeartButton>
 		
 		<Modal
-		title="Add to favourite"
-		visible={isLikeModalVisible}
-		onCancel={handleCancel}
-		footer={[
-			<Button type="primary" onClick={() => history.push("/login")}> Login </Button>,
-			<Button type="primary" onClick={() => history.push("/signup")}> Signup </Button>,
-			<Button onClick={handleCancel}> Close </Button>
-		]}
-	>
-		<LikeModalContent>
-			<HeartFilled id="inModalHeart"/>
-			<p>Sorry, only registered users can add favourite listings to their profile!</p>
-			<p>Are you a member yet?</p>
-		</LikeModalContent>
-	</Modal>
-	</>
+			title="Add to favourite"
+			visible={isLikeModalVisible}
+			onCancel={() => setIsLikeModalVisible(false) }
+			footer={[
+				<Button type="primary" onClick={() => history.push("/login")}> Login </Button>,
+				<Button type="primary" onClick={() => history.push("/signup")}> Signup </Button>,
+				<Button onClick={() => setIsLikeModalVisible(false) }> Close </Button>
+			]}
+		>
+			<LikeModalContent>
+				<HeartFilled id="inModalHeart"/>
+				<p>Sorry, only registered users can add favourite listings to their profile!</p>
+				<p>Are you a member yet?</p>
+			</LikeModalContent>
+		</Modal>
+		</>
 	)
 }

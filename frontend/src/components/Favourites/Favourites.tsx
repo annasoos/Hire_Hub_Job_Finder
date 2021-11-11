@@ -52,13 +52,13 @@ export const Favourites:FC<CollapseContentPropsType> = ({ job }) => {
       </Tooltip>
 
 			<Modal
-        title="Confirmation"
+        title="Remove from favourites"
         visible={isRemoveModalVisible}
         onCancel={() => setIsRemoveModalVisible(false)}
 				onOk={handleRemoveOk}
       >
         <RemoveModalContent>
-          <img src={BrokenHeart} alt="delete_icon" />
+          <img src={BrokenHeart} alt="broken_heart_icon" />
           <p>You are about to remove this listing from your Favourites.</p>
           <p>Are you sure?</p>
         </RemoveModalContent>
