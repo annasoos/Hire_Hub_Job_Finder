@@ -10,6 +10,7 @@ export const UserContext = createContext({} as UserContextType);
 export const UserContextProvider = ({children}: ContextProviderProps) => {
 	const [loggedInUser, setLoggedInUser] = useState<LoggedInUserType | null>(null)
 	const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
+	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	const tokenKey: string = process.env.REACT_APP_TOKEN_KEY!
 	
   useEffect(() => {
@@ -22,6 +23,7 @@ export const UserContextProvider = ({children}: ContextProviderProps) => {
             lastName: decoded.lastName,
             email: decoded.email,
           })
+					setIsLoaded(true)
         } else if (err) {
 					console.log(err)
 				}
@@ -29,10 +31,10 @@ export const UserContextProvider = ({children}: ContextProviderProps) => {
     } else {
 			setLoggedInUser(null)
 		}
-  }, [token, tokenKey]);
+  }, [token, tokenKey, isLoaded]);
 
 	return (
-	<UserContext.Provider value={{loggedInUser, setLoggedInUser, setToken}}>
+	<UserContext.Provider value={{loggedInUser, setLoggedInUser, setToken, setIsLoaded}}>
 		{children}
 	</UserContext.Provider>
 	)

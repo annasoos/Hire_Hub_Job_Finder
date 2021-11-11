@@ -1,8 +1,11 @@
 import { GraphQLResolveFn } from '../../utils/types';
 import bcrypt from 'bcryptjs';
+import jwt from "jsonwebtoken";
+import { APP_SECRET, getUserId } from "../../utils/tokenVerification";
 
 const updateUser: GraphQLResolveFn = async (parent, args, context, info) => {
 	let updateUserData;
+	let token;
 
 	const user = await context.prisma.user.findUnique({
 		where: {
@@ -24,10 +27,21 @@ const updateUser: GraphQLResolveFn = async (parent, args, context, info) => {
 				email: args.email,
 			},
 		})
+
+		token = jwt.sign(
+			{
+				userId: user.id,
+				firstName: args.firstName,
+				lastName: args.lastName,
+				email: args.email,
+			},
+			APP_SECRET
+		);
 	}
 
 	return {
 		updateUserData,
+		token,
 		message: 'User data updated',
 	}
 }

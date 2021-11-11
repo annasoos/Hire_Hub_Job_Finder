@@ -5,7 +5,6 @@ import { Button, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { SearchContainer, SearchContent, Label } from "./Search.style";
 // types & context
-import { SearchValuesType } from "../../utils/types/SearchValuesType";
 import { JobContext } from "../../utils/context/JobContext";
 // queries
 import { FEED_SEARCH_QUERY } from "../../utils/GqlQueries";
@@ -17,7 +16,7 @@ export const Search = () => {
 	const history = useHistory();
   const [position, setPosition] = useState<string | undefined>();
   const [city, setCity] = useState<string | undefined>();
-  const [filter, { data, loading, error }] = useLazyQuery(FEED_SEARCH_QUERY, {
+  const [filter] = useLazyQuery(FEED_SEARCH_QUERY, {
     onCompleted: (data) => {
 			history.push("/find-a-job");
       jobContext.setJobList(data.feed.jobs);

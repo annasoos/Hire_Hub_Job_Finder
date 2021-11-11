@@ -18,6 +18,7 @@ export const LoginPage: FC = () => {
   const userContext = useContext(UserContext);
   const [loginUser] = useMutation(LOGIN_MUTATION, {
 		onError: (error) => {
+			console.log(JSON.stringify(error, null, 2));
 			if (error.graphQLErrors[0].message === "Invalid password" || error.graphQLErrors[0].message === "User not found") {
 				openNotificationWithIcon(
 					"error",

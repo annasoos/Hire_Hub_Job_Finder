@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useMutation } from "@apollo/client";
 //design & components
 import { Modal, Button, Form, Input } from "antd";
 import { MailOutlined, UserOutlined, FrownOutlined } from "@ant-design/icons";
@@ -6,21 +7,56 @@ import { ProfileSection, ProfileName, ProfilePhoto, ErrorTitle, ErrorSubTitle, U
 import profilePhoto from "../../utils/images/Personal-data-pana.svg";
 import profileEdit from "../../utils/images/ProfileEdit-pana.svg";
 import { CollapseBar } from "../Collapse/Collapse";
-//context & types
+//context & types & functions
 import { UserContext } from "../../utils/context/UserContext";
 import { RegUserType } from "../../utils/types/RegUserType";
+import { openNotificationWithIcon } from "../../utils/functions/Notification";
+// queries
+import { UPDATE_USER_MUTATION } from "../../utils/GqlQueries";
 
 export const Profile = () => {
 	const [form] = Form.useForm();
 	const userContext = useContext(UserContext);
 	const [isUserEditModalVisible, setIsUserEditModalVisible] = useState(false);
+	const [updateUser] = useMutation(UPDATE_USER_MUTATION, {
+		onCompleted: (data) => {
+			console.log(data)
+			openNotificationWithIcon(
+				"success",
+				"User data updated!",
+				"Succesfully modified your personal data."
+			);
+			localStorage.setItem("token", data.updateUser.token);
+			userContext.setIsLoaded(false)
+		},
+		onError: (error) => {
+			console.log(JSON.stringify(error, null, 2));
+			if (error.graphQLErrors[0].message === "Invalid password") {
+				openNotificationWithIcon(
+					"error",
+					"Oops..something went wrong!",
+					"Password is incorrect. Please try again!"
+				);
+			} else {
+				openNotificationWithIcon(
+					"error",
+					"Oops..something went wrong!",
+					"Sorry, an unexpected error happened! Please try again!"
+				);
+			}
+		}
+	});
 
-	const handleCancel = () => {
-    setIsUserEditModalVisible(false);
-  };
+	const handleCancel = () => { setIsUserEditModalVisible(false) };
 
 	const handleSubmit = (values: RegUserType) => {
-    console.log("hahó", values)
+		updateUser({ variables: { 
+			userId: userContext.loggedInUser!.userId, 
+			firstName: values.firstName, 
+			lastName: values.lastName, 
+			email: values.email,
+			password: values.password
+		}});
   };
 
 	if(!userContext.loggedInUser){

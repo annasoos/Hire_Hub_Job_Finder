@@ -124,6 +124,7 @@ export const LOGIN_MUTATION = gql`
   }
 `;
 
+
 export const UPDATE_JOB_MUTATION = gql`
 	mutation UpdateJobMutation ($jobId:ID!, $level: String!, $skills: String!, $description: String!) {
 		updateListing(
@@ -141,12 +142,29 @@ export const UPDATE_JOB_MUTATION = gql`
 	}
 `;
 
+
 export const DELETE_JOB_MUTATION = gql`
 	mutation DeleteJobMutation ($jobId:ID!) {
 		deleteListing(jobId: $jobId){
 			deleteJob {
 				position
 			}
+			message
+		}
+	}
+`;
+
+
+export const UPDATE_USER_MUTATION = gql`
+	mutation UpdateUserMutation ($userId: ID!, $firstName: String!, $lastName: String!, $email: String!, $password: String!) {
+		updateUser(
+			userId: $userId,
+			firstName: $firstName,
+			lastName: $lastName,
+			email: $email,
+			password: $password
+		){
+			token
 			message
 		}
 	}
