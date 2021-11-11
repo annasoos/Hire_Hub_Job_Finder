@@ -53,16 +53,14 @@ export const FavButton:FC<Omit<CollapseContentPropsType, "key">> = ({job}) => {
 	});
 
 	useEffect(() => {
-		const array = favContext.favList.filter((favElement) => favElement.position === job.position)
-		if(array.length === 0) {
-			setIsLiked("unliked");
-		} else {
-			setIsLiked("liked");
+		if (favContext.favList) {
+			const array = favContext.favList.filter((favElement) => favElement.position === job.position)
+			array.length === 0 ? setIsLiked("unliked") : setIsLiked("liked")
 		}
 	}, [favContext.favList, job.position])
 
 	const handleHeartClick = () => {
-		if(isLiked === "unliked") {
+		if (isLiked === "unliked") {
 			userContext.loggedInUser ? likeListing({ variables: {	jobId: job.id	}}) : setIsLikeModalVisible(true)
 		} else {
 			deleteLike({ variables: { userId: userContext.loggedInUser!.userId , jobId: job.id } });
