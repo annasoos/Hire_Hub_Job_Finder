@@ -22,7 +22,7 @@ export const FavouritesContextProvider = ({ children }: ContextProviderProps) =>
 
 	useEffect(() => {
 		refetch()
-	}, [isLoaded])
+	}, [isLoaded, refetch])
 
   return (
     <FavouritesContext.Provider value={{ favList, setFavList, isLoaded, setIsLoaded }}>{children}</FavouritesContext.Provider>

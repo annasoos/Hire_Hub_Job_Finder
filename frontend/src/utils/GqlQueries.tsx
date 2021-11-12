@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const FEED_QUERY = gql`
-  query {
-    feed(orderBy: { createdAt: asc }) {
+  query FeedQuery($orderBy:FeedOrderBy, $skip: Int, $take: Int) {
+    feed(orderBy: $orderBy, skip: $skip, take: $take) {
       jobs {
 				id
         position
@@ -37,6 +37,7 @@ export const FEED_SEARCH_QUERY = gql`
           email
       	}
     	}
+			count
 		}
 	}
 `;

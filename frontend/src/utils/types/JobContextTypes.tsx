@@ -6,6 +6,8 @@ export type JobContextType = {
 	isLoaded: boolean,
 	setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>,
 	count: number,
+	setCount: React.Dispatch<React.SetStateAction<number>>,
+	setPage: React.Dispatch<React.SetStateAction<number>>,
 };
 
 export type ContextProviderProps = {

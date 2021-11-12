@@ -18,8 +18,9 @@ export const Search = () => {
   const [city, setCity] = useState<string | undefined>();
   const [filter] = useLazyQuery(FEED_SEARCH_QUERY, {
     onCompleted: (data) => {
-			history.push("/find-a-job");
+			history.push("/find-a-job/1");
       jobContext.setJobList(data.feed.jobs);
+			jobContext.setCount(data.feed.count);
       if (data.feed.jobs.length === 0) {
         openNotificationWithIcon(
           "error",
