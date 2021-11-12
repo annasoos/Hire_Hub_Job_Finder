@@ -16,6 +16,7 @@ export const FEED_QUERY = gql`
           email
         }
       }
+			count
     }
   }
 `;

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 //design & components
+import { Pagination } from 'antd';
 import { FilterBar } from "../FilterBar/FilterBar";
 import { FavButton } from "../FavButton/FavButton";
 import { cyan, darkBlue, lightgray, white } from "../../style_guide";
@@ -22,6 +23,13 @@ export const JobList = () => {
     return (
       <JobListSection>
         <FilterBar />
+				<Pagination
+					className="pagination up"
+      		total={jobContext.count}
+      		defaultPageSize={5}
+      		defaultCurrent={1}
+    		/>
+
         <JobContainer>
           {jobContext.jobList.map((job: JobElementType, index: number) => (
             <JobContent key={index} color={darkBlue}>
@@ -39,6 +47,13 @@ export const JobList = () => {
             </JobContent>
           ))}
         </JobContainer>
+
+				<Pagination
+					className="pagination down"
+      		total={jobContext.count}
+      		defaultPageSize={5}
+      		defaultCurrent={1}
+    		/>
       </JobListSection>
     )
   }
