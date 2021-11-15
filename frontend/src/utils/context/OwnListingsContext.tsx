@@ -22,7 +22,7 @@ export const OwnListingsContextProvider = ({ children }: ContextProviderProps) =
 
 	useEffect(() => {
 		refetch()
-	}, [isLoaded, refetch])
+	}, [isLoaded])
 
   return (
     <OwnListingsContext.Provider value={{ ownList, setOwnList, isLoaded, setIsLoaded }}>{children}</OwnListingsContext.Provider>

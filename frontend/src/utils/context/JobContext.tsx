@@ -32,7 +32,7 @@ export const JobContextProvider = ({ children }: ContextProviderProps) => {
 
 	useEffect(() => {
 		refetch()
-	}, [isLoaded, refetch])
+	}, [isLoaded])
 
   return (
     <JobContext.Provider value={{ jobList, setJobList, isLoaded, setIsLoaded, count, setCount, setPage }}>{children}</JobContext.Provider>
