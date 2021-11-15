@@ -10,7 +10,7 @@ export const Hero = () => {
 		<HeroSection>
 			<Title>Your career is our concern</Title>
 			<Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. </Text>
-			<Button onClick={() => history.push('/find-a-job')}>Find a job</Button>
+			<Button onClick={() => history.push('/find-a-job/1')}>Find a job</Button>
 			<HeroImg src={Illustration} alt="illustration" />
 		</HeroSection>
 	);

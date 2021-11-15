@@ -13,9 +13,10 @@ import { openNotificationWithIcon } from "../../utils/functions/Notification";
 
 export const FilterBar = () => {
 	const jobContext = useContext(JobContext);
-  const [filter, { data, loading, error }] = useLazyQuery(FEED_SEARCH_QUERY, {
+  const [filter] = useLazyQuery(FEED_SEARCH_QUERY, {
 		onCompleted: (data) => {
 			jobContext.setJobList(data.feed.jobs)
+			jobContext.setCount(data.feed.count)
 			if (data.feed.jobs.length === 0) {
 			openNotificationWithIcon("error", "Sorry!", "We didn't find any job with the given parameters.");
 			}

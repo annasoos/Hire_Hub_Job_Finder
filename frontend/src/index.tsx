@@ -5,12 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UserContextProvider } from "./utils/context/UserContext";
 import { JobContextProvider } from "./utils/context/JobContext";
-import {
-  ApolloProvider,
-  ApolloClient,
-  createHttpLink,
-  InMemoryCache
-} from '@apollo/client';
+import { OwnListingsContextProvider } from "./utils/context/OwnListingsContext";
+import { FavouritesContextProvider } from "./utils/context/FavouritesContext";
+import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 //We create the httpLink that will connect our ApolloClient instance with the GraphQL API. The GraphQL server will be running on localhost 4000.
@@ -38,9 +35,13 @@ ReactDOM.render(
   <React.StrictMode>
 		<ApolloProvider client={client}>
 		<JobContextProvider>
+		<OwnListingsContextProvider>
+		<FavouritesContextProvider>
 		<UserContextProvider>
     	<App />
 		</UserContextProvider>
+		</FavouritesContextProvider>
+		</OwnListingsContextProvider>
 		</JobContextProvider>
 		</ApolloProvider>
   </React.StrictMode>,

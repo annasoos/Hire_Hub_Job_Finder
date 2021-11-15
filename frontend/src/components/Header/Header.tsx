@@ -57,7 +57,7 @@ class Header extends Component<RouteComponentProps<{}>, HeaderClassStateType> {
 			</a>
 			<ul>
 				<li>
-					<NavLink to="/find-a-job">Find a job</NavLink>
+					<NavLink to="/find-a-job/1">Find a job</NavLink>
 				</li>
 				<li>
 					<NavLink to="/post-a-job">Post a job</NavLink>

@@ -28,7 +28,7 @@ const App = () => {
           <Newsletter />
         </>
       </Route>
-      <Route exact path="/find-a-job">
+      <Route exact path="/find-a-job/:page">
         <JobList />
       </Route>
       <Route exact path="/post-a-job">

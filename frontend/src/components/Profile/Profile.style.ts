@@ -82,7 +82,7 @@ export const UserInfoSection = styled.div({
     paddingRight: "0.7rem",
   },
 
-  "& div:nth-child(even)": {
+  "& div:nth-of-type(even)": {
     fontWeight: 300,
     textAlign: "right",
 

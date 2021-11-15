@@ -1,9 +1,10 @@
 import { gql } from "@apollo/client";
 
 export const FEED_QUERY = gql`
-  query {
-    feed(orderBy: { createdAt: asc }) {
+  query FeedQuery($orderBy:FeedOrderBy, $skip: Int, $take: Int) {
+    feed(orderBy: $orderBy, skip: $skip, take: $take) {
       jobs {
+				id
         position
         level
         location
@@ -15,6 +16,7 @@ export const FEED_QUERY = gql`
           email
         }
       }
+			count
     }
   }
 `;
@@ -23,6 +25,7 @@ export const FEED_SEARCH_QUERY = gql`
   query ($filter: FeedFilters!) {
     feed(orderBy: { createdAt: asc }, filter: $filter) {
       jobs {
+				id
         position
         level
         location
@@ -34,6 +37,7 @@ export const FEED_SEARCH_QUERY = gql`
           email
       	}
     	}
+			count
 		}
 	}
 `;
@@ -43,6 +47,7 @@ export const OWN_LISTINGS_QUERY = gql`
   query {
     ownListings {
       jobs {
+				id
         position
         level
         location
@@ -59,6 +64,7 @@ export const FAVOURITES_QUERY = gql`
   query {
     favourites {
       jobs {
+				id
         position
         level
         location
@@ -118,4 +124,70 @@ export const LOGIN_MUTATION = gql`
 			message
     }
   }
+`;
+
+
+export const UPDATE_JOB_MUTATION = gql`
+	mutation UpdateJobMutation ($jobId:ID!, $level: String!, $skills: String!, $description: String!) {
+		updateListing(
+			jobId: $jobId,
+			level: $level,
+			skills: $skills,
+			description: $description
+		){
+			updateJob {
+				id
+				position
+			}
+			message
+		}
+	}
+`;
+
+
+export const DELETE_JOB_MUTATION = gql`
+	mutation DeleteJobMutation ($jobId:ID!) {
+		deleteListing(jobId: $jobId){
+			deleteJob {
+				position
+			}
+			message
+		}
+	}
+`;
+
+
+export const UPDATE_USER_MUTATION = gql`
+	mutation UpdateUserMutation ($userId: ID!, $firstName: String!, $lastName: String!, $email: String!, $password: String!) {
+		updateUser(
+			userId: $userId,
+			firstName: $firstName,
+			lastName: $lastName,
+			email: $email,
+			password: $password
+		){
+			token
+			message
+		}
+	}
+`;
+
+
+export const CREATE_LIKE_MUTATION = gql`
+	mutation CreateLikeMutation ($jobId: ID!) {
+		like(jobId: $jobId){
+			job {
+				position
+  		}
+		}
+	}
+`;
+
+
+export const DELETE_LIKE_MUTATION = gql`
+	mutation DeleteLikeMutation ($userId: ID!, $jobId: ID!) {
+		deleteLike(userId: $userId, jobId: $jobId){
+			message
+		}
+	}
 `;

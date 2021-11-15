@@ -92,6 +92,7 @@ type UpdateJob {
 
 type UpdateUser {
 	updateUserData: User!
+	token: String!
 	message: String!
 }
 

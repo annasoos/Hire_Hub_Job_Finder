@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { darkBlue, footerBG } from "../../style_guide";
+import { cyan, cyanHover, darkBlue, footerBG, white } from "../../style_guide";
 
 export const LoadingText = styled.div({
   height: "50%",
@@ -24,18 +24,61 @@ export const JobListSection = styled.div({
   "@media screen and (max-width: 1090px)": {
     marginTop: "2rem",
   },
+
+  "& .pagination": {
+    position: "relative",
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: "70%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+
+    "& li, button": {
+      backgroundColor: `${cyan}`,
+      color: `${darkBlue}`,
+      border: "none",
+      borderRadius: "10px 0",
+    },
+
+    "& .ant-pagination-item": {
+      "&:hover": {
+        backgroundColor: `${cyanHover}`,
+        color: `${white}`,
+      },
+      "& a:hover": {
+        color: `${white}`,
+      },
+    },
+
+    "& .ant-pagination-item-active": {
+      backgroundColor: `${cyanHover}`,
+
+      "& a": {
+        color: `${white}`,
+      },
+    },
+
+    "&.up": {
+      marginTop: "2rem",
+    },
+
+    "&.down": {
+      marginBottom: "2rem",
+    },
+  },
 });
 
 export const JobContainer = styled.div({
   position: "relative",
   height: "auto",
   minHeight: "50vh",
-  padding: "1rem 0 5rem 0",
 
   transition: "all 1s ease-in-out",
 });
 
-export const JobContent = styled.div({
+export const JobContent = styled.div(
+  {
     position: "relative",
     left: "50%",
     transform: "translateX(-50%)",
@@ -52,7 +95,7 @@ export const JobContent = styled.div({
 
     "&.inCollapse": {
       width: "100%",
-			padding: "1rem 2rem",
+      padding: "1rem 2rem",
       margin: "1rem 0",
       cursor: "default",
 

@@ -17,7 +17,7 @@ export const DeleteIcon = styled.img({
 export const EditIcon = styled.img({
   position: "absolute",
   right: "10%",
-  top: "30%",
+  top: "20%",
   cursor: "pointer",
   transition: "all 1s ease-in-out",
 
