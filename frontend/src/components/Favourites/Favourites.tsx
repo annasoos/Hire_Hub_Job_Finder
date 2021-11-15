@@ -68,7 +68,7 @@ export const Favourites:FC<CollapseContentPropsType> = ({ job }) => {
         title="Details"
         visible={isDetailsModalVisible}
         onCancel={() => setIsDetailsModalVisible(false)}
-        footer={[ <Button type="primary" onClick={() => setIsDetailsModalVisible(false)}> Close </Button> ]}
+        footer={[ <Button key="favDetailsClose" type="primary" onClick={() => setIsDetailsModalVisible(false)}> Close </Button> ]}
       >
         <DetailsModalContent>
 					<h3>{job.position}</h3>

@@ -101,8 +101,8 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
 					visible={isEditListingModalVisible}
 					onCancel={() => setIsEditListingModalVisible(false)}
 					footer={[ 
-					<Button onClick={() => setIsEditListingModalVisible(false)}> Cancel </Button>,
-					<Button type="primary" htmlType="submit" onClick={() => {form.submit()}}> Save </Button> ]}
+					<Button key="editListingCancel" onClick={() => setIsEditListingModalVisible(false)}> Cancel </Button>,
+					<Button key="editListingSave" type="primary" htmlType="submit" onClick={() => {form.submit()}}> Save </Button> ]}
 				>
 					<EditModalContent>
 						<img src={listingEdit} alt="listing_edit" />

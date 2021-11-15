@@ -81,9 +81,9 @@ export const FavButton:FC<Omit<CollapseContentPropsType, "key">> = ({job}) => {
 			visible={isLikeModalVisible}
 			onCancel={() => setIsLikeModalVisible(false) }
 			footer={[
-				<Button type="primary" onClick={() => history.push("/login")}> Login </Button>,
-				<Button type="primary" onClick={() => history.push("/signup")}> Signup </Button>,
-				<Button onClick={() => setIsLikeModalVisible(false) }> Close </Button>
+				<Button key="addFavLogin" type="primary" onClick={() => history.push("/login")}> Login </Button>,
+				<Button key="addFavSignup" type="primary" onClick={() => history.push("/signup")}> Signup </Button>,
+				<Button key="addFavClose" onClick={() => setIsLikeModalVisible(false) }> Close </Button>
 			]}
 		>
 			<LikeModalContent>

@@ -96,8 +96,8 @@ export const Profile = () => {
 					visible={isUserEditModalVisible}
 					onCancel={handleCancel}
 					footer={[ 
-					<Button onClick={handleCancel}> Cancel </Button>,
-					<Button type="primary" htmlType="submit" onClick={() => {form.submit()}}> Save </Button> ]}
+					<Button key="editUserCancel" onClick={handleCancel}> Cancel </Button>,
+					<Button key="editUserSave" type="primary" htmlType="submit" onClick={() => {form.submit()}}> Save </Button> ]}
 				>
 					<EditUserModalContent>
 						<img src={profileEdit} alt="profile_edit" />
