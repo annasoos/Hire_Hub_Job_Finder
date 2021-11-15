@@ -7,15 +7,22 @@ import { CollapseSection } from "./Collapse.style";
 import { Favourites } from "../Favourites/Favourites";
 import { OwnListings } from "../OwnListings/OwnListings";
 //types & functions & context
-import { JobElementType } from "../../utils/types/JobElementType";
+import { JobObjectWithID } from "../../utils/types/JobElementType";
 import { OwnListingsContext } from "../../utils/context/OwnListingsContext";
 import { FavouritesContext } from "../../utils/context/FavouritesContext";
+import { generateUniqueID } from "../../utils/functions/generateUniqueID";
 
 export const CollapseBar = () => {
 	const history = useHistory();
   const { Panel } = Collapse;
 	const ownContext = useContext(OwnListingsContext);
 	const favContext = useContext(FavouritesContext);
+	const ownItems = ownContext.ownList.map(job => { 
+		return {uid: generateUniqueID(), value: job};
+	});
+	const favItems = favContext.favList.map(job => { 
+		return {uid: generateUniqueID(), value: job};
+	});
 
   return (
 		<CollapseSection>
@@ -23,8 +30,8 @@ export const CollapseBar = () => {
 
 				{/* YOUR LISTINGS */}
     	  <Panel header="Your listings" key="1">
-    	    {ownContext.ownList.map((job: JobElementType, index: number) => (
-    	        <OwnListings job={job} key={index}/>
+    	    {ownItems.map((job: JobObjectWithID, index: number) => (
+    	        <OwnListings job={job.value} key={job.uid}/>
     	      ))}
     	    <Button id="addBtn" onClick={() => history.push("/post-a-job")}>
     	      <PlusCircleOutlined />
@@ -34,8 +41,8 @@ export const CollapseBar = () => {
 
 				{/* YOUR FAVOURITES */}
     	 <Panel header="Your favourites" key="2">
-				{favContext.favList.map((job: JobElementType, index: number) => (
-    	      <Favourites job={job} key={index}/>
+				{favItems.map((job: JobObjectWithID, index: number) => (
+    	      <Favourites job={job.value} key={job.uid}/>
     	    ))}
     	  </Panel>
 				

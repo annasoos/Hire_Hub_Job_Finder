@@ -7,9 +7,10 @@ import { FavButton } from "../FavButton/FavButton";
 import { cyan, darkBlue, lightgray, white } from "../../style_guide";
 import { LoadingText, JobListSection,  JobContainer, JobContent, Position, Level, Location, Company, Skills, Description } from "../JobList/JobList.style";
 //types & context & function
-import { JobElementType } from "../../utils/types/JobElementType";
+import { JobObjectWithID } from "../../utils/types/JobElementType";
 import { JobContext } from "../../utils/context/JobContext";
 import { LINKS_PER_PAGE } from "../../utils/functions/getQueryVariable";
+import { generateUniqueID } from "../../utils/functions/generateUniqueID";
 
 export const JobList = () => {
   const jobContext = useContext(JobContext);
@@ -22,6 +23,10 @@ export const JobList = () => {
 		jobContext.setPage(pageNum);
 		history.push(`/find-a-job/${pageNum}`)
 	}, [pageNum, jobContext]);
+
+	const items = jobContext.jobList.map(job => { 
+    return {uid: generateUniqueID(), value: job};
+  });
 
   if (!jobContext.isLoaded) {
     return (
@@ -43,19 +48,19 @@ export const JobList = () => {
     		/>
 
         <JobContainer>
-          {jobContext.jobList.map((job: JobElementType, index: number) => (
-            <JobContent key={index} color={darkBlue}>
-							<FavButton job={job} />
+          {items.map((job: JobObjectWithID , index: number) => (
+            <JobContent key={job.uid} color={darkBlue}>
+							<FavButton job={job.value} />
               <Position color={white}>
-                <b>{job.position}</b>
+                <b>{job.value.position}</b>
               </Position>
-              {job.level ? (
-                <Level color={lightgray}> - {job.level} </Level>
+              {job.value.level ? (
+                <Level color={lightgray}> - {job.value.level} </Level>
               ) : null}
-              <Location color={cyan}> {job.location} </Location>
-              <Company color={lightgray}> {job.company} </Company>
-              <Skills color={cyan}> {job.skills} </Skills>
-              <Description color={white}> {job.description} </Description>
+              <Location color={cyan}> {job.value.location} </Location>
+              <Company color={lightgray}> {job.value.company} </Company>
+              <Skills color={cyan}> {job.value.skills} </Skills>
+              <Description color={white}> {job.value.description} </Description>
             </JobContent>
           ))}
         </JobContainer>

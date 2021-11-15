@@ -4,8 +4,10 @@ import { Card } from "../Card/Card";
 import { Search } from "../Search/Search";
 import { FeaturedSection, Title, Text, CardContainer, BlueLine } from "./Featured.style";
 //types & functions
-import { JobElementType } from "../../utils/types/JobElementType";
+import { JobElementType, JobObjectWithID } from "../../utils/types/JobElementType";
 import { JobContext } from "../../utils/context/JobContext";
+import { generateUniqueID } from "../../utils/functions/generateUniqueID";
+
 
 export class Featured extends Component<{}, {}> {
 	static contextType = JobContext;
@@ -13,6 +15,9 @@ export class Featured extends Component<{}, {}> {
   render() {
 
 		const jobContext = this.context;
+		const items = jobContext.jobList.slice(0, 3).map((job: JobElementType) => { 
+			return {uid: generateUniqueID(), value: job};
+		});
 
     return (
       <FeaturedSection>
@@ -25,10 +30,8 @@ export class Featured extends Component<{}, {}> {
         </Text>
 
         <CardContainer>
-          {jobContext.jobList
-						.slice(0, 3)
-						.map((card: JobElementType, index: number) => (
-            <Card key={index} cardElement={card} position={index} />
+          {items.map((card: JobObjectWithID, index: number) => (
+            <Card key={card.uid} cardElement={card.value} position={index} />
           ))}
           <BlueLine />
         </CardContainer>

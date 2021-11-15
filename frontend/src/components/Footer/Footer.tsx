@@ -42,10 +42,10 @@ export const Footer = () => {
       </LogoLink>
 
       {items.map((item: IFooter, index: number) => (
-        <LinkContainer key={index}>
+        <LinkContainer key={item.name}>
           <h3> {item.name} </h3>
           {item.links.map((link, index) => (
-            <li key={index}>
+            <li key={link.linkName}>
               <a href={link.path}>{link.linkName}</a>
             </li>
           ))}
