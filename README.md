@@ -12,10 +12,6 @@ The user should be able to…
   - Edit and Delete their own listings
   - Add favourite jobs to profile
 
-### Links
-
-- Live Site URL: [Hire Hub](https://hire-hub.herokuapp.com/)
-
 ## Implementation
 
 ### Built with
