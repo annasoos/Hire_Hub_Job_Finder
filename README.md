@@ -28,6 +28,5 @@ The user should be able to…
 ### TODO
 
 - Fix React Router scroll to top function
-- Fix sorting listings by DateTime 
 - Refresh page after modifying user data
 - Improve search with comprehensive keyword filtering
