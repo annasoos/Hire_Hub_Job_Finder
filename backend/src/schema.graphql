@@ -1,7 +1,7 @@
 type Query {
 	feed(filter: FeedFilters, skip: Int, take: Int, orderBy: FeedOrderBy): Feed!
-	ownListings: Feed!
-	favourites: Feed!
+	ownListings(orderBy: FeedOrderBy): Feed!
+	favourites(orderBy: FeedOrderBy): Feed!
 }
 
 type Feed {

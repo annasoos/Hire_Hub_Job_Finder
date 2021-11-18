@@ -46,7 +46,7 @@ const Query: GraphQLFieldResolveFn = {
       },
     };
 
-    const jobs = await context.prisma.job.findMany({ where });
+    const jobs = await context.prisma.job.findMany({ where, orderBy: args.orderBy });
     const count = await context.prisma.job.count({ where });
 
     return {
@@ -66,7 +66,7 @@ const Query: GraphQLFieldResolveFn = {
       },
     };
     // some returns elements when any one of them matches the condition while every returns elements when all of them matches the condition.
-    const jobs = await context.prisma.job.findMany({ where });
+    const jobs = await context.prisma.job.findMany({ where, orderBy: args.orderBy });
     const count = await context.prisma.job.count({ where });
 
     return {

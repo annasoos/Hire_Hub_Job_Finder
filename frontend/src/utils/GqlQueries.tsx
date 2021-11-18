@@ -23,7 +23,7 @@ export const FEED_QUERY = gql`
 
 export const FEED_SEARCH_QUERY = gql`
   query ($filter: FeedFilters!) {
-    feed(orderBy: { createdAt: asc }, filter: $filter) {
+    feed(orderBy: { createdAt: desc }, filter: $filter) {
       jobs {
 				id
         position
@@ -45,7 +45,7 @@ export const FEED_SEARCH_QUERY = gql`
 
 export const OWN_LISTINGS_QUERY = gql`
   query {
-    ownListings {
+    ownListings(orderBy: { createdAt: desc }) {
       jobs {
 				id
         position
@@ -62,7 +62,7 @@ export const OWN_LISTINGS_QUERY = gql`
 
 export const FAVOURITES_QUERY = gql`
   query {
-    favourites {
+    favourites(orderBy: { createdAt: desc }) {
       jobs {
 				id
         position
