@@ -27,8 +27,7 @@ The user should be able to…
 
 ### TODO
 
-- Add business logic to listing edit and delete
-- Add business logic to personal info edit
-- Add business logic to favourite button
-- Add pagination
+- Fix React Router scroll to top function
+- Fix sorting listings by DateTime 
+- Refresh page after modifying user data
 - Improve search with comprehensive keyword filtering
