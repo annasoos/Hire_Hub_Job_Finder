@@ -86,3 +86,25 @@ export const CardLogo = styled.div({
     transform: "translate(-50%, -50%)",
   },
 });
+
+
+export const DetailsModalContent = styled.div({
+  "& h3, p": {
+    textAlign: "center",
+		fontWeight: 700,
+  },
+
+	"& h3, p.level": {
+		margin: 0,
+		padding: 0
+	},
+
+	"& p.details": {
+		fontWeight: 500
+	},
+
+	"& p.location": {
+		fontWeight: 500,
+		color: `${cyan}`,
+	}
+});

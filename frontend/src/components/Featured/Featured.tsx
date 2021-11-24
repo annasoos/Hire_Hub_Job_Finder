@@ -8,7 +8,6 @@ import { JobElementType, JobObjectWithID } from "../../utils/types/JobElementTyp
 import { JobContext } from "../../utils/context/JobContext";
 import { generateUniqueID } from "../../utils/functions/generateUniqueID";
 
-
 export class Featured extends Component<{}, {}> {
 	static contextType = JobContext;
 
