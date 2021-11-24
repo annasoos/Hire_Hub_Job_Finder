@@ -42,6 +42,13 @@ export const JobListSection = styled.div({
       borderRadius: "10px 0",
     },
 
+		"& .ant-pagination-next>button, .ant-pagination-prev>button": {
+      "&:hover": {
+        backgroundColor: `rgb(33, 119, 125)`,  //cyanHover doesnt work for some reason
+        color: `${white}`,
+      },
+		},
+
     "& .ant-pagination-item": {
       "&:hover": {
         backgroundColor: `${cyanHover}`,
@@ -69,10 +76,17 @@ export const JobListSection = styled.div({
     },
 
 		"& .ant-pagination-options>div.ant-select>div.ant-select-selector": {
+			transition: "all 0s",
 			border: "none",
       borderRadius: "10px 0",
-			backgroundColor: `${cyanHover}`,
+			backgroundColor: `${cyan}`,
       color: `${darkBlue}`,
+
+ 			"&:hover": {
+				border: "none",
+				color: `${white}`,
+				backgroundColor: `rgb(33, 119, 125)`,  //cyanHover doesnt work for some reason
+			} 
 		},
 
 		"& .ant-select-single.ant-select-open .ant-select-selection-item": {
