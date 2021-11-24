@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { cyan, footerBG } from "../../style_guide";
+import { cyan, cyanHover, darkBlue, footerBG, lightblue, white } from "../../style_guide";
 
 export const CollapseSection = styled.div({
   position: "relative",
@@ -38,5 +38,45 @@ export const CollapseSection = styled.div({
         },
       },
     },
+		
+		"& .pagination.mini": {
+			position: "relative",
+			left: "50%",
+			transform: "translateX(-50%)",
+			width: "70%",
+			display: "flex",
+			flexDirection: "row",
+			justifyContent: "center",
+			marginTop: "2rem",
+	
+			"& li, button": {
+				backgroundColor: `${lightblue}`,
+				color: `${footerBG}`,
+				border: "none",
+				borderRadius: "10px 0",
+			},
+
+			"& li": {
+				margin: "0 5px",
+			},
+	
+			"& .ant-pagination-item": {
+				"&:hover": {
+					backgroundColor: `${footerBG}`,
+					color: `${white}`,
+				},
+				"& a:hover": {
+					color: `${white}`,
+				},
+			},
+	
+			"& .ant-pagination-item-active": {
+				backgroundColor: `${footerBG}`,
+	
+				"& a": {
+					color: `${white}`,
+				},
+			},
+		},
   },
 });
