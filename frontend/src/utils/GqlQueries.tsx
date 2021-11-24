@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const FEED_QUERY = gql`
-  query FeedQuery($orderBy:FeedOrderBy, $skip: Int, $take: Int) {
+  query FeedQuery ($orderBy:FeedOrderBy, $skip: Int, $take: Int) {
     feed(orderBy: $orderBy, skip: $skip, take: $take) {
       jobs {
 				id
@@ -44,8 +44,8 @@ export const FEED_SEARCH_QUERY = gql`
 
 
 export const OWN_LISTINGS_QUERY = gql`
-  query {
-    ownListings(orderBy: { createdAt: desc }) {
+  query OwnListingsQuery ($orderBy:FeedOrderBy, $skip: Int, $take: Int){
+    ownListings(orderBy: $orderBy, skip: $skip, take: $take) {
       jobs {
 				id
         position
@@ -55,14 +55,15 @@ export const OWN_LISTINGS_QUERY = gql`
         skills
         description
       }
+			count
     }
   }
 `;
 
 
 export const FAVOURITES_QUERY = gql`
-  query {
-    favourites(orderBy: { createdAt: desc }) {
+  query FavListingsQuery($orderBy:FeedOrderBy, $skip: Int, $take: Int){
+    favourites(orderBy: $orderBy, skip: $skip, take: $take) {
       jobs {
 				id
         position
@@ -72,6 +73,7 @@ export const FAVOURITES_QUERY = gql`
         skills
         description
       }
+			count
     }
   }
 `;

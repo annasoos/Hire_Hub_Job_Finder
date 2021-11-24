@@ -6,6 +6,6 @@ export const openNotificationWithIcon = (
 	description: string
 ): void => {
 	if (type === "success" || type === "error")
-		notification[type]({ message: message, description: description });
+		notification[type]({ message: message, description: description, duration: 3 });
 	return;
 };

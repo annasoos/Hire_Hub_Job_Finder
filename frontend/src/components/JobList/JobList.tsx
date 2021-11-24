@@ -9,15 +9,13 @@ import { LoadingText, JobListSection,  JobContainer, JobContent, Position, Level
 //types & context & function
 import { JobObjectWithID } from "../../utils/types/JobElementType";
 import { JobContext } from "../../utils/context/JobContext";
-import { LINKS_PER_PAGE } from "../../utils/functions/getQueryVariable";
+import { JOBS_PER_PAGE } from "../../utils/functions/getQueryVariable";
 import { generateUniqueID } from "../../utils/functions/generateUniqueID";
 
 export const JobList = () => {
   const jobContext = useContext(JobContext);
 	const history = useHistory();
 	const [pageNum, setPageNum] = useState(1);
-	/* const pageIndexParams = history.location.pathname.split('/');
-  setPageNum(parseInt(pageIndexParams[pageIndexParams.length - 1])); */
 
 	useEffect(() => {
 		jobContext.setPage(pageNum);
@@ -41,7 +39,7 @@ export const JobList = () => {
 				<Pagination
 					className="pagination up"
       		total={jobContext.count}
-      		defaultPageSize={LINKS_PER_PAGE}
+      		defaultPageSize={JOBS_PER_PAGE}
       		defaultCurrent={1}
 					current={pageNum}
 					onChange={(page: number) => setPageNum(page)}
@@ -68,7 +66,7 @@ export const JobList = () => {
 				<Pagination
 					className="pagination down"
       		total={jobContext.count}
-      		defaultPageSize={LINKS_PER_PAGE}
+      		defaultPageSize={JOBS_PER_PAGE}
       		defaultCurrent={1}
 					current={pageNum}
 					onChange={(page: number) => setPageNum(page)}
