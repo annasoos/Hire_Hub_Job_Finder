@@ -33,8 +33,9 @@ export const JobListSection = styled.div({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
+		zIndex: 1,
 
-    "& li, button": {
+    "& li, button, div": {
       backgroundColor: `${cyan}`,
       color: `${darkBlue}`,
       border: "none",
@@ -66,6 +67,22 @@ export const JobListSection = styled.div({
     "&.down": {
       marginBottom: "2rem",
     },
+
+		"& .ant-pagination-options>div.ant-select>div.ant-select-selector": {
+			border: "none",
+      borderRadius: "10px 0",
+			backgroundColor: `${cyanHover}`,
+      color: `${darkBlue}`,
+		},
+
+		"& .ant-select-single.ant-select-open .ant-select-selection-item": {
+			color: `${white}`,
+		},
+
+		"& .ant-select-item-option.ant-select-item-option-active>div.ant-select-item-option-content": {
+      color: `${white}`,
+		},
+
   },
 });
 

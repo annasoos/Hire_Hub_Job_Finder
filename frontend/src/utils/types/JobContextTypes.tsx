@@ -8,6 +8,8 @@ export type JobContextType = {
 	count: number,
 	setCount: React.Dispatch<React.SetStateAction<number>>,
 	setPage: React.Dispatch<React.SetStateAction<number>>,
+	jobsPerPage: number,
+	setJobsPerPage: React.Dispatch<React.SetStateAction<number>>,
 };
 
 export type ContextProviderProps = {

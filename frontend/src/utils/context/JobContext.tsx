@@ -15,7 +15,8 @@ export const JobContextProvider = ({ children }: ContextProviderProps) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
 	const [page, setPage] = useState<number>(1);
-	const queryVariables = getQueryVariables(page);
+	const [jobsPerPage, setJobsPerPage] = useState<number>(3);
+	const queryVariables = getQueryVariables(page, jobsPerPage);
 	const { data, loading, error, refetch } = useQuery(FEED_QUERY,{
     variables: queryVariables
   });
@@ -35,6 +36,6 @@ export const JobContextProvider = ({ children }: ContextProviderProps) => {
 	}, [isLoaded])
 
   return (
-    <JobContext.Provider value={{ jobList, setJobList, isLoaded, setIsLoaded, count, setCount, setPage }}>{children}</JobContext.Provider>
+    <JobContext.Provider value={{ jobList, setJobList, isLoaded, setIsLoaded, count, setCount, setPage, jobsPerPage, setJobsPerPage }}>{children}</JobContext.Provider>
   );
 };

@@ -9,7 +9,6 @@ import { LoadingText, JobListSection,  JobContainer, JobContent, Position, Level
 //types & context & function
 import { JobObjectWithID } from "../../utils/types/JobElementType";
 import { JobContext } from "../../utils/context/JobContext";
-import { JOBS_PER_PAGE } from "../../utils/functions/getQueryVariable";
 import { generateUniqueID } from "../../utils/functions/generateUniqueID";
 
 export const JobList = () => {
@@ -39,10 +38,12 @@ export const JobList = () => {
 				<Pagination
 					className="pagination up"
       		total={jobContext.count}
-      		defaultPageSize={JOBS_PER_PAGE}
-      		defaultCurrent={1}
-					current={pageNum}
+					showSizeChanger
+					pageSize={jobContext.jobsPerPage}
+					pageSizeOptions={['3', '5', '10', '20', '50']}
+      		current={pageNum}
 					onChange={(page: number) => setPageNum(page)}
+					onShowSizeChange={(current: number, size: number) => jobContext.setJobsPerPage(size)}
     		/>
 
         <JobContainer>
@@ -66,10 +67,12 @@ export const JobList = () => {
 				<Pagination
 					className="pagination down"
       		total={jobContext.count}
-      		defaultPageSize={JOBS_PER_PAGE}
-      		defaultCurrent={1}
-					current={pageNum}
+					showSizeChanger
+					pageSize={jobContext.jobsPerPage}
+					pageSizeOptions={['3', '5', '10', '20', '50']}
+      		current={pageNum}
 					onChange={(page: number) => setPageNum(page)}
+					onShowSizeChange={(current: number, size: number) => jobContext.setJobsPerPage(size)}
     		/>
       </JobListSection>
     )

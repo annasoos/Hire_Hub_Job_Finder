@@ -11,7 +11,6 @@ import { JobObjectWithID } from "../../utils/types/JobElementType";
 import { OwnListingsContext } from "../../utils/context/OwnListingsContext";
 import { FavouritesContext } from "../../utils/context/FavouritesContext";
 import { generateUniqueID } from "../../utils/functions/generateUniqueID";
-import { JOBS_PER_PAGE } from "../../utils/functions/getQueryVariable";
 
 export const CollapseBar = () => {
 	const history = useHistory();
@@ -42,7 +41,7 @@ export const CollapseBar = () => {
 					className="pagination"
 					size="small"
       		total={ownContext.count}
-      		defaultPageSize={JOBS_PER_PAGE}
+      		defaultPageSize={4}
       		defaultCurrent={1}
 					current={ownPageNum}
 					onChange={(page: number) => setOwnPageNum(page)}
@@ -62,7 +61,7 @@ export const CollapseBar = () => {
 					className="pagination"
 					size="small"
       		total={favContext.count}
-      		defaultPageSize={JOBS_PER_PAGE}
+      		defaultPageSize={4}
       		defaultCurrent={1}
 					current={favPageNum}
 					onChange={(page: number) => setFavPageNum(page)}

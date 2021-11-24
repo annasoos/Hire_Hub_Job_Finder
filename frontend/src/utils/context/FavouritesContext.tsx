@@ -14,7 +14,7 @@ export const FavouritesContextProvider = ({ children }: ContextProviderProps) =>
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	const [count, setCount] = useState<number>(0);
 	const [page, setPage] = useState<number>(1);
-	const queryVariables = getQueryVariables(page);
+	const queryVariables = getQueryVariables(page, 4);
 	const { data, loading, error, refetch } = useQuery(FAVOURITES_QUERY,{
     variables: queryVariables
   });
