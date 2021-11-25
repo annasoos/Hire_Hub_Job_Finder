@@ -33,7 +33,7 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
 				"Successful!",
 				`Candidates can now apply the ${data.post.position} position at ${data.post.company}.`
 			);
-			refetch().then(res => { jobContext.setJobList(res.data.jobs) })
+			refetch()
 			form.resetFields();
 		}
 	});

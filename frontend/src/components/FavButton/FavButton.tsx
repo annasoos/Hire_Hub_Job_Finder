@@ -52,7 +52,7 @@ export const FavButton:FC<Omit<CollapseContentPropsType, "key">> = ({job}) => {
 				"Removed from favourites!",
 				`Succesfully removed listing from favourites.`
 			);
-			refetch().then(res => { favContext.setFavList(res.data.jobs) })
+			refetch()
 		},
 		onError: (error) => {
 			console.log(JSON.stringify(error, null, 2));

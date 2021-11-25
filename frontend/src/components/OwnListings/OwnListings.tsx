@@ -46,8 +46,8 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
 				"Listing updated!",
 				`Succesfully updated your listing for ${data.updateListing.updateJob.position} position.`
 			);
-			jobListRefetch().then(res => { jobContext.setJobList(res.data.feed.jobs) })
-			ownListRefetch().then(res => { ownContext.setOwnList(res.data.ownListings.jobs) })
+			jobListRefetch()
+			ownListRefetch()
 		},
 		onError: (error) => {
 			console.log(JSON.stringify(error, null, 2));
@@ -60,8 +60,8 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
 				"Listing deleted!",
 				`Succesfully deleted position from our database.`
 			);
-			jobListRefetch().then(res => { jobContext.setJobList(res.data.feed.jobs) })
-			ownListRefetch().then(res => { ownContext.setOwnList(res.data.ownListings.jobs) })
+			jobListRefetch()
+			ownListRefetch()
 			setIsDeleteModalVisible(false)
 		},
 		onError: (error) => {

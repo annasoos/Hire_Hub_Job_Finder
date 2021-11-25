@@ -32,7 +32,7 @@ export const Favourites:FC<CollapseContentPropsType> = ({ job }) => {
 				"Removed from favourites!",
 				`Succesfully removed listing from favourites.`
 			);
-			refetch().then(res => { favContext.setFavList(res.data.favourites.jobs) })
+			refetch()
 			setIsRemoveModalVisible(false)
 		},
 		onError: (error) => {
