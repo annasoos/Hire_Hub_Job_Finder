@@ -12,18 +12,16 @@ export const JobContext = createContext({} as JobContextType);
 
 export const JobContextProvider = ({ children }: ContextProviderProps) => {
   const [jobList, setJobList] = useState<JobElementType[]>([] as JobElementType[]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
 	const [page, setPage] = useState<number>(1);
 	const [jobsPerPage, setJobsPerPage] = useState<number>(3);
 	const queryVariables = getQueryVariables(page, jobsPerPage);
-	const { data, loading, error, refetch } = useQuery(FEED_QUERY,{
+	const { data, loading, error } = useQuery(FEED_QUERY,{
     variables: queryVariables
   });
 
   useEffect(() => {
 		if (!loading && !error){
-			setIsLoaded(true)
 			setJobList(data.feed.jobs)
 			setCount(data.feed.count)
 		} else if (error) {
@@ -31,11 +29,7 @@ export const JobContextProvider = ({ children }: ContextProviderProps) => {
 		}
   }, [data, loading, error]);
 
-	useEffect(() => {
-		refetch()
-	}, [isLoaded])
-
   return (
-    <JobContext.Provider value={{ jobList, setJobList, isLoaded, setIsLoaded, count, setCount, setPage, jobsPerPage, setJobsPerPage }}>{children}</JobContext.Provider>
+    <JobContext.Provider value={{ jobList, setJobList, count, setCount, page, setPage, jobsPerPage, setJobsPerPage }}>{children}</JobContext.Provider>
   );
 };

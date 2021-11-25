@@ -1,5 +1,5 @@
 import { FC, useContext } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 //design & components
 import { Button, Input, Form, Select } from "antd";
 import { PostFormContainer, PostFormContent, PostTitle, SearchImg, WelcomeTitle } from "./PostPage.style";
@@ -13,13 +13,19 @@ import { openNotificationWithIcon } from "../../utils/functions/Notification";
 import withCurrentUser from "../HOC/withCurrentUser";
 import { JobContext } from "../../utils/context/JobContext";
 // queries
-import { CREATE_JOB_MUTATION } from "../../utils/GqlQueries";
+import { CREATE_JOB_MUTATION, FEED_QUERY } from "../../utils/GqlQueries";
+import { getQueryVariables } from "../../utils/functions/getQueryVariable";
 
 const { Option } = Select;
 
 const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
   const [form] = Form.useForm();
 	const jobContext = useContext(JobContext);
+	const queryVariables = getQueryVariables(jobContext.page, jobContext.jobsPerPage);
+	const { refetch } = useQuery(FEED_QUERY,{
+    variables: queryVariables
+  })
+
 	const [createJob] = useMutation(CREATE_JOB_MUTATION, {
 		onCompleted: (data) => {
 			openNotificationWithIcon(
@@ -27,7 +33,7 @@ const PostForm: FC<PostFormPropsType> = ({ isLoggedIn, user }) => {
 				"Successful!",
 				`Candidates can now apply the ${data.post.position} position at ${data.post.company}.`
 			);
-			jobContext.setIsLoaded(false);
+			refetch().then(res => { jobContext.setJobList(res.data.jobs) })
 			form.resetFields();
 		}
 	});

@@ -15,6 +15,9 @@ export const JobList = () => {
   const jobContext = useContext(JobContext);
 	const history = useHistory();
 	const [pageNum, setPageNum] = useState(1);
+	const [spinner, setSpinner] = useState(true);
+
+	setTimeout(function(){ setSpinner(false) }, 1500);
 
 	useEffect(() => {
 		jobContext.setPage(pageNum);
@@ -25,7 +28,7 @@ export const JobList = () => {
     return {uid: generateUniqueID(), value: job};
   });
 
-  if (!jobContext.isLoaded) {
+  if (spinner) {
     return (
       <JobContainer>
         <LoadingText>Searching for the best carreer options...</LoadingText>

@@ -1,5 +1,5 @@
 import { FC, useContext, useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 //design & components
 import { Tooltip, Button, Modal } from "antd";
 import { darkBlue, footerBG, lightblue } from "../../style_guide";
@@ -12,14 +12,19 @@ import { CollapseContentPropsType } from "../../utils/types/CollapseContentProps
 import { FavouritesContext } from "../../utils/context/FavouritesContext";
 import { UserContext } from "../../utils/context/UserContext";
 // queries
-import { DELETE_LIKE_MUTATION } from "../../utils/GqlQueries";
+import { DELETE_LIKE_MUTATION, FAVOURITES_QUERY } from "../../utils/GqlQueries";
 import { openNotificationWithIcon } from "../../utils/functions/Notification";
+import { getQueryVariables } from "../../utils/functions/getQueryVariable";
 
 export const Favourites:FC<CollapseContentPropsType> = ({ job }) => {
   const [isDetailsModalVisible, setIsDetailsModalVisible] = useState(false)
 	const [isRemoveModalVisible, setIsRemoveModalVisible] = useState(false)
 	const favContext = useContext(FavouritesContext);
 	const userContext = useContext(UserContext);
+	const queryVariables = getQueryVariables(favContext.page, 4);
+	const { refetch } = useQuery(FAVOURITES_QUERY,{
+    variables: queryVariables
+  })
 	const [deleteLike] = useMutation(DELETE_LIKE_MUTATION, {
 		onCompleted: (data) => {
 			openNotificationWithIcon(
@@ -27,7 +32,7 @@ export const Favourites:FC<CollapseContentPropsType> = ({ job }) => {
 				"Removed from favourites!",
 				`Succesfully removed listing from favourites.`
 			);
-			favContext.setIsLoaded(false)
+			refetch().then(res => { favContext.setFavList(res.data.favourites.jobs) })
 			setIsRemoveModalVisible(false)
 		},
 		onError: (error) => {

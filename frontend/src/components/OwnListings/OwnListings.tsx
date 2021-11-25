@@ -1,5 +1,5 @@
 import { FC, useContext, useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 //design & components
 import { Tooltip, Modal, Form, Button, Input, Select } from "antd";
 import { footerBG, lightgray, white } from "../../style_guide";
@@ -15,8 +15,9 @@ import { openNotificationWithIcon } from "../../utils/functions/Notification";
 import { JobContext } from "../../utils/context/JobContext";
 import { OwnListingsContext } from "../../utils/context/OwnListingsContext";
 // queries
-import { UPDATE_JOB_MUTATION } from "../../utils/GqlQueries";
+import { FEED_QUERY, OWN_LISTINGS_QUERY, UPDATE_JOB_MUTATION } from "../../utils/GqlQueries";
 import { DELETE_JOB_MUTATION } from "../../utils/GqlQueries";
+import { getQueryVariables } from "../../utils/functions/getQueryVariable";
 
 const { Option } = Select;
 
@@ -28,6 +29,16 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
 	const jobContext = useContext(JobContext);
 	const ownContext = useContext(OwnListingsContext);
 
+	const jobListQueryVariables = getQueryVariables(jobContext.page, jobContext.jobsPerPage);
+	const { refetch: jobListRefetch } = useQuery(FEED_QUERY,{
+    variables: jobListQueryVariables
+  })
+
+	const ownListQueryVariables = getQueryVariables(ownContext.page, 4);
+	const { refetch: ownListRefetch } = useQuery(OWN_LISTINGS_QUERY,{
+    variables: ownListQueryVariables
+  })
+
 	const [updateJob] = useMutation(UPDATE_JOB_MUTATION, {
 		onCompleted: (data) => {
 			openNotificationWithIcon(
@@ -35,8 +46,8 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
 				"Listing updated!",
 				`Succesfully updated your listing for ${data.updateListing.updateJob.position} position.`
 			);
-			jobContext.setIsLoaded(false)
-			ownContext.setIsLoaded(false)
+			jobListRefetch().then(res => { jobContext.setJobList(res.data.feed.jobs) })
+			ownListRefetch().then(res => { ownContext.setOwnList(res.data.ownListings.jobs) })
 		},
 		onError: (error) => {
 			console.log(JSON.stringify(error, null, 2));
@@ -49,8 +60,8 @@ export const OwnListings: FC<CollapseContentPropsType> = ({ job }) => {
 				"Listing deleted!",
 				`Succesfully deleted position from our database.`
 			);
-			jobContext.setIsLoaded(false)
-			ownContext.setIsLoaded(false)
+			jobListRefetch().then(res => { jobContext.setJobList(res.data.feed.jobs) })
+			ownListRefetch().then(res => { ownContext.setOwnList(res.data.ownListings.jobs) })
 			setIsDeleteModalVisible(false)
 		},
 		onError: (error) => {
