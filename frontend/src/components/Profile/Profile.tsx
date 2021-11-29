@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 //design & components
 import { Modal, Button, Form, Input } from "antd";
 import { MailOutlined, UserOutlined, FrownOutlined } from "@ant-design/icons";
@@ -9,25 +9,32 @@ import profileEdit from "../../utils/images/ProfileEdit-pana.svg";
 import { CollapseBar } from "../Collapse/Collapse";
 //context & types & functions
 import { UserContext } from "../../utils/context/UserContext";
+import { ValidLoginContext } from "../../utils/context/ValidLoginContext";
 import { RegUserType } from "../../utils/types/RegUserType";
 import { openNotificationWithIcon } from "../../utils/functions/Notification";
 // queries
-import { UPDATE_USER_MUTATION } from "../../utils/GqlQueries";
+import { UPDATE_USER_MUTATION, GET_USER } from "../../utils/GqlQueries";
 
 export const Profile = () => {
 	const [form] = Form.useForm();
-	const userContext = useContext(UserContext);
 	const [isUserEditModalVisible, setIsUserEditModalVisible] = useState(false);
+	const { validLogin } = useContext(ValidLoginContext);
+	const userContext = useContext(UserContext);
+	const { refetch } = useQuery(GET_USER);
 	const [updateUser] = useMutation(UPDATE_USER_MUTATION, {
 		onCompleted: (data) => {
-			console.log(data)
 			openNotificationWithIcon(
 				"success",
 				"User data updated!",
 				"Succesfully modified your personal data."
 			);
 			localStorage.setItem("token", data.updateUser.token);
-			userContext.setIsLoaded(false)
+			refetch().then(res => userContext.setLoggedInUser({
+				userId: res.data.currentUser.id,
+				firstName: res.data.currentUser.firstName, 
+				lastName: res.data.currentUser.lastName, 
+				email: res.data.currentUser.email
+			}));
 		},
 		onError: (error) => {
 			console.log(JSON.stringify(error, null, 2));
@@ -59,18 +66,10 @@ export const Profile = () => {
 		}});
   };
 
-	if(!userContext.loggedInUser){
+	if (validLogin && userContext.loggedInUser !== null) {
 		return (
 			<ProfileSection>
-				<ErrorTitle> Ooops! Page not found </ErrorTitle>
-				<FrownOutlined id="errorIcon"/>
-				<ErrorSubTitle>Please try to login to reach this page!</ErrorSubTitle>
-			</ProfileSection>
-		)
-	} else {
-		return (
-			<ProfileSection>
-				<ProfileName>{userContext.loggedInUser!.firstName} {userContext.loggedInUser!.lastName}</ProfileName>
+				<ProfileName>{userContext.loggedInUser.firstName} {userContext.loggedInUser.lastName}</ProfileName>
 				<ProfilePhoto src={profilePhoto} alt="profile" />
 				<UserInfoSection>
 					<div>
@@ -119,6 +118,14 @@ export const Profile = () => {
 				</Modal>
 
 				<CollapseBar/>
+			</ProfileSection>
+		)
+	} else {
+		return (
+			<ProfileSection>
+				<ErrorTitle> Ooops! Page not found </ErrorTitle>
+				<FrownOutlined id="errorIcon"/>
+				<ErrorSubTitle>Please try and login to reach this page!</ErrorSubTitle>
 			</ProfileSection>
 		)
 	}
