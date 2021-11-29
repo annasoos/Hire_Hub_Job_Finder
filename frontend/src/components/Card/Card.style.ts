@@ -23,6 +23,7 @@ export const CardTitle = styled.h4({
   fontSize: "1.2rem",
   position: "relative",
   top: "-2rem",
+	height: "auto",
 
   "@media only screen and (max-width: 1100px)": {
     textAlign: "center",
@@ -54,9 +55,18 @@ export const CardText = styled.p({
   color: `${gray}`,
   position: "relative",
   top: "-1rem",
+	maxHeight: "12rem",
+	whiteSpace: "pre-line",
+	/* textOverflow: "ellipsis",  // csak nowrap whitespace esetén működik  */
+	overflow: "hidden",
+	display: "-webkit-box",
+  "-webkit-line-clamp": "9",
+  "-webkit-box-orient": "vertical", 
 
   "@media only screen and (max-width: 1100px)": {
     textAlign: "center",
+		maxHeight: "6rem",
+		"-webkit-line-clamp": "5",
   },
 
   "@media only screen and (max-width: 300px)": {
@@ -100,7 +110,8 @@ export const DetailsModalContent = styled.div({
 	},
 
 	"& p.details": {
-		fontWeight: 500
+		fontWeight: 500,
+		whiteSpace: "pre-line",
 	},
 
 	"& p.location": {

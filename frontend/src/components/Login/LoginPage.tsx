@@ -8,14 +8,14 @@ import loginIllustration from "../../utils/images/Fingerprint-pana.svg";
 //types & functions & context
 import { openNotificationWithIcon } from "../../utils/functions/Notification";
 import { LoginSuccessType } from "../../utils/types/LoginSuccessType";
-import { UserContext } from "../../utils/context/UserContext";
+import { ValidLoginContext } from '../../utils/context/ValidLoginContext';
 // queries
 import { LOGIN_MUTATION } from "../../utils/GqlQueries";
 
 export const LoginPage: FC = () => {
   const [form] = Form.useForm();
   const history = useHistory();
-  const userContext = useContext(UserContext);
+	const validLoginContext = useContext(ValidLoginContext);
   const [loginUser] = useMutation(LOGIN_MUTATION, {
 		onError: (error) => {
 			console.log(JSON.stringify(error, null, 2));
@@ -29,8 +29,9 @@ export const LoginPage: FC = () => {
 			}
 		},
 		onCompleted: (data) => {
+			validLoginContext.setValidLogin(true);
+			sessionStorage.setItem("user logged in", "true");
 			localStorage.setItem("token", data.login.token);
-			userContext.setToken(data.login.token);
 			openNotificationWithIcon(
 				"success",
 				"Welcome back!",

@@ -62,7 +62,8 @@ export const DetailsModalContent = styled.div({
 	},
 
 	"& p.details": {
-		fontWeight: 500
+		fontWeight: 500,
+		whiteSpace: "pre-line",
 	},
 
 	"& p.location": {

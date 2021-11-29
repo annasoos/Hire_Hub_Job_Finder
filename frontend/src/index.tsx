@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+//apollo
+import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+//context
 import { UserContextProvider } from "./utils/context/UserContext";
+import { ValidLoginContextProvider } from './utils/context/ValidLoginContext';
 import { JobContextProvider } from "./utils/context/JobContext";
 import { OwnListingsContextProvider } from "./utils/context/OwnListingsContext";
 import { FavouritesContextProvider } from "./utils/context/FavouritesContext";
-import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
 
 //We create the httpLink that will connect our ApolloClient instance with the GraphQL API. The GraphQL server will be running on localhost 4000.
 const httpLink = createHttpLink({
@@ -37,9 +40,11 @@ ReactDOM.render(
 		<JobContextProvider>
 		<OwnListingsContextProvider>
 		<FavouritesContextProvider>
+		<ValidLoginContextProvider>
 		<UserContextProvider>
     	<App />
 		</UserContextProvider>
+		</ValidLoginContextProvider>
 		</FavouritesContextProvider>
 		</OwnListingsContextProvider>
 		</JobContextProvider>

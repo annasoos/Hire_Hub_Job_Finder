@@ -1,6 +1,6 @@
 import { FC, useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 // design
 import { Tooltip, Modal, Button } from "antd";
 import { HeartFilled } from '@ant-design/icons';
@@ -10,14 +10,21 @@ import { CollapseContentPropsType } from "../../utils/types/CollapseContentProps
 import { UserContext } from "../../utils/context/UserContext";
 import { openNotificationWithIcon } from "../../utils/functions/Notification";
 import { FavouritesContext } from "../../utils/context/FavouritesContext";
+import { ValidLoginContext } from "../../utils/context/ValidLoginContext";
 // queries
-import { CREATE_LIKE_MUTATION } from "../../utils/GqlQueries";
+import { CREATE_LIKE_MUTATION, FAVOURITES_QUERY } from "../../utils/GqlQueries";
 import { DELETE_LIKE_MUTATION } from "../../utils/GqlQueries";
+import { getQueryVariables } from "../../utils/functions/getQueryVariable";
 
 export const FavButton:FC<Omit<CollapseContentPropsType, "key">> = ({job}) => {
 	const userContext = useContext(UserContext);
 	const favContext = useContext(FavouritesContext);
+	const { validLogin } = useContext(ValidLoginContext);
 	const history = useHistory();
+	const queryVariables = getQueryVariables(favContext.page, 4);
+	const { refetch } = useQuery(FAVOURITES_QUERY,{
+    variables: queryVariables
+  })
 	const [isLiked, setIsLiked] = useState<"liked" | "unliked">("unliked");  // set as classname used for css styling
 	const [isLikeModalVisible, setIsLikeModalVisible] = useState(false);
 	const [likeListing] = useMutation(CREATE_LIKE_MUTATION, {
@@ -45,7 +52,7 @@ export const FavButton:FC<Omit<CollapseContentPropsType, "key">> = ({job}) => {
 				"Removed from favourites!",
 				`Succesfully removed listing from favourites.`
 			);
-			favContext.setIsLoaded(false)
+			refetch()
 		},
 		onError: (error) => {
 			console.log(JSON.stringify(error, null, 2));
@@ -53,11 +60,11 @@ export const FavButton:FC<Omit<CollapseContentPropsType, "key">> = ({job}) => {
 	});
 
 	useEffect(() => {
-		if (favContext.favList) {
+		if (validLogin && favContext.favList) {
 			const array = favContext.favList.filter((favElement) => favElement.position === job.position)
 			array.length === 0 ? setIsLiked("unliked") : setIsLiked("liked")
 		}
-	}, [favContext.favList, job.position])
+	}, [validLogin, favContext.favList, job.position])
 
 	const handleHeartClick = () => {
 		if (isLiked === "unliked") {

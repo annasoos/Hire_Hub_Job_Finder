@@ -186,6 +186,7 @@ export const Description = styled.p(
     fontWeight: 300,
     paddingTop: 20,
     textAlign: "justify",
+		whiteSpace: "pre-line",
   },
   (props) => ({ color: props.color })
 );

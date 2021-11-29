@@ -3,7 +3,6 @@ import { cyan, cyanHover, darkBlue, lightgray } from "../../style_guide";
 
 export const NewsletterContainer = styled.section({
   width: "100%",
-  height: 350,
   backgroundColor: `${darkBlue}`,
   padding: "2rem",
 
@@ -16,23 +15,35 @@ export const NewsletterContainer = styled.section({
   transform: "translateX(-50%)",
   transition: "all 1s ease-in-out",
 
-  "& .input": {
-    borderRadius: "15px 0",
-    width: "50%",
-    transition: "all 1s ease-in-out",
+	"& .newsletterForm": {
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
+		width: "40%",
 
-    "@media only screen and (max-width: 1090px)": {
-      textAlign: "center",
-      width: "80%",
-      textIndent: 0,
-      margin: "0.5rem 0",
-    },
+		"@media only screen and (max-width: 1090px)": {
+			width: "80%"
+		},
 
-    "@media only screen and (max-width: 600px)": {
-      textAlign: "center",
-      fontSize: "0.7rem",
-    },
-  },
+		"& .input": {
+			position: "relative",
+			borderRadius: "15px 0",
+			transition: "all 1s ease-in-out",
+			width: "100%",
+	
+			"@media only screen and (max-width: 1090px)": {
+				textAlign: "center",
+				textIndent: 0,
+				margin: "0.5rem 0",
+			},
+	
+			"@media only screen and (max-width: 600px)": {
+				textAlign: "center",
+				fontSize: "0.7rem",
+			},
+		},
+	}
 });
 
 export const NewsletterTitle = styled.h1({
@@ -58,6 +69,9 @@ export const NewsletterText = styled.p({
 });
 
 export const Button = styled.button({
+	position: "relative",
+	left: "50%",
+	transform: "translateX(-50%)",
   fontSize: "1rem",
   fontWeight: 700,
   height: "2.5rem",
@@ -65,8 +79,8 @@ export const Button = styled.button({
   color: "white",
   backgroundColor: `${cyan}`,
   borderRadius: 50,
-  width: "10rem",
   marginTop: "1rem",
+	padding: "0 1rem",
 
   "&:hover": {
     backgroundColor: `${cyanHover}`,

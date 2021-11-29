@@ -1,54 +1,39 @@
-import { Component } from "react";
-import { NavLink, withRouter, RouteComponentProps } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useHistory } from "react-router";
+import { NavLink } from "react-router-dom";
 //design
 import { Tooltip } from "antd";
 import { NavBar, HeaderLogo, Hamburger, HamburgerMenu, LogoutBtn, UserDisplay } from "./Header.style";
 import headerLogo from "../../utils/images/logo_white.png";
 //types & functions & context
-import { HeaderClassStateType } from "../../utils/types/HeaderClassStateType";
 import { openNotificationWithIcon } from "../../utils/functions/Notification";
 import { UserContext } from "../../utils/context/UserContext";
+import { ValidLoginContext } from "../../utils/context/ValidLoginContext";
 
-class Header extends Component<RouteComponentProps<{}>, HeaderClassStateType> { 
+export const Header = () => { 
+	const history = useHistory();
+	const userContext = useContext(UserContext);
+	const validLoginContext = useContext(ValidLoginContext);
+	const [hamMenu, setHamMenu] = useState<"open" | "closed">("closed");
+	const [hamIcon, setHamIcon] = useState<"open" | "closed">("closed");
 
-	/*
-	You can get access to the history object’s properties and the closest <Route>'s match via the withRouter higher-order component. 
-	If you would like to access the router history in class components, history has to be passed as a prop from react router, so it should be a direct child of a Route component.
-	It used by "props.history.push()"
-	withRouter HOC will pass updated match, location, and history props to the wrapped component whenever it renders, so I need to add the types of these props with importing RouteComponentProps
-	*/
-
-	static contextType = UserContext;
-
-	constructor (props: RouteComponentProps<{}>) {
-		super(props)
-
-		this.state = {
-			hamMenu: "closed",
-			hamIcon: "closed"
-		}
-	}
-
-  mobileMenu = () => {
-    this.state.hamMenu === "open" ? this.setState({hamMenu: "closed"}) : this.setState({hamMenu: "open"});
-    this.state.hamIcon === "open" ? this.setState({hamIcon: "closed"}) : this.setState({hamIcon: "open"});
+  const mobileMenu = () => {
+    hamMenu === "open" ? setHamMenu("closed") : setHamMenu("open");
+    hamIcon === "open" ? setHamIcon("closed") : setHamIcon("open");
   };
 
-	logout = () => {
+	const logout = () => {
 		console.log("User logged out");
     localStorage.removeItem("token");
-		this.context.setToken(null);
+		sessionStorage.removeItem("user logged in");
+		validLoginContext.setValidLogin(false);
 		openNotificationWithIcon(
 			"success",
 			"Logout successful!",
 			"We hope to see you again soon!"
 		);
-		this.props.history.push('/')
+		history.push('/')
   };
-
-	render () {
-
-		const userContext = this.context;
 
 		return (
 		<NavBar>
@@ -66,33 +51,32 @@ class Header extends Component<RouteComponentProps<{}>, HeaderClassStateType> {
 
 			<ul>
 				<li>
-					{userContext.loggedInUser ? <LogoutBtn onClick={this.logout}>Logout</LogoutBtn> : <NavLink to="/login">Login</NavLink>}
+					{validLoginContext.validLogin ? <LogoutBtn onClick={logout}>Logout</LogoutBtn> : <NavLink to="/login">Login</NavLink>}
 				</li>
 				<li>
 					<NavLink id="signup" to="/signup"> Sign Up </NavLink>
 				</li>
 			</ul>
 
-			<Hamburger id={this.state.hamIcon} onClick={this.mobileMenu}>
+			<Hamburger id={hamIcon} onClick={mobileMenu}>
 				<span className="bar"></span>
 				<span className="bar"></span>
 				<span className="bar"></span>
 			</Hamburger>
 
-			<HamburgerMenu id={this.state.hamMenu} onClick={(): void => { this.setState({hamMenu: "closed", hamIcon: "closed"})}}>
+			<HamburgerMenu id={hamMenu} onClick={(): void => { setHamMenu("closed"); setHamIcon("closed")}}>
 				<NavLink className="dropdown" to="/find-a-job"> Find a job </NavLink>
 				<NavLink className="dropdown" to="/post-a-job"> Post a job </NavLink>
 				<hr />
-				{userContext.loggedInUser ? <LogoutBtn onClick={this.logout}>Logout</LogoutBtn> : <NavLink to="/login">Login</NavLink>}
+				{userContext.loggedInUser ? <LogoutBtn onClick={logout}>Logout</LogoutBtn> : <NavLink to="/login">Login</NavLink>}
 				<NavLink className="dropdown" to="/signup" id="mobileSignup"> Sign Up </NavLink>
 			</HamburgerMenu>
 			
 			{userContext.loggedInUser ? 
-			<UserDisplay> Logged in as <Tooltip title="Profile" placement="right"><a href="/profile">{userContext.loggedInUser.firstName} {userContext.loggedInUser.lastName}</a></Tooltip> </UserDisplay> 
+			<UserDisplay> Logged in as <Tooltip title="Profile" placement="right"><a href="/profile">{userContext.loggedInUser!.firstName} {userContext.loggedInUser!.lastName}</a></Tooltip> </UserDisplay> 
 			: null }
 		</NavBar>
 		)
-	}
 };
 
-export default withRouter(Header);
+export default Header;
