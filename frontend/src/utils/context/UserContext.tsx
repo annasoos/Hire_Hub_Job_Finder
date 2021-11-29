@@ -1,40 +1,34 @@
 //cheat: https://www.youtube.com/watch?v=9726Yq3Scjk
 
-import { createContext, useState, useEffect } from 'react';
-import jwt from "jsonwebtoken";
+import { createContext, useState, useEffect, useContext } from 'react';
+import { useQuery } from '@apollo/client';
 import { UserContextType, ContextProviderProps } from "../types/UserContextTypes";
 import { LoggedInUserType } from '../types/LoggedInUserType';
+import { ValidLoginContext } from './ValidLoginContext';
+import { GET_USER } from '../GqlQueries';
 
 export const UserContext = createContext({} as UserContextType);
 
 export const UserContextProvider = ({children}: ContextProviderProps) => {
+	const { validLogin } = useContext(ValidLoginContext);
 	const [loggedInUser, setLoggedInUser] = useState<LoggedInUserType | null>(null)
-	const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
-	const [isLoaded, setIsLoaded] = useState<boolean>(false);
-	const tokenKey: string = process.env.REACT_APP_TOKEN_KEY!
-	
-  useEffect(() => {
-		if (token) {
-      jwt.verify(token, tokenKey, function (err, decoded) {
-        if (decoded) {
-          setLoggedInUser({
-						userId: decoded.userId,
-            firstName: decoded.firstName,
-            lastName: decoded.lastName,
-            email: decoded.email,
-          })
-					setIsLoaded(true)
-        } else if (err) {
-					console.log(err)
-				}
-      });
-    } else {
-			setLoggedInUser(null)
-		}
-  }, [token, tokenKey, isLoaded]);
+	const { refetch } = useQuery(GET_USER);
+
+	useEffect(() => {
+		if (validLogin === true) {
+				refetch().then(res => setLoggedInUser({
+					userId: res.data.currentUser.id,
+					firstName: res.data.currentUser.firstName, 
+					lastName: res.data.currentUser.lastName, 
+					email: res.data.currentUser.email
+				}))
+			} else {
+				setLoggedInUser(null)
+			}
+	}, [validLogin])
 
 	return (
-	<UserContext.Provider value={{loggedInUser, setLoggedInUser, setToken, setIsLoaded}}>
+	<UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
 		{children}
 	</UserContext.Provider>
 	)

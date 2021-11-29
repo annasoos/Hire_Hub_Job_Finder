@@ -11,7 +11,7 @@ generator client {
 
 //Data model: Defines your application models. Each model will be mapped to a table in the underlying database.
 model User {
-  id        	Int     @id @default(autoincrement()) //uuid()
+  id        	Int     @id @default(autoincrement()) @unique //uuid()
   firstName 	String  
   lastName  	String  
   email     	String  @unique

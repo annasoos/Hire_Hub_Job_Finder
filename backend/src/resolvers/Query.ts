@@ -1,6 +1,12 @@
 import { GraphQLFieldResolveFn } from "../utils/types";
 
 const Query: GraphQLFieldResolveFn = {
+	currentUser: async (parent, args, context, info) => {
+		if (context.userId) {
+    return await context.prisma.user.findUnique({ where: { id: context.userId } })
+		}
+  },
+
   feed: async (parent, args, context, info) => {
 		const filter = () => {
 			if (!args.filter) {

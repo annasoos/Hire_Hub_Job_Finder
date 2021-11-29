@@ -1,5 +1,16 @@
 import { gql } from "@apollo/client";
 
+export const GET_USER = gql`
+  query CurrentUser{
+    currentUser{
+			id
+			firstName
+			lastName
+      email
+    }
+  }
+`;
+
 export const FEED_QUERY = gql`
   query FeedQuery ($orderBy:FeedOrderBy, $skip: Int, $take: Int) {
     feed(orderBy: $orderBy, skip: $skip, take: $take) {
