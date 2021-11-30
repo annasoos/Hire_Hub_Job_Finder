@@ -32,7 +32,7 @@ The user should be able to…
 ## Screenshots
 
 ### Landing page
-![screencapture-localhost-3000-2021-11-29-14_52_17](https://user-images.githubusercontent.com/83576776/143881438-6a235e5f-b67d-42d9-96eb-d6ea85c8ffbb.jpg)
+![screencapture-localhost-3000-2021-11-30-09_55_24](https://user-images.githubusercontent.com/83576776/144015973-c39717ba-960e-46e9-b325-bfac0df67355.jpg)
 
 ### Browser page
 ![screencapture-localhost-3000-find-a-job-1-2021-11-29-15_03_48](https://user-images.githubusercontent.com/83576776/143881870-495b2c98-ddfb-4eab-ac03-aebca965cfef.jpg)
