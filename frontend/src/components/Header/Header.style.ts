@@ -181,7 +181,7 @@ export const LogoutBtn = styled.button({
 
 export const UserDisplay = styled.p({
   position: "absolute",
-  right: "13%",
+  right: "11.5%",
   top: "10%",
   width: "max-content",
   color: `${gray}`,
