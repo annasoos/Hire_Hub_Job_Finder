@@ -62,6 +62,8 @@ export const DetailsModalContent = styled.div({
 	},
 
 	"& p.details": {
+		textAlign: "left",
+		padding: "0 1rem",
 		fontWeight: 500,
 		whiteSpace: "pre-line",
 	},
