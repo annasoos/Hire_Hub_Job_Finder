@@ -81,7 +81,7 @@ export const SearchContent = styled.div({
 export const Label = styled.label({
   color: `${lightgray}`,
   fontSize: "0.9rem",
-  margin: "0 1rem",
+  margin: "0 0.5rem",
   fontStyle: "italic",
 
   "@media only screen and (max-width: 600px)": {
