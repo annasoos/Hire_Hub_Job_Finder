@@ -25,7 +25,6 @@ export const Header = () => {
 	const logout = () => {
 		console.log("User logged out");
     localStorage.removeItem("token");
-		sessionStorage.removeItem("user logged in");
 		validLoginContext.setValidLogin(false);
 		openNotificationWithIcon(
 			"success",

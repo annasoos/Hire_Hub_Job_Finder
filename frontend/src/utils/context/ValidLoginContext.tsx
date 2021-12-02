@@ -5,7 +5,7 @@ export const ValidLoginContext = createContext<ValidLoginContextType>({} as Vali
 
 export const ValidLoginContextProvider = ({children}: ContextProviderProps) => {
 	
-	const [validLogin, setValidLogin] = useState(sessionStorage.getItem("user logged in") !== null)
+	const [validLogin, setValidLogin] = useState(localStorage.getItem("token") !== null)
 	
 	return (
 	<ValidLoginContext.Provider value={{validLogin, setValidLogin}}>

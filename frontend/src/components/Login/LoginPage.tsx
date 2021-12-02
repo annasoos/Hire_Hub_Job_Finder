@@ -30,7 +30,6 @@ export const LoginPage: FC = () => {
 		},
 		onCompleted: (data) => {
 			validLoginContext.setValidLogin(true);
-			sessionStorage.setItem("user logged in", "true");
 			localStorage.setItem("token", data.login.token);
 			openNotificationWithIcon(
 				"success",
